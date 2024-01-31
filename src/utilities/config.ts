@@ -1,0 +1,234 @@
+
+export const BASE_API_ENDPOINT = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/api/v1' : 'https://api.nodes.com/api/v1'
+export const MAIN_APP_URL = 'https://nodes.com'
+
+
+
+const API_ENDPOINTS = {
+    Auth: {
+        RegisterURL: `${BASE_API_ENDPOINT}/auth/register`,
+        LoginURL: `${BASE_API_ENDPOINT}/auth/login`,
+        LogoutURL: `${BASE_API_ENDPOINT}/auth/logout`,
+        ResetPasswordURL: `${BASE_API_ENDPOINT}/auth/reset-password`,
+        CheckResetLinkURL: `${BASE_API_ENDPOINT}/auth/check-reset-link`,
+        ForgotPasswordURL: `${BASE_API_ENDPOINT}/auth/forgot-password`,
+        ChangePasswordURL: `${BASE_API_ENDPOINT}/auth/change-password`,
+        RefreshTokenURL: `${BASE_API_ENDPOINT}/auth/token`,
+        SendOTP: `${BASE_API_ENDPOINT}/auth/send-otp`,
+        VerfiyEmail: `${BASE_API_ENDPOINT}/auth/verify-email`,
+        ProfileURL: `${BASE_API_ENDPOINT}/users/profile`,
+
+    },
+    Submissions: {
+        ContactURL: `${BASE_API_ENDPOINT}/submissions/contact`,
+        WaitlistURL: `${BASE_API_ENDPOINT}/submissions/waitlist`,
+        SubscribeURL: `${BASE_API_ENDPOINT}/submissions/subscribe`,
+        LinkedInURL: `${BASE_API_ENDPOINT}/submissions/linkedin`,
+        AddressURL: `${BASE_API_ENDPOINT}/submissions/address`,
+        MembershipURL: `${BASE_API_ENDPOINT}/submissions/membership`,
+    },
+    Upgrades: {
+        TalentURL: `${BASE_API_ENDPOINT}/upgrades/talent`,
+        BusinessURL: `${BASE_API_ENDPOINT}/upgrades/business`,
+    },
+    Events: {
+        BaseURL: `${BASE_API_ENDPOINT}/events/`,
+        MineURL: `${BASE_API_ENDPOINT}/events/mine`,
+        CreateURL: `${BASE_API_ENDPOINT}/events/create`,
+        BuyTicketURL: `${BASE_API_ENDPOINT}/events/create/buy-ticket`,
+        GuestsURL: `${BASE_API_ENDPOINT}/events/guests/`,
+    },
+    Transactions: {
+        VerifyURL: `${BASE_API_ENDPOINT}/transactions/verify` // /:description/:reference
+    }
+}
+
+const PATHS = {
+    Auth: {
+        Login: '/auth/login',
+        Register: '/auth/register',
+        ForgotPassword: '/auth/forgot-password',
+        ResetPassword: '/auth/reset-password/',
+        ResetPasswordWithParams: '/auth/reset-password/:accountId/:token',
+    },
+    Upgrades: {
+        Talent: {
+            Base: '/upgrade/talent',
+            GetStarted: '/upgrade/talent/get-started',
+            Onboarding: '/upgrade/talent/onboarding',
+        },
+        Business: {
+            Base: '/upgrade/business',
+            GetStarted: '/upgrade/business/get-started',
+            Onboarding: '/upgrade/business/onboarding',
+        },
+    },
+    Dashboard: {
+        Events: {
+            Base: '/dashboard/events',
+            Create: '/dashboard/events/create',
+            Edit: '/dashboard/events/edit',
+            EditWithParam: '/dashboard/events/edit/:id',
+            Guests: '/dashboard/events/guests/'
+        },
+    },
+    Contact: `${MAIN_APP_URL}/contact`,
+    Career: '/career',
+    Blog: '/blog',
+    Partner: '/partner',
+    Terms: '/terms-and-conditions',
+    Privacy: '/privacy-policy'
+
+}
+
+const ROUTES = {
+
+}
+
+const DATA = {
+}
+
+export enum AccountTypes {
+    Default = 0,
+    Talent = 1,
+    Business = 2,
+}
+
+export const MONTHS = [
+    "January", "February", "March", "April",
+    "May", "June", "July", "August",
+    "September", "October", "November", "December"
+];
+
+export const DAYS = Array(31).fill(0).map((_, i) => i + 1)
+
+const currentYear = new Date().getFullYear();
+const startingYear = 1990;
+
+export const YEARS = Array.from({ length: currentYear - startingYear + 1 }, (_, index) => startingYear + index);
+
+export const defaultSuggestions = [
+    [
+        'Production assistant',
+        'Producer',
+        'Production manager',
+        'Project manager',
+        'Modelling',
+        'Video Editing'
+    ]
+]
+
+const AppConfig = {
+    API_ENDPOINTS,
+    ROUTES,
+    DATA,
+    PATHS,
+    ERROR_MESSAGES: {
+        InvalidCredentialsProvided: 'Invalid Credentials Provided.',
+        AuthenticationError: 'Authentication Error.',
+        BadRequestError: 'Bad Request Error.',
+        InternalServerError: 'Internal Server Error.',
+        UserAlreadyExists: 'This email address provided is associated with an existing account.',
+        InvalidLinkProvided: 'The link provided is either invalid or has expired.',
+        ResourceNotFound: 'Unable to process. Resource not found.',
+        AlreadyInWaitlist: 'You\'re already in the waitlist.',
+        AlreadySubscribed: 'You have already subcribed to our newsletter.',
+        AlreadyLinked: 'You have already submitted your LinkedIn Profile, thank you.',
+        AlreadySubmitted: 'You have already submitted your address, thank you.',
+        ServerError: 'Unable to process request. Please try again later.',
+        ValidationError: 'All fields are required',
+    },
+    STRINGS: {
+        RegistrationSuccessful: 'Registration successful.',
+        PasswordLinkSent: 'A password reset link has been sent to your email account.',
+        PasswordResetSuccessful: 'Password has been reset successfully.',
+        PasswordChangeSuccessful: 'Password changed successfully.',
+        PasswordLinkEmailTitle: 'Password reset.',
+        NewContactSubmission: 'New Contact Submission.',
+        JoinedWaitlistSuccessfully: 'Congratulations! you\'ve joined the waitlist successfully.',
+        SubscribedSuccessfully: 'Congratulations! you\'ve subscribed to our newsletter successfully.',
+        LinkedInSuccessfully: 'Thank you! we\'ve received your LinkedIn URL, we\'ll be in touch.',
+        SubmittedSuccessfully: 'Thank you! we\'ve received your address, we\'ll be in touch.'
+    },
+    PRODUCT_OPTIONS: ['Nodes Edu', 'Nodes Lab', 'Nodes Token'],
+    SEO: {
+        META_TITLE: 'Nodes',
+        META_DESCRIPTION: '',
+        META_IMAGE: '',
+        META_IMAGE_ALT: 'Nodes Logo',
+        META_IMAGE_WIDTH: '1200',
+        META_IMAGE_HEIGHT: '630',
+        META_IMAGE_TYPE: 'image/png',
+        META_IMAGE_QUALITY: '100',
+        META_IMAGE_URL_ALT: 'Nodes Logo',
+        META_IMAGE_WIDTH_ALT: '1200',
+        META_IMAGE_HEIGHT_ALT: '630',
+        META_IMAGE_TYPE_ALT: 'image/png',
+        META_IMAGE_QUALITY_ALT: '100',
+        META_URL: 'https://nodes.vercel.app/', //will change to  the real domain lateR
+        META_TYPE: 'website',
+        META_AUTHOR: 'Nodes Dev Team',
+        META_PUBLISHER: 'Nodes Inc',
+        META_PUBLISHED_AT: '2023-09-27',
+        META_KEYWORDS: 'Nodes,',
+    },
+    PLACEHOLDERS: {
+        Searchbar: 'Search',
+        Email: 'Enter email address',
+        Fullname: 'Enter your full name',
+        Username: 'Enter username',
+        Profession: 'Profession',
+        Gender: 'Gender',
+        LinkedInUrl: 'e.g https://www.linkedin.com/in/stephenelufisan/',
+        Distinction: 'Tell us about yourself and what you\'re doing differently with emerging disruptive technologies in three paragraphs.',
+        Password: 'Password',
+        ConfirmPassword: 'Confirm password',
+        Image: 'Upload Image here',
+        Timezone: 'Timezone'
+    },
+    OTP_LENGTH: 4,
+    OTP_COUNTDOWN: 300,
+    ACCOUNT_TYPES: {
+        DEFAULT: 0,
+        TALENT: 1,
+        BUSINESS: 2,
+    },
+    DATE_OPTIONS: {
+        MONTHS,
+        DAYS,
+        YEARS
+    },
+    SKILL_OPTIONS: [
+        'Production assistant',
+        'Producer',
+        'Production manager',
+        'Project manager',
+        'Modelling',
+        'Video Editing'
+    ],
+    PROFESSION_OPTIONS: [
+        'Hiring manager',
+        'Producer',
+        'Director'
+    ],
+    SUPPORTED_EXTENTIONS: {
+        "jpeg": "image",
+        "jpg": "image",
+        "png": "image",
+        // "mp3": "audio",
+        // "mp4": "video",
+        // "m4a": "video",
+        // "gltf": "3d",
+        // "obj": "3d",
+        // "gif": "3d",
+        // "glb": "3d"
+    },
+    FILE_SIZE_LIMIT: 2, //2mb,
+    COMPANY_INFO: {
+        Address: 'Level 1, 12 Sample St, Sydney NSW 2000',
+        Phone: '1800 123 4567',
+        Email: 'nodes@nodes.com'
+    }
+}
+
+export default AppConfig
