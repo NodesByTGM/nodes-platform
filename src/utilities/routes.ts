@@ -66,6 +66,6 @@ export const upgradeRoutes: RouteObject[] = [
     },
     {
         path: AppConfig.PATHS.Upgrades.Business.Onboarding,
-        Component: BusinessOnboarding
+        Component: checkAuth(BusinessOnboarding)
     },
 ]
