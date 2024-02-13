@@ -41,7 +41,13 @@ function CustomSwiper({
                         );
                     },
                 } : undefined}
-                className='!w-[1200px]'
+                breakpoints={{
+                    1400: { slidesPerView: 4 },
+                    800: { slidesPerView: 2 },
+                    480: { slidesPerView: 1 }
+
+                }}
+                className='!w-[280px] lg:!w-[1000px]'
                 {...rest}
             >
 
@@ -49,7 +55,7 @@ function CustomSwiper({
                     if (isValidElement(child)) {
                         // Assuming ChildComponent is the only type of child you expect
                         return (
-                            <SwiperSlide key={index} className={clsx('overflow-hidden !flex !justify-center', slideContainerClass)}>
+                            <SwiperSlide key={index} className={clsx('overflow-hidden !flex lg:!justify-center !w-[300px] md:!w-[350px]', slideContainerClass)}>
                                 {cloneElement(child, {
                                     key: `AdditionalProp-${index}`,
                                 })}

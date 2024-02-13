@@ -65,8 +65,14 @@ const PATHS = {
     },
     Dashboard: {
         Base: "/dashboard",
-        CategoryWithParam: "/dashboard/:category",
-        PostWithParam: "/dashboard/posts/:id",
+        Categories:{
+            Base: '/dashboard/categories',
+            CategoryWithParam: "/dashboard/categories/:id",
+        },
+        Posts:{
+            Base: '/dashboard/posts',
+            PostWithParam: "/dashboard/posts/:id",
+        },
         Profile: '/dashboard/profile',
         Events: {
             Base: '/dashboard/events',

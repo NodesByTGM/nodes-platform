@@ -9,7 +9,7 @@ function Main() {
             <div className="flex">
                 <Sidebar />
                 <div className="flex-1">
-                    <div className="p-10 min-h-[80vh]">
+                    <div className="p-5 md:p-10 min-h-[80vh]">
                         <Outlet />
                     </div>
                     <Footer />

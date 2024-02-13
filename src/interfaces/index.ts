@@ -51,6 +51,7 @@ export interface SearchbarProps {
     iconPosition?: 'left' | 'right',
     searchTerm: string,
     placeholder?: string,
+    className?: string,
     setSearchTerm: (value: any) => void
 }
 
