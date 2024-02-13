@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { ButtonHTMLAttributes } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  theme?: 'primary' | 'secondary' | 'dark',
+  theme?: 'primary' | 'secondary' | 'dark' | 'nodes',
   children?: any,
   size?: 'sm' | 'default',
   className?: string,
@@ -12,7 +12,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const themeKVP = {
   primary: 'bg-primary border-primary text-white hover:border-secondary focus:text-secondary disabled:bg-primary-light-active disabled:border-primary-light-active',
   secondary: 'bg-transparent border-primary text-primary hover:bg-primary hover:text-white hover:border-secondary focus:border-secondary disabled:border-primary-light-active disabled:text-primary-light-active',
-  dark: 'border-black bg-white text-black hover:bg-black hover:text-white '
+  dark: 'border-black bg-white text-black hover:bg-black hover:text-white ',
+  nodes:''
 }
 
 
