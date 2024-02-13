@@ -1,9 +1,10 @@
+import clsx from 'clsx';
 import { ButtonHTMLAttributes } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: 'primary' | 'secondary' | 'dark',
   children?: any,
-  size?: 'lg' | 'xl' | 'md' | 'default',
+  size?: 'sm' | 'default',
   className?: string,
   compact?: boolean
 }
@@ -14,13 +15,31 @@ const themeKVP = {
   dark: 'border-black bg-white text-black hover:bg-black hover:text-white '
 }
 
-export default function Button({ className, children, theme = "primary", compact, ...props }: ButtonProps) {
+
+const sizeKVP = {
+  default: 'py-3 px-5',
+  sm: 'p-2 max-w-[100px] max-h-[36px]'
+}
+
+export default function Button({
+  className = '',
+  children,
+  theme = "primary",
+  compact,
+  size = 'default',
+  ...props }: ButtonProps) {
   return (
     <button
       {...props}
-      className={`${className} whitespace-nowrap rounded-[5px] py-3 px-5 
-      ${themeKVP[theme]} outline-none transition-all border w-full ${compact ? 'max-w-[350px]' : ''}
-      flex items-center gap-2 justify-center`}>
+      className={clsx(
+        'whitespace-nowrap rounded-[5px]',
+        'outline-none transition-all border w-full ${}',
+        'flex items-center gap-2 justify-center',
+        themeKVP[theme],
+        (compact && size !== 'sm' )? 'max-w-[350px]' : '',
+        sizeKVP[size],
+        className,
+      )}>
       {children}
     </button>
   );

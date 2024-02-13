@@ -4,9 +4,12 @@ import {
     BusinessGetStarted,
     BusinessOnboarding,
     BusinessUpgrade,
+    Category,
+    Dashboard,
     ForgotPassword,
     Home,
     Login,
+    Post,
     Register,
     ResetPassword,
     TalentGetStarted,
@@ -20,10 +23,10 @@ export const authRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Auth.Login,
         Component: Login
     },
-    {
-        path: AppConfig.PATHS.Auth.Register,
-        Component: Register
-    },
+    // {
+    //     path: AppConfig.PATHS.Auth.Register,
+    //     Component: Register
+    // },
     {
         path: AppConfig.PATHS.Auth.ForgotPassword,
         Component: ForgotPassword
@@ -38,7 +41,27 @@ export const authRoutes: RouteObject[] = [
 export const publicRoutes: RouteObject[] = [
     {
         path: '/',
-        Component: getProfile(Home)
+        Component: Home
+    },
+    {
+        path: AppConfig.PATHS.Dashboard.Base,
+        Component: getProfile(Dashboard)
+    },
+    {
+        path: AppConfig.PATHS.Dashboard.CategoryWithParam,
+        Component: getProfile(Category)
+    },
+    {
+        path: AppConfig.PATHS.Dashboard.PostWithParam,
+        Component: getProfile(Post)
+    },
+    {
+        path: AppConfig.PATHS.Community,
+        Component: getProfile(Post)
+    },
+    {
+        path: AppConfig.PATHS.Dashboard.Profile,
+        Component: getProfile(Post)
     },
 ]
 

@@ -41,6 +41,7 @@ export interface IEventRowItem {
 
 export interface CheckboxProps {
     theme?: 'nodes' | 'primary'
+    size?: 'default' | 'lg'
     checked: boolean,
     setChecked: (value: any) => void,
     className?: string

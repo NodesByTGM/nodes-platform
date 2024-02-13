@@ -64,6 +64,10 @@ const PATHS = {
         },
     },
     Dashboard: {
+        Base: "/dashboard",
+        CategoryWithParam: "/dashboard/:category",
+        PostWithParam: "/dashboard/posts/:id",
+        Profile: '/dashboard/profile',
         Events: {
             Base: '/dashboard/events',
             Create: '/dashboard/events/create',
@@ -73,6 +77,7 @@ const PATHS = {
         },
     },
     Contact: `${MAIN_APP_URL}/contact`,
+    Community: '/community',
     Career: '/career',
     Blog: '/blog',
     Partner: '/partner',

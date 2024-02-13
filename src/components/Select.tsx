@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { CarretDownBoldIcon } from "../assets/svg";
 // import { CarretDownBoldIcon } from "../assets/svg"
 
 interface SelectProps {
@@ -10,7 +11,9 @@ interface SelectProps {
     required?: boolean,
     searchable?: boolean,
     options?: any[],
-    optionType?: 'values' | 'objects'
+    optionType?: 'values' | 'objects',
+    showCarret?: boolean,
+    padding?:string
 }
 
 function Select({
@@ -22,7 +25,9 @@ function Select({
     // required = false,
     options = ['Option 1', 'Option 2'],
     optionType = 'values',
-    searchable = false
+    searchable = false,
+    showCarret = false,
+    padding = 'p-4'
 }: SelectProps) {
 
     const wrapperRef = useRef<any>(null);
@@ -79,19 +84,21 @@ function Select({
             if (optionType === 'objects') {
                 return x.name.toLowerCase().includes(inputValue.toLowerCase())
             }
-            x.toLowerCase().includes(inputValue.toLowerCase())
+            return `${x}`.toLowerCase().includes(inputValue.toLowerCase())
         }))
     }, [inputValue])
 
     return (
         <div className={`group relative ${className}`} onClick={toggleMenu} ref={wrapperRef}>
             <div className='font-medium text-sm mb-1'>{label}</div>
-            <div className={`flex justify-between items-center p-4 bg-transparent border border-grey-dark focus-visible:border-primary rounded-[5px]
+            <div className={`flex justify-between items-center ${padding} bg-transparent border border-grey-dark focus-visible:border-primary rounded-[5px]
                 text-black text-sm transition-all cursor-pointer ${isFocused ? 'border-primary' : ''}`}>
                 <div className={selected === placeholder ? 'text-placeholder' : ''}>
                     {typeof selected === 'object' ? selected.name : selected}
                 </div>
-
+                {showCarret ? <div className={opened ? '' : 'rotate-180'}>
+                    <CarretDownBoldIcon />
+                </div> : null}
             </div>
 
             {opened ? (

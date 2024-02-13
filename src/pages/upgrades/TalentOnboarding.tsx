@@ -7,6 +7,7 @@ import {
     TalentReviewCard,
     TextArea,
     UploadInput,
+    WrappedCheckboxInput,
     WrappedInput
 } from "../../components";
 import { Title } from "../../components/Typography";
@@ -20,6 +21,14 @@ function TalentOnboarding() {
     const { user, setUser } = useAuth();
     const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(0)
+    const [checked, setChecked] = useState<any>({
+        connect: false,
+        job: false,
+        showcase: false,
+        projects: false,
+        other: false,
+    })
+
     const [preview, setPreview] = useState("");
     const [selectedFile, setSelectedFile] = useState<any>(null);
     const [formData, setFormData] = useState({
@@ -106,13 +115,69 @@ function TalentOnboarding() {
         }
     }, [user])
 
+    const handleChecked = (id: string) => {
+        const value = checked[id]
+        setChecked({
+            ...checked,
+            [id]: !value
+        })
+    }
+
     return (
         <div className="flex min-h-[100vh] justify-center">
             <div className="p-20 px-24 pt-10 lg:w-1/2">
                 <div className="flex justify-between items-center mb-10">
                     <Link to="/"><div><img src="/logo.svg" alt="" className="w-8" /></div></Link>
                 </div>
+
                 {currentIndex === 0 ? (
+                    <div className="">
+                        <div className="mb-10">
+                            <p className="mb-4">Step 1/4</p>
+                            <Title className="!text-2xl">What do you do?</Title>
+                        </div>
+                        <div className="flex flex-col gap-4 justify-center w-full">
+                            <WrappedCheckboxInput
+                                label="Connect with fellow creatives"
+                                checked={checked.connect}
+                                setChecked={() => handleChecked('connect')}
+                            />
+                            <WrappedCheckboxInput
+                                label="Find exciting job opportunities and gigs."
+                                checked={checked.job}
+                                setChecked={() => handleChecked('job')}
+                            />
+                            <WrappedCheckboxInput
+                                label="Increase visibility and showcase my work."
+                                checked={checked.showcase}
+                                setChecked={() => handleChecked('showcase')}
+                            />
+                            <WrappedCheckboxInput
+                                label=" Explore and discover inspiring projects."
+                                checked={checked.projects}
+                                setChecked={() => handleChecked('projects')}
+                            />
+                            <WrappedCheckboxInput
+                                label="Something else"
+                                checked={checked.other}
+                                setChecked={() => handleChecked('other')}
+                            />
+
+                            <ButtonWithBack
+                                backAction={previousStep}
+                                btnAction={handleClickForm}
+                                disabled={
+                                    !checked.connect &&
+                                    !checked.job &&
+                                    !checked.showcase &&
+                                    !checked.projects &&
+                                    !checked.other
+                                } />
+                        </div>
+                    </div>
+                ) : null}
+
+                {currentIndex === 1 ? (
                     <div className="">
                         <div className="mb-10">
                             <p className="mb-4">Step 1/4</p>
@@ -131,7 +196,7 @@ function TalentOnboarding() {
                     </div>
                 ) : null}
 
-                {currentIndex === 1 ? (
+                {currentIndex === 2 ? (
                     <div className="">
                         <div className="mb-10">
                             <p className="mb-4">Step 2/4</p>
@@ -154,7 +219,7 @@ function TalentOnboarding() {
                     </div>
                 ) : null}
 
-                {currentIndex === 2 ? (
+                {currentIndex === 3 ? (
                     <div className="">
                         <div className="mb-10">
                             <p className="mb-4">Step 3/4</p>
@@ -176,7 +241,7 @@ function TalentOnboarding() {
                 ) : null}
 
 
-                {currentIndex === 3 ? (
+                {currentIndex === 4 ? (
                     <div className="">
                         <div className="mb-10">
                             <p className="mb-4">Step 4/4</p>
@@ -212,7 +277,12 @@ function TalentOnboarding() {
                 ) : null}
             </div>
             <div className="bg-primary p-5 w-1/2 lg:block hidden">
-                <TalentReviewCard name={user?.name} preview={preview}{...formData} />
+                <TalentReviewCard
+                    name={user?.name}
+                    email={user?.email}
+                    preview={preview}
+                    showDetails={currentIndex !== 0}
+                    {...formData} />
             </div>
         </div>
     )

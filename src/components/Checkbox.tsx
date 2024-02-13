@@ -1,14 +1,24 @@
+import clsx from "clsx"
 import { CheckboxProps } from "../interfaces"
 
+const themeKVP = {
+    primary: 'border-primary',
+    nodes: 'boder-nodes'
+}
 /* eslint-disable react/prop-types */
 export default function CheckBox(props: CheckboxProps) {
 
-    const { checked, setChecked, className, theme = 'primary' } = props
+    const { checked, setChecked, className, theme = 'primary', size = 'default' } = props
 
     return (
         <div
-            className={`w-4 h-4 rounded-[2px] cursor-pointer ${checked ? `border-${theme}` : 'border-grey-dark'} border ${className ?? ''}`}
-            onClick={()=>setChecked(!checked)}
+            className={clsx(
+                'rounded-[2px] cursor-pointer border',
+                checked ? themeKVP[theme] : 'border-grey-dark',
+                size === 'default' ? 'w-4 h-4' : 'h-5 w-5',
+                className
+            )}
+            onClick={() => setChecked(!checked)}
         >
             {
                 checked && (

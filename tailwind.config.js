@@ -24,23 +24,27 @@ export default {
           },
         },
         secondary: "#D9E41E",
-        success:"#018E51",
+        success: "#018E51",
         danger: "#D11F54",
         warning: "#F7B307",
         light: "#FBFBFB",
-        placeholder:"#757575",
-        tooltip:"#828282",
+        placeholder: "#757575",
+        tooltip: "#828282",
         grey: {
           DEFAULT: "#EFEFEF",
           dark: "#D6D6D6",
-          footer:'#F9F9F9'
+          footer: '#F9F9F9'
         },
       },
-      boxShadow:{
-        normal: "0px 6px 20px 0px #0000000A"
+      boxShadow: {
+        normal: "0px 6px 20px 0px #0000000A",
+        overlay: "inset 0 0 0 2000px rgba(0, 0, 0, 0.7)"
       },
-      fontSize:{
-        md:'16px'
+      fontSize: {
+        md: '16px'
+      },
+      backgroundImage:{
+        darkgradient:'linear-gradient(180deg, #00000000 0%, #000000b3 62.92%)'
       }
     },
   },

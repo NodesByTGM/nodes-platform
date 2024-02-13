@@ -17,6 +17,8 @@ import {
   publicRoutes,
   upgradeRoutes
 } from './utilities/routes';
+import AppConfig from "./utilities/config";
+import { Register } from "./pages";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +49,11 @@ const router = createBrowserRouter([
   ...upgradeRoutes.map(route => ({
     path: route.path,
     Component: route.Component,
-  }))
+  })),
+  {
+    path: AppConfig.PATHS.Auth.Register,
+    Component: Register
+  },
 ]);
 
 function App() {
