@@ -31,7 +31,7 @@ function Home() {
                     <p>You account is currently a {AccountTypes[user.type]} Account</p>
                 ) : <p>Please login first</p>}
             </div>
-            {/* <div className="flex flex-wrap gap-10 items-center">
+            <div className="flex flex-wrap gap-10 items-center">
                 <Link to={AppConfig.PATHS.Auth.Login}>
                     <Button theme="secondary">Check Login</Button>
                 </Link>
@@ -55,7 +55,7 @@ function Home() {
                         <Button theme="secondary" onClick={handleLogout}>Logout</Button>
                     </div>
                 ) : null}
-            </div> */}
+            </div>
 
             <div>
                 
