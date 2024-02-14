@@ -1,15 +1,23 @@
+import {
+    GoogleAuthProvider,
+    getAuth,
+    signInWithPopup
+} from "firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { GoogleIcon } from "../../assets/svg";
 import { Button, Input, PasswordInput } from "../../components";
+import { Title } from "../../components/Typography";
 import { useAuth } from "../../context/hooks";
 import { mainClient } from "../../utilities/client";
 import { handleAxiosError, validateObjectValues } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
-import { GoogleIcon } from "../../assets/svg";
-import { Title } from "../../components/Typography";
+import { initalizeFirebaseApp } from "../../utilities/firebase";
 
 function Login() {
+    initalizeFirebaseApp()
+    const auth = getAuth();
     const navigate = useNavigate();
     const { setUser } = useAuth()
     const [socialLogin, setSocialLogin] = useState(true)
@@ -53,6 +61,64 @@ function Login() {
         }
     };
 
+    const handleRegistration = (e: any) => {
+        e?.preventDefault();
+        // let form = { ...formData, dob: new Date(`${date.day}-${date.month}-${date.year}`) }
+        // const { confirmPassword, ...data } = form;
+        // mainClient.post(AppConfig.API_ENDPOINTS.Auth.RegisterURL, data)
+        //     .then((r => {
+        //         if (r.status === 200) {
+        //             toast.success(r.data.message)
+        //             navigate(AppConfig.PATHS.Upgrades.Talent.Onboarding)
+        //         } else
+        //             toast.error(r.data.message)
+        //     }))
+        //     .catch(e => {
+        //         handleAxiosError(e)
+        //     })
+    };
+
+    const handleGoogleSignUp = async (e: any) => {
+        e.preventDefault();
+
+        // Instantiate a GoogleAuthProvider object
+        const provider = new GoogleAuthProvider();
+        provider.addScope("https://www.googleapis.com/auth/user.birthday.read")
+
+        
+
+        try {
+            // Sign in with a pop-up window
+            const result = await signInWithPopup(auth, provider);
+
+            // Pull signed-in user credential.
+            const user = result.user;
+            console.log(user.displayName)
+            // console.log(user)
+        } catch (err: any) {
+            // Handle errors here.
+            const { errorMessage, errorCode } = err;
+
+            switch (errorCode) {
+                case "auth/operation-not-allowed":
+                    toast.error("Email/password accounts are not enabled.");
+                    break;
+                case "auth/operation-not-supported-in-this-environment":
+                    toast.error("HTTP protocol is not supported. Please use HTTPS.")
+                    break;
+                case "auth/popup-blocked":
+                    toast.error("Popup has been blocked by the browser. Please allow popups for this website.")
+                    break;
+                case "auth/popup-closed-by-user":
+                    toast.error("Popup has been closed by the user before finalizing the operation. Please try again.")
+                    break;
+                default:
+                    toast.error(errorMessage);
+                    break;
+            }
+        }
+    };
+
     return (
         <div className="">
             <div className="flex justify-between items-center mb-10">
@@ -66,7 +132,7 @@ function Login() {
                 <p>Sign up now and become part of the Nodes community.</p>
             </div>
             <div className="flex flex-col items-center gap-5">
-                <Button theme="dark">
+                <Button theme="dark" onClick={handleGoogleSignUp}>
                     <span><GoogleIcon /></span>
                     <span>Sign up with Google</span>
                 </Button>
