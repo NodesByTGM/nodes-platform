@@ -11,7 +11,7 @@ export const getClient = (
             ...extraHeaders
         },
         baseURL: baseURL,
-        timeout: 30000,
+        timeout: 55000,
         withCredentials:true
     });
     instance?.interceptors?.response?.use(
