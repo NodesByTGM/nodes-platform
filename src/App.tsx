@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import {
   RouterProvider,
@@ -5,20 +6,20 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import 'swiper/css';
+import './App.css';
 import AuthProvider from "./context/auth";
 import {
   AuthLayout,
   MainLayout,
 } from "./layout";
-import './App.css';
-import 'swiper/css';
+import { Register } from "./pages";
+import AppConfig, { BASE_API_ENDPOINT } from "./utilities/config";
 import {
   authRoutes,
   publicRoutes,
   upgradeRoutes
 } from './utilities/routes';
-import AppConfig from "./utilities/config";
-import { Register } from "./pages";
 
 const router = createBrowserRouter([
   {
@@ -57,7 +58,15 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-
+  useEffect(() => {
+    fetch(BASE_API_ENDPOINT)
+      .then(() => {
+        // handle the response
+      })
+      .catch(() => {
+        // handle the error
+      });
+  }, [])
   return (
     <div className="">
       <ToastContainer />
