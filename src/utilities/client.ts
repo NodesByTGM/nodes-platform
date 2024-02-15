@@ -8,11 +8,12 @@ export const getClient = (
     const instance = axios.create({
         headers: {
             "Content-Type": `${multipart ? "multipart/form-data" : "application/json"}`,
-            ...extraHeaders
+            ...extraHeaders,
+            Authorization: localStorage.getItem('nodesToken')
         },
         baseURL: baseURL,
-        timeout: 55000,
-        withCredentials:true
+        timeout: 60000,
+        // withCredentials:true
     });
     instance?.interceptors?.response?.use(
         (response) => {

@@ -12,10 +12,12 @@ const getProfile = (WrappedComponent: FC) => {
     const WithLogger: FC = (props) => {
         const { user, setUser } = useAuth();
         if (!user) {
-            mainClient.get(AppConfig.API_ENDPOINTS.Auth.ProfileURL)
+            mainClient.get(AppConfig.API_ENDPOINTS.Auth.ProfileURL, {
+                headers: { Authorization: 'Token ' + localStorage.getItem("nodesToken") }
+            })
                 .then(r => {
                     if (r.status === 200) {
-                        setUser(r.data.data)
+                        setUser(r.data.user)
                     }
                 })
                 .catch(_ => { })

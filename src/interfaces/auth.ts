@@ -19,6 +19,7 @@ export interface IUser {
     verified: boolean;
     createdAt: string;
     updatedAt: string;
+    accessToken?: string;
 }
 
 

@@ -8,10 +8,15 @@ const AuthProvider = ({ children }: { children: ReactNode | ReactNode[] }) => {
     const [user, setUser] = useState<IUser | null>(null);
 
     const handleSetUser = async (user: IUser) => {
+
+        if (user.accessToken) {
+            localStorage.setItem("nodesToken", user.accessToken)
+        }
         setUser(user);
     };
 
     const handleLogout = () => {
+        localStorage.removeItem("nodesToken")
         setUser(null)
     };
 

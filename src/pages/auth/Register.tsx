@@ -14,12 +14,14 @@ import {
     Tooltip
 } from "../../components";
 import { Title } from "../../components/Typography";
+import { useAuth } from "../../context/hooks";
 import { mainClient } from "../../utilities/client";
 import { convertSecondsToTime, handleAxiosError, validateObjectValues } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
 
 function Register() {
     const navigate = useNavigate();
+    const { setUser } = useAuth()
     const [currentIndex, setCurrentIndex] = useState(0)
     const [checked, setChecked] = useState(false)
     const [sent, setSent] = useState(false)
@@ -69,6 +71,7 @@ function Register() {
             .then((r => {
                 if (r.status === 200) {
                     toast.success(r.data.message)
+                    setUser(r.data.user)
                     navigate(AppConfig.PATHS.Upgrades.Talent.Onboarding)
                 } else
                     toast.error(r.data.message)

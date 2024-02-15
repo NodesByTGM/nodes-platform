@@ -44,14 +44,14 @@ function Login() {
                 .then((r => {
                     if (r.status === 200) {
                         toast.success("Login successful!")
-                        setUser(r.data.data.user)
+                        setUser(r.data.user)
                         navigate("/")
                         setFormData({
                             email: '',
                             password: '',
                         })
                     } else
-                        toast.error(r.data.data.message)
+                        toast.error(r.data.message)
                 }))
                 .catch(e => {
                     console.log(e)
