@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 // image uploads
 // cookies, switch between talent and business
 // image uploads: Picture format, png, jpeg and not more than 2mb.
-// Username of Email
+// Username or Email
 // country dropdown, professionDropdown
 // button states for UploadInput and ButtonWithBack
-// CHANGE email and name when upgrading? move comany to 
+// CHANGE email and name when upgrading? move company to 

@@ -38,4 +38,4 @@ export const getClient = (
 
 export const mainClient = getClient(BASE_API_ENDPOINT);
 // export const multipartClient = getClient(config.API_ENDPOINTS.Base, true);
-// TODO: Hanlde auth errors and store profile in localstorage
+// TODO: Handle auth errors and store profile in localstorage

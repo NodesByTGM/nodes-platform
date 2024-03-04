@@ -65,11 +65,11 @@ const PATHS = {
     },
     Dashboard: {
         Base: "/dashboard",
-        Categories:{
+        Categories: {
             Base: '/dashboard/categories',
             CategoryWithParam: "/dashboard/categories/:id",
         },
-        Posts:{
+        Posts: {
             Base: '/dashboard/posts',
             PostWithParam: "/dashboard/posts/:id",
         },
@@ -103,6 +103,15 @@ export enum AccountTypes {
     Default = 0,
     Talent = 1,
     Business = 2,
+}
+
+export enum OnboaringPurpose {
+    NotSelected = 0,
+    Connection = 1,
+    Jobs = 2,
+    Showcase = 3,
+    ExploreProjects = 4,
+    Others = 5,
 }
 
 export const MONTHS = [
@@ -205,9 +214,9 @@ const AppConfig = {
         BUSINESS: 2,
     },
     DATE_OPTIONS: {
-        MONTHS,
-        DAYS,
-        YEARS
+        MONTHS: MONTHS.map(x => ({ value: x, label: `${x}` })),
+        DAYS: DAYS.map(x => ({ value: x, label: `${x}` })),
+        YEARS: YEARS.map(x => ({ value: x, label: `${x}` }))
     },
     SKILL_OPTIONS: [
         'Production assistant',

@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { InputHTMLAttributes, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { EyeIcon, SlashedEyeIcon } from '../assets/svg';
 import { containsNumber, containsSpecialCharacters } from '../utilities/common';
-import { Link } from 'react-router-dom';
 import AppConfig from '../utilities/config';
 
 const strengthColorArray = ['text-danger', 'text-warning', 'text-success']
@@ -55,7 +55,6 @@ export default function Input({
   }, [value])
 
   const bgColor = touched ? strengthBgArray[strength] : 'bg-grey-dark'
-
 
   return (
     <div className='text-sm'>

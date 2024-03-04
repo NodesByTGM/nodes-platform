@@ -1,7 +1,12 @@
+import clsx from "clsx";
 import { useEffect, useRef, useState } from "react"
-import { CarretDownBoldIcon } from "../assets/svg";
+import { ChevronDown } from "react-feather";
 // import { CarretDownBoldIcon } from "../assets/svg"
 
+interface IOption {
+    value: any,
+    label: string
+}
 interface SelectProps {
     className?: string,
     label?: string,
@@ -10,10 +15,11 @@ interface SelectProps {
     placeholder?: string,
     required?: boolean,
     searchable?: boolean,
-    options?: any[],
-    optionType?: 'values' | 'objects',
-    showCarret?: boolean,
-    padding?:string
+    options?: IOption[],
+    error?: any
+    touched?: boolean;
+    defaultValue?: any
+    optionType?: 'values' | 'objects'
 }
 
 function Select({
@@ -23,22 +29,25 @@ function Select({
     id = '',
     placeholder = '',
     // required = false,
-    options = ['Option 1', 'Option 2'],
-    optionType = 'values',
-    searchable = false,
-    showCarret = false,
-    padding = 'p-4'
+    options = [
+        { value: '1', label: 'One' },
+        { value: '2', label: 'Two' },
+    ],
+    error,
+    touched = false,
+    defaultValue,
+    searchable = false
 }: SelectProps) {
 
     const wrapperRef = useRef<any>(null);
     const inputRef = useRef<any>(null);
     const [opened, setOpened] = useState(false)
     const [isFocused, setIsFocused] = useState(false)
-    const [selected, setSelected] = useState<any>(placeholder)
+    const [selected, setSelected] = useState<IOption>({ value: "", label: placeholder })
     const [inputValue, setInputValue] = useState('');
     const [filtered, setFiltered] = useState(options);
 
-    const handleSelect = (value: string) => {
+    const handleSelect = (value: { value: any, label: string }) => {
         setSelected(value);
         setOpened(false)
     }
@@ -65,8 +74,8 @@ function Select({
     }
 
     useEffect(() => {
-        if (selected !== "Select") {
-            onSelect({ id, value: selected })
+        if (selected.label !== "Select") {
+            onSelect({ id, value: selected.value })
             setIsFocused(false)
         }
     }, [selected])
@@ -80,25 +89,36 @@ function Select({
     }, []);
 
     useEffect(() => {
-        setFiltered(options.filter((x: any) => {
-            if (optionType === 'objects') {
-                return x.name.toLowerCase().includes(inputValue.toLowerCase())
+        if (defaultValue != undefined) {
+            const value = options.find(x => x.value === defaultValue)
+            console.log(value);
+            if (value) {
+                setSelected(value)
             }
-            return `${x}`.toLowerCase().includes(inputValue.toLowerCase())
-        }))
+        }
+    }, [defaultValue])
+
+    useEffect(() => {
+        setFiltered(options.filter((x) => x.label.toLowerCase().includes(inputValue.toLowerCase())))
     }, [inputValue])
 
     return (
         <div className={`group relative ${className}`} onClick={toggleMenu} ref={wrapperRef}>
-            <div className='font-medium text-sm mb-1'>{label}</div>
-            <div className={`flex justify-between items-center ${padding} bg-transparent border border-grey-dark focus-visible:border-primary rounded-[5px]
-                text-black text-sm transition-all cursor-pointer ${isFocused ? 'border-primary' : ''}`}>
-                <div className={selected === placeholder ? 'text-placeholder' : ''}>
-                    {typeof selected === 'object' ? selected.name : selected}
+            {/* <div className='font-medium text-sm mb-1'>{label}</div> */}
+            <div className={clsx(
+                `flex justify-between items-center p-4- p-3.5 bg-transparent border border-grey-dark focus-visible:border-primary rounded-[5px]`,
+                `text-black text-sm transition-all cursor-pointer`,
+                isFocused ? 'border-primary' : ''
+            )}>
+                <div className={selected.label === placeholder ? 'text-placeholder' : ''}>
+                    {selected.label}
                 </div>
-                {showCarret ? <div className={opened ? '' : 'rotate-180'}>
-                    <CarretDownBoldIcon />
-                </div> : null}
+
+                <div className={clsx(
+                    'transition-all',
+                    opened ? 'rotate-180' : ''
+                )}><ChevronDown className="text-grey-dark" /></div>
+
             </div>
 
             {opened ? (
@@ -107,6 +127,7 @@ function Select({
                     {searchable ? (
                         <div className="p-2">
                             <input
+                                id={id}
                                 type="text"
                                 value={inputValue}
                                 autoFocus
@@ -118,11 +139,11 @@ function Select({
                         </div>
                     ) : null}
                     <ul>
-                        {filtered.map((v: any, i: number) => (
+                        {filtered.map((v, i: number) => (
                             <li key={i}
                                 className="p-3 hover:bg-primary-light-hover cursor-pointer transition-all"
                                 onClick={() => handleSelect(v)}>
-                                {optionType === 'objects' ? v.name : v}
+                                {v.label}
                             </li>
                         ))}
                     </ul>
