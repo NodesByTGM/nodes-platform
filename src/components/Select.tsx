@@ -19,7 +19,9 @@ interface SelectProps {
     error?: any
     touched?: boolean;
     defaultValue?: any
-    optionType?: 'values' | 'objects'
+    optionType?: 'values' | 'objects',
+    padding?: string,
+    showCarret?: boolean
 }
 
 function Select({
@@ -36,7 +38,8 @@ function Select({
     error,
     touched = false,
     defaultValue,
-    searchable = false
+    searchable = false,
+    showCarret
 }: SelectProps) {
 
     const wrapperRef = useRef<any>(null);
@@ -114,10 +117,13 @@ function Select({
                     {selected.label}
                 </div>
 
-                <div className={clsx(
-                    'transition-all',
-                    opened ? 'rotate-180' : ''
-                )}><ChevronDown className="text-grey-dark" /></div>
+                {showCarret ? (
+                    <div className={clsx(
+                        'transition-all',
+                        opened ? 'rotate-180' : ''
+                    )}><ChevronDown className="text-grey-dark" />
+                    </div>
+                ) : null}
 
             </div>
 
