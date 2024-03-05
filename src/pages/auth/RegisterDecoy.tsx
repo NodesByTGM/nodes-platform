@@ -22,9 +22,8 @@ import {
   validateObjectValues,
 } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
-import { FormikHelpers, useFormik } from "formik";
-import FormDebug from "../../components/FormDebug";
-import { signupSchema, SignupValidationType } from "../../utilities/validation";
+// import { FormikHelpers, useFormik } from "formik";
+
 
 function Register() {
   const navigate = useNavigate();
@@ -43,45 +42,19 @@ function Register() {
     confirmPassword: "",
     otp: "",
   });
-
-  const handleFormSubmit = (
-    values: SignupValidationType,
-    formikHelpers: FormikHelpers<SignupValidationType>
-  ) => {
-    console.log(values);
-  };
-
-  const formik = useFormik<SignupValidationType>({
-    initialValues: {
-      name: "",
-      email: "",
-      username: "",
-      dob: Date.now(),
-      password: "",
-      confirmPassword: "",
-      otp: "",
-    },
-    validationSchema: signupSchema,
-    validateOnBlur: true,
-    onSubmit: handleFormSubmit,
-  });
-
-  const { handleChange, handleSubmit, errors, touched, values, isValid } =
-    formik;
-
   const [date, setDate] = useState({
     day: "",
     month: "",
     year: "",
   });
 
-  //   const handleChange = (e: any) => {
-  //     const { id, value } = e.target;
-  //     setFormData((prev) => ({
-  //       ...prev,
-  //       [id]: value,
-  //     }));
-  //   };
+  const handleChange = (e: any) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
 
   const handleClickForm = (e?: any) => {
     console.log("formData: " + JSON.stringify(formData));
@@ -102,7 +75,7 @@ function Register() {
 
   const handleRegistration = (e: any) => {
     e?.preventDefault();
-    const form = {
+    let form = {
       ...formData,
       dob: new Date(`${date.day}-${date.month}-${date.year}`),
     };
@@ -196,10 +169,7 @@ function Register() {
               <Title>Welcome to Nodes!</Title>
               <p>Where creativtity knows no limits.</p>
             </div>
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-4 justify-center w-full"
-            >
+            <div className="flex flex-col gap-4 justify-center w-full">
               <div className="flex lg:flex-row flex-col gap-5">
                 <div className="w-full">
                   <Input
@@ -207,10 +177,8 @@ function Register() {
                     placeholder={AppConfig.PLACEHOLDERS.Fullname}
                     id="name"
                     label="Full name"
-                    error={errors.name}
-                    value={values.name}
-                    touched={touched.name}
-                    onChange={handleChange("name")}
+                    value={formData.name}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="w-full">
@@ -219,10 +187,8 @@ function Register() {
                     placeholder={AppConfig.PLACEHOLDERS.Username}
                     id="username"
                     label="Username"
-                    error={errors.username}
-                    value={values.username}
-                    touched={touched.username}
-                    onChange={handleChange("username")}
+                    value={formData.username}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -231,11 +197,9 @@ function Register() {
                 placeholder={AppConfig.PLACEHOLDERS.Email}
                 id="email"
                 type="email"
+                value={formData.email}
                 label="Email address"
-                error={errors.email}
-                value={values.email}
-                touched={touched.email}
-                onChange={handleChange("email")}
+                onChange={handleChange}
               />
 
               {/* DOB */}
@@ -290,10 +254,8 @@ function Register() {
                 type="password"
                 placeholder={"+8 characters"}
                 id="password"
-                error={errors.password}
-                value={values.password}
-                touched={touched.password}
-                onChange={handleChange("password")}
+                value={formData.password}
+                onChange={handleChange}
               />
               <PasswordInput
                 required
@@ -301,10 +263,8 @@ function Register() {
                 type="password"
                 placeholder={AppConfig.PLACEHOLDERS.ConfirmPassword}
                 id="confirmPassword"
-                error={errors.confirmPassword}
-                value={values.confirmPassword}
-                touched={touched.confirmPassword}
-                onChange={handleChange("confirmPassword")}
+                value={formData.confirmPassword}
+                onChange={handleChange}
               />
 
               {/* {formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword ? (
@@ -341,13 +301,12 @@ function Register() {
               >
                 Sign Up
               </Button>
-            </form>
+            </div>
           </div>
         ) : null}
 
         {currentIndex === 1 ? (
           <div>
-            <FormDebug form={{ values, touched, errors }} />
             <div
               onClick={previousStep}
               className="flex items-center mb-10 gap-2 cursor-pointer"
@@ -387,7 +346,6 @@ function Register() {
       >
         {currentIndex === 0 ? (
           <div className="flex flex-col justify-center mt-20 items-center">
-            <FormDebug form={{ values, touched, errors }} />
             <div className="">
               <img src="/img/auth1.png" alt="" className="w-[350px]" />
               <img
