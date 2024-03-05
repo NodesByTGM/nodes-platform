@@ -1,5 +1,5 @@
 
-export const BASE_API_ENDPOINT = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/api/v1' : 'https://nodes-server-v1.onrender.com/api/v1'
+export const BASE_API_ENDPOINT = process.env.NODE_ENV === 'development' ? 'https://nodes-server-v1.onrender.com/api/v1' : 'https://nodes-server-v1.onrender.com/api/v1'
 export const MAIN_APP_URL = 'https://nodes.com'
 
 
