@@ -207,7 +207,7 @@ const AppConfig = {
         Timezone: 'Timezone'
     },
     OTP_LENGTH: 4,
-    OTP_COUNTDOWN: 300,
+    OTP_COUNTDOWN: 30,
     ACCOUNT_TYPES: {
         DEFAULT: 0,
         TALENT: 1,

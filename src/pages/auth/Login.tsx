@@ -85,7 +85,7 @@ function Login() {
         const provider = new GoogleAuthProvider();
         provider.addScope("https://www.googleapis.com/auth/user.birthday.read")
 
-        
+
 
         try {
             // Sign in with a pop-up window
@@ -163,6 +163,7 @@ function Login() {
                         value={formData.email}
                         onChange={handleChange} />
                     <PasswordInput
+                        forgotPasswordLink
                         placeholder={AppConfig.PLACEHOLDERS.Password}
                         id="password"
                         type="password"
