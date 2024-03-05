@@ -66,7 +66,7 @@ function Register() {
     onSubmit: handleFormSubmit,
   });
 
-  const { handleChange, handleSubmit, errors, touched, values, isValid } =
+  const { handleChange, handleSubmit, errors, touched, values, isValid, handleBlur } =
     formik;
 
   const [date, setDate] = useState({
@@ -211,6 +211,7 @@ function Register() {
                     value={values.name}
                     touched={touched.name}
                     onChange={handleChange("name")}
+                    onBlur={handleBlur}
                   />
                 </div>
                 <div className="w-full">
@@ -223,6 +224,7 @@ function Register() {
                     value={values.username}
                     touched={touched.username}
                     onChange={handleChange("username")}
+                    onBlur={handleBlur}
                   />
                 </div>
               </div>
@@ -236,6 +238,7 @@ function Register() {
                 value={values.email}
                 touched={touched.email}
                 onChange={handleChange("email")}
+                onBlur={handleBlur}
               />
 
               {/* DOB */}
@@ -294,6 +297,7 @@ function Register() {
                 value={values.password}
                 touched={touched.password}
                 onChange={handleChange("password")}
+                onBlur={handleBlur}
               />
               <PasswordInput
                 required
@@ -305,6 +309,7 @@ function Register() {
                 value={values.confirmPassword}
                 touched={touched.confirmPassword}
                 onChange={handleChange("confirmPassword")}
+                onBlur={handleBlur}
               />
 
               {/* {formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword ? (
