@@ -17,6 +17,7 @@ import { IUser } from "../../interfaces/auth";
 import { mainClient } from "../../utilities/client";
 import { handleAxiosError } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
+// import FormDebug from "../../components/FormDebug";
 
 function TalentOnboarding() {
   const { user, setUser } = useAuth();
@@ -58,7 +59,7 @@ function TalentOnboarding() {
   };
 
   const handleClickForm = (e?: any) => {
-    if (currentIndex < 3) {
+    if (currentIndex < 4) {
       setCurrentIndex(currentIndex + 1);
     } else {
       handleSubmit(e);
@@ -77,7 +78,8 @@ function TalentOnboarding() {
         .post(AppConfig.API_ENDPOINTS.Upgrades.TalentURL, {
           ...formData,
           skills: formData.skills.join(", "),
-          // avatar: `data:image/jpeg;base64,${binaryAvatar}`
+        //   avatar: `data:image/jpeg;base64,${binaryAvatar}`
+          avatar: preview
         })
         .then((r) => {
           if (r.status === 200) {
@@ -116,6 +118,10 @@ function TalentOnboarding() {
       }
     }
   }, [user]);
+
+//   useEffect(() => {
+//     formData.avatar = preview;
+//   }, [preview]);
 
   const handleChecked = (id: string) => {
     const value = checked[id];
@@ -305,6 +311,7 @@ function TalentOnboarding() {
         ) : null}
       </div>
       <div className="bg-primary p-5 w-1/2 lg:block hidden">
+        {/* <FormDebug form={{ formData, preview }} /> */}
         <TalentReviewCard
           name={user?.name}
           email={user?.email}

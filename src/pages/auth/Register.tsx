@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
