@@ -28,3 +28,16 @@ export type SignupValidationType = {
   confirmPassword: string;
   otp: string;
 };
+
+export const loginSchema = object({
+  email: string().email().required(),
+  password: string().required(),
+ 
+});
+
+export type LoginValidationType = {
+
+  email: string;
+  password: string;
+
+};

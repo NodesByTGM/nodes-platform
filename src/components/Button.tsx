@@ -10,6 +10,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   compact?: boolean;
   disabled?: boolean;
   isLoading?: boolean;
+  type?: "submit" | "reset" | "button" | undefined;
 }
 
 const themeKVP = {
@@ -34,10 +35,12 @@ export default function Button({
   size = "default",
   disabled = false,
   isLoading,
+  type = "submit",
   ...props
 }: ButtonProps) {
   return (
     <button
+      type={type}
       disabled={disabled}
       {...props}
       className={clsx(

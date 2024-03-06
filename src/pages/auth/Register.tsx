@@ -20,11 +20,13 @@ import { mainClient } from "../../utilities/client";
 import {
   convertSecondsToTime,
   handleAxiosError,
-  validateObjectValues,
+  // validateObjectValues,
 } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
-import { FormikHelpers, useFormik } from "formik";
-import FormDebug from "../../components/FormDebug";
+import { 
+  // FormikHelpers,
+   useFormik } from "formik";
+// import FormDebug from "../../components/FormDebug";
 import { signupSchema, SignupValidationType } from "../../utilities/validation";
 
 function Register() {
