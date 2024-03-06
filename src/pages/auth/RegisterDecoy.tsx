@@ -10,7 +10,6 @@ import {
   OTPInput,
   PasswordInput,
   Select,
-  // BasicSelect,
   TalentCTA,
   Tooltip,
 } from "../../components";
@@ -20,14 +19,11 @@ import { mainClient } from "../../utilities/client";
 import {
   convertSecondsToTime,
   handleAxiosError,
-  // validateObjectValues,
+  validateObjectValues,
 } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
-import { 
-  // FormikHelpers,
-   useFormik } from "formik";
-// import FormDebug from "../../components/FormDebug";
-import { signupSchema, SignupValidationType } from "../../utilities/validation";
+// import { FormikHelpers, useFormik } from "formik";
+
 
 function Register() {
   const navigate = useNavigate();
@@ -37,34 +33,34 @@ function Register() {
   const [sent, setSent] = useState(false);
   const [resendAllowed, setResendAllowed] = useState(false);
   const [timeLeft, setTimeLeft] = useState(AppConfig.OTP_COUNTDOWN);
-  const [sendOtpLoading, setSendOtpLoading] = useState(false);
-  const [submitLoading, setSubmitLoading] = useState(false);
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   email: "",
-  //   username: "",
-  //   day: "",
-  //   month: "",
-  //   year: "",
-  //   password: "",
-  //   confirmPassword: "",
-  //   otp: "",
-  // });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    username: "",
+    dob: Date.now(),
+    password: "",
+    confirmPassword: "",
+    otp: "",
+  });
+  const [date, setDate] = useState({
+    day: "",
+    month: "",
+    year: "",
+  });
 
-  const prepareDetails = (values) => {
-    const payload = {
-      name: values.name,
-      username: values.username,
-      email: values.email,
-      dob: new Date(`${values.day}-${values.month}-${values.year}`),
-      otp: values.otp,
-      password: values.password,
-    };
-
-    return payload;
+  const handleChange = (e: any) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
   };
 
   const handleClickForm = (e?: any) => {
+    console.log("formData: " + JSON.stringify(formData));
+    for (const key in formData) {
+      console.log(`Signups - ${key}: ${formData[key]}`);
+    }
     if (currentIndex === 0) {
       if (!sent) {
         sendOTP();
@@ -79,9 +75,11 @@ function Register() {
 
   const handleRegistration = (e: any) => {
     e?.preventDefault();
-    setSubmitLoading(true);
-
-    const data = prepareDetails(values);
+    let form = {
+      ...formData,
+      dob: new Date(`${date.day}-${date.month}-${date.year}`),
+    };
+    const { confirmPassword, ...data } = form;
     mainClient
       .post(AppConfig.API_ENDPOINTS.Auth.RegisterURL, data)
       .then((r) => {
@@ -90,73 +88,18 @@ function Register() {
           setUser(r.data.user);
           navigate(AppConfig.PATHS.Upgrades.Talent.Onboarding);
         } else toast.error(r.data.message);
-        setSubmitLoading(false);
       })
       .catch((e) => {
-        setSubmitLoading(false);
         handleAxiosError(e);
       });
   };
-  // const handleFormSubmit = (
-  //   values: SignupValidationType
-  //   // formikHelpers: FormikHelpers<SignupValidationType>
-  // ) => {
-  //   console.log(values);
-  //   // formikHelpers.resetForm();
-  // };
-
-  const formik = useFormik<SignupValidationType>({
-    initialValues: {
-      name: "",
-      email: "",
-      username: "",
-      day: "",
-      month: "",
-      year: "",
-      password: "",
-      confirmPassword: "",
-      otp: "",
-    },
-    validationSchema: signupSchema,
-    validateOnBlur: true,
-    onSubmit: handleClickForm,
-  });
-
-  const {
-    handleChange,
-    handleSubmit,
-    errors,
-    touched,
-    values,
-    isValid,
-    handleBlur,
-  } = formik;
 
   const handleSelect = ({ id, value }: any) => {
-    console.log({ id, value });
-    if (id.toLowerCase() == "day") {
-      values.day = value;
-    }
-    if (id.toLowerCase() == "month") {
-      values.month = value;
-    }
-    if (id.toLowerCase() == "year") {
-      values.year = value;
-    }
+    setDate((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
   };
-
-  // const handleBasicSelect = (type, selected) => {
-  //   if (type === "day") {
-  //     console.log({ type, selected: selected?.value });
-  //     values.day = selected?.value;
-  //   }
-  //   if (type === "month") {
-  //     values.month = selected?.value;
-  //   }
-  //   if (type === "year") {
-  //     values.month = selected?.value;
-  //   }
-  // };
 
   const previousStep = () => {
     if (currentIndex > 0) {
@@ -165,9 +108,8 @@ function Register() {
   };
 
   const sendOTP = () => {
-    setSendOtpLoading(true);
     mainClient
-      .post(AppConfig.API_ENDPOINTS.Auth.SendOTP, { email: values.email })
+      .post(AppConfig.API_ENDPOINTS.Auth.SendOTP, { email: formData.email })
       .then((r) => {
         if (r.status === 200) {
           toast.success(r.data.message);
@@ -176,16 +118,14 @@ function Register() {
           setCurrentIndex(1);
           setTimeLeft(AppConfig.OTP_COUNTDOWN);
         }
-        setSendOtpLoading(false);
-      })
-      .catch((e) => {
-        setSendOtpLoading(false);
-        handleAxiosError(e);
       });
   };
 
   const handleSetOTP = (value: string) => {
-    values.otp = value;
+    setFormData((prev) => ({
+      ...prev,
+      otp: value,
+    }));
   };
 
   useEffect(() => {
@@ -229,10 +169,7 @@ function Register() {
               <Title>Welcome to Nodes!</Title>
               <p>Where creativtity knows no limits.</p>
             </div>
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-4 justify-center w-full"
-            >
+            <div className="flex flex-col gap-4 justify-center w-full">
               <div className="flex lg:flex-row flex-col gap-5">
                 <div className="w-full">
                   <Input
@@ -240,11 +177,8 @@ function Register() {
                     placeholder={AppConfig.PLACEHOLDERS.Fullname}
                     id="name"
                     label="Full name"
-                    error={errors.name}
-                    value={values.name}
-                    touched={touched.name}
-                    onChange={handleChange("name")}
-                    onBlur={handleBlur}
+                    value={formData.name}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="w-full">
@@ -253,11 +187,8 @@ function Register() {
                     placeholder={AppConfig.PLACEHOLDERS.Username}
                     id="username"
                     label="Username"
-                    error={errors.username}
-                    value={values.username}
-                    touched={touched.username}
-                    onChange={handleChange("username")}
-                    onBlur={handleBlur}
+                    value={formData.username}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -266,12 +197,9 @@ function Register() {
                 placeholder={AppConfig.PLACEHOLDERS.Email}
                 id="email"
                 type="email"
+                value={formData.email}
                 label="Email address"
-                error={errors.email}
-                value={values.email}
-                touched={touched.email}
-                onChange={handleChange("email")}
-                onBlur={handleBlur}
+                onChange={handleChange}
               />
 
               {/* DOB */}
@@ -297,29 +225,19 @@ function Register() {
                   </Tooltip>
                 </div>
                 <div className="flex gap-2">
-                  {/* <BasicSelect
-                    inputLabel="Day"
-                    value={values.day}
-                    handleSelected={(selected) =>
-                      handleBasicSelect("day", selected)
-                    }
-                    options={AppConfig.DATE_OPTIONS.DAYS}
-                  /> */}
                   <Select
                     className="flex-1"
                     placeholder={"Day"}
                     id="day"
-                    options={AppConfig.DATE_OPTIONS.DAYS}
+                    options={AppConfig.DATE_OPTIONS.MONTHS}
                     onSelect={handleSelect}
-                    error={errors.day}
                   />
                   <Select
                     className="flex-1"
                     placeholder={"Month"}
                     id="month"
-                    options={AppConfig.DATE_OPTIONS.MONTHS}
+                    options={AppConfig.DATE_OPTIONS.DAYS}
                     onSelect={handleSelect}
-                    error={errors.month}
                   />
                   <Select
                     className="flex-1"
@@ -327,7 +245,6 @@ function Register() {
                     id="year"
                     options={AppConfig.DATE_OPTIONS.YEARS}
                     onSelect={handleSelect}
-                    error={errors.year}
                   />
                 </div>
               </div>
@@ -337,11 +254,8 @@ function Register() {
                 type="password"
                 placeholder={"+8 characters"}
                 id="password"
-                error={errors.password}
-                value={values.password}
-                touched={touched.password}
-                onChange={handleChange("password")}
-                onBlur={handleBlur}
+                value={formData.password}
+                onChange={handleChange}
               />
               <PasswordInput
                 required
@@ -349,12 +263,27 @@ function Register() {
                 type="password"
                 placeholder={AppConfig.PLACEHOLDERS.ConfirmPassword}
                 id="confirmPassword"
-                error={errors.confirmPassword}
-                value={values.confirmPassword}
-                touched={touched.confirmPassword}
-                onChange={handleChange("confirmPassword")}
-                onBlur={handleBlur}
+                value={formData.confirmPassword}
+                onChange={handleChange}
               />
+
+              {/* {formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword ? (
+                                <div className="text-xs text-danger -mt-3">
+                                    Passwords don't match
+                                </div>
+                            ) : null} */}
+              <div
+                className={`text-xs text-danger -mt-3 
+                            ${
+                              formData.password &&
+                              formData.confirmPassword &&
+                              formData.password !== formData.confirmPassword
+                                ? "opacity-100"
+                                : "opacity-0"
+                            } `}
+              >
+                Passwords don't match
+              </div>
 
               <div className="flex items-center gap-2 text-xs">
                 <Checkbox checked={checked} setChecked={setChecked} />
@@ -366,15 +295,13 @@ function Register() {
               </div>
 
               <Button
-                isLoading={sendOtpLoading}
-                className={`${!checked || !isValid ? "opacity-50" : ""} mt-8`}
-                disabled={!checked || !isValid}
-                type="submit"
-                // onClick={handleClickForm}
+                className="mt-8"
+                disabled={!checked && !validateObjectValues(formData)}
+                onClick={handleClickForm}
               >
                 Sign Up
               </Button>
-            </form>
+            </div>
           </div>
         ) : null}
 
@@ -390,7 +317,7 @@ function Register() {
             <div className="text-center">
               <Title className="!text-2xl">We emailed you a code</Title>
               <p className="mb-5">Enter the verification code sent to: </p>
-              <p className="text-primary">{values.email}</p>
+              <p className="text-primary">{formData.email}</p>
             </div>
 
             <OTPInput onChange={handleSetOTP} btnAction={handleClickForm} />
@@ -419,7 +346,6 @@ function Register() {
       >
         {currentIndex === 0 ? (
           <div className="flex flex-col justify-center mt-20 items-center">
-            {/* <FormDebug form={{ values, touched, errors, isValid }} /> */}
             <div className="">
               <img src="/img/auth1.png" alt="" className="w-[350px]" />
               <img

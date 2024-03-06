@@ -10,13 +10,6 @@ import { mainClient } from "../../utilities/client";
 import { handleAxiosError, validateObjectValues } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
 import { initalizeFirebaseApp } from "../../utilities/firebase";
-import FormDebug from "../../components/FormDebug";
-
-import {
-  // FormikHelpers,
-  useFormik,
-} from "formik";
-import { loginSchema, LoginValidationType } from "../../utilities/validation";
 
 function Login() {
   initalizeFirebaseApp();
@@ -24,57 +17,62 @@ function Login() {
   const navigate = useNavigate();
   const { setUser } = useAuth();
   const [socialLogin, setSocialLogin] = useState(true);
-  const [submitLoading, setSubmitLoading] = useState(false);
 
-  const handleFormSubmit = (e: any) => {
-    setSubmitLoading(true);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-    if (!isValid) {
+  const handleChange = (e: any) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = (e: any) => {
+    e?.preventDefault();
+    if (!validateObjectValues(formData)) {
       toast.error(AppConfig.ERROR_MESSAGES.ValidationError);
     } else {
       mainClient
-        .post(AppConfig.API_ENDPOINTS.Auth.LoginURL, values)
+        .post(AppConfig.API_ENDPOINTS.Auth.LoginURL, formData)
         .then((r) => {
           if (r.status === 200) {
             toast.success("Login successful!");
             setUser(r.data.user);
             navigate("/");
-            // setFormData({
-            //   email: "",
-            //   password: "",
-            // });
+            setFormData({
+              email: "",
+              password: "",
+            });
           } else toast.error(r.data.message);
-          setSubmitLoading(false);
         })
         .catch((e) => {
           console.log(e);
-          setSubmitLoading(false);
-
           handleAxiosError(e);
         });
       return;
     }
   };
 
-  const formik = useFormik<LoginValidationType>({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: loginSchema,
-    validateOnBlur: true,
-    onSubmit: handleFormSubmit,
-  });
-
-  const {
-    handleChange,
-    handleSubmit,
-    errors,
-    touched,
-    values,
-    isValid,
-    handleBlur,
-  } = formik;
+  const handleRegistration = (e: any) => {
+    e?.preventDefault();
+    // let form = { ...formData, dob: new Date(`${date.day}-${date.month}-${date.year}`) }
+    // const { confirmPassword, ...data } = form;
+    // mainClient.post(AppConfig.API_ENDPOINTS.Auth.RegisterURL, data)
+    //     .then((r => {
+    //         if (r.status === 200) {
+    //             toast.success(r.data.message)
+    //             navigate(AppConfig.PATHS.Upgrades.Talent.Onboarding)
+    //         } else
+    //             toast.error(r.data.message)
+    //     }))
+    //     .catch(e => {
+    //         handleAxiosError(e)
+    //     })
+  };
 
   const handleGoogleSignUp = async (e: any) => {
     e.preventDefault();
@@ -121,7 +119,6 @@ function Login() {
 
   return (
     <div className="">
-      <FormDebug form={{ values, touched, errors, isValid }} />
       <div className="flex justify-between items-center mb-10">
         <Link to="/">
           <div>
@@ -144,12 +141,10 @@ function Login() {
       </div>
       <div className="flex flex-col items-center gap-5">
         <Button theme="dark" onClick={handleGoogleSignUp}>
-          <div className="flex items-center justify-center gap-2">
-            <span>
-              <GoogleIcon />
-            </span>
-            <span>Sign up with Google</span>
-          </div>
+          <span>
+            <GoogleIcon />
+          </span>
+          <span>Sign up with Google</span>
         </Button>
         <div className="w-full mt-5">
           <hr className="border-gray-200" />
@@ -169,41 +164,28 @@ function Login() {
         ) : null}
       </div>
       {!socialLogin ? (
-        <form
-          onSubmit={(e) => {
-            e?.preventDefault();
-            handleSubmit(e);
-          }}
-          className="flex flex-col gap-2 justify-center w-full mt-2"
-        >
+        <div className="flex flex-col gap-2 justify-center w-full mt-2">
           <Input
             placeholder={AppConfig.PLACEHOLDERS.Email}
             id="email"
             type="email"
             label="Email address"
-            error={errors.email}
-            value={values.email}
-            touched={touched.email}
-            onChange={handleChange("email")}
-            onBlur={handleBlur}
+            value={formData.email}
+            onChange={handleChange}
           />
           <PasswordInput
             forgotPasswordLink
             placeholder={AppConfig.PLACEHOLDERS.Password}
             id="password"
             type="password"
-            error={errors.password}
-            value={values.password}
-            touched={touched.password}
-            onChange={handleChange("password")}
-            onBlur={handleBlur}
+            value={formData.password}
+            onChange={handleChange}
           />
 
           <Button
-            isLoading={submitLoading}
             className="my-4"
-            disabled={!isValid}
-            type="submit"
+            disabled={!validateObjectValues(formData)}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>
@@ -213,7 +195,7 @@ function Login() {
               Sign Up
             </Link>
           </div>
-        </form>
+        </div>
       ) : null}
     </div>
   );

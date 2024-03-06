@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -9,26 +8,36 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   touched?: boolean;
 }
 export default function Input({
-  className = '',
-  value = '',
-  label = '',
-  description = '',
+  className = "",
+  value = "",
+  label = "",
+  description = "",
+  touched = false,
+  error,
   required,
   onChange,
   ...props
 }: InputProps) {
-
   return (
     <div>
-      {label ? (<div className='font-medium text-sm mb-1'>{label}{required ? "*" : null}</div>) : null}
+      {label ? (
+        <div className="font-medium text-sm mb-1">
+          {label}
+          {required ? "*" : null}
+        </div>
+      ) : null}
       <input
         value={value}
         onChange={onChange}
         className={`w-full p-4 transition-all outline-none bg-transparent border rounded-[5px] 
         border-grey-dark focus:border-primary disabled:text-placeholder 
         placeholder:text-placeholder text-ellipsis text-sm text-black ${className} `}
-        {...props} />
-      {description ? (<div className="my-2 text-sm">{description}</div>) : null}
+        {...props}
+      />
+      {description ? <div className="my-2 text-sm">{description}</div> : null}
+      {touched && error ? (
+        <div className="my-2 text-sm text-red-500">{error}</div>
+      ) : null}
     </div>
   );
 }
