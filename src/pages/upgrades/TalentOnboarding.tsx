@@ -29,7 +29,7 @@ function TalentOnboarding() {
     projects: false,
     other: false,
   });
-
+  const [tags, setTags] = useState<any>([]);
   const [preview, setPreview] = useState("");
   const [selectedFile, setSelectedFile] = useState<any>(null);
   const [formData, setFormData] = useState({
@@ -39,6 +39,7 @@ function TalentOnboarding() {
     linkedIn: "",
     instagram: "",
     twitter: "",
+    somethingElse: "",
   });
 
   const handleChange = (e: any) => {
@@ -181,15 +182,28 @@ function TalentOnboarding() {
                 setChecked={() => handleChecked("other")}
               />
 
+              {checked.other && (
+                <div className="">
+                  <TextArea
+                    required
+                    placeholder={"Tell us more..."}
+                    id="somethingElse"
+                    value={formData.somethingElse}
+                    onChange={handleChange}
+                  />
+                </div>
+              )}
+
               <ButtonWithBack
                 backAction={previousStep}
                 btnAction={handleClickForm}
                 disabled={
-                  !checked.connect &&
-                  !checked.job &&
-                  !checked.showcase &&
-                  !checked.projects &&
-                  !checked.other
+                  (!checked.connect &&
+                    !checked.job &&
+                    !checked.showcase &&
+                    !checked.projects &&
+                    !checked.other) ||
+                  (checked.other && !formData.somethingElse)
                 }
               />
             </div>
@@ -198,16 +212,14 @@ function TalentOnboarding() {
 
         {currentIndex === 1 ? (
           <div className="">
-            {/* <div className="mb-10">
-              <p className="mb-4">Step 1/4</p>
-              <Title className="!text-2xl">What do you do?</Title>
-            </div> */}
             <div className="flex flex-col gap-4 justify-center w-full">
               <TagInput
                 id="skills"
                 onSelect={handleSelect}
                 options={AppConfig.SKILL_OPTIONS}
                 description="Example: Modelling, Video editing"
+                tags={tags}
+                setTags={setTags}
               />
               <ButtonWithBack
                 backAction={previousStep}
@@ -220,10 +232,6 @@ function TalentOnboarding() {
 
         {currentIndex === 2 ? (
           <div className="">
-            {/* <div className="mb-10">
-              <p className="mb-4">Step 2/4</p>
-              <Title className="!text-2xl">Where are you located?</Title>
-            </div> */}
             <div className="flex flex-col gap-4 justify-center w-full">
               <TextArea
                 required
@@ -244,10 +252,6 @@ function TalentOnboarding() {
 
         {currentIndex === 3 ? (
           <div className="">
-            {/* <div className="mb-10">
-              <p className="mb-4">Step 3/4</p>
-              <Title className="!text-2xl">Let’s see what you look like</Title>
-            </div> */}
             <div className="flex flex-col gap-4 justify-center w-full">
               <UploadInput
                 preview={preview}
@@ -266,10 +270,6 @@ function TalentOnboarding() {
 
         {currentIndex === 4 ? (
           <div className="">
-            {/* <div className="mb-10">
-              <p className="mb-4">Step 4/4</p>
-              <Title className="!text-2xl">Social media</Title>
-            </div> */}
             <div className="flex flex-col gap-6 justify-center w-full">
               <WrappedInput
                 label="LinkedIn"

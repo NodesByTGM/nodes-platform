@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from 'react';
 import { CloseIcon } from '../assets/svg';
+// import React, { useMemo } from 'react';
+
 
 interface TagInputProps {
     description?: string,
@@ -8,6 +11,8 @@ interface TagInputProps {
     max?: number,
     id: string,
     onSelect: (e?: any) => void
+    tags?: Array<any>, 
+    setTags?: (e) => void
 }
 
 const TagInput = ({
@@ -17,8 +22,10 @@ const TagInput = ({
     onSelect,
     description = '',
     options = [],
+    tags,
+    setTags
 }: TagInputProps) => {
-    const [tags, setTags] = useState<any>([]);
+    // const [tags, setTags] = useState<any>([]);
 
     const [inputValue, setInputValue] = useState('');
     const [isFocused, setIsFocused] = useState(false);
