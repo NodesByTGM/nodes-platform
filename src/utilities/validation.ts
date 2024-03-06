@@ -1,21 +1,30 @@
-import { object, string, number, date } from "yup";
+import { object, string, number, ref } from "yup";
 
 export const signupSchema = object({
   name: string().required(),
-  email: string().email(),
+  email: string().email().required(),
   username: string().required(),
-  dob: date().default(() => new Date()),
+  // dob: date().default(() => new Date()),
+  day: string(),
+  month: string(),
+  year: string(),
   password: string().required(),
-  confirmPassword: string().required(),
-  otp: number(),
+  confirmPassword: string()
+    .required()
+    .oneOf([ref("password"), null], "Passwords must match"),
+  otp: string(),
 });
 
 export type SignupValidationType = {
-    name: string,
-    email: string,
-    username: string,
-    dob: number,
-    password: string,
-    confirmPassword: string,
-    otp: string,
-  };
+  name: string;
+  email: string;
+  username: string;
+  // dob: number,
+  day: string;
+  month: string;
+  year: string;
+
+  password: string;
+  confirmPassword: string;
+  otp: string;
+};

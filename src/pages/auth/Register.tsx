@@ -10,6 +10,7 @@ import {
   OTPInput,
   PasswordInput,
   Select,
+  // BasicSelect,
   TalentCTA,
   Tooltip,
 } from "../../components";
@@ -34,60 +35,34 @@ function Register() {
   const [sent, setSent] = useState(false);
   const [resendAllowed, setResendAllowed] = useState(false);
   const [timeLeft, setTimeLeft] = useState(AppConfig.OTP_COUNTDOWN);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    username: "",
-    dob: Date.now(),
-    password: "",
-    confirmPassword: "",
-    otp: "",
-  });
+  const [sendOtpLoading, setSendOtpLoading] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   email: "",
+  //   username: "",
+  //   day: "",
+  //   month: "",
+  //   year: "",
+  //   password: "",
+  //   confirmPassword: "",
+  //   otp: "",
+  // });
 
-  const handleFormSubmit = (
-    values: SignupValidationType,
-    formikHelpers: FormikHelpers<SignupValidationType>
-  ) => {
-    console.log(values);
+  const prepareDetails = (values) => {
+    const payload = {
+      name: values.name,
+      username: values.username,
+      email: values.email,
+      dob: new Date(`${values.day}-${values.month}-${values.year}`),
+      otp: values.otp,
+      password: values.password,
+    };
+
+    return payload;
   };
 
-  const formik = useFormik<SignupValidationType>({
-    initialValues: {
-      name: "",
-      email: "",
-      username: "",
-      dob: Date.now(),
-      password: "",
-      confirmPassword: "",
-      otp: "",
-    },
-    validationSchema: signupSchema,
-    validateOnBlur: true,
-    onSubmit: handleFormSubmit,
-  });
-
-  const { handleChange, handleSubmit, errors, touched, values, isValid, handleBlur } =
-    formik;
-
-  const [date, setDate] = useState({
-    day: "",
-    month: "",
-    year: "",
-  });
-
-  //   const handleChange = (e: any) => {
-  //     const { id, value } = e.target;
-  //     setFormData((prev) => ({
-  //       ...prev,
-  //       [id]: value,
-  //     }));
-  //   };
-
   const handleClickForm = (e?: any) => {
-    console.log("formData: " + JSON.stringify(formData));
-    for (const key in formData) {
-      console.log(`Signups - ${key}: ${formData[key]}`);
-    }
     if (currentIndex === 0) {
       if (!sent) {
         sendOTP();
@@ -102,11 +77,9 @@ function Register() {
 
   const handleRegistration = (e: any) => {
     e?.preventDefault();
-    const form = {
-      ...formData,
-      dob: new Date(`${date.day}-${date.month}-${date.year}`),
-    };
-    const { confirmPassword, ...data } = form;
+    setSubmitLoading(true);
+
+    const data = prepareDetails(values);
     mainClient
       .post(AppConfig.API_ENDPOINTS.Auth.RegisterURL, data)
       .then((r) => {
@@ -115,18 +88,73 @@ function Register() {
           setUser(r.data.user);
           navigate(AppConfig.PATHS.Upgrades.Talent.Onboarding);
         } else toast.error(r.data.message);
+        setSubmitLoading(false);
       })
       .catch((e) => {
+        setSubmitLoading(false);
         handleAxiosError(e);
       });
   };
+  // const handleFormSubmit = (
+  //   values: SignupValidationType
+  //   // formikHelpers: FormikHelpers<SignupValidationType>
+  // ) => {
+  //   console.log(values);
+  //   // formikHelpers.resetForm();
+  // };
+
+  const formik = useFormik<SignupValidationType>({
+    initialValues: {
+      name: "",
+      email: "",
+      username: "",
+      day: "",
+      month: "",
+      year: "",
+      password: "",
+      confirmPassword: "",
+      otp: "",
+    },
+    validationSchema: signupSchema,
+    validateOnBlur: true,
+    onSubmit: handleClickForm,
+  });
+
+  const {
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+    values,
+    isValid,
+    handleBlur,
+  } = formik;
 
   const handleSelect = ({ id, value }: any) => {
-    setDate((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
+    console.log({ id, value });
+    if (id.toLowerCase() == "day") {
+      values.day = value;
+    }
+    if (id.toLowerCase() == "month") {
+      values.month = value;
+    }
+    if (id.toLowerCase() == "year") {
+      values.year = value;
+    }
   };
+
+  // const handleBasicSelect = (type, selected) => {
+  //   if (type === "day") {
+  //     console.log({ type, selected: selected?.value });
+  //     values.day = selected?.value;
+  //   }
+  //   if (type === "month") {
+  //     values.month = selected?.value;
+  //   }
+  //   if (type === "year") {
+  //     values.month = selected?.value;
+  //   }
+  // };
 
   const previousStep = () => {
     if (currentIndex > 0) {
@@ -135,8 +163,9 @@ function Register() {
   };
 
   const sendOTP = () => {
+    setSendOtpLoading(true);
     mainClient
-      .post(AppConfig.API_ENDPOINTS.Auth.SendOTP, { email: formData.email })
+      .post(AppConfig.API_ENDPOINTS.Auth.SendOTP, { email: values.email })
       .then((r) => {
         if (r.status === 200) {
           toast.success(r.data.message);
@@ -145,14 +174,16 @@ function Register() {
           setCurrentIndex(1);
           setTimeLeft(AppConfig.OTP_COUNTDOWN);
         }
+        setSendOtpLoading(false);
+      })
+      .catch((e) => {
+        setSendOtpLoading(false);
+        handleAxiosError(e);
       });
   };
 
   const handleSetOTP = (value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      otp: value,
-    }));
+    values.otp = value;
   };
 
   useEffect(() => {
@@ -264,19 +295,29 @@ function Register() {
                   </Tooltip>
                 </div>
                 <div className="flex gap-2">
+                  {/* <BasicSelect
+                    inputLabel="Day"
+                    value={values.day}
+                    handleSelected={(selected) =>
+                      handleBasicSelect("day", selected)
+                    }
+                    options={AppConfig.DATE_OPTIONS.DAYS}
+                  /> */}
                   <Select
                     className="flex-1"
                     placeholder={"Day"}
                     id="day"
-                    options={AppConfig.DATE_OPTIONS.MONTHS}
+                    options={AppConfig.DATE_OPTIONS.DAYS}
                     onSelect={handleSelect}
+                    error={errors.day}
                   />
                   <Select
                     className="flex-1"
                     placeholder={"Month"}
                     id="month"
-                    options={AppConfig.DATE_OPTIONS.DAYS}
+                    options={AppConfig.DATE_OPTIONS.MONTHS}
                     onSelect={handleSelect}
+                    error={errors.month}
                   />
                   <Select
                     className="flex-1"
@@ -284,6 +325,7 @@ function Register() {
                     id="year"
                     options={AppConfig.DATE_OPTIONS.YEARS}
                     onSelect={handleSelect}
+                    error={errors.year}
                   />
                 </div>
               </div>
@@ -312,24 +354,6 @@ function Register() {
                 onBlur={handleBlur}
               />
 
-              {/* {formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword ? (
-                                <div className="text-xs text-danger -mt-3">
-                                    Passwords don't match
-                                </div>
-                            ) : null} */}
-              <div
-                className={`text-xs text-danger -mt-3 
-                            ${
-                              formData.password &&
-                              formData.confirmPassword &&
-                              formData.password !== formData.confirmPassword
-                                ? "opacity-100"
-                                : "opacity-0"
-                            } `}
-              >
-                Passwords don't match
-              </div>
-
               <div className="flex items-center gap-2 text-xs">
                 <Checkbox checked={checked} setChecked={setChecked} />
                 <span>
@@ -340,9 +364,11 @@ function Register() {
               </div>
 
               <Button
-                className="mt-8"
-                disabled={!checked && !validateObjectValues(formData)}
-                onClick={handleClickForm}
+                isLoading={sendOtpLoading}
+                className={`${!checked || !isValid ? "opacity-50" : ""} mt-8`}
+                disabled={!checked || !isValid}
+                type="submit"
+                // onClick={handleClickForm}
               >
                 Sign Up
               </Button>
@@ -352,7 +378,6 @@ function Register() {
 
         {currentIndex === 1 ? (
           <div>
-            <FormDebug form={{ values, touched, errors }} />
             <div
               onClick={previousStep}
               className="flex items-center mb-10 gap-2 cursor-pointer"
@@ -363,7 +388,7 @@ function Register() {
             <div className="text-center">
               <Title className="!text-2xl">We emailed you a code</Title>
               <p className="mb-5">Enter the verification code sent to: </p>
-              <p className="text-primary">{formData.email}</p>
+              <p className="text-primary">{values.email}</p>
             </div>
 
             <OTPInput onChange={handleSetOTP} btnAction={handleClickForm} />
@@ -392,7 +417,7 @@ function Register() {
       >
         {currentIndex === 0 ? (
           <div className="flex flex-col justify-center mt-20 items-center">
-            <FormDebug form={{ values, touched, errors }} />
+            {/* <FormDebug form={{ values, touched, errors, isValid }} /> */}
             <div className="">
               <img src="/img/auth1.png" alt="" className="w-[350px]" />
               <img
