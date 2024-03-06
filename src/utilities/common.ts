@@ -112,12 +112,12 @@ export const getInitials = (fullName = '') => {
 }
 
 export const containsSpecialCharacters = (inputString: string) => {
-    var specialCharacters = /[^a-zA-Z0-9\s]/;
+    const specialCharacters = /[^a-zA-Z0-9\s]/;
     return specialCharacters.test(inputString);
 }
 
 export const containsNumber = (inputString: string) => {
-    var hasNumber = /\d/;
+    const hasNumber = /\d/;
     return hasNumber.test(inputString);
 }
 

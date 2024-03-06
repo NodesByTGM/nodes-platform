@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,10 +8,10 @@ import { Button, Input, PasswordInput } from "../../components";
 import { Title } from "../../components/Typography";
 import { useAuth } from "../../context/hooks";
 import { mainClient } from "../../utilities/client";
-import { handleAxiosError, validateObjectValues } from "../../utilities/common";
+import { handleAxiosError,  } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
 import { initalizeFirebaseApp } from "../../utilities/firebase";
-import FormDebug from "../../components/FormDebug";
+// import FormDebug from "../../components/FormDebug";
 
 import {
   // FormikHelpers,
@@ -27,9 +28,11 @@ function Login() {
   const [submitLoading, setSubmitLoading] = useState(false);
 
   const handleFormSubmit = (e: any) => {
+
     setSubmitLoading(true);
 
     if (!isValid) {
+      console.log(e)
       toast.error(AppConfig.ERROR_MESSAGES.ValidationError);
     } else {
       mainClient
@@ -121,7 +124,7 @@ function Login() {
 
   return (
     <div className="">
-      <FormDebug form={{ values, touched, errors, isValid }} />
+      {/* <FormDebug form={{ values, touched, errors, isValid }} /> */}
       <div className="flex justify-between items-center mb-10">
         <Link to="/">
           <div>
