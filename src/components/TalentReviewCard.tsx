@@ -1,4 +1,4 @@
-import { Button } from "."
+// import { Button } from "."
 import { InstagramIcon, LinkedInIcon, LocationIcon, TwitterIcon } from "../assets/svg"
 import { Title } from "./Typography"
 

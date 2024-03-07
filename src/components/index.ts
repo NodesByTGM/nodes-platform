@@ -35,3 +35,4 @@ export { default as TrendingItem } from "./custom/TrendingItem.tsx";
 export { default as CommunityItem } from "./custom/CommunityItem.tsx";
 export { default as CommentBox } from "./custom/CommentBox.tsx";
 export { default as BasicSelect } from "./BasicSelect.tsx";
+export { default as PricingCard } from "./PricingCard.tsx";

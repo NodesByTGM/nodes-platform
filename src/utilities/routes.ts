@@ -15,7 +15,8 @@ import {
     ResetPassword,
     TalentGetStarted,
     TalentOnboarding,
-    TalentUpgrade
+    TalentUpgrade,
+    Pricing
 } from "../pages";
 import AppConfig from "./config";
 
@@ -71,6 +72,10 @@ export const upgradeRoutes: RouteObject[] = [
     {
         path: AppConfig.PATHS.Upgrades.Talent.Base,
         Component: checkAuth(TalentUpgrade)
+    },
+    {
+        path: AppConfig.PATHS.Upgrades.Pricing.Base,
+        Component: checkAuth(Pricing)
     },
     {
         path: AppConfig.PATHS.Upgrades.Business.Base,

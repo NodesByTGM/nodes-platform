@@ -23,13 +23,7 @@ function TalentOnboarding() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [checked, setChecked] = useState<any>({
-    connect: false,
-    job: false,
-    showcase: false,
-    projects: false,
-    other: false,
-  });
+
   const [tags, setTags] = useState<any>([]);
   const [preview, setPreview] = useState("");
   const [selectedFile, setSelectedFile] = useState<any>(null);
@@ -40,8 +34,22 @@ function TalentOnboarding() {
     linkedIn: "",
     instagram: "",
     twitter: "",
-    somethingElse: "",
+    otherPurpose: "",
+    onboardingPurpose: 0,
+    step: currentIndex + 1,
   });
+
+  //   {
+  //     skills
+  // location
+  // avatar
+  // linkedIn
+  // instagram
+  // twitter
+  // otherPurpose:string
+  // onboardingPurpose:0
+  // step:1
+  //   }
 
   const handleChange = (e: any) => {
     const { id, value } = e.target;
@@ -78,8 +86,9 @@ function TalentOnboarding() {
         .post(AppConfig.API_ENDPOINTS.Upgrades.TalentURL, {
           ...formData,
           skills: formData.skills.join(", "),
-        //   avatar: `data:image/jpeg;base64,${binaryAvatar}`
-          avatar: preview
+          //   avatar: `data:image/jpeg;base64,${binaryAvatar}`
+          avatar: preview,
+      
         })
         .then((r) => {
           if (r.status === 200) {
@@ -119,16 +128,28 @@ function TalentOnboarding() {
     }
   }, [user]);
 
-//   useEffect(() => {
-//     formData.avatar = preview;
-//   }, [preview]);
+  useEffect(() => {
+setFormData((prev) => ({
+    ...prev,
+    step: currentIndex + 1
+}))
+  }, [currentIndex])
 
-  const handleChecked = (id: string) => {
-    const value = checked[id];
-    setChecked({
-      ...checked,
-      [id]: !value,
-    });
+  //   useEffect(() => {
+  //     formData.avatar = preview;
+  //   }, [preview]);
+
+  const handleChecked = (id: number) => {
+    console.log(id);
+    // const value = checked[id];
+    let value = id;
+    if (formData.onboardingPurpose == value) {
+      value = 0;
+    }
+    setFormData((prev) => ({
+      ...prev,
+      onboardingPurpose: value,
+    }));
   };
 
   const indexQuestion = {
@@ -164,37 +185,37 @@ function TalentOnboarding() {
             <div className="flex flex-col gap-4 justify-center w-full">
               <WrappedCheckboxInput
                 label="Connect with fellow creatives"
-                checked={checked.connect}
-                setChecked={() => handleChecked("connect")}
+                checked={formData.onboardingPurpose == 1}
+                setChecked={() => handleChecked(1)}
               />
               <WrappedCheckboxInput
                 label="Find exciting job opportunities and gigs."
-                checked={checked.job}
-                setChecked={() => handleChecked("job")}
+                checked={formData.onboardingPurpose == 2}
+                setChecked={() => handleChecked(2)}
               />
               <WrappedCheckboxInput
                 label="Increase visibility and showcase my work."
-                checked={checked.showcase}
-                setChecked={() => handleChecked("showcase")}
+                checked={formData.onboardingPurpose == 3}
+                setChecked={() => handleChecked(3)}
               />
               <WrappedCheckboxInput
                 label=" Explore and discover inspiring projects."
-                checked={checked.projects}
-                setChecked={() => handleChecked("projects")}
+                checked={formData.onboardingPurpose == 4}
+                setChecked={() => handleChecked(4)}
               />
               <WrappedCheckboxInput
                 label="Something else"
-                checked={checked.other}
-                setChecked={() => handleChecked("other")}
+                checked={formData.onboardingPurpose == 5}
+                setChecked={() => handleChecked(5)}
               />
 
-              {checked.other && (
+              {formData.onboardingPurpose == 5 && (
                 <div className="">
                   <TextArea
                     required
                     placeholder={"Tell us more..."}
-                    id="somethingElse"
-                    value={formData.somethingElse}
+                    id="otherPurpose"
+                    value={formData.otherPurpose}
                     onChange={handleChange}
                   />
                 </div>
@@ -204,12 +225,8 @@ function TalentOnboarding() {
                 backAction={previousStep}
                 btnAction={handleClickForm}
                 disabled={
-                  (!checked.connect &&
-                    !checked.job &&
-                    !checked.showcase &&
-                    !checked.projects &&
-                    !checked.other) ||
-                  (checked.other && !formData.somethingElse)
+                  formData.onboardingPurpose == 0 ||
+                  (formData.onboardingPurpose == 5 && !formData.otherPurpose)
                 }
               />
             </div>
@@ -311,7 +328,7 @@ function TalentOnboarding() {
         ) : null}
       </div>
       <div className="bg-primary p-5 w-1/2 lg:block hidden">
-        {/* <FormDebug form={{ formData, preview }} /> */}
+        {/* <FormDebug form={{ formData, preview, checked }} /> */}
         <TalentReviewCard
           name={user?.name}
           email={user?.email}

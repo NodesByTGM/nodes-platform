@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.pricing-padding {
+  @apply px-6 sm:px-[40px] lg:px-[120px];
+}
