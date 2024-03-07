@@ -394,7 +394,7 @@ function Register() {
               <p className="text-primary">{values.email}</p>
             </div>
 
-            <OTPInput onChange={handleSetOTP} btnAction={handleClickForm} />
+            <OTPInput submitLoading={submitLoading} onChange={handleSetOTP} btnAction={handleClickForm} />
             <div className="text-center mt-6">
               {resendAllowed ? (
                 <span>

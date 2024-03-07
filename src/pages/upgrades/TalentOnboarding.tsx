@@ -23,7 +23,7 @@ function TalentOnboarding() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
-
+const [submitLoading, setSubmitLoading] = useState(false)
   const [tags, setTags] = useState<any>([]);
   const [preview, setPreview] = useState("");
   const [selectedFile, setSelectedFile] = useState<any>(null);
@@ -38,6 +38,12 @@ function TalentOnboarding() {
     onboardingPurpose: 0,
     step: currentIndex + 1,
   });
+
+  const nextStep = () => {
+    if (currentIndex + 1 < 5) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
 
   //   {
   //     skills
@@ -68,7 +74,7 @@ function TalentOnboarding() {
 
   const handleClickForm = (e?: any) => {
     if (currentIndex < 4) {
-      setCurrentIndex(currentIndex + 1);
+      nextStep();
     } else {
       handleSubmit(e);
     }
@@ -81,6 +87,7 @@ function TalentOnboarding() {
     //     return
     // }
     const submitForm = async () => {
+      setSubmitLoading(true)
       // const binaryAvatar: any = await convertToBase64(selectedFile)
       mainClient
         .post(AppConfig.API_ENDPOINTS.Upgrades.TalentURL, {
@@ -88,9 +95,9 @@ function TalentOnboarding() {
           skills: formData.skills.join(", "),
           //   avatar: `data:image/jpeg;base64,${binaryAvatar}`
           avatar: preview,
-      
         })
         .then((r) => {
+           setSubmitLoading(false)
           if (r.status === 200) {
             toast.success(r.data.message);
             const newUser = {
@@ -102,6 +109,7 @@ function TalentOnboarding() {
           } else toast.error(r.data.message);
         })
         .catch((e) => {
+           setSubmitLoading(false)
           handleAxiosError(e);
         });
     };
@@ -129,11 +137,11 @@ function TalentOnboarding() {
   }, [user]);
 
   useEffect(() => {
-setFormData((prev) => ({
-    ...prev,
-    step: currentIndex + 1
-}))
-  }, [currentIndex])
+    setFormData((prev) => ({
+      ...prev,
+      step: currentIndex + 1,
+    }));
+  }, [currentIndex]);
 
   //   useEffect(() => {
   //     formData.avatar = preview;
@@ -169,6 +177,15 @@ setFormData((prev) => ({
               <img src="/logo.svg" alt="" className="w-8" />
             </div>
           </Link>
+
+          {currentIndex + 1 > 1 && (
+            <span
+              onClick={() => nextStep()}
+              className="text-primary font-normal text-base cursor-pointer"
+            >
+              Skip
+            </span>
+          )}
         </div>
 
         <div className="mb-10">
@@ -320,6 +337,7 @@ setFormData((prev) => ({
               />
 
               <ButtonWithBack
+              submitLoading={submitLoading}
                 backAction={previousStep}
                 btnAction={handleClickForm}
               />

@@ -6,7 +6,8 @@ interface ButtonWithBackProps {
     className?: string,
     btnAction: () => void,
     backAction: () => void,
-    disabled?: boolean
+    disabled?: boolean,
+    submitLoading?: boolean
 }
 function ButtonWithBack({
     className = '',
@@ -14,6 +15,7 @@ function ButtonWithBack({
     disabled = false,
     btnAction,
     backAction,
+    submitLoading=false
 }: ButtonWithBackProps) {
     return (
         <div className={className}>
@@ -21,7 +23,7 @@ function ButtonWithBack({
                 <div className="cursor-pointer p-4 border border-grey-dark rounded-[5px]" onClick={backAction}>
                     <BackIcon />
                 </div>
-                <Button onClick={btnAction} disabled={disabled}>{btnText}</Button>
+                <Button isLoading={submitLoading} onClick={btnAction} disabled={disabled}>{btnText}</Button>
             </div>
         </div>
     )
