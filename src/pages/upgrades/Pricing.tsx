@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PricingCard } from "../../components";
 import { pricing } from "../../utilities";
 export default function Pricing() {
+  const navigate = useNavigate();
   const paymentPlans = [
     { id: "yearly billing", title: "Yearly billing" },
 
@@ -12,9 +14,10 @@ export default function Pricing() {
     <div className="bg-primary w-full min-h-[100vh] flex flex-col pb-[210px]">
       <div className="py-6 pricing-padding">
         <img
+          onClick={() => navigate("/")}
           src="/logo-white-lg.png"
           alt="logo"
-          className="h-[32px] w-[123.49px]"
+          className="cursor-pointer h-[32px] w-[123.49px]"
         />
       </div>
       <div className="pricing-padding w-full mt-[32px] mb-[36px] text-white flex flex-col gap-4 justify-center items-start md:items-center">
