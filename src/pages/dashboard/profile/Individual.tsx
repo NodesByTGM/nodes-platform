@@ -10,7 +10,7 @@ export default function Individual() {
       id: "1",
       title: "Jane Doe created a space called “insert name of space”",
       text: "Lorem ipsum dolor sit amet consectetur. Libero adipiscing phasellus interdum ullamcorper sed amet netus iaculis.",
-      img: "stiff",
+      img: "stuff",
     },
     {
       id: "2",
@@ -22,7 +22,7 @@ export default function Individual() {
       id: "3",
       title: "Jane Doe created a space called “insert name of space”",
       text: "Lorem ipsum dolor sit amet consectetur. Libero adipiscing phasellus interdum ullamcorper sed amet netus iaculis.",
-      img: "stiff",
+      img: null,
     },
     {
       id: "4",
@@ -34,7 +34,7 @@ export default function Individual() {
       id: "5",
       title: "Jane Doe created a space called “insert name of space”",
       text: "Lorem ipsum dolor sit amet consectetur. Libero adipiscing phasellus interdum ullamcorper sed amet netus iaculis.",
-      img: "stiff",
+      img: null,
     },
     {
       id: "6",

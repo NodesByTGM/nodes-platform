@@ -4,6 +4,7 @@ export { default as Header } from "./Header.tsx";
 export { default as Sidebar } from "./Sidebar.tsx";
 export { default as Footer } from "./Footer.tsx";
 export { default as Button } from "./Button.tsx";
+export { default as ButtonOutline } from "./ButtonOutline.tsx";
 export { default as Container } from "./Container.tsx";
 export { default as Input } from "./Input.tsx";
 export { default as WrappedInput } from "./WrappedInput.tsx";
@@ -38,3 +39,4 @@ export { default as BasicSelect } from "./BasicSelect.tsx";
 export { default as PricingCard } from "./PricingCard.tsx";
 export {default as IndividualProfileCard} from './profile/IndividualProfileCard.tsx'
 export {default as Interaction} from './custom/Interaction.tsx'
+export {default as FormDiv} from './FormDiv'

@@ -1,4 +1,7 @@
 import React from "react";
+import AppConfig from "../../utilities/config";
+
+import {Link} from 'react-router-dom'
 import { Button } from "../index";
 import { CiLocationOn } from "react-icons/ci";
 import { GoLink } from "react-icons/go";
@@ -37,9 +40,11 @@ export default function Individual() {
         <div className="mb-10">
           <Interaction data={bio} />
         </div>
+        <Link className='w-full' to={AppConfig.PATHS.Dashboard.Profile.EditIndividual}>
         <Button>
           <span className="text-base font-medium">Edit Your Profile</span>
         </Button>
+        </Link>
       </div>
     </div>
   );
