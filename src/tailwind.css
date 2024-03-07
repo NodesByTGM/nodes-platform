@@ -5,3 +5,8 @@
 .pricing-padding {
   @apply px-6 sm:px-[40px] lg:px-[120px];
 }
+
+.main-container{
+  @apply bg-[#FDFDF7] py-[64px] pl-[64px] pr-[80px];
+  background-image: url('/img/Dots.png');
+}

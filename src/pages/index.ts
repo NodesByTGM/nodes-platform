@@ -12,7 +12,9 @@ export { default as Home } from "./Home";
 export { default as Dashboard } from "./dashboard/Dashboard";
 export { default as Category } from "./dashboard/Category";
 export { default as Community } from "./dashboard/Community";
-export { default as Profile } from "./dashboard/Profile";
+export { default as Profile } from "./dashboard/profile/Profile";
+export { default as Individual } from "./dashboard/profile/Individual";
+
 export { default as Post } from "./dashboard/Post";
 export { default as Pricing } from "./upgrades/Pricing";
 

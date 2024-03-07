@@ -12,6 +12,7 @@ import {
     Login,
     Post,
     Profile,
+    Individual,
     ResetPassword,
     TalentGetStarted,
     TalentOnboarding,
@@ -62,8 +63,15 @@ export const publicRoutes: RouteObject[] = [
         Component: getProfile(Community)
     },
     {
-        path: AppConfig.PATHS.Dashboard.Profile,
-        Component: getProfile(Profile)
+        path: AppConfig.PATHS.Dashboard.Profile.Base,
+        Component: getProfile(Profile),
+        children: [
+            {
+                path: AppConfig.PATHS.Dashboard.Profile.Individual,
+                Component: Individual
+
+            }
+        ]
     },
 ]
 

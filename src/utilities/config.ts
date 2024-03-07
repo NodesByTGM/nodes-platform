@@ -75,7 +75,10 @@ const PATHS = {
       Base: "/dashboard/posts",
       PostWithParam: "/dashboard/posts/:id",
     },
-    Profile: "/dashboard/profile",
+    Profile: {
+      Base: "/dashboard/profile",
+      Individual: "",
+    },
     Events: {
       Base: "/dashboard/events",
       Create: "/dashboard/events/create",
