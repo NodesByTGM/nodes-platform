@@ -36,3 +36,5 @@ export { default as CommunityItem } from "./custom/CommunityItem.tsx";
 export { default as CommentBox } from "./custom/CommentBox.tsx";
 export { default as BasicSelect } from "./BasicSelect.tsx";
 export { default as PricingCard } from "./PricingCard.tsx";
+export {default as IndividualProfileCard} from './profile/IndividualProfileCard.tsx'
+export {default as Interaction} from './custom/Interaction.tsx'
