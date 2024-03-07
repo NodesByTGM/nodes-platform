@@ -6,13 +6,15 @@
   @apply px-6 sm:px-[40px] lg:px-[120px];
 }
 
-.main-container{
+.main-container {
   @apply bg-[#FDFDF7] py-[64px] pl-[64px] pr-[80px];
-  background-image: url('/img/Dots.png');
+  background-image: url("/img/Dots.png");
 }
 
 .profile-card-shadow {
-
   box-shadow: 4px 3px 10px 4px #00000008;
-  
 }
+
+/* .profile-forms-section {
+  height: calc(100vh - 144px);
+} */

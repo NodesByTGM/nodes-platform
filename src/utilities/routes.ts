@@ -13,6 +13,8 @@ import {
     Post,
     Profile,
     Individual,
+    EditIndividual,
+    EditTalent,
     ResetPassword,
     TalentGetStarted,
     TalentOnboarding,
@@ -69,6 +71,16 @@ export const publicRoutes: RouteObject[] = [
             {
                 path: AppConfig.PATHS.Dashboard.Profile.Individual,
                 Component: Individual
+
+            },
+            {
+                path: AppConfig.PATHS.Dashboard.Profile.EditIndividual,
+                Component: EditIndividual
+
+            },
+            {
+                path: AppConfig.PATHS.Dashboard.Profile.EditTalent,
+                Component: EditTalent
 
             }
         ]

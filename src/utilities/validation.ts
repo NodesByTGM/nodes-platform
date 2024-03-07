@@ -1,4 +1,4 @@
-import { object, string, ref } from "yup";
+import { object, string, ref, bool } from "yup";
 
 export const signupSchema = object({
   name: string().required(),
@@ -52,3 +52,35 @@ export type EmailValidationType = {
   email: string;
 
 };
+
+export type PersonalIndividualInformationType = {
+  firstName: string;
+  lastName: string;
+  location: string;
+  headline: string;
+  bio: string;
+  website: string;
+  linkedIn: string;
+  instagram: string;
+  x: string;
+  spaces: boolean;
+  comments: boolean;
+
+
+}; 
+
+export const PersonalIndividualInformationSchema = {
+  firstName: string(),
+  lastName: string(),
+  location: string(),
+  headline: string(),
+  bio: string(),
+  website: string(),
+  linkedIn: string(),
+  instagram: string(),
+  x: string(),
+  spaces: bool(),
+  comments: bool(),
+
+
+}; 

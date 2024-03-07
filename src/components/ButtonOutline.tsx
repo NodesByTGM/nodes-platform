@@ -16,7 +16,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const themeKVP = {
   primary:
-    "bg-primary border-primary text-white hover:border-secondary focus:text-secondary disabled:bg-primary-light-active disabled:border-primary-light-active",
+    "bg-white border-primary text-primary hover:border-secondary focus:text-secondary disabled:bg-primary-light-active disabled:border-primary-light-active",
   secondary:
     "bg-transparent border-primary text-primary hover:bg-primary hover:text-white hover:border-secondary focus:border-secondary disabled:border-primary-light-active disabled:text-primary-light-active",
   dark: "border-black bg-white text-black hover:bg-black hover:text-white ",
@@ -28,7 +28,7 @@ const sizeKVP = {
   sm: "p-2 max-w-[100px] max-h-[36px]",
 };
 
-export default function Button({
+export default function ButtonOutline({
   className = "",
   children,
   theme = "primary",
