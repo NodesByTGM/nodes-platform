@@ -56,7 +56,7 @@ function Register() {
         setSubmitLoading(false);
         if (r.status === 200) {
           toast.success(r.data.message);
-          navigate(AppConfig.PATHS.Auth.ResetPassword);
+          // navigate(AppConfig.PATHS.Auth.ResetPassword);
         } else toast.error(r.data.message);
       })
       .catch((e) => {
