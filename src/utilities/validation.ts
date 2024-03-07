@@ -1,4 +1,4 @@
-import { object, string, number, ref } from "yup";
+import { object, string, ref } from "yup";
 
 export const signupSchema = object({
   name: string().required(),
@@ -39,5 +39,16 @@ export type LoginValidationType = {
 
   email: string;
   password: string;
+
+};
+
+export const emailSchema = object({
+  email: string().email().required(),
+ 
+});
+
+export type EmailValidationType = {
+
+  email: string;
 
 };

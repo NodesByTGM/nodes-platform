@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -15,12 +12,12 @@ export default {
           light: {
             DEFAULT: "#E6EFEE",
             active: "#B2CCCA",
-            hover: "#DAE6E6"
+            hover: "#DAE6E6",
           },
           dark: {
             DEFAULT: "#064440",
             active: "#B2CCCA",
-            hover: "#042826"
+            hover: "#042826",
           },
         },
         secondary: "#D9E41E",
@@ -33,20 +30,24 @@ export default {
         grey: {
           DEFAULT: "#EFEFEF",
           dark: "#D6D6D6",
-          footer: '#F9F9F9'
+          footer: "#F9F9F9",
         },
       },
       boxShadow: {
         normal: "0px 6px 20px 0px #0000000A",
-        overlay: "inset 0 0 0 2000px rgba(0, 0, 0, 0.7)"
+        overlay: "inset 0 0 0 2000px rgba(0, 0, 0, 0.7)",
       },
       fontSize: {
-        md: '16px'
+        md: "16px",
       },
-      backgroundImage:{
-        darkgradient:'linear-gradient(180deg, #00000000 0%, #000000b3 62.92%)'
-      }
+      backgroundImage: {
+        darkgradient: "linear-gradient(180deg, #00000000 0%, #000000b3 62.92%)",
+      },
     },
   },
-  plugins: [],
-}
+  // plugins: [],
+  // plugins: [
+  //   // ...
+  //   require('@tailwindcss/forms'),
+  // ],
+};

@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import 'swiper/css';
 import './App.css';
+import './tailwind.css';
 import AuthProvider from "./context/auth";
 import {
   AuthLayout,
