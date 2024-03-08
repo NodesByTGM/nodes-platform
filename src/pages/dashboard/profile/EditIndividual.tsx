@@ -1,8 +1,31 @@
 import React, { useState, useRef, useEffect } from "react";
 import AppConfig from "../../../utilities/config";
-import { Button, ButtonOutline, FormDiv } from "../../../components";
+import {
+  Button,
+  ButtonOutline,
+  FormDiv,
+  Input,
+  TextArea,
+  Switch,
+} from "../../../components";
 import { Link } from "react-router-dom";
 import { useProfileContext } from "../../../context/hooks";
+
+function InteractionsSwitch({ label, description }) {
+  return (
+    <div className="flex gap-6 items-center">
+      <div className="flex-1 flex flex-col gap-2">
+        <span className="text-[#000000] font-medium text-base">{label}</span>
+        <span className="text-[#000000] font-normal text-sm">
+          {description}
+        </span>
+      </div>
+      <div className="">
+        <Switch />
+      </div>
+    </div>
+  );
+}
 export default function EditIndividual() {
   const { profileType, setProfileType } = useProfileContext();
   const personalInfo = useRef<HTMLDivElement>(null);
@@ -46,7 +69,7 @@ export default function EditIndividual() {
 
   useEffect(() => {
     setProfileType("Individual");
-    console.log(profileType)
+    console.log(profileType);
   });
 
   return (
@@ -85,22 +108,151 @@ export default function EditIndividual() {
       <div className="flex-1 flex flex-col gap-8 ">
         <div ref={personalInfo}>
           <FormDiv title="Personal Information">
-            <div className="h-40"></div>
+            <div className="">
+              <div className="grid grid-col-1 gap-6">
+                <div className="w-full">
+                  <Input
+                    placeholder={AppConfig.PLACEHOLDERS.Firstname}
+                    id="First name"
+                    label="First name"
+                    // error={errors.name}
+                    // value={values.name}
+                    // touched={touched.name}
+                    // onChange={handleChange("name")}
+                    // onBlur={handleBlur}
+                  />
+                </div>
+                <div className="w-full">
+                  <Input
+                    placeholder={AppConfig.PLACEHOLDERS.Lastname}
+                    id="Last name"
+                    label="Last name"
+                    // error={errors.username}
+                    // value={values.username}
+                    // touched={touched.username}
+                    // onChange={handleChange("username")}
+                    // onBlur={handleBlur}
+                  />
+                </div>
+                <div className="w-full">
+                  <Input
+                    placeholder={AppConfig.PLACEHOLDERS.Location}
+                    id="Location"
+                    label="Location"
+                    // error={errors.username}
+                    // value={values.username}
+                    // touched={touched.username}
+                    // onChange={handleChange("username")}
+                    // onBlur={handleBlur}
+                  />
+                </div>
+              </div>
+            </div>
           </FormDiv>
         </div>
         <div ref={introduceYourself}>
           <FormDiv title="Introduce yourself">
-            <div className="h-40"></div>
+            <div className="">
+              <div className="grid grid-col-1 gap-6">
+                <div className="w-full">
+                  <Input
+                    placeholder={AppConfig.PLACEHOLDERS.Headline}
+                    id="Headline"
+                    label="Headline"
+                    // error={errors.name}
+                    // value={values.name}
+                    // touched={touched.name}
+                    // onChange={handleChange("name")}
+                    // onBlur={handleBlur}
+                  />
+                </div>
+                <div className="w-full">
+                  {/* <Input
+                    placeholder={AppConfig.PLACEHOLDERS.Bio}
+                    id="Bio"
+                    label="Bio"
+                    // error={errors.username}
+                    // value={values.username}
+                    // touched={touched.username}
+                    // onChange={handleChange("username")}
+                    // onBlur={handleBlur}
+                  /> */}
+                  <TextArea label="Bio" />
+                </div>
+              </div>
+            </div>
           </FormDiv>
         </div>
         <div ref={onlineProfiles}>
           <FormDiv title="Online profiles">
-            <div className="h-40"></div>
+            <div className="">
+              <div className="grid grid-col-1 gap-6">
+                <div className="w-full">
+                  <Input
+                    placeholder={AppConfig.PLACEHOLDERS.PersomalWebsite}
+                    id="Personal Website"
+                    label="Personal Website"
+                    // error={errors.name}
+                    // value={values.name}
+                    // touched={touched.name}
+                    // onChange={handleChange("name")}
+                    // onBlur={handleBlur}
+                  />
+                </div>
+                <div className="w-full">
+                  <Input
+                    placeholder={AppConfig.PLACEHOLDERS.LinkedIn}
+                    id="LinkedIn"
+                    label="LinkedIn"
+                    // error={errors.username}
+                    // value={values.username}
+                    // touched={touched.username}
+                    // onChange={handleChange("username")}
+                    // onBlur={handleBlur}
+                  />
+                </div>
+                <div className="w-full">
+                  <Input
+                    placeholder={AppConfig.PLACEHOLDERS.Instagram}
+                    id="Instagram"
+                    label="Instagram"
+                    // error={errors.username}
+                    // value={values.username}
+                    // touched={touched.username}
+                    // onChange={handleChange("username")}
+                    // onBlur={handleBlur}
+                  />
+                </div>
+                <div className="w-full">
+                  <Input
+                    placeholder={AppConfig.PLACEHOLDERS.X}
+                    id="x"
+                    label="x"
+                    // error={errors.username}
+                    // value={values.username}
+                    // touched={touched.username}
+                    // onChange={handleChange("username")}
+                    // onBlur={handleBlur}
+                  />
+                </div>
+              </div>
+            </div>
           </FormDiv>
         </div>
         <div ref={interactions}>
           <FormDiv title="Interactions">
-            <div className="h-40"></div>
+            <div className="">
+              <div className="grid grid-col-1 gap-6">
+                <InteractionsSwitch
+                  label="Spaces"
+                  description="Enabling this will allow all your acitivity in spaces show up on your profile"
+                />
+                <InteractionsSwitch
+                  label="Comments"
+                  description="Enabling this will allow all your acitivity in spaces show up on your profile"
+                />
+              </div>
+            </div>
           </FormDiv>
         </div>
       </div>

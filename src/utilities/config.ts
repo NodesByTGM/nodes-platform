@@ -80,7 +80,6 @@ const PATHS = {
       Individual: "",
       EditIndividual: "/dashboard/profile/edit-individual",
       EditTalent: "/dashboard/profile/edit-talent",
-
     },
     Events: {
       Base: "/dashboard/events",
@@ -221,6 +220,9 @@ const AppConfig = {
     Searchbar: "Search",
     Email: "Enter email address",
     Fullname: "Enter your full name",
+    Firstname: "Enter your first name",
+    Lastname: "Enter your last name",
+    Location: "Enter your city",
     Username: "Enter username",
     Profession: "Profession",
     Gender: "Gender",
@@ -231,6 +233,12 @@ const AppConfig = {
     ConfirmPassword: "Confirm password",
     Image: "Upload Image here",
     Timezone: "Timezone",
+    PersomalWebsite: "http://",
+    Instagram: "https://www.Instagram.com/in/jane-doe/",
+    X: "https://www.Twitter.com/in/jane-doe/",
+    LinkedIn: 'https://www.linkedin.com/in/jane-doe/',
+    Headline: 'Ex: Actress, Actor, Director',
+    Bio: 'Add a short bio to showcase your best self'
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,

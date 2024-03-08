@@ -18,6 +18,7 @@ export { default as Modal } from "./Modal.tsx";
 export { default as Checkbox } from "./Checkbox.tsx";
 export { default as Searchbar } from "./Searchbar.tsx";
 export { default as Select } from "./Select.tsx";
+export { default as Switch } from "./Switch.tsx";
 export { default as Tooltip } from "./Tooltip.tsx";
 export { default as TalentCTA } from "./TalentCTA.tsx";
 export { default as BusinessCTA } from "./BusinessCTA.tsx";
