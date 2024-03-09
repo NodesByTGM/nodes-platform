@@ -25,7 +25,7 @@ export default function Card({
           <div className="flex items-ccenter gap-2">
             <span className="text-black font-medium text-base">{title}</span>
 
-            {listCount && (
+            {listCount && listCount > 0 && (
               <div className="border border-[#000000] rounded-full size-6 flex items-center justify-center">
                 <span className="text-sm font-normal"> {listCount}</span>
               </div>

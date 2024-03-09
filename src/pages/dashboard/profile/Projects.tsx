@@ -10,13 +10,13 @@ type ProjectType = {
 
 export default function Projects() {
   const [projects, setProjects] = useState<ProjectType[]>([
-    {
-      id: "1",
-      img: "",
-      title: "Name  of project",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Cum amet id lectus viverra faucibus. Arcu eget hendrerit ut dictumst id. Lorem ipsum dolor sit amet consec...",
-    },
+    // {
+    //   id: "1",
+    //   img: "",
+    //   title: "Name  of project",
+    //   description:
+    //     "Lorem ipsum dolor sit amet consectetur. Cum amet id lectus viverra faucibus. Arcu eget hendrerit ut dictumst id. Lorem ipsum dolor sit amet consec...",
+    // },
   ]);
 
   const addProject = () => {
@@ -37,7 +37,7 @@ export default function Projects() {
       <Card
         className=""
         title="Projects"
-        listCount={projects.length}
+        listCount={projects?.length}
         editButton
         editFunction={() => console.log("edit")}
       >

@@ -1,12 +1,14 @@
 import { ReactNode, createContext, useMemo, useState } from "react";
 import { IProfileContext } from "../interfaces/profile";
-// import { 
+// import {
 //   // FormikHelpers,
 //    useFormik } from "formik";
 
 const initialState = {
-  profileType: "individual profile",
+  profileType: "individual",
   setProfileType: () => {},
+  hasProject: false,
+  setHasProject: () => {},
 };
 
 export const ProfileContext = createContext<IProfileContext>(initialState);
@@ -16,19 +18,36 @@ const ProfileProvider = ({
 }: {
   children: ReactNode | ReactNode[];
 }) => {
-  const [profileType, setProfileType] = useState("");
+  const [profileType, setProfileType] = useState("individual");
+  const [hasProject, setHasProject] = useState(false);
 
   const profileContextValue = useMemo(
     () => ({
       profileType,
       setProfileType,
+      hasProject,
+      setHasProject,
     }),
 
-    [profileType, setProfileType]
+    [profileType, setProfileType, hasProject, setHasProject]
   );
 
   return (
     <ProfileContext.Provider value={profileContextValue}>
+      <div className="flex gap-2 mb-4">
+        <button
+          onClick={() => setProfileType("individual")}
+          className="px-4 py-2 rounded-md bg-primary text-white"
+        >
+          Switch to Individual
+        </button>
+        <button
+          onClick={() => setProfileType("talent")}
+          className="px-4 py-2 rounded-md bg-primary text-white"
+        >
+          Switch to Talent
+        </button>
+      </div>
       {children}
     </ProfileContext.Provider>
   );

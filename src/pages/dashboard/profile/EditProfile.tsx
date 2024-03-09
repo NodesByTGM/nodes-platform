@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
 import AppConfig from "../../../utilities/config";
 import {
   Button,
@@ -27,50 +33,82 @@ function InteractionsSwitch({ label, description }) {
   );
 }
 export default function EditIndividual() {
-  const { profileType, setProfileType } = useProfileContext();
+  const { profileType, hasProject, setHasProject } = useProfileContext();
   const personalInfo = useRef<HTMLDivElement>(null);
   const introduceYourself = useRef<HTMLDivElement>(null);
 
   const onlineProfiles = useRef<HTMLDivElement>(null);
+  const addAProject = useRef<HTMLDivElement>(null);
 
   const interactions = useRef<HTMLDivElement>(null);
+  const addProjectNav = useMemo(
+    () => ({
+      id: "4",
+      title: "Add a project",
+      link: "Add a project",
+      ref: addAProject,
+    }),
+    [addAProject]
+  );
 
-  const navs = [
-    {
-      id: "1",
-      title: "Personal Information",
-      link: "personalInfo",
-      ref: personalInfo,
-    },
-    {
-      id: "2",
-      title: "Introduce yourself",
-      link: "introduceYourself",
-      ref: introduceYourself,
-    },
+  const individualNavs = useMemo(
+    () => [
+      {
+        id: "1",
+        title: "Personal Information",
+        link: "personalInfo",
+        ref: personalInfo,
+      },
+      {
+        id: "2",
+        title: "Introduce yourself",
+        link: "introduceYourself",
+        ref: introduceYourself,
+      },
 
-    {
-      id: "3",
-      title: "Online profiles",
-      link: "onlineProfiles",
-      ref: onlineProfiles,
-    },
-    {
-      id: "34",
-      title: "Interactions",
-      link: "interactions",
-      ref: interactions,
-    },
-  ];
+      {
+        id: "3",
+        title: "Online profiles",
+        link: "onlineProfiles",
+        ref: onlineProfiles,
+      },
+      {
+        id: "5",
+        title: "Interactions",
+        link: "interactions",
+        ref: interactions,
+      },
+    ],
+    [personalInfo, introduceYourself, onlineProfiles, interactions]
+  );
+
+  const [navs, setNavs] = useState(individualNavs);
   const [selected, setSelected] = useState(navs[0]);
+
   const scrollToDiv = (navRef) => {
     navRef?.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleNavs = useCallback(() => {
+    if (profileType.toLowerCase() == "individual") {
+      setNavs(individualNavs);
+      setHasProject(false)
+      return;
+    }
+    if (profileType.toLowerCase() == "talent") {
+      setNavs([...individualNavs, addProjectNav]);
+      setHasProject(true)
+      return;
+    }
+  }, [profileType, individualNavs, addProjectNav]);
+
   useEffect(() => {
-    setProfileType("Individual");
-    console.log(profileType);
-  });
+    handleNavs();
+  }, [profileType, handleNavs]);
+
+  useEffect(() => {
+    setSelected(navs[0]);
+  }, [navs]);
 
   return (
     <div className="flex gap-x-8 h-full">
@@ -106,6 +144,7 @@ export default function EditIndividual() {
         </div>
       </div>
       <div className="flex-1 flex flex-col gap-8 ">
+        {hasProject ? 'True' : 'False'}
         <div ref={personalInfo}>
           <FormDiv title="Personal Information">
             <div className="">
@@ -239,6 +278,65 @@ export default function EditIndividual() {
             </div>
           </FormDiv>
         </div>
+        {hasProject && (
+          <div ref={addAProject}>
+            <FormDiv title="Add a project">
+              <div className="">
+                <div className="grid grid-col-1 gap-6">
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.PersomalWebsite}
+                      id="Personal Website"
+                      label="Personal Website"
+                      // error={errors.name}
+                      // value={values.name}
+                      // touched={touched.name}
+                      // onChange={handleChange("name")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.LinkedIn}
+                      id="LinkedIn"
+                      label="LinkedIn"
+                      // error={errors.username}
+                      // value={values.username}
+                      // touched={touched.username}
+                      // onChange={handleChange("username")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.Instagram}
+                      id="Instagram"
+                      label="Instagram"
+                      // error={errors.username}
+                      // value={values.username}
+                      // touched={touched.username}
+                      // onChange={handleChange("username")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.X}
+                      id="x"
+                      label="x"
+                      // error={errors.username}
+                      // value={values.username}
+                      // touched={touched.username}
+                      // onChange={handleChange("username")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                </div>
+              </div>
+            </FormDiv>
+          </div>
+        )}
+
         <div ref={interactions}>
           <FormDiv title="Interactions">
             <div className="">
