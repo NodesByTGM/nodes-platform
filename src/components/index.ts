@@ -49,4 +49,4 @@ export { default as CollaboratorInput } from "./CollaboratorInput";
 export { default as AddProjectsItem } from "./AddProjectsItem";
 export { default as AddedProject } from "./AddedProject";
 export { default as ActionIcon } from "./ActionIcon";
-
+export { default as JobAndEventsCard } from "./profile/JobAndEventsCard.tsx";

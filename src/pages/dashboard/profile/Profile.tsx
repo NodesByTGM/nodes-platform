@@ -2,21 +2,28 @@ import React, { useState, useContext, useEffect, useCallback } from "react";
 import { IndividualProfileCard } from "../../../components/index.ts";
 import Interactions from "./Interactions.tsx";
 import Projects from "./Projects.tsx";
+import JobAndEvents from "./JobAndEvents";
 import { ProfileContext } from "../../../context/profile.tsx";
 export default function Individual() {
-  const { profileType,  setHasProject } = useContext(ProfileContext);
-  const [navs, setNavs] = useState([ "Interactions"]);
+  const { profileType, setHasProject } = useContext(ProfileContext);
+  const [navs, setNavs] = useState(["Interactions"]);
   const [selectedNav, setSelectedNav] = useState(navs[0]);
 
   const handleNavs = useCallback(() => {
     if (profileType.toLowerCase() == "individual") {
       setNavs(["Interactions"]);
-      setHasProject(false)
+      setHasProject(false);
       return;
     }
     if (profileType.toLowerCase() == "talent") {
       setNavs(["Projects", "Interactions"]);
-      setHasProject(true)
+      setHasProject(true);
+      return;
+    }
+
+    if (profileType.toLowerCase() == "business") {
+      setNavs(["Job/Events", "Projects"]);
+      setHasProject(true);
       return;
     }
   }, [profileType]);
@@ -53,6 +60,8 @@ export default function Individual() {
           {selectedNav.toLowerCase() == "projects" && <Projects />}
 
           {selectedNav.toLowerCase() == "interactions" && <Interactions />}
+
+          {selectedNav.toLowerCase() == "job/events" && <JobAndEvents />}
         </div>
       </div>
     </div>

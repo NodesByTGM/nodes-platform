@@ -24,7 +24,7 @@ export default function Projects() {
       ...projects,
       {
         id: "2",
-        img: "",
+        img: "/img/ProjectThumbnailSample.png",
         title: "Name  of project",
         description:
           "Lorem ipsum dolor sit amet consectetur. Cum amet id lectus viverra faucibus. Arcu eget hendrerit ut dictumst id. Lorem ipsum dolor sit amet consec...",

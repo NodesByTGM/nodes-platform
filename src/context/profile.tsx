@@ -18,7 +18,7 @@ const ProfileProvider = ({
 }: {
   children: ReactNode | ReactNode[];
 }) => {
-  const [profileType, setProfileType] = useState("talent");
+  const [profileType, setProfileType] = useState("business");
   const [hasProject, setHasProject] = useState(false);
 
   const profileContextValue = useMemo(
@@ -47,6 +47,14 @@ const ProfileProvider = ({
         >
           Switch to Talent
         </button>
+        <button
+          onClick={() => setProfileType("business")}
+          className="px-4 py-2 rounded-md bg-primary text-white"
+        >
+          Switch to Business
+        </button>
+
+        <span className="text-blue-500 text-base">{profileType}</span>
       </div>
       {children}
     </ProfileContext.Provider>
