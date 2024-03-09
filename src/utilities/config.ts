@@ -77,8 +77,8 @@ const PATHS = {
     },
     Profile: {
       Base: "/dashboard/profile",
-      Individual: "",
-      EditIndividual: "/dashboard/profile/edit-individual",
+      Profile: "",
+      EditProfile: "/dashboard/profile/edit-profile",
       EditTalent: "/dashboard/profile/edit-talent",
     },
     Events: {

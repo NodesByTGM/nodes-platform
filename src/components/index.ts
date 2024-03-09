@@ -41,3 +41,7 @@ export { default as PricingCard } from "./PricingCard.tsx";
 export {default as IndividualProfileCard} from './profile/IndividualProfileCard.tsx'
 export {default as Interaction} from './custom/Interaction.tsx'
 export {default as FormDiv} from './FormDiv'
+export {default as Card} from './Card'
+export {default as ProjectsCard} from './profile/ProjectsCard.tsx'
+
+

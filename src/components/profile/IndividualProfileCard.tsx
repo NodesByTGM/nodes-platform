@@ -40,7 +40,7 @@ export default function Individual() {
         <div className="mb-10">
           <Interaction data={bio} />
         </div>
-        <Link className='w-full' to={AppConfig.PATHS.Dashboard.Profile.EditIndividual}>
+        <Link className='w-full' to={AppConfig.PATHS.Dashboard.Profile.EditProfile}>
         <Button>
           <span className="text-base font-medium">Edit Your Profile</span>
         </Button>
