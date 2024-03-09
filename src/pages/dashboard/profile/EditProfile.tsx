@@ -13,7 +13,11 @@ import {
   Input,
   TextArea,
   Switch,
+  AddCollaboratorInputDiv,
+  ProjectFileUpload,
+  CollaboratorInput
 } from "../../../components";
+import { FaPlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useProfileContext } from "../../../context/hooks";
 
@@ -92,12 +96,12 @@ export default function EditIndividual() {
   const handleNavs = useCallback(() => {
     if (profileType.toLowerCase() == "individual") {
       setNavs(individualNavs);
-      setHasProject(false)
+      setHasProject(false);
       return;
     }
     if (profileType.toLowerCase() == "talent") {
       setNavs([...individualNavs, addProjectNav]);
-      setHasProject(true)
+      setHasProject(true);
       return;
     }
   }, [profileType, individualNavs, addProjectNav]);
@@ -144,7 +148,7 @@ export default function EditIndividual() {
         </div>
       </div>
       <div className="flex-1 flex flex-col gap-8 ">
-        {hasProject ? 'True' : 'False'}
+        {/* {hasProject ? "True" : "False"} */}
         <div ref={personalInfo}>
           <FormDiv title="Personal Information">
             <div className="">
@@ -285,9 +289,10 @@ export default function EditIndividual() {
                 <div className="grid grid-col-1 gap-6">
                   <div className="w-full">
                     <Input
-                      placeholder={AppConfig.PLACEHOLDERS.PersomalWebsite}
-                      id="Personal Website"
-                      label="Personal Website"
+                      required
+                      placeholder={AppConfig.PLACEHOLDERS.ProjectName}
+                      id="Project Name"
+                      label="Project Name"
                       // error={errors.name}
                       // value={values.name}
                       // touched={touched.name}
@@ -296,10 +301,11 @@ export default function EditIndividual() {
                     />
                   </div>
                   <div className="w-full">
-                    <Input
-                      placeholder={AppConfig.PLACEHOLDERS.LinkedIn}
-                      id="LinkedIn"
-                      label="LinkedIn"
+                    <TextArea
+                      required
+                      placeholder={AppConfig.PLACEHOLDERS.ProjectDescription}
+                      id="Description"
+                      label="Description"
                       // error={errors.username}
                       // value={values.username}
                       // touched={touched.username}
@@ -309,9 +315,10 @@ export default function EditIndividual() {
                   </div>
                   <div className="w-full">
                     <Input
-                      placeholder={AppConfig.PLACEHOLDERS.Instagram}
-                      id="Instagram"
-                      label="Instagram"
+                      required
+                      placeholder={AppConfig.PLACEHOLDERS.ProjectUrl}
+                      id="Project Url"
+                      label="Project Url"
                       // error={errors.username}
                       // value={values.username}
                       // touched={touched.username}
@@ -319,17 +326,46 @@ export default function EditIndividual() {
                       // onBlur={handleBlur}
                     />
                   </div>
-                  <div className="w-full">
-                    <Input
-                      placeholder={AppConfig.PLACEHOLDERS.X}
-                      id="x"
-                      label="x"
-                      // error={errors.username}
-                      // value={values.username}
-                      // touched={touched.username}
-                      // onChange={handleChange("username")}
-                      // onBlur={handleBlur}
-                    />
+                  <div className="w-full flex flex-col gap-6">
+                    <div className="flex flex-col gap-2">
+                      <span className="font-medium text-base">
+                        Add collaborators
+                      </span>
+                      <span className="font-normal text-base">
+                        You can add cast members...etc here
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-6">
+                      <div className="flex items-center gap-6">
+                        <div className="rounded-full font-normal text-xs text-[#757575] h-6 w-6 border border-[#D6D6D6] flex items-center justify-center">
+                          1
+                        </div>
+                        <AddCollaboratorInputDiv >
+                          <CollaboratorInput placeholder='Name' textSize='text-base'/>
+                          <CollaboratorInput placeholder='role' textSize='text-xs'/>
+
+                        </AddCollaboratorInputDiv>
+                      </div>
+                      <div className="flex items-center gap-6 mb-[16px]">
+                        <div className="rounded-full bg-primary font-normal text-xs text-white h-6 w-6   flex items-center justify-center">
+                          <FaPlus />
+                        </div>
+                        <span className="text-primary font-normal text-base">
+                          Add another collaborator
+                        </span>
+                      </div>
+                      <div className="flex flex-col gap-10 mb-2">
+                        <ProjectFileUpload label="Project thumbnail" />
+                        <ProjectFileUpload label="Project images" />
+                      </div>
+
+                      <div className="w-full flex items-center justify-end">
+                        <div className="max-w-max">
+                          {" "}
+                          <Button>Add Projects</Button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

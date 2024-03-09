@@ -38,10 +38,12 @@ export { default as CommunityItem } from "./custom/CommunityItem.tsx";
 export { default as CommentBox } from "./custom/CommentBox.tsx";
 export { default as BasicSelect } from "./BasicSelect.tsx";
 export { default as PricingCard } from "./PricingCard.tsx";
-export {default as IndividualProfileCard} from './profile/IndividualProfileCard.tsx'
-export {default as Interaction} from './custom/Interaction.tsx'
-export {default as FormDiv} from './FormDiv'
-export {default as Card} from './Card'
-export {default as ProjectsCard} from './profile/ProjectsCard.tsx'
-
+export { default as IndividualProfileCard } from "./profile/IndividualProfileCard.tsx";
+export { default as Interaction } from "./custom/Interaction.tsx";
+export { default as FormDiv } from "./FormDiv";
+export { default as Card } from "./Card";
+export { default as ProjectsCard } from "./profile/ProjectsCard.tsx";
+export { default as AddCollaboratorInputDiv } from "./AddCollaboratorInputDiv";
+export { default as ProjectFileUpload } from "./ProjectFileUpload";
+export { default as CollaboratorInput } from "./CollaboratorInput";
 

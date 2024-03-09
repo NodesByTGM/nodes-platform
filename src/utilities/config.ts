@@ -238,7 +238,11 @@ const AppConfig = {
     X: "https://www.Twitter.com/in/jane-doe/",
     LinkedIn: 'https://www.linkedin.com/in/jane-doe/',
     Headline: 'Ex: Actress, Actor, Director',
-    Bio: 'Add a short bio to showcase your best self'
+    Bio: 'Add a short bio to showcase your best self',
+    ProjectName: 'Ex: Actress, Actor, Director',
+    ProjectDescription: 'Add a short bio to showcase your best self',
+    ProjectUrl: 'http://',
+
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,

@@ -3,7 +3,7 @@ import AppConfig from "../../utilities/config";
 import { ProfileContext } from "../../context/profile";
 
 import { Link } from "react-router-dom";
-import { Button } from "../index";
+import { Button, ButtonOutline } from "../index";
 import { CiLocationOn } from "react-icons/ci";
 import { GoLink } from "react-icons/go";
 import { Interaction } from "../../components";
@@ -57,14 +57,30 @@ export default function Individual() {
         <div className="mb-10">
           <Interaction data={bio} />
         </div>
-        <Link
-          className="w-full"
-          to={AppConfig.PATHS.Dashboard.Profile.EditProfile}
+        <div
+          className={`${
+            profileType.toLowerCase() == "individual"
+              ? "grid-cols-1"
+              : "grid-cols-2"
+          } w-full grid  gap-6 `}
         >
-          <Button>
-            <span className="text-base font-medium">Edit Your Profile</span>
-          </Button>
-        </Link>
+          {profileType.toLowerCase() !== "individual" && (
+            <Link
+              to={AppConfig.PATHS.Dashboard.Profile.Base}
+              className="w-full"
+            >
+              <ButtonOutline>Share Profile</ButtonOutline>
+            </Link>
+          )}
+          <Link
+            className="w-full"
+            to={AppConfig.PATHS.Dashboard.Profile.EditProfile}
+          >
+            <Button>
+              <span className="text-base font-medium">Edit Your Profile</span>
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

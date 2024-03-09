@@ -18,7 +18,7 @@ const ProfileProvider = ({
 }: {
   children: ReactNode | ReactNode[];
 }) => {
-  const [profileType, setProfileType] = useState("individual");
+  const [profileType, setProfileType] = useState("talent");
   const [hasProject, setHasProject] = useState(false);
 
   const profileContextValue = useMemo(
