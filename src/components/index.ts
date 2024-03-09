@@ -46,4 +46,7 @@ export { default as ProjectsCard } from "./profile/ProjectsCard.tsx";
 export { default as AddCollaboratorInputDiv } from "./AddCollaboratorInputDiv";
 export { default as ProjectFileUpload } from "./ProjectFileUpload";
 export { default as CollaboratorInput } from "./CollaboratorInput";
+export { default as AddProjectsItem } from "./AddProjectsItem";
+export { default as AddedProject } from "./AddedProject";
+export { default as ActionIcon } from "./ActionIcon";
 

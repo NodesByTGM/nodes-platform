@@ -15,7 +15,9 @@ import {
   Switch,
   AddCollaboratorInputDiv,
   ProjectFileUpload,
-  CollaboratorInput
+  CollaboratorInput,
+  AddProjectsItem,
+  AddedProject,
 } from "../../../components";
 import { FaPlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
@@ -340,10 +342,15 @@ export default function EditIndividual() {
                         <div className="rounded-full font-normal text-xs text-[#757575] h-6 w-6 border border-[#D6D6D6] flex items-center justify-center">
                           1
                         </div>
-                        <AddCollaboratorInputDiv >
-                          <CollaboratorInput placeholder='Name' textSize='text-base'/>
-                          <CollaboratorInput placeholder='role' textSize='text-xs'/>
-
+                        <AddCollaboratorInputDiv>
+                          <CollaboratorInput
+                            placeholder="Name"
+                            textSize="text-base"
+                          />
+                          <CollaboratorInput
+                            placeholder="role"
+                            textSize="text-xs"
+                          />
                         </AddCollaboratorInputDiv>
                       </div>
                       <div className="flex items-center gap-6 mb-[16px]">
@@ -359,11 +366,29 @@ export default function EditIndividual() {
                         <ProjectFileUpload label="Project images" />
                       </div>
 
-                      <div className="w-full flex items-center justify-end">
-                        <div className="max-w-max">
-                          {" "}
-                          <Button>Add Projects</Button>
+                      <div className="grid grid-cols-3 gap-6">
+                        <AddProjectsItem
+                          data={{ img: "/img/ProjectThumbnailSample.png" }}
+                        />
+                        <AddProjectsItem
+                          data={{ img: "/img/ProjectThumbnailSample.png" }}
+                        />
+
+                        <AddProjectsItem
+                          data={{ img: "/img/ProjectThumbnailSample.png" }}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-10">
+                        <div className="w-full flex items-center justify-end">
+                          <div className="max-w-max">
+                            {" "}
+                            <Button>Add Projects</Button>
+                          </div>
                         </div>
+                        <AddedProject
+                          data={{ img: "/img/ProjectThumbnailSample.png" }}
+                        />
                       </div>
                     </div>
                   </div>

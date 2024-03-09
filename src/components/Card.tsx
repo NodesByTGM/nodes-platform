@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { FiEdit3 } from "react-icons/fi";
+import ActionIcon from "./ActionIcon";
 
 export default function Card({
   className = "",
@@ -35,9 +35,9 @@ export default function Card({
         {editButton && (
           <div
             onClick={() => editFunction && editFunction()}
-            className="cursor-pointer border border-[#000000] rounded-full size-8 flex items-center justify-center"
+            className="max-w-max"
           >
-            <FiEdit3 />
+            <ActionIcon edit />
           </div>
         )}
       </div>
