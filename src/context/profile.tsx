@@ -34,7 +34,7 @@ const ProfileProvider = ({
 
   return (
     <ProfileContext.Provider value={profileContextValue}>
-      <div className="flex gap-2 mb-4">
+      <div className="flex gap-2 mb-4 hidden">
         <button
           onClick={() => setProfileType("individual")}
           className="px-4 py-2 rounded-md bg-primary text-white"

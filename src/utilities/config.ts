@@ -221,11 +221,13 @@ const AppConfig = {
     Email: "Enter email address",
     Fullname: "Enter your full name",
     Firstname: "Enter your first name",
+    Businessname: "Enter your business name",
     Lastname: "Enter your last name",
     Location: "Enter your city",
     Username: "Enter username",
     Profession: "Profession",
     Gender: "Gender",
+    Year: "1995",
     LinkedInUrl: "e.g https://www.linkedin.com/in/stephenelufisan/",
     Distinction:
       "Tell us about yourself and what you're doing differently with emerging disruptive technologies in three paragraphs.",

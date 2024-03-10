@@ -38,38 +38,54 @@ function InteractionsSwitch({ label, description }) {
     </div>
   );
 }
+
+function ProfileImgUploader() {
+  return (
+    <div className="flex items-center gap-4">
+      <div className="size-[100px] ">
+        <img
+          className=" h-full w-full"
+          src="/img/ProfilePlaceholder.png"
+          alt=""
+        />
+      </div>
+      <span className="text-primary font-normal text-base">Replace</span>
+    </div>
+  );
+}
 export default function EditIndividual() {
   const { profileType, hasProject, setHasProject } = useProfileContext();
   const personalInfo = useRef<HTMLDivElement>(null);
+  const businessInfo = useRef<HTMLDivElement>(null);
+
   const introduceYourself = useRef<HTMLDivElement>(null);
 
   const onlineProfiles = useRef<HTMLDivElement>(null);
   const addAProject = useRef<HTMLDivElement>(null);
 
   const interactions = useRef<HTMLDivElement>(null);
-  const addProjectNav = useMemo(
-    () => ({
-      id: "4",
-      title: "Add a project",
-      link: "Add a project",
-      ref: addAProject,
-    }),
-    [addAProject]
-  );
-
-  const individualNavs = useMemo(
+  const navOptions = useMemo(
     () => [
+      {
+        id: "0",
+        title: "Business Information",
+        link: "businessInfo",
+        ref: businessInfo,
+        conditions: ["business"],
+      },
       {
         id: "1",
         title: "Personal Information",
         link: "personalInfo",
         ref: personalInfo,
+        conditions: ["talent", "individual"],
       },
       {
         id: "2",
         title: "Introduce yourself",
         link: "introduceYourself",
         ref: introduceYourself,
+        conditions: ["talent", "individual"],
       },
 
       {
@@ -77,18 +93,34 @@ export default function EditIndividual() {
         title: "Online profiles",
         link: "onlineProfiles",
         ref: onlineProfiles,
+        conditions: ["talent", "individual"],
+      },
+      {
+        id: "4",
+        title: "Add a project",
+        link: "Add a project",
+        ref: addAProject,
+        conditions: ["talent", "business"],
       },
       {
         id: "5",
         title: "Interactions",
         link: "interactions",
         ref: interactions,
+        conditions: ["talent", "individual"],
       },
     ],
-    [personalInfo, introduceYourself, onlineProfiles, interactions]
+    [
+      personalInfo,
+      introduceYourself,
+      onlineProfiles,
+      interactions,
+      addAProject,
+      businessInfo,
+    ]
   );
 
-  const [navs, setNavs] = useState(individualNavs);
+  const [navs, setNavs] = useState(navOptions);
   const [selected, setSelected] = useState(navs[0]);
 
   const scrollToDiv = (navRef) => {
@@ -96,17 +128,30 @@ export default function EditIndividual() {
   };
 
   const handleNavs = useCallback(() => {
+    setNavs([
+      ...navOptions.filter((nav) =>
+        nav.conditions.includes(profileType.toLowerCase())
+      ),
+    ]);
+
     if (profileType.toLowerCase() == "individual") {
-      setNavs(individualNavs);
+      // setNavs(individualNavs);
       setHasProject(false);
       return;
     }
     if (profileType.toLowerCase() == "talent") {
-      setNavs([...individualNavs, addProjectNav]);
+      // setNavs([...individualNavs, addProjectNav]);
       setHasProject(true);
       return;
     }
-  }, [profileType, individualNavs, addProjectNav]);
+
+    if (profileType.toLowerCase() == "business") {
+      // setNavs([...individualNavs, addProjectNav]);
+      setHasProject(true);
+      return;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profileType, navOptions]);
 
   useEffect(() => {
     handleNavs();
@@ -151,139 +196,196 @@ export default function EditIndividual() {
       </div>
       <div className="flex-1 flex flex-col gap-8 ">
         {/* {hasProject ? "True" : "False"} */}
-        <div ref={personalInfo}>
-          <FormDiv title="Personal Information">
-            <div className="">
-              <div className="grid grid-col-1 gap-6">
-                <div className="w-full">
-                  <Input
-                    placeholder={AppConfig.PLACEHOLDERS.Firstname}
-                    id="First name"
-                    label="First name"
-                    // error={errors.name}
-                    // value={values.name}
-                    // touched={touched.name}
-                    // onChange={handleChange("name")}
-                    // onBlur={handleBlur}
-                  />
-                </div>
-                <div className="w-full">
-                  <Input
-                    placeholder={AppConfig.PLACEHOLDERS.Lastname}
-                    id="Last name"
-                    label="Last name"
-                    // error={errors.username}
-                    // value={values.username}
-                    // touched={touched.username}
-                    // onChange={handleChange("username")}
-                    // onBlur={handleBlur}
-                  />
-                </div>
-                <div className="w-full">
-                  <Input
-                    placeholder={AppConfig.PLACEHOLDERS.Location}
-                    id="Location"
-                    label="Location"
-                    // error={errors.username}
-                    // value={values.username}
-                    // touched={touched.username}
-                    // onChange={handleChange("username")}
-                    // onBlur={handleBlur}
-                  />
-                </div>
-              </div>
-            </div>
-          </FormDiv>
-        </div>
-        <div ref={introduceYourself}>
-          <FormDiv title="Introduce yourself">
-            <div className="">
-              <div className="grid grid-col-1 gap-6">
-                <div className="w-full">
-                  <Input
-                    placeholder={AppConfig.PLACEHOLDERS.Headline}
-                    id="Headline"
-                    label="Headline"
-                    // error={errors.name}
-                    // value={values.name}
-                    // touched={touched.name}
-                    // onChange={handleChange("name")}
-                    // onBlur={handleBlur}
-                  />
-                </div>
-                <div className="w-full">
-                  {/* <Input
-                    placeholder={AppConfig.PLACEHOLDERS.Bio}
-                    id="Bio"
-                    label="Bio"
-                    // error={errors.username}
-                    // value={values.username}
-                    // touched={touched.username}
-                    // onChange={handleChange("username")}
-                    // onBlur={handleBlur}
-                  /> */}
-                  <TextArea label="Bio" />
+        {profileType.toLowerCase() == "business" && (
+          <div ref={businessInfo} className="">
+            <FormDiv title="Business Information">
+              <div className="">
+                <div className="grid grid-col-1 gap-6">
+                 <ProfileImgUploader />
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.Businessname}
+                      id="Name of Business"
+                      label="Name of Business"
+                      // error={errors.name}
+                      // value={values.name}
+                      // touched={touched.name}
+                      // onChange={handleChange("name")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.Location}
+                      id="Location"
+                      label="Location"
+                      // error={errors.username}
+                      // value={values.username}
+                      // touched={touched.username}
+                      // onChange={handleChange("username")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.Year}
+                      id="Year of Establishment"
+                      label="Year of Establishment"
+                      // error={errors.username}
+                      // value={values.username}
+                      // touched={touched.username}
+                      // onChange={handleChange("username")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </FormDiv>
-        </div>
-        <div ref={onlineProfiles}>
-          <FormDiv title="Online profiles">
-            <div className="">
-              <div className="grid grid-col-1 gap-6">
-                <div className="w-full">
-                  <Input
-                    placeholder={AppConfig.PLACEHOLDERS.PersomalWebsite}
-                    id="Personal Website"
-                    label="Personal Website"
-                    // error={errors.name}
-                    // value={values.name}
-                    // touched={touched.name}
-                    // onChange={handleChange("name")}
-                    // onBlur={handleBlur}
-                  />
-                </div>
-                <div className="w-full">
-                  <Input
-                    placeholder={AppConfig.PLACEHOLDERS.LinkedIn}
-                    id="LinkedIn"
-                    label="LinkedIn"
-                    // error={errors.username}
-                    // value={values.username}
-                    // touched={touched.username}
-                    // onChange={handleChange("username")}
-                    // onBlur={handleBlur}
-                  />
-                </div>
-                <div className="w-full">
-                  <Input
-                    placeholder={AppConfig.PLACEHOLDERS.Instagram}
-                    id="Instagram"
-                    label="Instagram"
-                    // error={errors.username}
-                    // value={values.username}
-                    // touched={touched.username}
-                    // onChange={handleChange("username")}
-                    // onBlur={handleBlur}
-                  />
-                </div>
-                <div className="w-full">
-                  <Input
-                    placeholder={AppConfig.PLACEHOLDERS.X}
-                    id="x"
-                    label="x"
-                    // error={errors.username}
-                    // value={values.username}
-                    // touched={touched.username}
-                    // onChange={handleChange("username")}
-                    // onBlur={handleBlur}
-                  />
+            </FormDiv>
+          </div>
+        )}
+
+        {profileType.toLowerCase() !== "business" && (
+          <div ref={personalInfo}>
+            <FormDiv title="Personal Information">
+              <div className="">
+                <div className="grid grid-col-1 gap-6">
+                <ProfileImgUploader />
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.Firstname}
+                      id="First name"
+                      label="First name"
+                      // error={errors.name}
+                      // value={values.name}
+                      // touched={touched.name}
+                      // onChange={handleChange("name")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.Lastname}
+                      id="Last name"
+                      label="Last name"
+                      // error={errors.username}
+                      // value={values.username}
+                      // touched={touched.username}
+                      // onChange={handleChange("username")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.Location}
+                      id="Location"
+                      label="Location"
+                      // error={errors.username}
+                      // value={values.username}
+                      // touched={touched.username}
+                      // onChange={handleChange("username")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </FormDiv>
-        </div>
+            </FormDiv>
+          </div>
+        )}
+
+        {profileType.toLowerCase() !== "business" && (
+          <div ref={introduceYourself}>
+            <FormDiv title="Introduce yourself">
+              <div className="">
+                <div className="grid grid-col-1 gap-6">
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.Headline}
+                      id="Headline"
+                      label="Headline"
+                      // error={errors.name}
+                      // value={values.name}
+                      // touched={touched.name}
+                      // onChange={handleChange("name")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    {/* <Input
+                  placeholder={AppConfig.PLACEHOLDERS.Bio}
+                  id="Bio"
+                  label="Bio"
+                  // error={errors.username}
+                  // value={values.username}
+                  // touched={touched.username}
+                  // onChange={handleChange("username")}
+                  // onBlur={handleBlur}
+                /> */}
+                    <TextArea label="Bio" />
+                  </div>
+                </div>
+              </div>
+            </FormDiv>
+          </div>
+        )}
+
+        {profileType.toLowerCase() !== "business" && (
+          <div ref={onlineProfiles}>
+            <FormDiv title="Online profiles">
+              <div className="">
+                <div className="grid grid-col-1 gap-6">
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.PersomalWebsite}
+                      id="Personal Website"
+                      label="Personal Website"
+                      // error={errors.name}
+                      // value={values.name}
+                      // touched={touched.name}
+                      // onChange={handleChange("name")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.LinkedIn}
+                      id="LinkedIn"
+                      label="LinkedIn"
+                      // error={errors.username}
+                      // value={values.username}
+                      // touched={touched.username}
+                      // onChange={handleChange("username")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.Instagram}
+                      id="Instagram"
+                      label="Instagram"
+                      // error={errors.username}
+                      // value={values.username}
+                      // touched={touched.username}
+                      // onChange={handleChange("username")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.X}
+                      id="x"
+                      label="x"
+                      // error={errors.username}
+                      // value={values.username}
+                      // touched={touched.username}
+                      // onChange={handleChange("username")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                </div>
+              </div>
+            </FormDiv>
+          </div>
+        )}
         {hasProject && (
           <div ref={addAProject}>
             <FormDiv title="Add a project">
