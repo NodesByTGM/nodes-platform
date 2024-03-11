@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useContext } from "react";
+import { ProfileContext } from "../../../context/profile";
+
 import { ActionIcon } from "../../../components";
 
 const TextDivs = ({
@@ -20,6 +22,19 @@ const TextDivs = ({
   );
 };
 export default function ProjectDetail({ details }) {
+  const {
+ 
+    setProjectDetailsModal,
+
+    setEditProjectModal,
+  } = useContext(ProfileContext);
+
+  const handleEditModalOpen = () => {
+    setProjectDetailsModal(false);
+
+    setEditProjectModal(true);
+  };
+
   return (
     <div>
       <div className="flex flex-col gap-8">
@@ -28,7 +43,7 @@ export default function ProjectDetail({ details }) {
           <h3 className="text-[#000000] font-medium text-[20px]">
             Project details
           </h3>
-          <div className="max-w-max">
+          <div onClick={() => handleEditModalOpen()} className="cursor-pointer max-w-max">
             <ActionIcon edit />
           </div>
         </div>
@@ -68,12 +83,12 @@ export default function ProjectDetail({ details }) {
                 alt=""
                 className="w-full rounded-[5px] h-[160px]"
               />
-                <img
+              <img
                 src="/img/ProjectThumbnailSample.png"
                 alt=""
                 className="w-full rounded-[5px] h-[160px]"
               />
-                <img
+              <img
                 src="/img/ProjectThumbnailSample.png"
                 alt=""
                 className="w-full rounded-[5px] h-[160px]"

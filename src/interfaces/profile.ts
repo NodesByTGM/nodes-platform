@@ -8,4 +8,6 @@ export interface IProfileContext {
   setProjectDetailsModal: (e) => void,
   projectDetails: any,
   setProjectDetails: (e) => void,
+  editProjectmodal: any,
+  setEditProjectModal: (e) => void,
 }

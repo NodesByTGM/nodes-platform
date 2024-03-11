@@ -11,7 +11,7 @@ export default function ProjectsCard({
   setProjectDetails,
 }: ProjectsCard) {
   return (
-    <div className="text-[#000000] font-normal text-sm border-dash rounded-[4px] p-4 flex flex-col gap-4">
+    <div className="h-full text-[#000000] font-normal text-sm border-dash rounded-[4px] p-4 flex flex-col gap-4">
       <img
         className="bg-gray-400 rounded-[4px] h-[160px]"
         src={project.img}
@@ -24,7 +24,7 @@ export default function ProjectsCard({
           setProjectDetails && setProjectDetails(project);
           setProjectDetailsModal && setProjectDetailsModal(true);
         }}
-        className="underline cursor-pointer"
+        className="underline cursor-pointer mt-auto"
       >
         See more
       </span>

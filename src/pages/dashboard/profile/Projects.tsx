@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState,  } from "react";
 import { Card, ProjectsCard, Modal } from "../../../components";
-import { ProfileContext } from "../../../context/profile";
 import ProjectDetail from "./ProjectDetail";
+import EditProject from "./EditProject";
+import {useProfileContext} from '../../../context/hooks'
 
 type ProjectType = {
   id: string;
@@ -14,9 +15,11 @@ export default function Projects() {
   const {
     projectDetails,
     setProjectDetails,
-    setProjectDetailsModal,
     projectDetailsModal,
-  } = useContext(ProfileContext);
+    setProjectDetailsModal,
+    editProjectmodal,
+    setEditProjectModal,
+  } = useProfileContext();
   const [projects, setProjects] = useState<ProjectType[]>([]);
 
   const addProject = () => {
@@ -28,6 +31,13 @@ export default function Projects() {
         title: "Name  of project",
         description:
           "Lorem ipsum dolor sit amet consectetur. Cum amet id lectus viverra faucibus. Arcu eget hendrerit ut dictumst id. Lorem ipsum dolor sit amet consec...",
+      },
+      {
+        id: "3",
+        img: "/img/ProjectThumbnailSample.png",
+        title: "Name  of project 2",
+        description:
+          "Lorem ipsum dolor sit amet consectetur. ",
       },
     ];
     setProjects(updatedProjects);
@@ -44,7 +54,7 @@ export default function Projects() {
         {projects?.length > 0 ? (
           <div className="grid grid-cols-2 gap-4">
             {projects?.map((project) => (
-              <div key={project.id} className="">
+              <div key={project.id} className="h-full ">
                 <ProjectsCard
                   project={project}
                   setProjectDetailsModal={setProjectDetailsModal}
@@ -81,8 +91,16 @@ export default function Projects() {
         open={projectDetailsModal}
         setOpen={setProjectDetailsModal}
       >
-        <ProjectDetail details={projectDetails}/>
+        <ProjectDetail details={projectDetails}  />
       </Modal>
+      <Modal
+        sizeClass="sm:max-w-[1020px]"
+        open={editProjectmodal}
+        setOpen={setEditProjectModal}
+      >
+        <EditProject details={projectDetails} />
+      </Modal>
+      
     </div>
   );
 }
