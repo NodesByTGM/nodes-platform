@@ -137,10 +137,13 @@ export const DAYS = Array(31)
   .map((_, i) => i + 1);
 
 const currentYear = new Date().getFullYear();
-const startingYear = 1990;
+const startingYear = currentYear - 100;
+const stopYear = currentYear - 18
+
+
 
 export const YEARS = Array.from(
-  { length: currentYear - startingYear + 1 },
+  { length: stopYear - startingYear + 1 },
   (_, index) => startingYear + index
 );
 
