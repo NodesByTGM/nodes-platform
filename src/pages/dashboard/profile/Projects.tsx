@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Card, ProjectsCard } from "../../../components";
+import React, { useState, useContext } from "react";
+import { Card, ProjectsCard, Modal } from "../../../components";
+import { ProfileContext } from "../../../context/profile";
+import ProjectDetail from "./ProjectDetail";
 
 type ProjectType = {
   id: string;
@@ -9,15 +11,13 @@ type ProjectType = {
 };
 
 export default function Projects() {
-  const [projects, setProjects] = useState<ProjectType[]>([
-    // {
-    //   id: "1",
-    //   img: "",
-    //   title: "Name  of project",
-    //   description:
-    //     "Lorem ipsum dolor sit amet consectetur. Cum amet id lectus viverra faucibus. Arcu eget hendrerit ut dictumst id. Lorem ipsum dolor sit amet consec...",
-    // },
-  ]);
+  const {
+    projectDetails,
+    setProjectDetails,
+    setProjectDetailsModal,
+    projectDetailsModal,
+  } = useContext(ProfileContext);
+  const [projects, setProjects] = useState<ProjectType[]>([]);
 
   const addProject = () => {
     const updatedProjects = [
@@ -45,7 +45,11 @@ export default function Projects() {
           <div className="grid grid-cols-2 gap-4">
             {projects?.map((project) => (
               <div key={project.id} className="">
-                <ProjectsCard project={project} />
+                <ProjectsCard
+                  project={project}
+                  setProjectDetailsModal={setProjectDetailsModal}
+                  setProjectDetails={setProjectDetails}
+                />
               </div>
             ))}
           </div>
@@ -72,6 +76,13 @@ export default function Projects() {
           <img src="/img/AddProjects.svg" alt="" className="w-full" />
         </div>
       )}
+      <Modal
+        sizeClass="sm:max-w-[1020px]"
+        open={projectDetailsModal}
+        setOpen={setProjectDetailsModal}
+      >
+        <ProjectDetail details={projectDetails}/>
+      </Modal>
     </div>
   );
 }

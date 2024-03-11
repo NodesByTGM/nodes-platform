@@ -9,6 +9,10 @@ const initialState = {
   setProfileType: () => {},
   hasProject: false,
   setHasProject: () => {},
+  projectDetailsModal: false,
+  setProjectDetailsModal: () => {},
+  projectDetails: null,
+  setProjectDetails: () => {},
 };
 
 export const ProfileContext = createContext<IProfileContext>(initialState);
@@ -18,8 +22,10 @@ const ProfileProvider = ({
 }: {
   children: ReactNode | ReactNode[];
 }) => {
-  const [profileType, setProfileType] = useState("business");
+  const [profileType, setProfileType] = useState("talent");
   const [hasProject, setHasProject] = useState(false);
+  const [projectDetailsModal, setProjectDetailsModal] = useState(true);
+  const [projectDetails, setProjectDetails] = useState(null);
 
   const profileContextValue = useMemo(
     () => ({
@@ -27,14 +33,27 @@ const ProfileProvider = ({
       setProfileType,
       hasProject,
       setHasProject,
+      projectDetailsModal,
+      setProjectDetailsModal,
+      projectDetails,
+      setProjectDetails,
     }),
 
-    [profileType, setProfileType, hasProject, setHasProject]
+    [
+      profileType,
+      setProfileType,
+      hasProject,
+      setHasProject,
+      projectDetailsModal,
+      setProjectDetailsModal,
+      projectDetails,
+      setProjectDetails,
+    ]
   );
 
   return (
     <ProfileContext.Provider value={profileContextValue}>
-      <div className="flex gap-2 mb-4 hidden">
+      <div className="flex gap-2 mb-4 ">
         <button
           onClick={() => setProfileType("individual")}
           className="px-4 py-2 rounded-md bg-primary text-white"
