@@ -50,3 +50,6 @@ export { default as AddedProject } from "./AddedProject";
 export { default as ActionIcon } from "./ActionIcon";
 export { default as JobAndEventsCard } from "./profile/JobAndEventsCard.tsx";
 export { default as Modal } from "./modals/Modal.tsx";
+export { default as PageLoader } from "./PageLoader.tsx";
+
+

@@ -11,7 +11,7 @@ import { AuthLayout, MainLayout } from "./layout";
 import { Register } from "./pages";
 import AppConfig, { BASE_API_ENDPOINT } from "./utilities/config";
 import { authRoutes, publicRoutes, upgradeRoutes } from "./utilities/routes";
-
+import AppWrapper from "./AppWrapper";
 const router = createBrowserRouter([
   {
     // parent route component
@@ -22,11 +22,11 @@ const router = createBrowserRouter([
       ...publicRoutes.map((route) => ({
         path: route.path,
         Component: route.Component,
-        children: route?.children?.map((childRoute) => ({
+        children:
+          route?.children?.map((childRoute) => ({
             path: childRoute.path,
             Component: childRoute.Component,
           })) || [],
-       
       })),
     ],
   },
@@ -63,12 +63,14 @@ function App() {
   }, []);
   return (
     <div className="">
-      <ToastContainer />
-      <HelmetProvider>
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
-      </HelmetProvider>
+      <AppWrapper>
+        <ToastContainer />
+        <HelmetProvider>
+          <AuthProvider>
+            <RouterProvider router={router} />
+          </AuthProvider>
+        </HelmetProvider>
+      </AppWrapper>
     </div>
   );
 }
