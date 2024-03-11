@@ -3,6 +3,8 @@ import { IProfileContext } from "../interfaces/profile";
 // import {
 //   // FormikHelpers,
 //    useFormik } from "formik";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/";
 
 const initialState = {
   profileType: "individual",
@@ -24,6 +26,8 @@ const ProfileProvider = ({
 }: {
   children: ReactNode | ReactNode[];
 }) => {
+  const user = useSelector((state: RootState) => state.user.user);
+
   const [profileType, setProfileType] = useState("talent");
   const [hasProject, setHasProject] = useState(false);
   const [projectDetailsModal, setProjectDetailsModal] = useState(false);
@@ -61,6 +65,11 @@ const ProfileProvider = ({
 
   return (
     <ProfileContext.Provider value={profileContextValue}>
+      <div className="">
+        <pre className="Test-primary">
+          Stuff: {JSON.stringify(user, null, 2)}
+        </pre>
+      </div>
       <div className="flex gap-2 mb-4 hidden">
         <button
           onClick={() => setProfileType("individual")}

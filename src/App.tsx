@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
 import "./App.css";
@@ -64,7 +64,6 @@ function App() {
   return (
     <div className="">
       <AppWrapper>
-        <ToastContainer />
         <HelmetProvider>
           <AuthProvider>
             <RouterProvider router={router} />

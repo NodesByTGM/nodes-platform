@@ -157,7 +157,7 @@ function Register() {
           </Button>
         </form>
       ) : (
-        <div>
+        <div className="text-primary animate-pulse text-[18px] font-medium">
           {loading ? "Please wait while we verify your token" : "Invalid link "}
         </div>
       )}

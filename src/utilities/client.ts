@@ -9,7 +9,7 @@ export const getClient = (
         headers: {
             "Content-Type": `${multipart ? "multipart/form-data" : "application/json"}`,
             ...extraHeaders,
-            Authorization: localStorage.getItem('nodesToken')
+            Authorization: `Bearer ${localStorage.getItem('nodesToken')}`
         },
         baseURL: baseURL,
         timeout: 60000,

@@ -2,10 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import { profileApi } from "../api";
 import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
-import userReducer from '../utilities/reducers/userSlice';
-
+import userReducer from "../utilities/reducers/userSlice";
 
 import {
+  persistStore,
   persistReducer,
   FLUSH,
   REHYDRATE,
@@ -16,8 +16,7 @@ import {
 } from "redux-persist";
 const reducers = combineReducers({
   [profileApi?.reducerPath]: profileApi?.reducer,
-  user: userReducer
-
+  user: userReducer,
 });
 const persistConfig = {
   key: "root",
@@ -25,8 +24,7 @@ const persistConfig = {
 };
 const persistedReducer = persistReducer(persistConfig, reducers);
 
-export const store = () => {
-  return configureStore({
+export const store = configureStore({
     reducer: persistedReducer,
     devTools: true,
     middleware: (getDefaultMiddleware) =>
@@ -36,4 +34,9 @@ export const store = () => {
         },
       }).concat(profileApi?.middleware),
   });
-};
+
+
+
+export const persistor = persistStore(store);
+ 
+export type RootState = ReturnType<typeof store.getState>;
