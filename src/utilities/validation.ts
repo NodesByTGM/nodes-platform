@@ -29,28 +29,36 @@ export type SignupValidationType = {
   otp: string;
 };
 
+
+export const resetPasswordSchema = object({
+ 
+  password: string().required(),
+  confirmPassword: string()
+    .required()
+    .oneOf([ref("password"), null], "Passwords must match"),
+ 
+});
+export type ResetPasswordType = {
+  password: string;
+  confirmPassword: string;
+};
+
 export const loginSchema = object({
   email: string().email().required(),
   password: string().required(),
- 
 });
 
 export type LoginValidationType = {
-
   email: string;
   password: string;
-
 };
 
 export const emailSchema = object({
   email: string().email().required(),
- 
 });
 
 export type EmailValidationType = {
-
   email: string;
-
 };
 
 export type PersonalIndividualInformationType = {
@@ -65,9 +73,7 @@ export type PersonalIndividualInformationType = {
   x: string;
   spaces: boolean;
   comments: boolean;
-
-
-}; 
+};
 
 export const PersonalIndividualInformationSchema = {
   firstName: string(),
@@ -81,6 +87,4 @@ export const PersonalIndividualInformationSchema = {
   x: string(),
   spaces: bool(),
   comments: bool(),
-
-
-}; 
+};

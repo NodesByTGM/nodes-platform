@@ -11,6 +11,8 @@ import { mainClient } from "../../utilities/client";
 import { handleAxiosError,  } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
 import { initalizeFirebaseApp } from "../../utilities/firebase";
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../utilities/reducers/userSlice';
 // import FormDebug from "../../components/FormDebug";
 
 import {
@@ -23,6 +25,13 @@ function Login() {
   initalizeFirebaseApp();
   const auth = getAuth();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const loginUserPayloadTest = {
+    id: 123,
+    username: 'example_user'
+    // Other user data...
+  };
+
   const { setUser } = useAuth();
   const [socialLogin, setSocialLogin] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -41,7 +50,8 @@ function Login() {
           if (r.status === 200) {
             toast.success("Login successful!");
             setUser(r.data.user);
-            navigate("/");
+            dispatch(loginUser(loginUserPayloadTest));
+            navigate("/dashboard/profile");
             // setFormData({
             //   email: "",
             //   password: "",

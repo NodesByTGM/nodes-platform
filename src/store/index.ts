@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { profileApi } from "../api";
 import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
+import userReducer from '../utilities/reducers/userSlice';
+
 
 import {
   persistReducer,
@@ -14,6 +16,8 @@ import {
 } from "redux-persist";
 const reducers = combineReducers({
   [profileApi?.reducerPath]: profileApi?.reducer,
+  user: userReducer
+
 });
 const persistConfig = {
   key: "root",

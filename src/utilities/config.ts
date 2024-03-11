@@ -27,8 +27,8 @@ const API_ENDPOINTS = {
     MembershipURL: `${BASE_API_ENDPOINT}/submissions/membership`,
   },
   Upgrades: {
-    TalentURL: `${BASE_API_ENDPOINT}/upgrades/talent`,
-    BusinessURL: `${BASE_API_ENDPOINT}/upgrades/business`,
+    TalentURL: `${BASE_API_ENDPOINT}/onboarding`,
+    BusinessURL: `${BASE_API_ENDPOINT}/onboarding/business`,
   },
   Events: {
     BaseURL: `${BASE_API_ENDPOINT}/events/`,

@@ -4,13 +4,13 @@ import Interactions from "./Interactions.tsx";
 import Projects from "./Projects.tsx";
 import JobAndEvents from "./JobAndEvents";
 import { ProfileContext } from "../../../context/profile.tsx";
-import { useGetTestQuery } from "../../../api";
+// import { useGetTestQuery } from "../../../api";
 export default function Individual() {
-  const {
-    data: profileData,
-    refetch: profileRefetch,
-    isFetching: profileLoading,
-  } = useGetTestQuery({ filter_by: "name" });
+  // const {
+  //   data: profileData,
+  //   refetch: profileRefetch,
+  //   isFetching: profileLoading,
+  // } = useGetTestQuery({ filter_by: "name" });
   const { profileType, setHasProject } = useContext(ProfileContext);
   const [navs, setNavs] = useState(["Interactions"]);
   const [selectedNav, setSelectedNav] = useState(navs[0]);
