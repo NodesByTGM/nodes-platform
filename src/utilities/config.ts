@@ -18,6 +18,9 @@ const API_ENDPOINTS = {
     VerfiyEmail: `${BASE_API_ENDPOINT}/auth/verify-email`,
     ProfileURL: `${BASE_API_ENDPOINT}/users/profile`,
   },
+  Profile: {
+    GetUserProfile: `${BASE_API_ENDPOINT}/profile`,
+  },
   Submissions: {
     ContactURL: `${BASE_API_ENDPOINT}/submissions/contact`,
     WaitlistURL: `${BASE_API_ENDPOINT}/submissions/waitlist`,
@@ -106,6 +109,11 @@ export enum AccountTypes {
   Default = 0,
   Talent = 1,
   Business = 2,
+}
+export const AccountTypesObj = {
+  individual: 0,
+  talent: 1,
+  business: 2,
 }
 
 export enum OnboaringPurpose {

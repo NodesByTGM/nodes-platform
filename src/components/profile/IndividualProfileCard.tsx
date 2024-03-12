@@ -9,7 +9,7 @@ import { Button, ButtonOutline } from "../index";
 
 import { Interaction } from "../../components";
 export default function Individual() {
-  const { profileType } = useContext(ProfileContext);
+  const { profileType,  } = useContext(ProfileContext);
 
   const bio = {
     id: "1",

@@ -24,14 +24,15 @@ import {
   // validateObjectValues,
 } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
-import { 
-  // FormikHelpers,
-   useFormik } from "formik";
+import { useFormik } from "formik";
 // import FormDebug from "../../components/FormDebug";
 import { signupSchema, SignupValidationType } from "../../utilities/validation";
+import { loginUser } from "../../api/reducers/userSlice";
+import { useDispatch } from "react-redux";
 
 function Register() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { setUser } = useAuth();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [checked, setChecked] = useState(false);
@@ -89,6 +90,8 @@ function Register() {
         if (r.status === 200) {
           toast.success(r.data.message);
           setUser(r.data.user);
+          dispatch(loginUser(r.data.user));
+          localStorage.setItem('bearerToken', r.data?.user?.accessToken)
           navigate(AppConfig.PATHS.Upgrades.Talent.Onboarding);
         } else toast.error(r.data.message);
         setSubmitLoading(false);
@@ -394,7 +397,11 @@ function Register() {
               <p className="text-primary">{values.email}</p>
             </div>
 
-            <OTPInput submitLoading={submitLoading} onChange={handleSetOTP} btnAction={handleClickForm} />
+            <OTPInput
+              submitLoading={submitLoading}
+              onChange={handleSetOTP}
+              btnAction={handleClickForm}
+            />
             <div className="text-center mt-6">
               {resendAllowed ? (
                 <span>

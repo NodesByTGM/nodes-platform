@@ -1,5 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function PricingCard({ info }) {
+  const navigate = useNavigate();
+
   return (
     <div
       className={`sm:min-w-[400px] max-w-[600px]  ${
@@ -58,7 +62,10 @@ export default function PricingCard({ info }) {
         ))}
       </div>
 
-      <div className="cursor-pointer bg-primary rounded-[5px] p-4">
+      <div
+        onClick={() => navigate("/dashboard/profile")}
+        className="cursor-pointer bg-primary rounded-[5px] p-4"
+      >
         <span className="text-white font-normal text-base">
           {info.buttonText}
         </span>

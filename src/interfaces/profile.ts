@@ -10,4 +10,8 @@ export interface IProfileContext {
   setProjectDetails: (e) => void,
   editProjectmodal: any,
   setEditProjectModal: (e) => void,
+  profileData?: any,
+  profileIsSuccess?: boolean,
+  profileLoading?: boolean,
+  user: any
 }

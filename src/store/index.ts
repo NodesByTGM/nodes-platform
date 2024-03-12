@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { profileApi } from "../api";
 import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
-import userReducer from "../utilities/reducers/userSlice";
+import userReducer from "../api/reducers/userSlice";
 
 import {
   persistStore,
@@ -25,18 +25,16 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
-    reducer: persistedReducer,
-    devTools: true,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-      }).concat(profileApi?.middleware),
-  });
-
-
+  reducer: persistedReducer,
+  devTools: true,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(profileApi?.middleware),
+});
 
 export const persistor = persistStore(store);
- 
+
 export type RootState = ReturnType<typeof store.getState>;

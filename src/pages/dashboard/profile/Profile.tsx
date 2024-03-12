@@ -4,14 +4,15 @@ import Interactions from "./Interactions.tsx";
 import Projects from "./Projects.tsx";
 import JobAndEvents from "./JobAndEvents";
 import { ProfileContext } from "../../../context/profile.tsx";
-// import { useGetTestQuery } from "../../../api";
 export default function Individual() {
-  // const {
-  //   data: profileData,
-  //   refetch: profileRefetch,
-  //   isFetching: profileLoading,
-  // } = useGetTestQuery({ filter_by: "name" });
-  const { profileType, setHasProject } = useContext(ProfileContext);
+  const {
+    profileType,
+    setHasProject,
+    // profileData,
+    // profileIsSuccess,
+    // profileLoading,
+    
+  } = useContext(ProfileContext);
   const [navs, setNavs] = useState(["Interactions"]);
   const [selectedNav, setSelectedNav] = useState(navs[0]);
 
@@ -43,6 +44,7 @@ export default function Individual() {
   }, [navs]);
   return (
     <div className="flex gap-x-8 h-full">
+      {/* {profileData}ss {profileLoading ? 'True' : "false"} */}
       <div className="max-h-max">
         <IndividualProfileCard />
       </div>

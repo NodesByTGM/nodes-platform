@@ -3,6 +3,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { axiosBaseQuery } from "./axiosBaseQuery";
 import { REHYDRATE } from "redux-persist";
 import { cleanObject } from "../utilities";
+import AppConfig from "../utilities/config";
 
 export const profileApi: any = createApi({
   reducerPath: "profileApi",
@@ -23,7 +24,16 @@ export const profileApi: any = createApi({
         };
       },
     }),
+    getUserProfile: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Profile.GetUserProfile}`,
+          method: "get",
+          
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetTestQuery } = profileApi;
+export const { useGetTestQuery, useGetUserProfileQuery } = profileApi;

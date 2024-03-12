@@ -1,11 +1,13 @@
-import { ReactNode, createContext, useMemo, useState } from "react";
+import { ReactNode, createContext, useMemo, useState, useEffect, useCallback } from "react";
 import { IProfileContext } from "../interfaces/profile";
+import { useGetUserProfileQuery } from "../api";
+import { AccountTypesObj } from "../utilities";
 // import {
 //   // FormikHelpers,
 //    useFormik } from "formik";
 import { useSelector } from "react-redux";
-import { RootState } from "../store/";
-
+import { RootState } from "../store";
+import { GetToken } from "../utilities/getToken";
 const initialState = {
   profileType: "individual",
   setProfileType: () => {},
@@ -17,6 +19,10 @@ const initialState = {
   setProjectDetails: () => {},
   editProjectmodal: false,
   setEditProjectModal: () => {},
+  profileData: null,
+  profileIsSuccess: false,
+  profileLoading: false,
+  user: null,
 };
 
 export const ProfileContext = createContext<IProfileContext>(initialState);
@@ -26,8 +32,14 @@ const ProfileProvider = ({
 }: {
   children: ReactNode | ReactNode[];
 }) => {
-  const user = useSelector((state: RootState) => state.user.user);
+  const {
+    data: profileData,
+    // refetch: profileRefetch,
+    isSuccess: profileIsSuccess,
+    isFetching: profileLoading,
+  } = useGetUserProfileQuery();
 
+  const user = useSelector((state: RootState) => state.user.user);
   const [profileType, setProfileType] = useState("talent");
   const [hasProject, setHasProject] = useState(false);
   const [projectDetailsModal, setProjectDetailsModal] = useState(false);
@@ -47,6 +59,10 @@ const ProfileProvider = ({
       setProjectDetails,
       editProjectmodal,
       setEditProjectModal,
+      profileData,
+      profileIsSuccess,
+      profileLoading,
+      user,
     }),
 
     [
@@ -60,13 +76,35 @@ const ProfileProvider = ({
       setProjectDetails,
       editProjectmodal,
       setEditProjectModal,
+      profileData,
+      profileIsSuccess,
+      profileLoading,
+      user,
     ]
   );
 
+  const handleAccountType = useCallback(() => {
+    const type = user?.type;
+    if (type == AccountTypesObj.individual) {
+      setProfileType("individual");
+    }
+    if (type == AccountTypesObj.talent) {
+      setProfileType("talent");
+    }
+    if (type == AccountTypesObj.business) {
+      setProfileType("business");
+    }
+  }, [user]);
+
+  useEffect(() => {
+    handleAccountType();
+  }, [user, handleAccountType]);
+
   return (
     <ProfileContext.Provider value={profileContextValue}>
-      <div className="">
+      <div className="hidden">
         <pre className="Test-primary">
+          Token: {GetToken()}
           Stuff: {JSON.stringify(user, null, 2)}
         </pre>
       </div>

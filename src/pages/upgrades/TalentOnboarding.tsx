@@ -17,9 +17,12 @@ import { IUser } from "../../interfaces/auth";
 import { mainClient } from "../../utilities/client";
 import { handleAxiosError } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
+import { loginUser } from "../../api/reducers/userSlice";
+import { useDispatch } from "react-redux";
 // import FormDebug from "../../components/FormDebug";
 
 function TalentOnboarding() {
+  const dispatch = useDispatch();
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -105,7 +108,12 @@ const [submitLoading, setSubmitLoading] = useState(false)
               type: AppConfig.ACCOUNT_TYPES.TALENT,
             } as IUser;
             setUser(newUser);
-            navigate("/");
+            if(r?.data?.user){
+              dispatch(loginUser(r?.data?.user));
+            }
+           
+          localStorage.setItem('bearerToken', r.data?.user?.accessToken)
+            navigate("/upgrade/pricing");
           } else toast.error(r.data.message);
         })
         .catch((e) => {

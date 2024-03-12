@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React, {
   useState,
   useRef,
@@ -6,6 +8,11 @@ import React, {
   useCallback,
 } from "react";
 import AppConfig from "../../../utilities/config";
+import {
+  profileSchema,
+  profileValidationType,
+} from "../../../utilities/validation";
+
 import {
   Button,
   ButtonOutline,
@@ -22,6 +29,7 @@ import {
 import { FaPlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useProfileContext } from "../../../context/hooks";
+import { useFormik } from "formik";
 
 function InteractionsSwitch({ label, description }) {
   return (
@@ -123,6 +131,20 @@ export default function EditIndividual() {
   const [navs, setNavs] = useState(navOptions);
   const [selected, setSelected] = useState(navs[0]);
 
+  const handleClickForm = (values: any) => {
+    console.log(JSON.stringify(values, null, 2));
+  };
+
+  const formik = useFormik<profileValidationType>({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+    },
+    validationSchema: profileSchema,
+    validateOnBlur: true,
+    onSubmit: handleClickForm,
+  });
+
   const scrollToDiv = (navRef) => {
     navRef?.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -161,8 +183,24 @@ export default function EditIndividual() {
     setSelected(navs[0]);
   }, [navs]);
 
+  const {
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+    values,
+    isValid,
+    handleBlur,
+  } = formik;
+
   return (
-    <div className="flex gap-x-8 h-full">
+    <form
+      onSubmit={(e) => {
+        e?.preventDefault();
+        handleSubmit();
+      }}
+      className="flex gap-x-8 h-full"
+    >
       <div className="max-h-max w-[400px]">
         <div className="flex flex-col">
           <div className="rounded-lg p-6 bg-white flex flex-col gap-4">
@@ -191,7 +229,12 @@ export default function EditIndividual() {
           <Link to={AppConfig.PATHS.Dashboard.Profile.Base} className="w-full">
             <ButtonOutline>Back to profile</ButtonOutline>
           </Link>
-          <Button>Save and Continue</Button>
+          <Button
+            disabled={!isValid}
+            className={`${!isValid ? "opacity-50" : ""} `}
+          >
+            Save and Continue 
+          </Button>
         </div>
       </div>
       <div className="flex-1 flex flex-col gap-8 ">
@@ -201,7 +244,7 @@ export default function EditIndividual() {
             <FormDiv title="Business Information">
               <div className="">
                 <div className="grid grid-col-1 gap-6">
-                 <ProfileImgUploader />
+                  <ProfileImgUploader />
                   <div className="w-full">
                     <Input
                       placeholder={AppConfig.PLACEHOLDERS.Businessname}
@@ -249,17 +292,17 @@ export default function EditIndividual() {
             <FormDiv title="Personal Information">
               <div className="">
                 <div className="grid grid-col-1 gap-6">
-                <ProfileImgUploader />
+                  <ProfileImgUploader />
                   <div className="w-full">
                     <Input
                       placeholder={AppConfig.PLACEHOLDERS.Firstname}
                       id="First name"
                       label="First name"
-                      // error={errors.name}
-                      // value={values.name}
-                      // touched={touched.name}
-                      // onChange={handleChange("name")}
-                      // onBlur={handleBlur}
+                      error={errors.firstName}
+                      value={values.firstName}
+                      touched={touched.firstName}
+                      onChange={handleChange("firstName")}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="w-full">
@@ -517,6 +560,6 @@ export default function EditIndividual() {
           </FormDiv>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

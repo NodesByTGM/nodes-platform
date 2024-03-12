@@ -1,7 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { GoLink } from "react-icons/go";
+import { ProfileContext } from "../../context/profile";
+
 export default function IndividualId() {
+  const {  user } = useContext(ProfileContext);
+
   return (
     <div className="flex flex-col gap-6 items-center">
       <div className="size-[100px] ">
@@ -11,7 +15,7 @@ export default function IndividualId() {
           alt=""
         />
       </div>
-      <span className="font-medium text-[24px] ">Jane Doe</span>
+      <span className="font-medium text-[24px] "> {user?.name}</span>
       <span className="font-normal text-base text-[#757575] ">
         Height and Age
       </span>

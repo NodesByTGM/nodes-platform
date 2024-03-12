@@ -28,15 +28,21 @@ export type SignupValidationType = {
   confirmPassword: string;
   otp: string;
 };
+export const profileSchema = object({
+  firstName: string().required(),
+  lastName: string().required(),
+});
 
+export type profileValidationType = {
+  firstName: string;
+  lastName: string;
+};
 
 export const resetPasswordSchema = object({
- 
   password: string().required(),
   confirmPassword: string()
     .required()
     .oneOf([ref("password"), null], "Passwords must match"),
- 
 });
 export type ResetPasswordType = {
   password: string;
