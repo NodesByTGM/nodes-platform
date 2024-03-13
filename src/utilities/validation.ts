@@ -31,11 +31,37 @@ export type SignupValidationType = {
 export const profileSchema = object({
   firstName: string().required(),
   lastName: string().required(),
+  avatar: string(),
+  location: string(),
+  headline: string(),
+  bio: string(),
+  website: string(),
+  linkedIn: string(),
+  instagram: string(),
+  twitter: string(),
+  projectName: string(),
+  description: string(),
+  projectUrl: string(),
+  spaces: bool(),
+  comments: bool(),
 });
 
 export type profileValidationType = {
   firstName: string;
   lastName: string;
+  avatar: string;
+  location: string;
+  headline: string;
+  bio: string;
+  website: string;
+  linkedIn: string;
+  instagram: string;
+  twitter: string;
+  projectName: string;
+  description: string;
+  projectUrl: string;
+  spaces: boolean;
+  comments: boolean;
 };
 
 export const resetPasswordSchema = object({

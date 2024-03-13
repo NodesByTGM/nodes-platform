@@ -26,7 +26,7 @@ export const getClient = (
         multipart ? "multipart/form-data" : "application/json"
       }`,
       ...extraHeaders,
-      Authorization: accessToken ? `Bearer ${accessToken}` : null,
+      Authorization: accessToken ? `Token ${accessToken}` : null,
     },
     baseURL: baseURL,
     timeout: 60000,

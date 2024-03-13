@@ -13,5 +13,6 @@ export interface IProfileContext {
   profileData?: any,
   profileIsSuccess?: boolean,
   profileLoading?: boolean,
+  profileRefetch?: any ,
   user: any
 }

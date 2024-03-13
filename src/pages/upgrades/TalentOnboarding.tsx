@@ -137,7 +137,7 @@ const [submitLoading, setSubmitLoading] = useState(false)
 
   useEffect(() => {
     if (user) {
-      if (user.type === AppConfig.ACCOUNT_TYPES.TALENT) {
+      if (user?.type === AppConfig.ACCOUNT_TYPES.TALENT) {
         toast.success("Your account is already upgraded");
         navigate("/");
       }

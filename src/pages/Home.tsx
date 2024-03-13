@@ -28,7 +28,7 @@ function Home() {
     <div>
       <div className="mb-4">
         {user ? (
-          <p>You account is currently a {AccountTypes[user.type]} Account</p>
+          <p>You account is currently a {AccountTypes[user?.type]} Account</p>
         ) : (
           <p>Please login first</p>
         )}

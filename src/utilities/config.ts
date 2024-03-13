@@ -19,7 +19,7 @@ const API_ENDPOINTS = {
     ProfileURL: `${BASE_API_ENDPOINT}/users/profile`,
   },
   Profile: {
-    GetUserProfile: `${BASE_API_ENDPOINT}/profile`,
+  UserProfile: `${BASE_API_ENDPOINT}/profile`,
   },
   Submissions: {
     ContactURL: `${BASE_API_ENDPOINT}/submissions/contact`,

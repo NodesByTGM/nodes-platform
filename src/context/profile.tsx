@@ -1,4 +1,11 @@
-import { ReactNode, createContext, useMemo, useState, useEffect, useCallback } from "react";
+import {
+  ReactNode,
+  createContext,
+  useMemo,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 import { IProfileContext } from "../interfaces/profile";
 import { useGetUserProfileQuery } from "../api";
 import { AccountTypesObj } from "../utilities";
@@ -22,6 +29,7 @@ const initialState = {
   profileData: null,
   profileIsSuccess: false,
   profileLoading: false,
+  profileRefetch: () => {},
   user: null,
 };
 
@@ -34,7 +42,7 @@ const ProfileProvider = ({
 }) => {
   const {
     data: profileData,
-    // refetch: profileRefetch,
+    refetch: profileRefetch,
     isSuccess: profileIsSuccess,
     isFetching: profileLoading,
   } = useGetUserProfileQuery();
@@ -62,6 +70,7 @@ const ProfileProvider = ({
       profileData,
       profileIsSuccess,
       profileLoading,
+      profileRefetch,
       user,
     }),
 
@@ -79,6 +88,7 @@ const ProfileProvider = ({
       profileData,
       profileIsSuccess,
       profileLoading,
+      profileRefetch,
       user,
     ]
   );
@@ -86,7 +96,7 @@ const ProfileProvider = ({
   const handleAccountType = useCallback(() => {
     const type = user?.type;
     if (type == AccountTypesObj.individual) {
-      setProfileType("individual");
+      // setProfileType("individual");
     }
     if (type == AccountTypesObj.talent) {
       setProfileType("talent");
@@ -102,6 +112,9 @@ const ProfileProvider = ({
 
   return (
     <ProfileContext.Provider value={profileContextValue}>
+      <div className="hidden">
+        <pre>{"Data:" + JSON.stringify(profileData, null, 2)}</pre>
+      </div>
       <div className="hidden">
         <pre className="Test-primary">
           Token: {GetToken()}

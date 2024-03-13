@@ -10,7 +10,7 @@ export const profileApi: any = createApi({
   baseQuery: axiosBaseQuery(),
   keepUnusedDataFor: 0,
   extractRehydrationInfo(action, { reducerPath }) {
-    if (action.type === REHYDRATE && action.payload) {
+    if (action?.type === REHYDRATE && action?.payload) {
       return action.payload[reducerPath];
     }
   },
@@ -27,13 +27,22 @@ export const profileApi: any = createApi({
     getUserProfile: builder.query<any, any>({
       query: () => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Profile.GetUserProfile}`,
+          url: `${AppConfig.API_ENDPOINTS.Profile.UserProfile}`,
           method: "get",
           
+        };
+      },
+    }),
+    updateUserProfile: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Profile.UserProfile}`,
+          method: "put",
+          body: data,
         };
       },
     }),
   }),
 });
 
-export const { useGetTestQuery, useGetUserProfileQuery } = profileApi;
+export const { useGetTestQuery, useGetUserProfileQuery, useUpdateUserProfileMutation } = profileApi;

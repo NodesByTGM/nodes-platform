@@ -12,6 +12,7 @@ import {
   profileSchema,
   profileValidationType,
 } from "../../../utilities/validation";
+// import { FormDebug } from "../../../components";
 
 import {
   Button,
@@ -30,6 +31,7 @@ import { FaPlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useProfileContext } from "../../../context/hooks";
 import { useFormik } from "formik";
+import { useUpdateUserProfileMutation } from "../../../api";
 
 function InteractionsSwitch({ label, description }) {
   return (
@@ -62,7 +64,17 @@ function ProfileImgUploader() {
   );
 }
 export default function EditIndividual() {
-  const { profileType, hasProject, setHasProject } = useProfileContext();
+  const { profileType, hasProject, setHasProject, profileRefetch } =
+    useProfileContext();
+  const [
+    updateUserProfile,
+    {
+      isLoading: updateProfileLoading,
+      isSuccess: updateProfileSuccess,
+      // isError: updateProfileIsError,
+      // error: updateProfileError,
+    },
+  ] = useUpdateUserProfileMutation();
   const personalInfo = useRef<HTMLDivElement>(null);
   const businessInfo = useRef<HTMLDivElement>(null);
 
@@ -133,12 +145,43 @@ export default function EditIndividual() {
 
   const handleClickForm = (values: any) => {
     console.log(JSON.stringify(values, null, 2));
+    const data = {
+      name: `${values.firstName} ${values.lastName}`,
+      avatar: values.avatar,
+      skills: [],
+      location: values.location,
+      linkedIn: values.linkedIn,
+      instagram: values.instagram,
+      twitter: values.twitter,
+      headline: values.headline,
+      bio: values.bio,
+      website: values.website,
+      spaces: values.spaces,
+      comments: values.comments,
+      companyName: values.projectName,
+      logo: values.projectUrl,
+      yoe: 0,
+    };
+    updateUserProfile(data);
   };
 
   const formik = useFormik<profileValidationType>({
     initialValues: {
       firstName: "",
       lastName: "",
+      avatar: "",
+      location: "",
+      headline: "",
+      bio: "",
+      website: "",
+      linkedIn: "",
+      instagram: "",
+      twitter: "",
+      projectName: "",
+      description: "",
+      projectUrl: "",
+      spaces: false,
+      comments: false,
     },
     validationSchema: profileSchema,
     validateOnBlur: true,
@@ -182,6 +225,12 @@ export default function EditIndividual() {
   useEffect(() => {
     setSelected(navs[0]);
   }, [navs]);
+
+  useEffect(() => {
+    if (updateProfileSuccess) {
+      profileRefetch();
+    }
+  }, [updateProfileSuccess]);
 
   const {
     handleChange,
@@ -230,11 +279,16 @@ export default function EditIndividual() {
             <ButtonOutline>Back to profile</ButtonOutline>
           </Link>
           <Button
+            isLoading={updateProfileLoading}
             disabled={!isValid}
             className={`${!isValid ? "opacity-50" : ""} `}
           >
-            Save and Continue 
+            Save and Continue
           </Button>
+        </div>
+
+        <div className="mt-4">
+          {/* <FormDebug form={{ values, touched, errors }} /> */}
         </div>
       </div>
       <div className="flex-1 flex flex-col gap-8 ">
@@ -296,7 +350,7 @@ export default function EditIndividual() {
                   <div className="w-full">
                     <Input
                       placeholder={AppConfig.PLACEHOLDERS.Firstname}
-                      id="First name"
+                      id="firstName"
                       label="First name"
                       error={errors.firstName}
                       value={values.firstName}
@@ -308,25 +362,25 @@ export default function EditIndividual() {
                   <div className="w-full">
                     <Input
                       placeholder={AppConfig.PLACEHOLDERS.Lastname}
-                      id="Last name"
+                      id="lastName"
                       label="Last name"
-                      // error={errors.username}
-                      // value={values.username}
-                      // touched={touched.username}
-                      // onChange={handleChange("username")}
-                      // onBlur={handleBlur}
+                      error={errors.lastName}
+                      value={values.lastName}
+                      touched={touched.lastName}
+                      onChange={handleChange("lastName")}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="w-full">
                     <Input
                       placeholder={AppConfig.PLACEHOLDERS.Location}
-                      id="Location"
+                      id="location"
                       label="Location"
-                      // error={errors.username}
-                      // value={values.username}
-                      // touched={touched.username}
-                      // onChange={handleChange("username")}
-                      // onBlur={handleBlur}
+                      error={errors.location}
+                      value={values.location}
+                      touched={touched.location}
+                      onChange={handleChange("location")}
+                      onBlur={handleBlur}
                     />
                   </div>
                 </div>
@@ -343,13 +397,13 @@ export default function EditIndividual() {
                   <div className="w-full">
                     <Input
                       placeholder={AppConfig.PLACEHOLDERS.Headline}
-                      id="Headline"
+                      id="headline"
                       label="Headline"
-                      // error={errors.name}
-                      // value={values.name}
-                      // touched={touched.name}
-                      // onChange={handleChange("name")}
-                      // onBlur={handleBlur}
+                      error={errors.headline}
+                      value={values.headline}
+                      touched={touched.headline}
+                      onChange={handleChange("headline")}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="w-full">
@@ -363,7 +417,15 @@ export default function EditIndividual() {
                   // onChange={handleChange("username")}
                   // onBlur={handleBlur}
                 /> */}
-                    <TextArea label="Bio" />
+                    <TextArea
+                      id="bio"
+                      label="Bio"
+                      error={errors.bio}
+                      value={values.bio}
+                      touched={touched.bio}
+                      onChange={handleChange("bio")}
+                      onBlur={handleBlur}
+                    />
                   </div>
                 </div>
               </div>
@@ -379,49 +441,49 @@ export default function EditIndividual() {
                   <div className="w-full">
                     <Input
                       placeholder={AppConfig.PLACEHOLDERS.PersomalWebsite}
-                      id="Personal Website"
+                      id="website"
                       label="Personal Website"
-                      // error={errors.name}
-                      // value={values.name}
-                      // touched={touched.name}
-                      // onChange={handleChange("name")}
-                      // onBlur={handleBlur}
+                      error={errors.website}
+                      value={values.website}
+                      touched={touched.website}
+                      onChange={handleChange("website")}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="w-full">
                     <Input
                       placeholder={AppConfig.PLACEHOLDERS.LinkedIn}
-                      id="LinkedIn"
+                      id="linkedIn"
                       label="LinkedIn"
-                      // error={errors.username}
-                      // value={values.username}
-                      // touched={touched.username}
-                      // onChange={handleChange("username")}
-                      // onBlur={handleBlur}
+                      error={errors.linkedIn}
+                      value={values.linkedIn}
+                      touched={touched.linkedIn}
+                      onChange={handleChange("linkedIn")}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="w-full">
                     <Input
                       placeholder={AppConfig.PLACEHOLDERS.Instagram}
-                      id="Instagram"
+                      id="instagram"
                       label="Instagram"
-                      // error={errors.username}
-                      // value={values.username}
-                      // touched={touched.username}
-                      // onChange={handleChange("username")}
-                      // onBlur={handleBlur}
+                      error={errors.instagram}
+                      value={values.instagram}
+                      touched={touched.instagram}
+                      onChange={handleChange("instagram")}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="w-full">
                     <Input
                       placeholder={AppConfig.PLACEHOLDERS.X}
-                      id="x"
+                      id="twitter"
                       label="x"
-                      // error={errors.username}
-                      // value={values.username}
-                      // touched={touched.username}
-                      // onChange={handleChange("username")}
-                      // onBlur={handleBlur}
+                      error={errors.twitter}
+                      value={values.twitter}
+                      touched={touched.twitter}
+                      onChange={handleChange("twitter")}
+                      onBlur={handleBlur}
                     />
                   </div>
                 </div>
@@ -438,39 +500,39 @@ export default function EditIndividual() {
                     <Input
                       required
                       placeholder={AppConfig.PLACEHOLDERS.ProjectName}
-                      id="Project Name"
+                      id="projectName"
                       label="Project Name"
-                      // error={errors.name}
-                      // value={values.name}
-                      // touched={touched.name}
-                      // onChange={handleChange("name")}
-                      // onBlur={handleBlur}
+                      error={errors.projectName}
+                      value={values.projectName}
+                      touched={touched.projectName}
+                      onChange={handleChange("projectName")}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="w-full">
                     <TextArea
                       required
                       placeholder={AppConfig.PLACEHOLDERS.ProjectDescription}
-                      id="Description"
+                      id="description"
                       label="Description"
-                      // error={errors.username}
-                      // value={values.username}
-                      // touched={touched.username}
-                      // onChange={handleChange("username")}
-                      // onBlur={handleBlur}
+                      error={errors.description}
+                      value={values.description}
+                      touched={touched.description}
+                      onChange={handleChange("description")}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="w-full">
                     <Input
                       required
                       placeholder={AppConfig.PLACEHOLDERS.ProjectUrl}
-                      id="Project Url"
+                      id="projectUrl"
                       label="Project Url"
-                      // error={errors.username}
-                      // value={values.username}
-                      // touched={touched.username}
-                      // onChange={handleChange("username")}
-                      // onBlur={handleBlur}
+                      error={errors.projectUrl}
+                      value={values.projectUrl}
+                      touched={touched.projectUrl}
+                      onChange={handleChange("projectUrl")}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="w-full flex flex-col gap-6">
@@ -489,10 +551,12 @@ export default function EditIndividual() {
                         </div>
                         <AddCollaboratorInputDiv>
                           <CollaboratorInput
+                            onChange={() => {}}
                             placeholder="Name"
                             textSize="text-base"
                           />
                           <CollaboratorInput
+                            onChange={() => {}}
                             placeholder="role"
                             textSize="text-xs"
                           />
@@ -507,8 +571,14 @@ export default function EditIndividual() {
                         </span>
                       </div>
                       <div className="flex flex-col gap-10 mb-2">
-                        <ProjectFileUpload label="Project thumbnail" />
-                        <ProjectFileUpload label="Project images" />
+                        <ProjectFileUpload
+                          onChange={() => {}}
+                          label="Project thumbnail"
+                        />
+                        <ProjectFileUpload
+                          onChange={() => {}}
+                          label="Project images"
+                        />
                       </div>
 
                       <div className="grid grid-cols-3 gap-6">

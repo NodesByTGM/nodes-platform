@@ -11,7 +11,6 @@ export default function Individual() {
     // profileData,
     // profileIsSuccess,
     // profileLoading,
-    
   } = useContext(ProfileContext);
   const [navs, setNavs] = useState(["Interactions"]);
   const [selectedNav, setSelectedNav] = useState(navs[0]);
@@ -44,7 +43,7 @@ export default function Individual() {
   }, [navs]);
   return (
     <div className="flex gap-x-8 h-full">
-      {/* {profileData}ss {profileLoading ? 'True' : "false"} */}
+      {/* ss {profileLoading ? 'True' : "false"} */}
       <div className="max-h-max">
         <IndividualProfileCard />
       </div>
