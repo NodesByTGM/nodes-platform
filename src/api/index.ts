@@ -1,1 +1,2 @@
-export * from './profileApi'
+export * from "./profileApi";
+export * from "./projectApi";

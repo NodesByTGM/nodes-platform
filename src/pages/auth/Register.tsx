@@ -41,17 +41,7 @@ function Register() {
   const [timeLeft, setTimeLeft] = useState(AppConfig.OTP_COUNTDOWN);
   const [sendOtpLoading, setSendOtpLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   email: "",
-  //   username: "",
-  //   day: "",
-  //   month: "",
-  //   year: "",
-  //   password: "",
-  //   confirmPassword: "",
-  //   otp: "",
-  // });
+
 
   const prepareDetails = (values) => {
     const payload = {
@@ -101,13 +91,6 @@ function Register() {
         handleAxiosError(e);
       });
   };
-  // const handleFormSubmit = (
-  //   values: SignupValidationType
-  //   // formikHelpers: FormikHelpers<SignupValidationType>
-  // ) => {
-  //   console.log(values);
-  //   // formikHelpers.resetForm();
-  // };
 
   const formik = useFormik<SignupValidationType>({
     initialValues: {
@@ -374,7 +357,7 @@ function Register() {
                 className={`${!checked || !isValid ? "opacity-50" : ""} mt-8`}
                 disabled={!checked || !isValid}
                 type="submit"
-                // onClick={handleClickForm}
+                
               >
                 Sign Up
               </Button>

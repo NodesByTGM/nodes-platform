@@ -1,17 +1,17 @@
-import { object, string, ref, bool } from "yup";
+import { object, string, ref, bool, array } from "yup";
 
 export const signupSchema = object({
-  name: string().required(),
-  email: string().email().required(),
-  username: string().required(),
+  name: string().required("Name is a required field"),
+  email: string().email().required("Email is a required field"),
+  username: string().required("Username is a required field"),
   // dob: date().default(() => new Date()),
   day: string(),
   month: string(),
   year: string(),
-  password: string().required(),
+  password: string().required("Password is a required field"),
   confirmPassword: string()
-    .required()
-    .oneOf([ref("password"), null], "Passwords must match"),
+    .required("Confirm Password is a required field")
+    .oneOf([ref("password"), ], "Passwords must match"),
   otp: string(),
 });
 
@@ -29,8 +29,8 @@ export type SignupValidationType = {
   otp: string;
 };
 export const profileSchema = object({
-  firstName: string().required(),
-  lastName: string().required(),
+  firstName: string().required("first name is a required field"),
+  lastName: string().required("Last name is a required field"),
   avatar: string(),
   location: string(),
   headline: string(),
@@ -44,6 +44,13 @@ export const profileSchema = object({
   projectUrl: string(),
   spaces: bool(),
   comments: bool(),
+  collaborators: array().of(
+    object().shape({
+      name: string(),
+      role: string(),
+      collabName: string()
+    })
+  ),
 });
 
 export type profileValidationType = {
@@ -62,13 +69,65 @@ export type profileValidationType = {
   projectUrl: string;
   spaces: boolean;
   comments: boolean;
+  collaborators: [
+    {
+      name: string;
+      role: string;
+      collabName: string
+    }
+  ];
+};
+
+export const projectSchema = object({
+  name: string().required("Project name is a required field"),
+  description: string(),
+  projectURL: string(),
+  thumbnail: object().shape({
+    id: string(),
+    url: string(),
+  }),
+  images: array().of(
+    object().shape({
+      id: string(),
+      url: string(),
+    })
+  ),
+  collaborators: array().of(
+    object().shape({
+      name: string(),
+      role: string(),
+      collabName: string()
+    })
+  ),
+});
+export type projectValidationType = {
+  name: string;
+  description: string;
+  projectURL: string;
+  thumbnail: {
+    id: string;
+    url: string;
+  };
+  images: [
+    {
+      id: string;
+      url: string;
+    }
+  ];
+  collaborators: [
+    {
+      name: string;
+      role: string;
+      collabName: string
+    }
+  ];
 };
 
 export const resetPasswordSchema = object({
-  password: string().required(),
+  password: string().required("Password is a required field"),
   confirmPassword: string()
     .required()
-    .oneOf([ref("password"), null], "Passwords must match"),
+    .oneOf([ref("password"),], "Passwords must match"),
 });
 export type ResetPasswordType = {
   password: string;
@@ -76,7 +135,7 @@ export type ResetPasswordType = {
 };
 
 export const loginSchema = object({
-  email: string().email().required(),
+  email: string().email().required("Email is a required field"),
   password: string().required(),
 });
 
@@ -86,7 +145,7 @@ export type LoginValidationType = {
 };
 
 export const emailSchema = object({
-  email: string().email().required(),
+  email: string().email().required("Email is a required field"),
 });
 
 export type EmailValidationType = {

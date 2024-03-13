@@ -8,7 +8,8 @@ import {
 } from "react";
 import { IProfileContext } from "../interfaces/profile";
 import { useGetUserProfileQuery } from "../api";
-import { AccountTypesObj } from "../utilities";
+import { AccountTypesObj,  } from "../utilities";
+
 // import {
 //   // FormikHelpers,
 //    useFormik } from "formik";
@@ -24,7 +25,7 @@ const initialState = {
   setProjectDetailsModal: () => {},
   projectDetails: null,
   setProjectDetails: () => {},
-  editProjectmodal: false,
+  editProjectModal: false,
   setEditProjectModal: () => {},
   profileData: null,
   profileIsSuccess: false,
@@ -51,7 +52,7 @@ const ProfileProvider = ({
   const [profileType, setProfileType] = useState("talent");
   const [hasProject, setHasProject] = useState(false);
   const [projectDetailsModal, setProjectDetailsModal] = useState(false);
-  const [editProjectmodal, setEditProjectModal] = useState(false);
+  const [editProjectModal, setEditProjectModal] = useState(false);
 
   const [projectDetails, setProjectDetails] = useState(null);
 
@@ -65,7 +66,7 @@ const ProfileProvider = ({
       setProjectDetailsModal,
       projectDetails,
       setProjectDetails,
-      editProjectmodal,
+      editProjectModal,
       setEditProjectModal,
       profileData,
       profileIsSuccess,
@@ -83,7 +84,7 @@ const ProfileProvider = ({
       setProjectDetailsModal,
       projectDetails,
       setProjectDetails,
-      editProjectmodal,
+      editProjectModal,
       setEditProjectModal,
       profileData,
       profileIsSuccess,
@@ -121,7 +122,7 @@ const ProfileProvider = ({
           Stuff: {JSON.stringify(user, null, 2)}
         </pre>
       </div>
-      <div className="flex gap-2 mb-4 hidden">
+      <div className="flex gap-2 mb-4 ">
         <button
           onClick={() => setProfileType("individual")}
           className="px-4 py-2 rounded-md bg-primary text-white"

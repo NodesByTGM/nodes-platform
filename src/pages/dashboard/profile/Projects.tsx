@@ -1,8 +1,9 @@
-import React, { useState,  } from "react";
+import React, { useState } from "react";
 import { Card, ProjectsCard, Modal } from "../../../components";
 import ProjectDetail from "./ProjectDetail";
-import EditProject from "./EditProject";
-import {useProfileContext} from '../../../context/hooks'
+import ProjectForm from "./ProjectForm";
+import { useProfileContext } from "../../../context/hooks";
+import { projectModalTypes } from "../../../utilities";
 
 type ProjectType = {
   id: string;
@@ -17,30 +18,15 @@ export default function Projects() {
     setProjectDetails,
     projectDetailsModal,
     setProjectDetailsModal,
-    editProjectmodal,
+    editProjectModal,
     setEditProjectModal,
+    user,
   } = useProfileContext();
-  const [projects, setProjects] = useState<ProjectType[]>([]);
-
+  const [projects] = useState<ProjectType[]>([]);
+const [projectAction, setProjectAction] = useState(projectModalTypes.add)
   const addProject = () => {
-    const updatedProjects = [
-      ...projects,
-      {
-        id: "2",
-        img: "/img/ProjectThumbnailSample.png",
-        title: "Name  of project",
-        description:
-          "Lorem ipsum dolor sit amet consectetur. Cum amet id lectus viverra faucibus. Arcu eget hendrerit ut dictumst id. Lorem ipsum dolor sit amet consec...",
-      },
-      {
-        id: "3",
-        img: "/img/ProjectThumbnailSample.png",
-        title: "Name  of project 2",
-        description:
-          "Lorem ipsum dolor sit amet consectetur. ",
-      },
-    ];
-    setProjects(updatedProjects);
+    setProjectAction(projectModalTypes.add)
+    setEditProjectModal(true);
   };
   return (
     <div className="relative flex flex-col min-h-[400px]">
@@ -66,7 +52,7 @@ export default function Projects() {
         ) : (
           <div className="mx-auto max-w-[219px] flex flex-col justify-center items-center ">
             <h3 className="text-center font-medium text-base text-[#212121]">
-              Hi, Aderinsola
+              Hi, {user?.name}
             </h3>
             <span className="mt-8 text-center font-normal text-base text-[#212121]">
               Nothing to see here yet, add a project or two to get started.
@@ -91,16 +77,15 @@ export default function Projects() {
         open={projectDetailsModal}
         setOpen={setProjectDetailsModal}
       >
-        <ProjectDetail details={projectDetails}  />
+        <ProjectDetail details={projectDetails} />
       </Modal>
       <Modal
         sizeClass="sm:max-w-[1020px]"
-        open={editProjectmodal}
+        open={editProjectModal}
         setOpen={setEditProjectModal}
       >
-        <EditProject details={projectDetails} />
+        <ProjectForm details={projectDetails} type={projectAction} />
       </Modal>
-      
     </div>
   );
 }

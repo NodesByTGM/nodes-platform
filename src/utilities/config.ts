@@ -19,7 +19,13 @@ const API_ENDPOINTS = {
     ProfileURL: `${BASE_API_ENDPOINT}/users/profile`,
   },
   Profile: {
-  UserProfile: `${BASE_API_ENDPOINT}/profile`,
+    UserProfile: `${BASE_API_ENDPOINT}/users/profile`,
+  },
+  Project: {
+    Projects: `${BASE_API_ENDPOINT}/users/projects`,
+  
+
+
   },
   Submissions: {
     ContactURL: `${BASE_API_ENDPOINT}/submissions/contact`,
@@ -114,7 +120,7 @@ export const AccountTypesObj = {
   individual: 0,
   talent: 1,
   business: 2,
-}
+};
 
 export enum OnboaringPurpose {
   NotSelected = 0,
@@ -146,9 +152,7 @@ export const DAYS = Array(31)
 
 const currentYear = new Date().getFullYear();
 const startingYear = currentYear - 100;
-const stopYear = currentYear - 18
-
-
+const stopYear = currentYear - 18;
 
 export const YEARS = Array.from(
   { length: stopYear - startingYear + 1 },
@@ -249,13 +253,12 @@ const AppConfig = {
     PersomalWebsite: "http://",
     Instagram: "https://www.Instagram.com/in/jane-doe/",
     X: "https://www.Twitter.com/in/jane-doe/",
-    LinkedIn: 'https://www.linkedin.com/in/jane-doe/',
-    Headline: 'Ex: Actress, Actor, Director',
-    Bio: 'Add a short bio to showcase your best self',
-    ProjectName: 'Ex: Actress, Actor, Director',
-    ProjectDescription: 'Add a short bio to showcase your best self',
-    ProjectUrl: 'http://',
-
+    LinkedIn: "https://www.linkedin.com/in/jane-doe/",
+    Headline: "Ex: Actress, Actor, Director",
+    Bio: "Add a short bio to showcase your best self",
+    ProjectName: "Ex: Actress, Actor, Director",
+    ProjectDescription: "Add a short bio to showcase your best self",
+    ProjectUrl: "http://",
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,

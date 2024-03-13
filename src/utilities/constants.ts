@@ -25,3 +25,8 @@ export const pricing = {
 
     },
 }
+
+export const projectModalTypes = {
+    add: 'add',
+    edit: 'edit'
+}

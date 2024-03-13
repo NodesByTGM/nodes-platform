@@ -8,7 +8,7 @@ export interface IProfileContext {
   setProjectDetailsModal: (e) => void,
   projectDetails: any,
   setProjectDetails: (e) => void,
-  editProjectmodal: any,
+  editProjectModal: any,
   setEditProjectModal: (e) => void,
   profileData?: any,
   profileIsSuccess?: boolean,
