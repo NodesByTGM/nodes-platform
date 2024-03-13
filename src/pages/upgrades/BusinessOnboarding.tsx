@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -75,7 +76,7 @@ function BusinessOnboarding() {
             formData.tagline &&
             formData.industry &&
             formData.size &&
-            formData.type &&
+            formData?.type &&
             oneSocial
             // && selectedFile
         )) {
@@ -205,7 +206,7 @@ function BusinessOnboarding() {
                                 label="Company type"
                                 placeholder={"Example: Public company, self employed etc"}
                                 id="type"
-                                value={formData.type}
+                                value={formData?.type}
                                 onChange={handleChange} />
                             <ButtonWithBack backAction={previousStep} btnAction={handleClickForm} />
 

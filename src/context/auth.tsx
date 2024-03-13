@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode, createContext, useState } from "react";
 import { IUser } from "../interfaces/auth";
 

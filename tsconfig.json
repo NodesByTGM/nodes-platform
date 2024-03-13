@@ -20,17 +20,33 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": false,
-    "baseUrl": "./src",
+    "baseUrl": ".",
 
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@context/*": ["src/context/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": ["src"],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
+
+// {
+//   "compilerOptions": {
+//     // Existing compiler options...
+//     "baseUrl": "./src",
+//     "paths": {
+//       "@components/*": ["components/*"],
+//       "@utils/*": ["utils/*"],
+//       // Add more aliases as needed
+//     }
+//   },
+//   "include": ["src"]
+// }

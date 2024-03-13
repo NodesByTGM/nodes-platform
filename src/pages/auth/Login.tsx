@@ -8,9 +8,11 @@ import { Button, Input, PasswordInput } from "../../components";
 import { Title } from "../../components/Typography";
 import { useAuth } from "../../context/hooks";
 import { mainClient } from "../../utilities/client";
-import { handleAxiosError,  } from "../../utilities/common";
+import { handleAxiosError } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
 import { initalizeFirebaseApp } from "../../utilities/firebase";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../api/reducers/userSlice";
 // import FormDebug from "../../components/FormDebug";
 
 import {
@@ -23,16 +25,17 @@ function Login() {
   initalizeFirebaseApp();
   const auth = getAuth();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { setUser } = useAuth();
   const [socialLogin, setSocialLogin] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
 
   const handleFormSubmit = (e: any) => {
-
     setSubmitLoading(true);
 
     if (!isValid) {
-      console.log(e)
+      console.log(e);
       toast.error(AppConfig.ERROR_MESSAGES.ValidationError);
     } else {
       mainClient
@@ -41,11 +44,10 @@ function Login() {
           if (r.status === 200) {
             toast.success("Login successful!");
             setUser(r.data.user);
-            navigate("/");
-            // setFormData({
-            //   email: "",
-            //   password: "",
-            // });
+            dispatch(loginUser(r.data.user));
+            localStorage.setItem("bearerToken", r.data?.user?.accessToken);
+
+            navigate("/dashboard/profile");
           } else toast.error(r.data.message);
           setSubmitLoading(false);
         })

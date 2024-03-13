@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import AppConfig from "../../utilities/config";
+import { ProfileContext } from "../../context/profile";
+import IndividualId from "./IndividualId";
+import BusinessId from "./BusinessId";
 
-import {Link} from 'react-router-dom'
-import { Button } from "../index";
-import { CiLocationOn } from "react-icons/ci";
-import { GoLink } from "react-icons/go";
+import { Link } from "react-router-dom";
+import { Button, ButtonOutline } from "../index";
+
 import { Interaction } from "../../components";
 export default function Individual() {
+  const { profileType,  } = useContext(ProfileContext);
+
   const bio = {
     id: "1",
     title: "Your headline and bio goes her",
@@ -16,35 +20,50 @@ export default function Individual() {
   return (
     <div className="w-[400px] max-h-max flex text-[#212121]">
       <div className="profile-card-shadow p-6 pt-10 flex flex-col justify-center items-center bg-white rounded-lg">
-        <div className="size-[100px] mb-6">
-          <img
-            className=" h-full w-full"
-            src="/img/ProfilePlaceholder.png"
-            alt=""
-          />
-        </div>
-        <span className="font-medium text-[24px] mb-6">Jane Doe</span>
-        <div className="mb-[51px] font-medium text-base flex justify-center gap-6">
-          <div className="flex items-center gap-[4px]">
-            <CiLocationOn className="size-[20px]" />
+        {profileType.toLowerCase() == "business" ? (
+          <BusinessId />
+        ) : (
+          <IndividualId />
+        )}
 
-            <span>Location</span>
+        {profileType.toLowerCase() == "talent" ? (
+          <div className="flex items-center justify-center gap-6 mb-10">
+            <span className="text-base font-normal text-[#000000]">
+              26 Followers
+            </span>
+            <span className="text-base font-normal text-[#000000]">
+              32 Following
+            </span>
           </div>
-          <div className="flex items-center gap-[4px]">
-            <GoLink className="size-[20px]" />
-
-            <span>Add website</span>
-          </div>
-        </div>
+        ) : null}
 
         <div className="mb-10">
           <Interaction data={bio} />
         </div>
-        <Link className='w-full' to={AppConfig.PATHS.Dashboard.Profile.EditIndividual}>
-        <Button>
-          <span className="text-base font-medium">Edit Your Profile</span>
-        </Button>
-        </Link>
+        <div
+          className={`${
+            profileType.toLowerCase() == "individual"
+              ? "grid-cols-1"
+              : "grid-cols-2"
+          } w-full grid  gap-6 `}
+        >
+          {profileType.toLowerCase() !== "individual" && (
+            <Link
+              to={AppConfig.PATHS.Dashboard.Profile.Base}
+              className="w-full"
+            >
+              <ButtonOutline>Share Profile</ButtonOutline>
+            </Link>
+          )}
+          <Link
+            className="w-full"
+            to={AppConfig.PATHS.Dashboard.Profile.EditProfile}
+          >
+            <Button>
+              <span className="text-base font-medium">Edit Your Profile</span>
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

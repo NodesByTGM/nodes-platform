@@ -14,10 +14,10 @@ export { default as PasswordInput } from "./PasswordInput.tsx";
 export { default as UploadInput } from "./UploadInput.tsx";
 export { default as TagInput } from "./TagInput.tsx";
 export { default as TextArea } from "./TextArea.tsx";
-export { default as Modal } from "./Modal.tsx";
 export { default as Checkbox } from "./Checkbox.tsx";
 export { default as Searchbar } from "./Searchbar.tsx";
 export { default as Select } from "./Select.tsx";
+export { default as Switch } from "./Switch.tsx";
 export { default as Tooltip } from "./Tooltip.tsx";
 export { default as TalentCTA } from "./TalentCTA.tsx";
 export { default as BusinessCTA } from "./BusinessCTA.tsx";
@@ -37,6 +37,19 @@ export { default as CommunityItem } from "./custom/CommunityItem.tsx";
 export { default as CommentBox } from "./custom/CommentBox.tsx";
 export { default as BasicSelect } from "./BasicSelect.tsx";
 export { default as PricingCard } from "./PricingCard.tsx";
-export {default as IndividualProfileCard} from './profile/IndividualProfileCard.tsx'
-export {default as Interaction} from './custom/Interaction.tsx'
-export {default as FormDiv} from './FormDiv'
+export { default as IndividualProfileCard } from "./profile/IndividualProfileCard.tsx";
+export { default as Interaction } from "./custom/Interaction.tsx";
+export { default as FormDiv } from "./FormDiv";
+export { default as Card } from "./Card";
+export { default as ProjectsCard } from "./profile/ProjectsCard.tsx";
+export { default as AddCollaboratorInputDiv } from "./AddCollaboratorInputDiv";
+export { default as ProjectFileUpload } from "./ProjectFileUpload";
+export { default as CollaboratorInput } from "./CollaboratorInput";
+export { default as AddProjectsItem } from "./AddProjectsItem";
+export { default as AddedProject } from "./AddedProject";
+export { default as ActionIcon } from "./ActionIcon";
+export { default as JobAndEventsCard } from "./profile/JobAndEventsCard.tsx";
+export { default as Modal } from "./modals/Modal.tsx";
+export { default as PageLoader } from "./PageLoader.tsx";
+export { default as LogoutComponent } from "./LogoutComponent";
+export { default as FormDebug } from "./FormDebug";

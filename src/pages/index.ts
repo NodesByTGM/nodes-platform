@@ -12,9 +12,9 @@ export { default as Home } from "./Home";
 export { default as Dashboard } from "./dashboard/Dashboard";
 export { default as Category } from "./dashboard/Category";
 export { default as Community } from "./dashboard/Community";
+export { default as ProfileBase } from "./dashboard/profile/ProfileBase";
 export { default as Profile } from "./dashboard/profile/Profile";
-export { default as Individual } from "./dashboard/profile/Individual";
-export { default as EditIndividual } from "./dashboard/profile/EditIndividual";
+export { default as EditProfile } from "./dashboard/profile/EditProfile";
 
 export { default as EditTalent } from "./dashboard/profile/EditTalent";
 

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.border-dash {
+  @apply border border-[#000000]  border-dashed border-spacing-[5px];
+}
+
 .pricing-padding {
   @apply px-6 sm:px-[40px] lg:px-[120px];
 }

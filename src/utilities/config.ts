@@ -18,6 +18,9 @@ const API_ENDPOINTS = {
     VerfiyEmail: `${BASE_API_ENDPOINT}/auth/verify-email`,
     ProfileURL: `${BASE_API_ENDPOINT}/users/profile`,
   },
+  Profile: {
+  UserProfile: `${BASE_API_ENDPOINT}/profile`,
+  },
   Submissions: {
     ContactURL: `${BASE_API_ENDPOINT}/submissions/contact`,
     WaitlistURL: `${BASE_API_ENDPOINT}/submissions/waitlist`,
@@ -27,8 +30,8 @@ const API_ENDPOINTS = {
     MembershipURL: `${BASE_API_ENDPOINT}/submissions/membership`,
   },
   Upgrades: {
-    TalentURL: `${BASE_API_ENDPOINT}/upgrades/talent`,
-    BusinessURL: `${BASE_API_ENDPOINT}/upgrades/business`,
+    TalentURL: `${BASE_API_ENDPOINT}/onboarding`,
+    BusinessURL: `${BASE_API_ENDPOINT}/onboarding/business`,
   },
   Events: {
     BaseURL: `${BASE_API_ENDPOINT}/events/`,
@@ -77,10 +80,9 @@ const PATHS = {
     },
     Profile: {
       Base: "/dashboard/profile",
-      Individual: "",
-      EditIndividual: "/dashboard/profile/edit-individual",
+      Profile: "",
+      EditProfile: "/dashboard/profile/edit-profile",
       EditTalent: "/dashboard/profile/edit-talent",
-
     },
     Events: {
       Base: "/dashboard/events",
@@ -107,6 +109,11 @@ export enum AccountTypes {
   Default = 0,
   Talent = 1,
   Business = 2,
+}
+export const AccountTypesObj = {
+  individual: 0,
+  talent: 1,
+  business: 2,
 }
 
 export enum OnboaringPurpose {
@@ -138,10 +145,13 @@ export const DAYS = Array(31)
   .map((_, i) => i + 1);
 
 const currentYear = new Date().getFullYear();
-const startingYear = 1990;
+const startingYear = currentYear - 100;
+const stopYear = currentYear - 18
+
+
 
 export const YEARS = Array.from(
-  { length: currentYear - startingYear + 1 },
+  { length: stopYear - startingYear + 1 },
   (_, index) => startingYear + index
 );
 
@@ -221,9 +231,14 @@ const AppConfig = {
     Searchbar: "Search",
     Email: "Enter email address",
     Fullname: "Enter your full name",
+    Firstname: "Enter your first name",
+    Businessname: "Enter your business name",
+    Lastname: "Enter your last name",
+    Location: "Enter your city",
     Username: "Enter username",
     Profession: "Profession",
     Gender: "Gender",
+    Year: "1995",
     LinkedInUrl: "e.g https://www.linkedin.com/in/stephenelufisan/",
     Distinction:
       "Tell us about yourself and what you're doing differently with emerging disruptive technologies in three paragraphs.",
@@ -231,6 +246,16 @@ const AppConfig = {
     ConfirmPassword: "Confirm password",
     Image: "Upload Image here",
     Timezone: "Timezone",
+    PersomalWebsite: "http://",
+    Instagram: "https://www.Instagram.com/in/jane-doe/",
+    X: "https://www.Twitter.com/in/jane-doe/",
+    LinkedIn: 'https://www.linkedin.com/in/jane-doe/',
+    Headline: 'Ex: Actress, Actor, Director',
+    Bio: 'Add a short bio to showcase your best self',
+    ProjectName: 'Ex: Actress, Actor, Director',
+    ProjectDescription: 'Add a short bio to showcase your best self',
+    ProjectUrl: 'http://',
+
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,
