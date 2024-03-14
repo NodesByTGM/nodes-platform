@@ -250,6 +250,7 @@ export default function EditProject({ details, type = "add" }) {
                 >
                   {" "}
                   <Button
+                    type="submit"
                     isLoading={createProjectLoading}
                     className={`${!isValid ? "opacity-50" : ""} `}
                     disabled={!isValid}

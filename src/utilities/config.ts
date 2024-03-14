@@ -22,10 +22,7 @@ const API_ENDPOINTS = {
     UserProfile: `${BASE_API_ENDPOINT}/users/profile`,
   },
   Project: {
-    Projects: `${BASE_API_ENDPOINT}/users/projects`,
-  
-
-
+    Projects: `${BASE_API_ENDPOINT}/projects`,
   },
   Submissions: {
     ContactURL: `${BASE_API_ENDPOINT}/submissions/contact`,
@@ -49,6 +46,9 @@ const API_ENDPOINTS = {
   Transactions: {
     VerifyURL: `${BASE_API_ENDPOINT}/transactions/verify`, // /:description/:reference
   },
+  Uploads: {
+    UploadFile: `${BASE_API_ENDPOINT}/uploads/media`
+  }
 };
 
 const PATHS = {

@@ -66,8 +66,14 @@ function ProfileImgUploader() {
   );
 }
 export default function EditIndividual() {
-  const { profileType, hasProject, setHasProject, profileRefetch } =
-    useProfileContext();
+  const {
+    profileType,
+    hasProject,
+    setHasProject,
+    profileRefetch,
+    profileData,
+    profileIsSuccess,
+  } = useProfileContext();
   const [
     updateUserProfile,
     {
@@ -150,6 +156,10 @@ export default function EditIndividual() {
   const [navs, setNavs] = useState(navOptions);
   const [selected, setSelected] = useState(navs[0]);
 
+  const handleProjectThumbnail = (value) => {
+    console.log(value);
+  };
+
   const handleClickForm = (values: any) => {
     console.log(JSON.stringify(values, null, 2));
     const data = {
@@ -174,21 +184,21 @@ export default function EditIndividual() {
 
   const formik = useFormik<profileValidationType>({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      avatar: "",
-      location: "",
-      headline: "",
-      bio: "",
-      website: "",
-      linkedIn: "",
-      instagram: "",
-      twitter: "",
-      projectName: "",
-      description: "",
-      projectUrl: "",
-      spaces: false,
-      comments: false,
+      firstName: profileData?.user?.name?.split(" ")[0],
+      lastName: profileData?.user?.name?.split(" ")[1],
+      avatar: profileData?.user?.avatar,
+      location: profileData?.user?.location,
+      headline: profileData?.user?.headline,
+      bio: profileData?.user?.bio,
+      website: profileData?.user?.website,
+      linkedIn: profileData?.user?.linkedIn,
+      instagram: profileData?.user?.instagram,
+      twitter: profileData?.user?.twitter,
+      projectName: profileData?.user?.projectName,
+      description: profileData?.user?.description,
+      projectUrl: profileData?.user?.projectUrl,
+      spaces: profileData?.user?.spaces,
+      comments: profileData?.user?.comments,
       collaborators: [initialCollaborator],
     },
     validationSchema: profileSchema,
@@ -226,6 +236,10 @@ export default function EditIndividual() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profileType, navOptions]);
 
+  const populateFormValues = () => {
+    console.log(JSON.stringify(profileData.user, null, 2));
+  };
+
   useEffect(() => {
     handleNavs();
   }, [profileType, handleNavs]);
@@ -239,6 +253,12 @@ export default function EditIndividual() {
       profileRefetch();
     }
   }, [updateProfileSuccess]);
+
+  useEffect(() => {
+    if (profileIsSuccess) {
+      populateFormValues();
+    }
+  }, [profileIsSuccess]);
 
   const {
     setFieldValue,
@@ -329,11 +349,11 @@ export default function EditIndividual() {
                         placeholder={AppConfig.PLACEHOLDERS.Location}
                         id="Location"
                         label="Location"
-                        // error={errors.username}
-                        // value={values.username}
-                        // touched={touched.username}
-                        // onChange={handleChange("username")}
-                        // onBlur={handleBlur}
+                        error={errors.location}
+                        value={values.location}
+                        touched={touched.location}
+                        onChange={handleChange("location")}
+                        onBlur={handleBlur}
                       />
                     </div>
                     <div className="w-full">
@@ -627,13 +647,15 @@ export default function EditIndividual() {
                         />
                         <div className="flex flex-col gap-10 mb-2">
                           <ProjectFileUpload
-                            onChange={() => {}}
+                            onChange={(e) => {
+                              handleProjectThumbnail(e);
+                            }}
                             label="Project thumbnail"
                           />
-                          <ProjectFileUpload
+                          {/* <ProjectFileUpload
                             onChange={() => {}}
                             label="Project images"
-                          />
+                          /> */}
                         </div>
 
                         <div className="grid grid-cols-3 gap-6">

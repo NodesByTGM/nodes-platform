@@ -5,8 +5,8 @@ import { BASE_API_ENDPOINT } from "./config";
 // Function to get the access token from the Redux store
 const getAccessToken = () => {
   // Access the Redux store state and retrieve the access token
-//   const state = store.getState();
-  return localStorage.getItem('bearerToken')
+  //   const state = store.getState();
+  return localStorage.getItem("bearerToken");
 };
 
 export const getClient = (
@@ -14,11 +14,10 @@ export const getClient = (
   multipart = false,
   extraHeaders = {}
 ) => {
- 
   const accessToken = getAccessToken();
 
   console.log("getAccessToken: " + accessToken);
-//   console.log("getAccessToken: " + accessToken);
+  //   console.log("getAccessToken: " + accessToken);
 
   const instance = axios.create({
     headers: {
@@ -26,7 +25,7 @@ export const getClient = (
         multipart ? "multipart/form-data" : "application/json"
       }`,
       ...extraHeaders,
-      Authorization: accessToken ? `Token ${accessToken}` : null,
+      Authorization: accessToken ? `Bearer ${accessToken}` : null,
     },
     baseURL: baseURL,
     timeout: 60000,
