@@ -28,7 +28,7 @@ export default function Projects() {
 
   const {
     data: projectsData,
-    // refetch: projectRefetch,
+    refetch: projectRefetch,
     // isSuccess: projectIsSuccess,
     isFetching: projectLoading,
   } = useGetUserProjectsQuery();
@@ -111,7 +111,7 @@ export default function Projects() {
         open={editProjectModal}
         setOpen={setEditProjectModal}
       >
-        <ProjectForm details={projectDetails} type={projectAction} />
+        <ProjectForm refetchAllProjects={projectRefetch} details={projectDetails} type={projectAction} />
       </Modal>
     </div>
   );

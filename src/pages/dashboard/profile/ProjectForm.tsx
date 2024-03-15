@@ -23,13 +23,18 @@ import {
 } from "../../../components";
 import AppConfig from "../../../utilities/config";
 import { useFormik, FormikProvider, FieldArray } from "formik";
+import { toast } from "react-toastify";
 
-export default function EditProject({ details, type = "add" }) {
+export default function EditProject({
+  details,
+  type = "add",
+  refetchAllProjects = () => {},
+}) {
   const { setEditProjectModal } = useProfileContext();
   const initialCollaborator = {
-    name: "string",
-    role: "string",
-    collabName: "string",
+    name: "",
+    role: "",
+    collabName: "",
   };
   const [
     createUserProject,
@@ -51,18 +56,18 @@ export default function EditProject({ details, type = "add" }) {
 
   const formik = useFormik<projectValidationType>({
     initialValues: {
-      name: "string",
-      description: "string",
-      projectURL: "string",
+      name: "",
+      description: "",
+      projectURL: "",
       thumbnail: {
         id: "",
         url: "",
       },
       images: [
-        {
-          id: "",
-          url: "",
-        },
+        // {
+        //   id: "",
+        //   url: "",
+        // },
       ],
       collaborators: [initialCollaborator],
     },
@@ -84,7 +89,9 @@ export default function EditProject({ details, type = "add" }) {
 
   useEffect(() => {
     if (isCreateProjectSuccessful) {
-      console.log("Successfully Created Product");
+      toast.success("Successfully Created Product");
+      setEditProjectModal(false)
+      refetchAllProjects();
     }
   }, [isCreateProjectSuccessful]);
 
@@ -232,41 +239,34 @@ export default function EditProject({ details, type = "add" }) {
                 />
                 <ProjectFileUpload
                   value={""}
-                  onChange={() => {}}
+                  onChange={(value) => {
+                    setFieldValue("images", [...values.images, value]);
+                  }}
                   label="Project images"
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-6 hidden">
-                <AddProjectsItem
-                  data={{ img: "/img/ProjectThumbnailSample.png" }}
-                />
+              <div className="">
                 <FieldArray
                   name="images"
                   render={(arrayHelpers) => (
-                    <div className="w-full flex flex-col gap-6">
+                    <div className="w-full grid grid-cols-3 ">
                       {values.images.map((image, index) => (
                         <div
                           onClick={() => arrayHelpers.remove(index)}
                           key={image?.id + String(index)}
-                          className="flex items-center gap-6"
+                          className="w-full  "
                         >
-                          {image?.id ? 'id' : 'none'}
                           <AddProjectsItem data={{ img: image?.url }} />
-                       
                         </div>
                       ))}
-                   
                     </div>
                   )}
                 />
               </div>
 
               <div className="w-full flex items-center justify-end">
-                <div
-                  onClick={() => setEditProjectModal(false)}
-                  className="max-w-max"
-                >
+                <div className="max-w-max">
                   {" "}
                   <Button
                     type="submit"

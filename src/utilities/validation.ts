@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { object, string, ref, bool, array } from "yup";
 
 export const signupSchema = object({
@@ -113,7 +114,7 @@ export type projectValidationType = {
       id: string;
       url: string;
     }
-  ];
+  ]| any;
   collaborators: [
     {
       name: string;

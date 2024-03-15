@@ -6,7 +6,7 @@ import { convertToBase64 } from "../utilities/common";
 // import { mainClient } from "../utilities/client";
 // import AppConfig from "../utilities/config";
 
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { InputHTMLAttributes } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -39,6 +39,8 @@ export default function ProjectFileUpload({
       data: uploadResponse,
       isLoading: uploadFileLoading,
       isSuccess: uploadFileSuccess,
+      error: uploadFileError,
+      isError: isUploadError
     },
   ] = useUploadFileMutation();
 
@@ -85,18 +87,13 @@ export default function ProjectFileUpload({
     // alert(JSON.stringify(uploadResponse?.data, null, 2))
   }, [uploadFileSuccess]);
 
-  // const uploadClient = () => {
-  //   mainClient
-  //     .post(AppConfig.API_ENDPOINTS.Uploads.UploadFile, selectedFile)
-  //     .then((r) => {
-  //       if (r.status === 200) {
-  //         console.log(JSON.stringify(r, null, 2));
-  //       }
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // };
+  useEffect(() => {
+    if(isUploadError){
+toast.success(uploadFileError)
+    }
+  }, [uploadFileError, isUploadError])
+
+
 
   const setBgImg = () => {
     return {
