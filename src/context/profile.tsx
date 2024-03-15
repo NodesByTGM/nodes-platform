@@ -8,7 +8,7 @@ import {
 } from "react";
 import { IProfileContext } from "../interfaces/profile";
 import { useGetUserProfileQuery } from "../api";
-import { AccountTypesObj,  } from "../utilities";
+import { AccountTypesObj } from "../utilities";
 
 // import {
 //   // FormikHelpers,
@@ -97,7 +97,7 @@ const ProfileProvider = ({
   const handleAccountType = useCallback(() => {
     const type = user?.type;
     if (type == AccountTypesObj.individual) {
-      // setProfileType("individual");
+      setProfileType("individual");
     }
     if (type == AccountTypesObj.talent) {
       setProfileType("talent");

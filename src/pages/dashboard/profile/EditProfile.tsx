@@ -13,6 +13,7 @@ import {
   profileValidationType,
 } from "../../../utilities/validation";
 import { FormDebug } from "../../../components";
+import { toast } from "react-toastify";
 
 import {
   Button,
@@ -250,6 +251,7 @@ export default function EditIndividual() {
 
   useEffect(() => {
     if (updateProfileSuccess) {
+      toast.success('Successfully updated profile')
       profileRefetch();
     }
   }, [updateProfileSuccess]);
@@ -320,7 +322,7 @@ export default function EditIndividual() {
             </Button>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 hidden">
             <FormDebug form={{ values, touched, errors }} className="" />
           </div>
         </div>

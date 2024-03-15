@@ -27,9 +27,9 @@ import { useFormik, FormikProvider, FieldArray } from "formik";
 export default function EditProject({ details, type = "add" }) {
   const { setEditProjectModal } = useProfileContext();
   const initialCollaborator = {
-    name: "",
-    role: "",
-    collabName: "",
+    name: "string",
+    role: "string",
+    collabName: "string",
   };
   const [
     createUserProject,
@@ -51,17 +51,17 @@ export default function EditProject({ details, type = "add" }) {
 
   const formik = useFormik<projectValidationType>({
     initialValues: {
-      name: "",
-      description: "",
-      projectURL: "",
+      name: "string",
+      description: "string",
+      projectURL: "string",
       thumbnail: {
-        id: "string",
-        url: "string",
+        id: "",
+        url: "",
       },
       images: [
         {
-          id: "string",
-          url: "string",
+          id: "",
+          url: "",
         },
       ],
       collaborators: [initialCollaborator],
@@ -72,7 +72,7 @@ export default function EditProject({ details, type = "add" }) {
   });
 
   const {
-    // setFieldValue,
+    setFieldValue,
     handleChange,
     handleSubmit,
     errors,
@@ -90,7 +90,7 @@ export default function EditProject({ details, type = "add" }) {
 
   return (
     <div>
-      <FormDebug form={{ values, errors, touched }} className="hidden" />
+      <FormDebug form={{ values, errors, touched }} className="" />
       <div className="flex flex-col gap-8">
         <pre className="hidden">{JSON.stringify(details, null, 2)}</pre>
         <div className="flex items-center justify-between">
@@ -224,22 +224,41 @@ export default function EditProject({ details, type = "add" }) {
             <div className="grid grid-cols-1 gap-6">
               <div className="flex flex-col gap-10 mb-2">
                 <ProjectFileUpload
-                  onChange={() => {}}
+                  value={values?.thumbnail?.url}
+                  onChange={(value) => {
+                    setFieldValue("thumbnail", value);
+                  }}
                   label="Project thumbnail"
                 />
-                <ProjectFileUpload onChange={() => {}} label="Project images" />
+                <ProjectFileUpload
+                  value={""}
+                  onChange={() => {}}
+                  label="Project images"
+                />
               </div>
 
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid grid-cols-3 gap-6 hidden">
                 <AddProjectsItem
                   data={{ img: "/img/ProjectThumbnailSample.png" }}
                 />
-                <AddProjectsItem
-                  data={{ img: "/img/ProjectThumbnailSample.png" }}
-                />
-
-                <AddProjectsItem
-                  data={{ img: "/img/ProjectThumbnailSample.png" }}
+                <FieldArray
+                  name="images"
+                  render={(arrayHelpers) => (
+                    <div className="w-full flex flex-col gap-6">
+                      {values.images.map((image, index) => (
+                        <div
+                          onClick={() => arrayHelpers.remove(index)}
+                          key={image?.id + String(index)}
+                          className="flex items-center gap-6"
+                        >
+                          {image?.id ? 'id' : 'none'}
+                          <AddProjectsItem data={{ img: image?.url }} />
+                       
+                        </div>
+                      ))}
+                   
+                    </div>
+                  )}
                 />
               </div>
 

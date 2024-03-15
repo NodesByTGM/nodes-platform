@@ -23,6 +23,7 @@ export default function Projects() {
     editProjectModal,
     setEditProjectModal,
     user,
+    profileData,
   } = useProfileContext();
 
   const {
@@ -51,7 +52,7 @@ export default function Projects() {
         title="Projects"
         listCount={projects?.length}
         editButton
-        editFunction={() => console.log("edit")}
+        editFunction={() => addProject()}
       >
         {/* {JSON.stringify(projects, null, 2)} */}
         {!projectLoading ? (
@@ -71,7 +72,10 @@ export default function Projects() {
             ) : (
               <div className="mx-auto max-w-[219px] flex flex-col justify-center items-center ">
                 <h3 className="text-center font-medium text-base text-[#212121]">
-                  Hi, {user?.name}
+                  Hi,{" "}
+                  {profileData?.user?.name
+                    ? profileData?.user?.name
+                    : user?.name}
                 </h3>
                 <span className="mt-8 text-center font-normal text-base text-[#212121]">
                   Nothing to see here yet, add a project or two to get started.

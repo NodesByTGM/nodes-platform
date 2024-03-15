@@ -9,7 +9,7 @@ import { Button, ButtonOutline } from "../index";
 
 import { Interaction } from "../../components";
 export default function Individual() {
-  const { profileType,  } = useContext(ProfileContext);
+  const { profileType, profileData } = useContext(ProfileContext);
 
   const bio = {
     id: "1",
@@ -19,7 +19,7 @@ export default function Individual() {
   };
   return (
     <div className="w-[400px] max-h-max flex text-[#212121]">
-      <div className="profile-card-shadow p-6 pt-10 flex flex-col justify-center items-center bg-white rounded-lg">
+      <div className="w-full profile-card-shadow p-6 pt-10 flex flex-col justify-center items-center bg-white rounded-lg">
         {profileType.toLowerCase() == "business" ? (
           <BusinessId />
         ) : (
@@ -29,16 +29,20 @@ export default function Individual() {
         {profileType.toLowerCase() == "talent" ? (
           <div className="flex items-center justify-center gap-6 mb-10">
             <span className="text-base font-normal text-[#000000]">
-              26 Followers
+              0 Followers
             </span>
             <span className="text-base font-normal text-[#000000]">
-              32 Following
+              0 Following
             </span>
           </div>
         ) : null}
 
-        <div className="mb-10">
-          <Interaction data={bio} />
+        <div className="mb-10 w-full">
+          <Interaction
+            data={bio}
+            headline={profileData?.user?.headline}
+            bio={profileData?.user?.bio}
+          />
         </div>
         <div
           className={`${

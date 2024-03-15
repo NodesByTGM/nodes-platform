@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useRef, MutableRefObject } from "react";
 import { useUploadFileMutation } from "../api";
-// import { checkFileSize } from "../utilities/common";
+import { convertToBase64 } from "../utilities/common";
 // import AppConfig from "../utilities/config";
-import { mainClient } from "../utilities/client";
-import AppConfig from "../utilities/config";
+// import { mainClient } from "../utilities/client";
+// import AppConfig from "../utilities/config";
 
 // import { toast } from "react-toastify";
 import { InputHTMLAttributes } from "react";
@@ -16,6 +16,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   touched?: boolean;
   onChange: (e) => void;
+  value?: string;
 }
 export default function ProjectFileUpload({
   className = "",
@@ -34,14 +35,21 @@ export default function ProjectFileUpload({
 
   const [
     upload,
-    { isLoading: uploadFileLoading, isSuccess: uploadFileSuccess },
+    {
+      data: uploadResponse,
+      isLoading: uploadFileLoading,
+      isSuccess: uploadFileSuccess,
+    },
   ] = useUploadFileMutation();
 
-  const handleFileUpload = (event: any) => {
-    const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append("file", file);
-    upload(formData);
+  const handleFileUpload = (e: any) => {
+    const files = e.target.files;
+    console.log("My upload: " + JSON.stringify(files), null, 2);
+    setSelectedFile(files[0]);
+    // const file = e.target.files[0];
+    // const formData = new FormData();
+    // formData.append("file", file);
+    // upload(formData);
 
     // if (!target.files || target.files.length === 0) {
 
@@ -53,14 +61,28 @@ export default function ProjectFileUpload({
     // setSelectedFile(files[0]);
   };
 
+  const handleFileConversion = async () => {
+    if (selectedFile) {
+      const res = await convertToBase64(selectedFile);
+      let binary = "";
+      console.log(res, null, 2);
+      if (res) {
+        binary = String(res);
+        // const binaryBlob = atob(binary);
+        upload({ file: binary });
+      }
+    }
+  };
+
   useEffect(() => {
-    // console.log(`selectedFile: ` + JSON.stringify(selectedFile, null, 2));
-   
-    // upload(selectedFile);
+    handleFileConversion();
   }, [selectedFile, upload]);
 
   useEffect(() => {
-    onChange(selectedFile);
+    if (uploadFileSuccess) {
+      onChange(uploadResponse?.data);
+    }
+    // alert(JSON.stringify(uploadResponse?.data, null, 2))
   }, [uploadFileSuccess]);
 
   // const uploadClient = () => {
@@ -75,6 +97,23 @@ export default function ProjectFileUpload({
   //       console.log(e);
   //     });
   // };
+
+  const setBgImg = () => {
+    return {
+      backgroundRepeat: "no-repeat",
+      // -webkit-background-size: cover;
+      // -moz-background-size: cover;
+      // -o-background-size: cover;
+      backgroundSize: "cover",
+      backgroundAttachment: "fixed",
+      backgroundPosition: "center",
+      backgroundImage: "url(" + value + ")",
+    };
+  };
+
+  // useEffect(() => {
+  //   setBgImg();
+  // }, [value]);
   return (
     <div>
       {label ? (
@@ -85,23 +124,30 @@ export default function ProjectFileUpload({
       ) : null}
       <div
         onClick={() => inputRef.current?.click()}
+        style={setBgImg()}
         className="border-dash cursor-pointer flex flex-col gap-[10px] px-6 py-[53px] rounded-[5px] items-center justify-center"
       >
         {uploadFileLoading ? (
           <span className="">Uploading</span>
         ) : (
-          <div className="flex flex-col gap-[10px] ">
-            <span className="text-[#757575] font-normal text-base">
-              Drag image here or browse your files{" "}
-            </span>
-            <span className="text-[#757575] font-normal text-base">
-              Recommended image size: 00 x 00px
-            </span>
+          <div className="min-h-[42px]">
+            {!value ? (
+              <div className="flex flex-col gap-[10px] ">
+                <span className="text-[#757575] font-normal text-base">
+                  Drag image here or browse your files{" "}
+                </span>
+                <span className="text-[#757575] font-normal text-base">
+                  Recommended image size: 00 x 00px
+                </span>
+                <span className="hidden">{value}</span>
+              </div>
+            ) : null}
           </div>
         )}
       </div>
       <input
         ref={inputRef}
+        multiple={false}
         type="file"
         accept=".png, .jpg"
         // value={value}

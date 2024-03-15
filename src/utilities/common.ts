@@ -42,7 +42,7 @@ export const convertToBase64 = async (file: File) => {
         params description :
             file : a file to be uploaded      
     */
-    console.log(file)
+    console.log(file, null, 2)
     return new Promise((resolve, reject) => {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
