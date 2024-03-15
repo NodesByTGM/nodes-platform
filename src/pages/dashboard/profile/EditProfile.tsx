@@ -14,7 +14,6 @@ import {
 } from "../../../utilities/validation";
 import { FormDebug } from "../../../components";
 import { toast } from "react-toastify";
-
 import {
   Button,
   ButtonOutline,
@@ -24,6 +23,7 @@ import {
   Switch,
   AddCollaboratorInputDiv,
   ProjectFileUpload,
+  ProfileImgUploader,
   CollaboratorInput,
   AddProjectsItem,
   AddedProject,
@@ -52,20 +52,6 @@ function InteractionsSwitch({ label, description, value, setValue }) {
   );
 }
 
-function ProfileImgUploader() {
-  return (
-    <div className="flex items-center gap-4">
-      <div className="size-[100px] ">
-        <img
-          className=" h-full w-full"
-          src="/img/ProfilePlaceholder.png"
-          alt=""
-        />
-      </div>
-      <span className="text-primary font-normal text-base">Replace</span>
-    </div>
-  );
-}
 export default function EditIndividual() {
   const {
     profileType,
@@ -165,9 +151,12 @@ export default function EditIndividual() {
     console.log(JSON.stringify(values, null, 2));
     const data = {
       name: `${values.firstName} ${values.lastName}`,
+      username: values.username,
       avatar: values.avatar,
       skills: [],
       location: values.location,
+      height: values.height,
+      age: values.age,
       linkedIn: values.linkedIn,
       instagram: values.instagram,
       twitter: values.twitter,
@@ -187,8 +176,12 @@ export default function EditIndividual() {
     initialValues: {
       firstName: profileData?.user?.name?.split(" ")[0],
       lastName: profileData?.user?.name?.split(" ")[1],
+      username: profileData?.user?.username,
       avatar: profileData?.user?.avatar,
       location: profileData?.user?.location,
+      height: "",
+      age: "",
+
       headline: profileData?.user?.headline,
       bio: profileData?.user?.bio,
       website: profileData?.user?.website,
@@ -251,7 +244,7 @@ export default function EditIndividual() {
 
   useEffect(() => {
     if (updateProfileSuccess) {
-      toast.success('Successfully updated profile')
+      toast.success("Successfully updated profile");
       profileRefetch();
     }
   }, [updateProfileSuccess]);
@@ -322,9 +315,10 @@ export default function EditIndividual() {
             </Button>
           </div>
 
-          <div className="mt-4 hidden">
-            <FormDebug form={{ values, touched, errors }} className="" />
-          </div>
+          <FormDebug
+            form={{ values, touched, errors }}
+            className="mt-4 hidden"
+          />
         </div>
         <div className="flex-1 flex flex-col gap-8 ">
           {/* {hasProject ? "True" : "False"} */}
@@ -333,7 +327,12 @@ export default function EditIndividual() {
               <FormDiv title="Business Information">
                 <div className="">
                   <div className="grid grid-col-1 gap-6">
-                    <ProfileImgUploader />
+                    <ProfileImgUploader
+                      value={values?.avatar}
+                      onChange={(value) => {
+                        setFieldValue("avatar", value);
+                      }}
+                    />
                     <div className="w-full">
                       <Input
                         placeholder={AppConfig.PLACEHOLDERS.Businessname}
@@ -381,7 +380,12 @@ export default function EditIndividual() {
               <FormDiv title="Personal Information">
                 <div className="">
                   <div className="grid grid-col-1 gap-6">
-                    <ProfileImgUploader />
+                    <ProfileImgUploader
+                      value={values?.avatar}
+                      onChange={(value) => {
+                        setFieldValue("avatar", value);
+                      }}
+                    />
                     <div className="w-full">
                       <Input
                         placeholder={AppConfig.PLACEHOLDERS.Firstname}
@@ -408,6 +412,18 @@ export default function EditIndividual() {
                     </div>
                     <div className="w-full">
                       <Input
+                        placeholder={AppConfig.PLACEHOLDERS.Username}
+                        id="username"
+                        label="Username"
+                        error={errors.username}
+                        value={values.username}
+                        touched={touched.username}
+                        onChange={handleChange("username")}
+                        onBlur={handleBlur}
+                      />
+                    </div>
+                    <div className="w-full">
+                      <Input
                         placeholder={AppConfig.PLACEHOLDERS.Location}
                         id="location"
                         label="Location"
@@ -417,6 +433,33 @@ export default function EditIndividual() {
                         onChange={handleChange("location")}
                         onBlur={handleBlur}
                       />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-6">
+                      <div className="w-full">
+                        <Input
+                          placeholder={AppConfig.PLACEHOLDERS.Height}
+                          id="height"
+                          label="Height(cm)"
+                          error={errors.height}
+                          value={values.height}
+                          touched={touched.height}
+                          onChange={handleChange("height")}
+                          onBlur={handleBlur}
+                        />
+                      </div>
+                      <div className="w-full">
+                        <Input
+                          placeholder={AppConfig.PLACEHOLDERS.Age}
+                          id="age"
+                          label="Age"
+                          error={errors.age}
+                          value={values.age}
+                          touched={touched.age}
+                          onChange={handleChange("age")}
+                          onBlur={handleBlur}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

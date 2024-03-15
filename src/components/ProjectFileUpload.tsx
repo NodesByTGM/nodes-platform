@@ -48,26 +48,14 @@ export default function ProjectFileUpload({
     const files = e.target.files;
     console.log("My upload: " + JSON.stringify(files), null, 2);
     setSelectedFile(files[0]);
-    // const file = e.target.files[0];
-    // const formData = new FormData();
-    // formData.append("file", file);
-    // upload(formData);
-
-    // if (!target.files || target.files.length === 0) {
-
-    //   return;
-    // }
-
-    // console.log(`beforeselectedFile: ` + JSON.stringify(files, null, 2));
-
-    // setSelectedFile(files[0]);
+  
   };
 
   const handleFileConversion = async () => {
     if (selectedFile) {
       const res = await convertToBase64(selectedFile);
       let binary = "";
-      console.log(res, null, 2);
+      // console.log(res, null, 2);
       if (res) {
         binary = String(res);
         // const binaryBlob = atob(binary);
@@ -89,7 +77,7 @@ export default function ProjectFileUpload({
 
   useEffect(() => {
     if (isUploadError) {
-      toast.success(uploadFileError);
+      toast.error(uploadFileError);
     }
   }, [uploadFileError, isUploadError]);
 
@@ -106,9 +94,7 @@ export default function ProjectFileUpload({
     };
   };
 
-  // useEffect(() => {
-  //   setBgImg();
-  // }, [value]);
+
   return (
     <div>
       {label ? (

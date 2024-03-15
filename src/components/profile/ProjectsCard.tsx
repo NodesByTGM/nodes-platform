@@ -12,10 +12,11 @@ export default function ProjectsCard({
 }: ProjectsCard) {
   return (
     <div className="h-full">
+      {/* <pre className="text-blue-400">{JSON.stringify(project, null, 2)}</pre> */}
       <div className="h-full text-[#000000] font-normal text-sm border-dash rounded-[4px] p-4 flex flex-col gap-4">
         <img
-          className="bg-gray-400 rounded-[4px] h-[160px]"
-          src={project?.url}
+          className="bg-gray-200 rounded-[4px] h-[160px]"
+          src={project?.thumbnail?.url}
           alt=""
         />
         <h3 className="font-medium text-base">{project.name}</h3>

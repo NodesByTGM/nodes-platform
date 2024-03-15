@@ -53,3 +53,4 @@ export { default as Modal } from "./modals/Modal.tsx";
 export { default as PageLoader } from "./PageLoader.tsx";
 export { default as LogoutComponent } from "./LogoutComponent";
 export { default as FormDebug } from "./FormDebug";
+export { default as ProfileImgUploader } from "./ProfileImgUploader";

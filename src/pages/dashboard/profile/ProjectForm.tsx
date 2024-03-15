@@ -225,7 +225,7 @@ export default function EditProject({
                             {values.collaborators?.length > 1 && (
                               <span
                                 onClick={() => arrayHelpers.remove(index)}
-                                className=""
+                                className="text-primary"
                               >
                                 <FaTimes />
                               </span>

@@ -239,6 +239,8 @@ const AppConfig = {
     Businessname: "Enter your business name",
     Lastname: "Enter your last name",
     Location: "Enter your city",
+    Height: "Enter your height",
+    Age: "Enter your age",
     Username: "Enter username",
     Profession: "Profession",
     Gender: "Gender",
