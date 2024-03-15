@@ -8,7 +8,7 @@ import {
 } from "react";
 import { IProfileContext } from "../interfaces/profile";
 import { useGetUserProfileQuery } from "../api";
-import { AccountTypesObj } from "../utilities";
+import { AccountTypesObj, projectModalTypes } from "../utilities";
 
 // import {
 //   // FormikHelpers,
@@ -31,6 +31,8 @@ const initialState = {
   profileIsSuccess: false,
   profileLoading: false,
   profileRefetch: () => {},
+  projectAction: "add",
+  setProjectAction: () => {},
   user: null,
 };
 
@@ -53,6 +55,7 @@ const ProfileProvider = ({
   const [hasProject, setHasProject] = useState(false);
   const [projectDetailsModal, setProjectDetailsModal] = useState(false);
   const [editProjectModal, setEditProjectModal] = useState(false);
+  const [projectAction, setProjectAction] = useState(projectModalTypes.add);
 
   const [projectDetails, setProjectDetails] = useState(null);
 
@@ -72,6 +75,8 @@ const ProfileProvider = ({
       profileIsSuccess,
       profileLoading,
       profileRefetch,
+      projectAction,
+      setProjectAction,
       user,
     }),
 
@@ -90,6 +95,8 @@ const ProfileProvider = ({
       profileIsSuccess,
       profileLoading,
       profileRefetch,
+      projectAction,
+      setProjectAction,
       user,
     ]
   );

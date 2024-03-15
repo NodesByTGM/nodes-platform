@@ -30,7 +30,7 @@ export default function EditProject({
   type = "add",
   refetchAllProjects = () => {},
 }) {
-  const { setEditProjectModal } = useProfileContext();
+  const { setEditProjectModal, projectAction } = useProfileContext();
   const initialCollaborator = {
     name: "",
     role: "",
@@ -78,6 +78,7 @@ export default function EditProject({
 
   const {
     setFieldValue,
+    setValues,
     handleChange,
     handleSubmit,
     errors,
@@ -90,16 +91,36 @@ export default function EditProject({
   useEffect(() => {
     if (isCreateProjectSuccessful) {
       toast.success("Successfully Created Product");
-      setEditProjectModal(false)
+      setEditProjectModal(false);
       refetchAllProjects();
     }
   }, [isCreateProjectSuccessful]);
 
+  const populateForm = () => {
+    setValues({
+      ...details,
+      collaborators: details?.collaborators?.map((collaborator) => {
+        return {
+          name: collaborator.name,
+          role: collaborator.role,
+          collabName: collaborator.name,
+        };
+      }),
+    });
+  };
+
+  useEffect(() => {
+    //populate form if
+    if (projectAction == projectModalTypes.edit) {
+      populateForm();
+    }
+  }, [details]);
+
   return (
     <div>
-      <FormDebug form={{ values, errors, touched }} className="" />
+      <FormDebug form={{ values, errors, touched }} className="hidden" />
       <div className="flex flex-col gap-8">
-        <pre className="hidden">{JSON.stringify(details, null, 2)}</pre>
+        {/* <pre className="">{JSON.stringify(details, null, 2)}</pre> */}
         <div className="flex items-center justify-between">
           <h3 className="text-[#000000] font-medium text-[20px]">
             {type == projectModalTypes.add ? "Add Project" : "Edit Project"}

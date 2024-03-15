@@ -24,6 +24,8 @@ export default function Projects() {
     setEditProjectModal,
     user,
     profileData,
+    projectAction,
+    setProjectAction,
   } = useProfileContext();
 
   const {
@@ -34,7 +36,6 @@ export default function Projects() {
   } = useGetUserProjectsQuery();
 
   const [projects, setProjects] = useState<any[]>([]);
-  const [projectAction, setProjectAction] = useState(projectModalTypes.add);
   const addProject = () => {
     setProjectAction(projectModalTypes.add);
     setEditProjectModal(true);
@@ -111,7 +112,11 @@ export default function Projects() {
         open={editProjectModal}
         setOpen={setEditProjectModal}
       >
-        <ProjectForm refetchAllProjects={projectRefetch} details={projectDetails} type={projectAction} />
+        <ProjectForm
+          refetchAllProjects={projectRefetch}
+          details={projectDetails}
+          type={projectAction}
+        />
       </Modal>
     </div>
   );

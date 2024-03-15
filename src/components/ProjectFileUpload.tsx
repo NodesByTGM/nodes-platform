@@ -40,7 +40,7 @@ export default function ProjectFileUpload({
       isLoading: uploadFileLoading,
       isSuccess: uploadFileSuccess,
       error: uploadFileError,
-      isError: isUploadError
+      isError: isUploadError,
     },
   ] = useUploadFileMutation();
 
@@ -88,12 +88,10 @@ export default function ProjectFileUpload({
   }, [uploadFileSuccess]);
 
   useEffect(() => {
-    if(isUploadError){
-toast.success(uploadFileError)
+    if (isUploadError) {
+      toast.success(uploadFileError);
     }
-  }, [uploadFileError, isUploadError])
-
-
+  }, [uploadFileError, isUploadError]);
 
   const setBgImg = () => {
     return {
@@ -125,7 +123,9 @@ toast.success(uploadFileError)
         className="border-dash cursor-pointer flex flex-col gap-[10px] px-6 py-[53px] rounded-[5px] items-center justify-center"
       >
         {uploadFileLoading ? (
-          <span className="">Uploading</span>
+          <span className="text-[16px] animate-pulse text-primary font-normal">
+            Uploading...
+          </span>
         ) : (
           <div className="min-h-[42px]">
             {!value ? (
