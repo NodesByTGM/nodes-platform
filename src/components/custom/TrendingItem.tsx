@@ -6,7 +6,7 @@ function TrendingItem() {
     return (
         <div
             className="h-[300px] w-[250px] md:h-[400px] md:w-[350px] rounded bg-cover bg-center text-white shadow-overlay p-5 flex flex-col justify-end"
-            style={{ backgroundImage: `url('/img/placeholder.png')`, }}>
+            style={{ backgroundImage: `url('/img/checkcards.png')`, }}>
             <div className="">
                 <h3 className="w-[220px] md:w-[300px] text-ellipsis text-nowrap overflow-hidden text-xl font-medium h-[30px]">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.

@@ -6,7 +6,9 @@ import {
   BusinessUpgrade,
   Category,
   Community,
+  DashboardBase,
   Dashboard,
+  ViewAll,
   ForgotPassword,
   Home,
   Login,
@@ -49,7 +51,19 @@ export const publicRoutes: RouteObject[] = [
   },
   {
     path: AppConfig.PATHS.Dashboard.Base,
-    Component: getProfile(Dashboard),
+    Component: getProfile(DashboardBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Dashboard.Dashboard,
+        Component: getProfile(Dashboard),
+      },
+      {
+        path: AppConfig.PATHS.Dashboard.ViewAll,
+        Component: getProfile(ViewAll),
+      },
+
+      
+    ],
   },
   {
     path: AppConfig.PATHS.Dashboard.Categories.CategoryWithParam,

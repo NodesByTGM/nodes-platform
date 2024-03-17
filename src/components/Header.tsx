@@ -64,7 +64,7 @@ function Header() {
         };
     }, []);
     return (
-        <div className="py-2 pr-4 w-full flex justify-between items-center border-b">
+        <div className="py-2 pr-4 w-full flex justify-between items-center border-b hidden">
             <div className="flex gap-4 items-center">
                 <Menu className="w-[50px] cursor-pointer" />
                 <div className="flex items-center gap-2">

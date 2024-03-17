@@ -14,9 +14,19 @@
   @apply bg-[#FDFDF7] py-[64px] pl-[64px] pr-[80px];
   background-image: url("/img/Dots.png");
 }
+.main-plain-container {
+  @apply bg-[#FDFDF7] py-[64px] pl-[40px] pr-[40px];
+}
 
 .profile-card-shadow {
   box-shadow: 4px 3px 10px 4px #00000008;
+}
+
+.swiper-wrapper {
+  max-width: 1000px;
+  transition-duration: 0ms;
+  transform: translate3d(0px, 0px, 0px);
+  transition-delay: 0ms;
 }
 
 /* .profile-forms-section {

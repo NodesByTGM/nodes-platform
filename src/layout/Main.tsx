@@ -5,11 +5,16 @@ function Main() {
   return (
     <div className="">
       <SEO />
-      <Header />
-      <div className="flex">
-        <Sidebar />
-        <div className="flex-1">
-          <div className="px-10">
+
+      <div className="flex max-h-screen h-full">
+        <div className="lg:w-[300px] fixed h-full">
+          <Sidebar />
+        </div>
+        <div className="flex-1 ml-[300px]">
+          <div className="sticky top-0">
+            <Header />
+          </div>
+          <div className="">
             <Outlet />
           </div>
           <Footer />
