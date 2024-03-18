@@ -60,3 +60,9 @@ export { default as CarouselSection } from "./custom/CarouselSection.tsx";
 export { default as UpgradeCTA } from "./dashboard/UpgradeCTA.tsx";
 export { default as Breadcrumbs } from "./Breadcrumbs.tsx";
 export { default as LabeledSelect } from "./LabeledSelect";
+export { default as WelcomeComponent } from "./dashboard/WelcomeComponent.tsx";
+export { default as WelcomeCard } from "./dashboard/WelcomeCard.tsx";
+export { default as Back } from "./Back.tsx";
+export { default as BorderlessSelect } from "./BorderlessSelect.tsx";
+export { default as JobItem } from "./custom/JobItem.tsx";
+export {default as BookMarkIcon} from './BookMarkIcon'

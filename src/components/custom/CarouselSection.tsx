@@ -5,6 +5,7 @@ import {
   TrendingItem,
   MovieItem,
   EventItem,
+  JobItem,
   CustomSwiper,
 } from "../../components";
 
@@ -13,10 +14,12 @@ type ICarouselSection = {
   trend?: boolean;
   movie?: boolean;
   event?: boolean;
+  job?: boolean;
   children?: ReactNode | ReactNode[];
   borderBottom?: boolean;
   openCommunity?: boolean;
   viewAll?: boolean;
+  seeMore?: boolean;
   title?: string;
   description?: string;
   navigateTo?: () => void;
@@ -26,9 +29,11 @@ export default function CarouselSection({
   trend,
   movie,
   event,
+  job,
   openCommunity,
   borderBottom,
   viewAll,
+  seeMore,
   title = "",
   description = "",
   navigateTo,
@@ -38,6 +43,7 @@ export default function CarouselSection({
     <div className={`flex flex-col !max-w-[100%] `}>
       <div className="mb-6">
         <HeaderAndDescription
+          seeMore={seeMore}
           navigateTo={navigateTo}
           openCommunity={openCommunity}
           viewAll={viewAll}
@@ -60,14 +66,19 @@ export default function CarouselSection({
               .fill(null)
               .map((_, i) => (
                 <div key={i}>
-                  {trend || movie || event ? (
+                  {trend || movie || event || job ? (
                     <div className="">
-                      {trend && <TrendingItem />}
+                      {trend && (
+                        <div className="w-[250px] md:w-[350px] ">
+                          <TrendingItem />
+                        </div>
+                      )}
                       {movie && <MovieItem />}
-                      {event && <EventItem />}
+                      {event && <EventItem className={"!w-[310px]"} />}
+                      {job && <JobItem className={"!w-[310px]"} />}
                     </div>
                   ) : (
-                    <EventItem />
+                    <EventItem className={"!w-[310px]"} />
                   )}
                 </div>
               ))}

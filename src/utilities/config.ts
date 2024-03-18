@@ -78,7 +78,9 @@ const PATHS = {
     Base: "/dashboard",
     Dashboard: "",
     ViewAll: '/dashboard/view-all',
+    Business: '/dashboard/business',
     ViewDetail: '/dashboard/view-detail/:id',
+    SeeMore: '/dashboard/see-more',
     Categories: {
       Base: "/dashboard/categories",
       CategoryWithParam: "/dashboard/categories/:id",

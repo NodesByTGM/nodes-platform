@@ -9,12 +9,12 @@ export default function ViewAll() {
     {
       id: 1,
       title: "Dashboard",
-      url: "/",
+      url: "/dashboard",
     },
     {
       id: 2,
       title: "Top Movies",
-      url: "/",
+      url: "#",
     },
   ]);
 

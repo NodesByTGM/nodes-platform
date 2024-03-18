@@ -2,7 +2,7 @@
 import clsx from "clsx";
 import { useState } from "react";
 import { MoreHorizontal, ThumbsDown, ThumbsUp, X } from "react-feather";
-import { Button, Checkbox, Select } from "..";
+import { Button, Checkbox,  } from "..";
 import Avatar from "../Avatar";
 import { LabeledSelect } from "../../components";
 
@@ -51,13 +51,13 @@ function Comment({ last = false }) {
 function CommentBox({ opened = false, setOpened = () => {} }: any) {
   const [checked, setChecked] = useState(false);
 
-  const handleSelect = ({ id, value }: any) => {
-    console.log(id, value);
-    // setDate((prev) => ({
-    //     ...prev,
-    //     [id]: value,
-    // }));
-  };
+  // const handleSelect = ({ id, value }: any) => {
+  //   console.log(id, value);
+  //   // setDate((prev) => ({
+  //   //     ...prev,
+  //   //     [id]: value,
+  //   // }));
+  // };
   return (
     <div>
       <div

@@ -12,7 +12,7 @@ function Sidebar() {
       path: AppConfig.PATHS.Dashboard.Profile.Base,
     },
     { name: "Community", icon: <Globe />, path: AppConfig.PATHS.Community },
-    { name: "For Business", icon: <Briefcase />, path: "/" },
+    { name: "For Business", icon: <Briefcase />, path: AppConfig.PATHS.Dashboard.Business },
     { name: "Subscriptions", icon: <Box />, path: "/" },
   ];
   return (

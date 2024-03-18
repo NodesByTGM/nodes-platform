@@ -33,6 +33,7 @@ export default function IndividualDashboard() {
         />
         <UpgradeCTA />
         <CarouselSection
+        job
           title={`Trending jobs on Nodes`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         />

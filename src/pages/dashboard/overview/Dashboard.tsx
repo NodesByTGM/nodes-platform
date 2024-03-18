@@ -1,13 +1,17 @@
-import React from  'react'
-import {useDashboardContext} from '../../../context/hooks'
-import IndividualDashboard from './IndividualDashboard'
+import React from "react";
+import { useDashboardContext } from "../../../context/hooks";
+import IndividualDashboard from "./IndividualDashboard";
+import BusinessDashboard from './BusinessDashboard'
+import TalentDashboard from './TalentDashboard'
 function Dashboard() {
-  const {pageName} = useDashboardContext()
+  const { accountType } = useDashboardContext();
   return (
     <div>
-      <span className="text-primary hidden">Page: {pageName}</span>
-      <IndividualDashboard />
-      
+      {accountType.toLowerCase() == "individual" && <IndividualDashboard />}
+      {accountType.toLowerCase() == "talent" && <TalentDashboard />}
+
+      {accountType.toLowerCase() == "business" && <BusinessDashboard />}
+
     </div>
   );
 }

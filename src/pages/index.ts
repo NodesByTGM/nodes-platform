@@ -18,10 +18,11 @@ export { default as Profile } from "./dashboard/profile/Profile";
 export { default as EditProfile } from "./dashboard/profile/EditProfile";
 export {default as ViewAll} from './dashboard/overview/ViewAll.tsx'
 export { default as EditTalent } from "./dashboard/profile/EditTalent";
-
+export {default as SeeMoreJobs} from './dashboard/overview/SeeMoreJobs.tsx'
 export { default as Post } from "./dashboard/Post";
 export { default as Pricing } from "./upgrades/Pricing";
 export {default as ViewDetail} from './dashboard/overview/ViewDetail'
+export {default as BusinessDashboard} from '../pages/dashboard/overview/BusinessDashboard.tsx'
 // export { default as DashboardEvents } from './dashboard/Events'
 // export { default as DashboardCreateEvent } from './dashboard/CreateEvent'
 // export { default as DashboardContacts } from './dashboard/Contacts'

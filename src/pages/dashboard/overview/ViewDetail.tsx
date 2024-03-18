@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import AppConfig from "../../../utilities/config";
+
 import { CiHeart } from "react-icons/ci";
 import { TfiComment } from "react-icons/tfi";
 import {
@@ -8,37 +7,14 @@ import {
   CarouselSection,
   TrendingItem,
   CommentBox,
+  Back
 } from "../../../components";
 export default function ViewDetail() {
-  const navigate = useNavigate();
   const [commentOpen, setCommentOpen] = useState(false);
 
   return (
     <div>
-      <div className="flex gap-2 items-center mb-[64px]">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M15 18L9 12L15 6"
-            stroke="black"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-
-        <span
-          onClick={() => navigate(`${AppConfig.PATHS.Dashboard.ViewAll}}`)}
-          className=" text-base font-normal text-[#000000] cursor-pointer"
-        >
-          Go back
-        </span>
-      </div>
+     <Back className={`mb-[64px]`} link={'/dashboard'}/>
       <div className="mb-[64px] flex items-start justify-between gap-6">
         <div className="flex gap-4 flex-col text-[#000000] max-w-[500px]">
           <span className="text-[#000000] font-normal text-sm">Top Movies</span>

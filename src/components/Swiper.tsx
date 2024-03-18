@@ -57,7 +57,7 @@ function CustomSwiper({
             : undefined
         }
         breakpoints={{
-          1400: { slidesPerView: 4 },
+          1400: { slidesPerView: 3.5 },
           800: { slidesPerView: 2 },
           480: { slidesPerView: 1 },
         }}
@@ -71,9 +71,10 @@ function CustomSwiper({
               <SwiperSlide
                 key={index}
                 className={clsx(
-                  "overflow-hidden !flex lg:!justify-center !w-[300px] md:!w-[350px]",
+                  "overflow-hidden !flex lg:!justify-start w-full !mr-6",
                   slideContainerClass
                 )}
+                // !w-[300px] md:!w-[350px]
               >
                 {cloneElement(child, {
                   key: `AdditionalProp-${index}`,
