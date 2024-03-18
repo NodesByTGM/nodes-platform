@@ -58,5 +58,5 @@ export { default as SearchComponent } from "./SearchComponent";
 export { default as HeaderAndDescription } from "./text/HeaderAndDescription.tsx";
 export { default as CarouselSection } from "./custom/CarouselSection.tsx";
 export { default as UpgradeCTA } from "./dashboard/UpgradeCTA.tsx";
-export {default as Breadcrumbs} from './BreadCrumbs.tsx'
-export {default as LabeledSelect} from './LabeledSelect'
+export { default as Breadcrumbs } from "./Breadcrumbs.tsx";
+export { default as LabeledSelect } from "./LabeledSelect";

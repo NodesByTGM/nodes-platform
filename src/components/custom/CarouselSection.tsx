@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Navigation, Pagination } from "swiper/modules";
 import {
   HeaderAndDescription,
@@ -9,10 +9,11 @@ import {
 } from "../../components";
 
 type ICarouselSection = {
+  hasCarousel?: boolean;
   trend?: boolean;
   movie?: boolean;
   event?: boolean;
-
+  children?: ReactNode | ReactNode[];
   borderBottom?: boolean;
   openCommunity?: boolean;
   viewAll?: boolean;
@@ -21,6 +22,7 @@ type ICarouselSection = {
   navigateTo?: () => void;
 };
 export default function CarouselSection({
+  hasCarousel = true,
   trend,
   movie,
   event,
@@ -29,7 +31,8 @@ export default function CarouselSection({
   viewAll,
   title = "",
   description = "",
-  navigateTo
+  navigateTo,
+  children,
 }: ICarouselSection) {
   return (
     <div className={`flex flex-col !max-w-[100%] `}>
@@ -46,29 +49,33 @@ export default function CarouselSection({
       <div
         className={`${borderBottom ? " mb-10 border-b border-[#D6D6D6]" : ""} `}
       ></div>
-      <div className="!max-w-[100%]">
-        <CustomSwiper
-          modules={[Pagination, Navigation]}
-          navigation={true}
-          pagination={true}
-        >
-          {Array(6)
-            .fill(null)
-            .map((_, i) => (
-              <div key={i}>
-                {trend || movie || event ? (
-                  <div className="">
-                    {trend && <TrendingItem />}
-                    {movie && <MovieItem />}
-                    {event && <EventItem />}
-                  </div>
-                ) : (
-                  <EventItem />
-                )}
-              </div>
-            ))}
-        </CustomSwiper>
-      </div>
+      {hasCarousel ? (
+        <div className="!max-w-[100%]">
+          <CustomSwiper
+            modules={[Pagination, Navigation]}
+            navigation={true}
+            pagination={true}
+          >
+            {Array(6)
+              .fill(null)
+              .map((_, i) => (
+                <div key={i}>
+                  {trend || movie || event ? (
+                    <div className="">
+                      {trend && <TrendingItem />}
+                      {movie && <MovieItem />}
+                      {event && <EventItem />}
+                    </div>
+                  ) : (
+                    <EventItem />
+                  )}
+                </div>
+              ))}
+          </CustomSwiper>
+        </div>
+      ) : null}
+
+      {children}
     </div>
   );
 }

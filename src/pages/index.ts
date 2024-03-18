@@ -21,7 +21,7 @@ export { default as EditTalent } from "./dashboard/profile/EditTalent";
 
 export { default as Post } from "./dashboard/Post";
 export { default as Pricing } from "./upgrades/Pricing";
-
+export {default as ViewDetail} from './dashboard/overview/ViewDetail'
 // export { default as DashboardEvents } from './dashboard/Events'
 // export { default as DashboardCreateEvent } from './dashboard/CreateEvent'
 // export { default as DashboardContacts } from './dashboard/Contacts'

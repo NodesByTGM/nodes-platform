@@ -9,6 +9,7 @@ import {
   DashboardBase,
   Dashboard,
   ViewAll,
+  ViewDetail,
   ForgotPassword,
   Home,
   Login,
@@ -61,6 +62,12 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Dashboard.ViewAll,
         Component: getProfile(ViewAll),
       },
+      {
+        path: AppConfig.PATHS.Dashboard.ViewDetail,
+        Component: getProfile(ViewDetail),
+      },
+
+      
 
       
     ],

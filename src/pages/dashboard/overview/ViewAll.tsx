@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { TrendingItem, Breadcrumbs, LabeledSelect } from "../../../components";
+// import AppConfig from "../../../utilities/config";
 
 export default function ViewAll() {
+    const navigate = useNavigate()
   const [links] = useState([
     {
       id: 1,
@@ -20,6 +23,7 @@ export default function ViewAll() {
     { id: 2, name: "Option 2" },
     { id: 3, name: "Option 2" },
   ]);
+
   return (
     <div>
       <div className="mb-[48px]">
@@ -46,15 +50,13 @@ export default function ViewAll() {
       </div>
       <div className="">
         <div className="grid grid-cols-3 gap-6">
-          <TrendingItem />
-          <TrendingItem />
-          <TrendingItem />
-          <TrendingItem />
-          <TrendingItem />
-          <TrendingItem />
-          <TrendingItem />
-          <TrendingItem />
-          <TrendingItem />
+          {Array(6)
+            .fill(null)
+            .map((_, index) => (
+              <div className="cursor-pointer" onClick={() => navigate(`${'/dashboard/view-detail/'+index }`)} key={index} >
+                <TrendingItem />
+              </div>
+            ))}
         </div>
       </div>
     </div>

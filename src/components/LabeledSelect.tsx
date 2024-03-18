@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
@@ -8,7 +9,7 @@ function classNames(...classes) {
 
 type IProps = {
   label?: string;
-  options: Array;
+  options: Array<any>;
 };
 
 export default function LabeledSelect({ label, options }: IProps) {
