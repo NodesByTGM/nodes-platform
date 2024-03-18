@@ -5,6 +5,8 @@ export interface IProfileContext {
   hasProject: boolean;
   setHasProject: (e) => void;
   projectDetailsModal: boolean;
+  jobModal: boolean;
+  setJobModal: (e) => void;
   setProjectDetailsModal: (e) => void;
   projectDetails: any;
   setProjectDetails: (e) => void;
@@ -20,4 +22,3 @@ export interface IProfileContext {
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-

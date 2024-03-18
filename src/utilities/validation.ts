@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { object, string, ref, bool, array } from "yup";
+import { object, string, ref, bool, array, number } from "yup";
 
 export const signupSchema = object({
   name: string().required("Name is a required field"),
@@ -12,7 +12,7 @@ export const signupSchema = object({
   password: string().required("Password is a required field"),
   confirmPassword: string()
     .required("Confirm Password is a required field")
-    .oneOf([ref("password"), ], "Passwords must match"),
+    .oneOf([ref("password")], "Passwords must match"),
   otp: string(),
 });
 
@@ -52,7 +52,7 @@ export const profileSchema = object({
     object().shape({
       name: string(),
       role: string(),
-      collabName: string()
+      collabName: string(),
     })
   ),
 });
@@ -80,7 +80,7 @@ export type profileValidationType = {
     {
       name: string;
       role: string;
-      collabName: string
+      collabName: string;
     }
   ];
 };
@@ -103,7 +103,7 @@ export const projectSchema = object({
     object().shape({
       name: string(),
       role: string(),
-      collabName: string()
+      collabName: string(),
     })
   ),
 });
@@ -115,26 +115,47 @@ export type projectValidationType = {
     id: string;
     url: string;
   };
-  images: [
-    {
-      id: string;
-      url: string;
-    }
-  ]| any;
+  images:
+    | [
+        {
+          id: string;
+          url: string;
+        }
+      ]
+    | any;
   collaborators: [
     {
       name: string;
       role: string;
-      collabName: string
+      collabName: string;
     }
   ];
+};
+
+export const jobSchema = object({
+  name: string(),
+  description: string(),
+  experience: string(),
+  payRate: number(),
+  workRate: string(),
+  skills: array().of(string()),
+  jobType: number(),
+});
+export type jobValidationType = {
+  name: string,
+  description: string,
+  experience: string,
+  payRate: number,
+  workRate: string,
+  skills: Array<string>,
+  jobType: number,
 };
 
 export const resetPasswordSchema = object({
   password: string().required("Password is a required field"),
   confirmPassword: string()
     .required()
-    .oneOf([ref("password"),], "Passwords must match"),
+    .oneOf([ref("password")], "Passwords must match"),
 });
 export type ResetPasswordType = {
   password: string;

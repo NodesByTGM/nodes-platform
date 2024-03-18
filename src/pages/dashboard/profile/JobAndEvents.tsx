@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Card, JobAndEventsCard } from "../../../components";
-
+import { Card, JobAndEventsCard, Modal } from "../../../components";
+import { useProfileContext } from "../../../context/hooks";
+import JobPostForm from "./JobPostForm";
 type JobAndEventType = {
   id: string;
   img: string;
@@ -9,20 +10,11 @@ type JobAndEventType = {
 };
 
 export default function JobAndEvents() {
-  const [jobAndEvents, setJobAndEvents] = useState<JobAndEventType[]>([]);
+  const { jobModal, setJobModal } = useProfileContext();
+  const [jobAndEvents] = useState<JobAndEventType[]>([]);
 
   const addJobAndEvents = () => {
-    const updatedJobAndEvents = [
-      ...jobAndEvents,
-      {
-        id: "2",
-        img: "/img/ProjectThumbnailSample.png",
-        title: "Job Title",
-        description:
-          "Lorem ipsum dolor sit amet consectetur. Cum amet id lectus viverra faucibus. Arcu eget hendrerit ut dictumst id. Lorem ipsum dolor sit amet consec...",
-      },
-    ];
-    setJobAndEvents(updatedJobAndEvents);
+    setJobModal(true);
   };
   return (
     <div className="relative flex flex-col min-h-[400px]">
@@ -64,6 +56,10 @@ export default function JobAndEvents() {
           <img src="/img/AddProjects.svg" alt="" className="w-full" />
         </div>
       )}
+
+      <Modal sizeClass="sm:max-w-[800px]" open={jobModal} setOpen={setJobModal}>
+        <JobPostForm closeModal={() => setJobModal(false)} />
+      </Modal>
     </div>
   );
 }

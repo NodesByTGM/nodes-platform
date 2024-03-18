@@ -266,6 +266,9 @@ const AppConfig = {
     ProjectName: "Ex: Actress, Actor, Director",
     ProjectDescription: "Add a short bio to showcase your best self",
     ProjectUrl: "http://",
+    JobTitle: 'Enter the title of the job here',
+    Hours: 'E.g 20',
+    JobDescription: 'Give more information about the job'
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,

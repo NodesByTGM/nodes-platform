@@ -23,6 +23,8 @@ const initialState = {
   setHasProject: () => {},
   projectDetailsModal: false,
   setProjectDetailsModal: () => {},
+  jobModal: false,
+  setJobModal: () => {},
   projectDetails: null,
   setProjectDetails: () => {},
   editProjectModal: false,
@@ -51,10 +53,12 @@ const ProfileProvider = ({
   } = useGetUserProfileQuery();
 
   const user = useSelector((state: RootState) => state.user.user);
-  const [profileType, setProfileType] = useState("talent");
+  const [profileType, setProfileType] = useState("business");
   const [hasProject, setHasProject] = useState(false);
   const [projectDetailsModal, setProjectDetailsModal] = useState(false);
   const [editProjectModal, setEditProjectModal] = useState(false);
+  const [jobModal, setJobModal] = useState(false);
+
   const [projectAction, setProjectAction] = useState(projectModalTypes.add);
 
   const [projectDetails, setProjectDetails] = useState(null);
@@ -67,6 +71,8 @@ const ProfileProvider = ({
       setHasProject,
       projectDetailsModal,
       setProjectDetailsModal,
+      jobModal,
+      setJobModal,
       projectDetails,
       setProjectDetails,
       editProjectModal,
@@ -87,6 +93,8 @@ const ProfileProvider = ({
       setHasProject,
       projectDetailsModal,
       setProjectDetailsModal,
+      jobModal,
+      setJobModal,
       projectDetails,
       setProjectDetails,
       editProjectModal,
@@ -104,7 +112,7 @@ const ProfileProvider = ({
   const handleAccountType = useCallback(() => {
     const type = user?.type;
     if (type == AccountTypesObj.individual) {
-      setProfileType("individual");
+      // setProfileType("individual");
     }
     if (type == AccountTypesObj.talent) {
       setProfileType("talent");
