@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+// import { useParams } from "react-router-dom";
+
 import {
   CarouselSection,
   HeaderAndDescription,
@@ -55,7 +57,8 @@ export default function BusinessDashboard() {
         </WelcomeComponent>
 
         <CarouselSection
-          navigateTo={() => navigate("/dashboard/see-more?business")}
+          navigateTo={() => navigate("/dashboard/see-more/business")}
+          isBusiness
           seeMore
           job
           title={`Jobs by you`}

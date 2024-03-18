@@ -10,6 +10,7 @@ import {
 } from "../../components";
 
 type ICarouselSection = {
+  isBusiness?: boolean;
   hasCarousel?: boolean;
   trend?: boolean;
   movie?: boolean;
@@ -25,6 +26,7 @@ type ICarouselSection = {
   navigateTo?: () => void;
 };
 export default function CarouselSection({
+  isBusiness=false,
   hasCarousel = true,
   trend,
   movie,
@@ -75,7 +77,7 @@ export default function CarouselSection({
                       )}
                       {movie && <MovieItem />}
                       {event && <EventItem className={"!w-[310px]"} />}
-                      {job && <JobItem className={"!w-[310px]"} />}
+                      {job && <JobItem isBusiness={isBusiness} className={"!w-[310px]"} />}
                     </div>
                   ) : (
                     <EventItem className={"!w-[310px]"} />

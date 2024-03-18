@@ -63,21 +63,21 @@ export default function TalentDashboard() {
         </WelcomeComponent>
 
         <CarouselSection
-          navigateTo={() => navigate("/dashboard/see-more")}
+          navigateTo={() => navigate("/dashboard/see-more/talent")}
           seeMore
           job
           title={`Jobs you have applied to`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         />
         <CarouselSection
-          navigateTo={() => navigate("/dashboard/see-more")}
+          navigateTo={() => navigate("/dashboard/see-more/talent")}
           seeMore
           job
           title={`Jobs for you`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         />
         <CarouselSection
-          navigateTo={() => navigate("/dashboard/see-more")}
+          navigateTo={() => navigate("/dashboard/see-more/talent")}
           seeMore
           title={`Spaces you might like`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}

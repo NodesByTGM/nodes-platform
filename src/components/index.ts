@@ -65,4 +65,6 @@ export { default as WelcomeCard } from "./dashboard/WelcomeCard.tsx";
 export { default as Back } from "./Back.tsx";
 export { default as BorderlessSelect } from "./BorderlessSelect.tsx";
 export { default as JobItem } from "./custom/JobItem.tsx";
-export {default as BookMarkIcon} from './BookMarkIcon'
+export { default as BookMarkIcon } from "./BookMarkIcon";
+export { default as ItemDeleteIcon } from "./ItemDeleteIcon";
+export {default as JobPost} from './dashboard/JobPost.tsx'
