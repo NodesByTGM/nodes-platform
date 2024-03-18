@@ -179,8 +179,8 @@ export default function EditIndividual() {
       username: profileData?.user?.username,
       avatar: profileData?.user?.avatar,
       location: profileData?.user?.location,
-      height: "",
-      age: "",
+      height: profileData?.user?.height,
+      age: profileData?.user?.age,
 
       headline: profileData?.user?.headline,
       bio: profileData?.user?.bio,

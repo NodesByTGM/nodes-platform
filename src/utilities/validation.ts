@@ -33,7 +33,7 @@ export const profileSchema = object({
   firstName: string().required("first name is a required field"),
   lastName: string().required("Last name is a required field"),
   username: string().required("Username is a required field"),
-  avatar: string(),
+  avatar: string().nullable(),
   location: string(),
   height: string(),
   age: string(),

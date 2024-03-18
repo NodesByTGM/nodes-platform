@@ -42,7 +42,6 @@ function Register() {
   const [sendOtpLoading, setSendOtpLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-
   const prepareDetails = (values) => {
     const payload = {
       name: values.name,
@@ -81,8 +80,14 @@ function Register() {
           toast.success(r.data.message);
           setUser(r.data.user);
           dispatch(loginUser(r.data.user));
-          localStorage.setItem('bearerToken', r.data?.user?.accessToken)
-          navigate(AppConfig.PATHS.Upgrades.Talent.Onboarding);
+          const accessToken = r.data?.user?.accessToken;
+          localStorage.setItem("bearerToken", accessToken);
+          
+          if (localStorage.getItem("bearerToken") == accessToken) {
+            navigate(AppConfig.PATHS.Upgrades.Talent.Onboarding);
+          } else {
+            toast.error("Something went wrong");
+          }
         } else toast.error(r.data.message);
         setSubmitLoading(false);
       })
@@ -357,7 +362,6 @@ function Register() {
                 className={`${!checked || !isValid ? "opacity-50" : ""} mt-8`}
                 disabled={!checked || !isValid}
                 type="submit"
-                
               >
                 Sign Up
               </Button>

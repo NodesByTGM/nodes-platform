@@ -129,7 +129,7 @@ const ProfileProvider = ({
           Stuff: {JSON.stringify(user, null, 2)}
         </pre>
       </div>
-      <div className="flex gap-2 mb-4 hidden">
+      <div className="flex gap-2 mb-4 ">
         <button
           onClick={() => setProfileType("individual")}
           className="px-4 py-2 rounded-md bg-primary text-white"

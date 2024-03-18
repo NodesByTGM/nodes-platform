@@ -1,11 +1,8 @@
 import axios from "axios";
 import { BASE_API_ENDPOINT } from "./config";
-// import {store} from "../store"; // Import your Redux store instance
 
-// Function to get the access token from the Redux store
 const getAccessToken = () => {
-  // Access the Redux store state and retrieve the access token
-  //   const state = store.getState();
+
   return localStorage.getItem("bearerToken");
 };
 
