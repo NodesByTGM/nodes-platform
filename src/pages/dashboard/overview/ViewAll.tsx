@@ -4,7 +4,7 @@ import { TrendingItem, Breadcrumbs, LabeledSelect } from "../../../components";
 // import AppConfig from "../../../utilities/config";
 
 export default function ViewAll() {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const [links] = useState([
     {
       id: 1,
@@ -44,8 +44,16 @@ export default function ViewAll() {
       </div>
       <div className="mb-[64px]">
         <div className="flex justify-between border-b border-[#D6D6D6] pb-6">
-          <LabeledSelect label={"FILTER BY"} options={options} />
-          <LabeledSelect label={"SORT BY"} options={options} />
+          <LabeledSelect
+            onChange={() => {}}
+            label={"FILTER BY"}
+            options={options}
+          />
+          <LabeledSelect
+            onChange={() => {}}
+            label={"SORT BY"}
+            options={options}
+          />
         </div>
       </div>
       <div className="">
@@ -53,7 +61,11 @@ export default function ViewAll() {
           {Array(6)
             .fill(null)
             .map((_, index) => (
-              <div className="cursor-pointer" onClick={() => navigate(`${'/dashboard/view-detail/'+index }`)} key={index} >
+              <div
+                className="cursor-pointer"
+                onClick={() => navigate(`${"/dashboard/view-detail/" + index}`)}
+                key={index}
+              >
                 <TrendingItem />
               </div>
             ))}

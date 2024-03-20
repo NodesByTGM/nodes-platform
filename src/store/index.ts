@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { profileApi, projectApi, generalApi } from "../api";
+import { profileApi, projectApi, generalApi, jobAndEventsApi } from "../api";
 import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 import userReducer from "../api/reducers/userSlice";
@@ -19,8 +19,7 @@ const reducers = combineReducers({
   user: userReducer,
   [projectApi?.reducerPath]: projectApi?.reducer,
   [generalApi?.reducerPath]: generalApi?.reducer,
-
-  
+  [jobAndEventsApi?.reducerPath]: jobAndEventsApi?.reducer,
 });
 const persistConfig = {
   key: "root",
@@ -39,7 +38,8 @@ export const store = configureStore({
     })
       .concat(profileApi?.middleware)
       .concat(projectApi?.middleware)
-      .concat(generalApi?.middleware),
+      .concat(generalApi?.middleware)
+      .concat(jobAndEventsApi?.middleware),
 });
 
 export const persistor = persistStore(store);

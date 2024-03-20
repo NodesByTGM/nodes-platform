@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useEffect } from "react";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 
@@ -10,25 +10,59 @@ function classNames(...classes) {
 type IProps = {
   label?: string;
   options: Array<any>;
+  width?: string;
+  paddingy?: string;
+  error?: any;
+  touched?: boolean;
+  defaultValue?: any;
+  onChange: (e) => void
 };
 
-export default function LabeledSelect({ label, options }: IProps) {
-  const [selected, setSelected] = useState(options[0]);
+export default function LabeledSelect({
+  label,
+  options,
+  width,
+  paddingy,
+  error,
+  touched,
+  defaultValue,
+  onChange
+}: IProps) {
+  const handlePrefill = () => {
+    const defaultdata = options.find(
+      (option) => String(option?.value)?.toLowerCase() == String(defaultValue)?.toLowerCase()
+    );
+    if(!defaultdata){
+      return options[0]
+    }
+
+    return defaultdata;
+  };
+  const [selected, setSelected] = useState(handlePrefill());
+
+  useEffect(() => {
+    onChange(selected)
+  }, [selected])
+
+
 
   return (
-    <div className="">
-      <div className="">
+    <div className={`${width}`}>
+      <span onClick={() => handlePrefill()} className=""></span>
+      <div className="w-full">
         <Listbox value={selected} onChange={setSelected}>
           {({ open }) => (
             <>
-              <div className="flex gap-4 items-center">
+              <div className="flex gap-4 items-center w-full">
                 {label && (
-                  <Listbox.Label className="text-[#000000] text-sm font-medium">
+                  <Listbox.Label className="text-nowrap text-[#000000] text-sm font-medium">
                     {label}
                   </Listbox.Label>
                 )}
-                <div className="relative ">
-                  <Listbox.Button className="border border-[#D6D6D6] flex items-center justify-between  gap-6 relative w-full cursor-default rounded-md bg-white px-4 py-[10.5px] text-left text-gray-900  ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-0 sm:text-sm sm:leading-6">
+                <div className="relative w-full">
+                  <Listbox.Button
+                    className={`${paddingy} border border-[#D6D6D6] flex items-center justify-between  gap-6 relative w-full cursor-default rounded-md bg-white px-4 py-[10.5px] text-left text-gray-900  ring-inset ring-primary outline-none ring-0 focus:outline-none focus:ring-[0.5px] sm:text-sm sm:leading-6`}
+                  >
                     <span className="block truncate">{selected.name}</span>
                     <span className="">
                       <svg
@@ -75,7 +109,7 @@ export default function LabeledSelect({ label, options }: IProps) {
                                   "block truncate"
                                 )}
                               >
-                                {option.name}
+                                {option?.name}
                               </span>
 
                               {selected ? (
@@ -98,6 +132,9 @@ export default function LabeledSelect({ label, options }: IProps) {
           )}
         </Listbox>
       </div>
+      {touched && error && !selected?.value ? (
+        <div className="my-2 text-sm text-red-500">{error}</div>
+      ) : null}
     </div>
   );
 }

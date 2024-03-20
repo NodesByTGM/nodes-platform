@@ -21,6 +21,9 @@ const API_ENDPOINTS = {
   Profile: {
     UserProfile: `${BASE_API_ENDPOINT}/users/profile`,
   },
+  Job: {
+    JobUrl: `${BASE_API_ENDPOINT}/jobs`,
+  },
   Project: {
     Projects: `${BASE_API_ENDPOINT}/projects`,
   },

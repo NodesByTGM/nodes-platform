@@ -7,7 +7,7 @@ import {
   useCallback,
 } from "react";
 import { IProfileContext } from "../interfaces/profile";
-import { useGetUserProfileQuery } from "../api";
+import { useGetUserProfileQuery,  } from "../api";
 import { AccountTypesObj, projectModalTypes } from "../utilities";
 
 // import {

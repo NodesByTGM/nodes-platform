@@ -135,6 +135,8 @@ export type projectValidationType = {
 export const jobSchema = object({
   name: string(),
   description: string(),
+  hoursPerWeek: number(),
+  location: string(),
   experience: string(),
   payRate: number(),
   workRate: string(),
@@ -144,6 +146,8 @@ export const jobSchema = object({
 export type jobValidationType = {
   name: string,
   description: string,
+  hoursPerWeek: number,
+  location: string,
   experience: string,
   payRate: number,
   workRate: string,

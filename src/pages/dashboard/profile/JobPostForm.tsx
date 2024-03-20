@@ -1,23 +1,57 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { MdCancel } from "react-icons/md";
-import { Button, Input, TextArea, FormDebug } from "../../../components";
+import {
+  Button,
+  Input,
+  TextArea,
+  FormDebug,
+  LabeledSelect,
+  TagInput,
+} from "../../../components";
 import AppConfig from "../../../utilities/config";
-import { useFormik, FormikProvider, FieldArray } from "formik";
+import { useFormik, FormikProvider } from "formik";
 import { jobSchema, jobValidationType } from "../../../utilities/validation";
+import { useCreateJobMutation } from "../../../api";
+import { toast } from "react-toastify";
 
-export default function JobPostForm({ closeModal }) {
+export default function JobPostForm({ closeModal, refetchAllJobs = () => {} }) {
+  const [
+    createJob,
+    {
+      isLoading: createJobLoading,
+      isSuccess: createJobSuccess,
+      isError: createJobIsError,
+      //   error: createJobError,
+    },
+  ] = useCreateJobMutation();
+
+  const [options] = useState([
+    { id: 1, name: "Full time", value: 0 },
+    { id: 2, name: "Part time", value: 1 },
+    { id: 3, name: "Contract", value: 3 },
+  ]);
+
   const handleClickForm = (values?: any) => {
     const data = {
-      ...values,
+      name: values.name,
+      description: values.description,
+      experience: values.experience,
+      payRate: values.payRate,
+      workRate: values.workRate,
+      skills: values.skills,
+      jobType: values.jobType,
     };
     console.log(JSON.stringify(data, null, 2));
-    // createUserProject(data);
+    createJob(data);
   };
+
   const formik = useFormik<jobValidationType>({
     initialValues: {
       name: "",
       description: "",
+      hoursPerWeek: 0,
+      location: "",
       experience: "",
       payRate: 0,
       workRate: "",
@@ -30,7 +64,7 @@ export default function JobPostForm({ closeModal }) {
   });
 
   const {
-    // setFieldValue,
+    setFieldValue,
     // setValues,
     handleChange,
     handleSubmit,
@@ -40,6 +74,22 @@ export default function JobPostForm({ closeModal }) {
     isValid,
     handleBlur,
   } = formik;
+
+  useEffect(() => {
+    if (createJobSuccess) {
+      toast.success("Successfully created job");
+      refetchAllJobs();
+      closeModal();
+    }
+  }, [createJobSuccess]);
+
+  useEffect(() => {
+    if (createJobIsError) {
+      toast.error("Something went wrong");
+      closeModal();
+    }
+  }, [createJobIsError]);
+
   return (
     <div className={`text-[#000000]`}>
       <div className="flex items-center justify-between mb-[32px]">
@@ -60,8 +110,7 @@ export default function JobPostForm({ closeModal }) {
           touched,
           isValid,
         }}
-
-        className='hidden'
+        className=""
       />
       <FormikProvider value={formik}>
         <form
@@ -73,6 +122,7 @@ export default function JobPostForm({ closeModal }) {
         >
           <div className="w-full">
             <Input
+              labelStyle="!text-base"
               required
               placeholder={AppConfig.PLACEHOLDERS.JobTitle}
               id="name"
@@ -87,19 +137,21 @@ export default function JobPostForm({ closeModal }) {
           <div className="grid grid-cols-2 gap-4">
             <div className="w-full">
               <Input
+                labelStyle="!text-base"
                 required
                 placeholder={AppConfig.PLACEHOLDERS.Hours}
-                id="hours"
+                id="hoursPerWeek"
                 label="Hours required per week"
-                // error={errors.name}
-                // value={values.name}
-                // touched={touched.name}
-                // onChange={handleChange("name")}
-                // onBlur={handleBlur}
+                error={errors.hoursPerWeek}
+                value={values.hoursPerWeek}
+                touched={touched.hoursPerWeek}
+                onChange={handleChange("hoursPerWeek")}
+                onBlur={handleBlur}
               />
             </div>
             <div className="w-full">
               <Input
+                labelStyle="!text-base"
                 required
                 placeholder={AppConfig.PLACEHOLDERS.Hours}
                 id="payRate"
@@ -112,9 +164,24 @@ export default function JobPostForm({ closeModal }) {
               />
             </div>
           </div>
+          <div className="w-full">
+            <Input
+              labelStyle="!text-base"
+              required
+              placeholder={AppConfig.PLACEHOLDERS.JobTitle}
+              id="experience"
+              label="Experience"
+              error={errors.experience}
+              value={values.experience}
+              touched={touched.experience}
+              onChange={handleChange("experience")}
+              onBlur={handleBlur}
+            />
+          </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="w-full">
               <Input
+                labelStyle="!text-base"
                 required
                 placeholder={AppConfig.PLACEHOLDERS.Hours}
                 id="workRate"
@@ -128,20 +195,31 @@ export default function JobPostForm({ closeModal }) {
             </div>
             <div className="w-full">
               <Input
+                labelStyle="!text-base"
                 required
                 placeholder={AppConfig.PLACEHOLDERS.Hours}
                 id="location"
                 label="Location"
-                // error={errors.name}
-                // value={values.name}
-                // touched={touched.name}
-                // onChange={handleChange("name")}
-                // onBlur={handleBlur}
+                error={errors.location}
+                value={values.location}
+                touched={touched.location}
+                onChange={handleChange("location")}
+                onBlur={handleBlur}
               />
             </div>
           </div>
+          <div className="flex flex-col gap-1">
+            <span className="font-medium text-base ">Job Type</span>
+            <LabeledSelect
+              paddingy="py-[16px]"
+              defaultValue={values.jobType}
+              options={options}
+              onChange={(value) => setFieldValue("jobType", value.value)}
+            />
+          </div>
           <div className="w-full">
             <TextArea
+              labelStyle="!text-base"
               required
               placeholder={AppConfig.PLACEHOLDERS.JobDescription}
               id="description"
@@ -153,9 +231,18 @@ export default function JobPostForm({ closeModal }) {
               onBlur={handleBlur}
             />
           </div>
+
+          <TagInput
+            id="skills"
+            onSelect={() => {}}
+            options={AppConfig.SKILL_OPTIONS}
+            description="Example: Modelling, Video editing"
+            tags={values.skills}
+            setTags={(value) => setFieldValue("skills", value)}
+          />
           <Button
             type="submit"
-            isLoading={false}
+            isLoading={createJobLoading}
             className={`${!isValid ? "opacity-50" : ""} `}
             disabled={!isValid}
           >

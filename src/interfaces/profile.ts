@@ -19,6 +19,7 @@ export interface IProfileContext {
   projectAction?: any;
   setProjectAction: (e) => void;
   user: any;
+
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
