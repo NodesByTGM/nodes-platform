@@ -110,7 +110,7 @@ export default function JobPostForm({ closeModal, refetchAllJobs = () => {} }) {
           touched,
           isValid,
         }}
-        className=""
+        className="hidden"
       />
       <FormikProvider value={formik}>
         <form

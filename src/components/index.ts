@@ -67,4 +67,5 @@ export { default as BorderlessSelect } from "./BorderlessSelect.tsx";
 export { default as JobItem } from "./custom/JobItem.tsx";
 export { default as BookMarkIcon } from "./BookMarkIcon";
 export { default as ItemDeleteIcon } from "./ItemDeleteIcon";
-export {default as JobPost} from './dashboard/JobPost.tsx'
+export { default as JobPost } from "./dashboard/JobPost.tsx";
+export { default as SubscriptionAndBilling } from "./dashboard/SubscriptionAndBilling.tsx";

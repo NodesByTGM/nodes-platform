@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { useParams } from "react-router-dom";
-
+import { useDashboardContext } from "../../../context/hooks";
 import {
   CarouselSection,
   HeaderAndDescription,
@@ -8,8 +8,19 @@ import {
   WelcomeCard,
 } from "../../../components";
 import { useNavigate } from "react-router-dom";
-
+// import { useGetBusinessUserJobsQuery } from "../../../api";
+import BusinessDashboardEmptyState from "./BusinessDashboardEmptyState.tsx";
+import { SubscriptionAndBilling, Modal } from "../../../components";
 export default function BusinessDashboard() {
+  const { user } = useDashboardContext();
+  const [subscriptionModal, setSubscriptionModal] = useState(false);
+
+  // const {
+  //   data: jobsData,
+  //   refetch: jobsRefetch,
+  //   isFetching: jobsLoading,
+  // } = useGetBusinessUserJobsQuery(user?.business?.id);
+
   const navigate = useNavigate();
   const [WelcomeCardItems] = useState([
     {
@@ -18,7 +29,7 @@ export default function BusinessDashboard() {
       text2: "post",
       icon: "/img/Connect.png",
       buttonText: "Create a job post",
-      buttonLink: "profile",
+      buttonLink: "/dashboard/profile",
     },
     {
       id: 2,
@@ -26,12 +37,26 @@ export default function BusinessDashboard() {
       text2: "business profile",
       icon: "/img/CompleteProfile.png",
       buttonText: "Complete profile",
-      buttonLink: "profile",
+      buttonLink: "/dashboard/profile/edit-profile",
     },
   ]);
   return (
     <div>
-      <HeaderAndDescription title="Welcome to <insert business name>”s business account!" />
+      <div className="flex">
+        {" "}
+        <pre className="hidden text-blue-400 text-wrap max-w-[600px]">
+          {JSON.stringify(user, null, 2)}
+        </pre>
+      </div>
+      <BusinessDashboardEmptyState
+        user={user}
+        addBusinessAccount={() => {
+          setSubscriptionModal(true);
+        }}
+      />
+      <HeaderAndDescription
+        title={`Welcome to ${user?.business?.name}'s business account!`}
+      />
 
       <div className={` h-4 mb-10 border-b border-[#D6D6D6]`}></div>
 
@@ -71,6 +96,16 @@ export default function BusinessDashboard() {
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         />
       </div>
+
+      <Modal
+        sizeClass="sm:max-w-[800px]"
+        open={subscriptionModal}
+        setOpen={setSubscriptionModal}
+      >
+        <SubscriptionAndBilling
+          closeModal={() => setSubscriptionModal(false)}
+        />
+      </Modal>
     </div>
   );
 }

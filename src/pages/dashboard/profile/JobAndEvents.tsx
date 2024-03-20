@@ -16,7 +16,7 @@ export default function JobAndEvents() {
     data: jobsData,
     refetch: jobsRefetch,
     isFetching: jobsLoading,
-  } = useGetJobsQuery(user?.id);
+  } = useGetJobsQuery();
 
 
 
