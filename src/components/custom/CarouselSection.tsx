@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ReactNode } from "react";
 import { Navigation, Pagination } from "swiper/modules";
 import {
@@ -23,10 +24,12 @@ type ICarouselSection = {
   seeMore?: boolean;
   title?: string;
   description?: string;
+  data?: Array<any>;
   navigateTo?: () => void;
 };
 export default function CarouselSection({
-  isBusiness=false,
+  data = [],
+  isBusiness = false,
   hasCarousel = true,
   trend,
   movie,
@@ -59,14 +62,13 @@ export default function CarouselSection({
       ></div>
       {hasCarousel ? (
         <div className="!max-w-[100%]">
-          <CustomSwiper
-            modules={[Pagination, Navigation]}
-            navigation={true}
-            pagination={true}
-          >
-            {Array(6)
-              .fill(null)
-              .map((_, i) => (
+          {data?.length > 0 ? (
+            <CustomSwiper
+              modules={[Pagination, Navigation]}
+              navigation={true}
+              pagination={true}
+            >
+              {data.map((item, i) => (
                 <div key={i}>
                   {trend || movie || event || job ? (
                     <div className="">
@@ -77,14 +79,53 @@ export default function CarouselSection({
                       )}
                       {movie && <MovieItem />}
                       {event && <EventItem className={"!w-[310px]"} />}
-                      {job && <JobItem isBusiness={isBusiness} className={"!w-[310px]"} />}
+                      {job && (
+                        <JobItem
+                          data={item}
+                          isBusiness={isBusiness}
+                          className={"!w-[310px]"}
+                        />
+                      )}
                     </div>
                   ) : (
                     <EventItem className={"!w-[310px]"} />
                   )}
                 </div>
               ))}
-          </CustomSwiper>
+            </CustomSwiper>
+          ) : (
+            <CustomSwiper
+              modules={[Pagination, Navigation]}
+              navigation={true}
+              pagination={true}
+            >
+              {Array(6)
+                .fill(null)
+                .map((_, i) => (
+                  <div key={i}>
+                    {trend || movie || event || job ? (
+                      <div className="">
+                        {trend && (
+                          <div className="w-[250px] md:w-[350px] ">
+                            <TrendingItem />
+                          </div>
+                        )}
+                        {movie && <MovieItem />}
+                        {event && <EventItem className={"!w-[310px]"} />}
+                        {job && (
+                          <JobItem
+                            isBusiness={isBusiness}
+                            className={"!w-[310px]"}
+                          />
+                        )}
+                      </div>
+                    ) : (
+                      <EventItem className={"!w-[310px]"} />
+                    )}
+                  </div>
+                ))}
+            </CustomSwiper>
+          )}
         </div>
       ) : null}
 

@@ -2,7 +2,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { axiosBaseQuery } from "./axiosBaseQuery";
 import { REHYDRATE } from "redux-persist";
-// import { cleanObject } from "../utilities";
+import { cleanObject } from "../utilities";
 import AppConfig from "../utilities/config";
 
 export const jobAndEventsApi: any = createApi({
@@ -48,9 +48,10 @@ export const jobAndEventsApi: any = createApi({
     }),
     getBusinessUserJobs: builder.query<any, any>({
       query: (params) => {
-        
         return {
-          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/${params}`,
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}?${new URLSearchParams(
+            cleanObject(params)
+          )}`,
           method: "get",
         };
       },
@@ -73,9 +74,12 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
-
-   
   }),
 });
 
-export const { useGetJobsQuery, useGetBusinessUserJobsQuery, useCreateJobMutation, useApplyToJobMutation } = jobAndEventsApi;
+export const {
+  useGetJobsQuery,
+  useGetBusinessUserJobsQuery,
+  useCreateJobMutation,
+  useApplyToJobMutation,
+} = jobAndEventsApi;

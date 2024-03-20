@@ -1,18 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { MdCancel } from "react-icons/md";
-import {
-  Button,
-  Input,
-  TextArea,
-  FormDebug,
-  LabeledSelect,
-  TagInput,
-} from "../../../components";
-import AppConfig from "../../../utilities/config";
+import { Button, Input, TextArea, FormDebug, LabeledSelect, TagInput } from ".";
+import AppConfig from "../utilities/config";
 import { useFormik, FormikProvider } from "formik";
-import { jobSchema, jobValidationType } from "../../../utilities/validation";
-import { useCreateJobMutation } from "../../../api";
+import { jobSchema, jobValidationType } from "../utilities/validation";
+import { useCreateJobMutation } from "../api";
 import { toast } from "react-toastify";
 
 export default function JobPostForm({ closeModal, refetchAllJobs = () => {} }) {

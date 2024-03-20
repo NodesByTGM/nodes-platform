@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Card, Modal, JobItem } from "../../../components";
 import { useProfileContext } from "../../../context/hooks";
-import JobPostForm from "./JobPostForm";
-import { useGetJobsQuery,  } from "../../../api";
+import JobPostForm from "../../../components/JobPostForm";
+import { useGetJobsQuery } from "../../../api";
 type JobAndEventType = {
   id: string;
   img: string;
@@ -17,8 +17,6 @@ export default function JobAndEvents() {
     refetch: jobsRefetch,
     isFetching: jobsLoading,
   } = useGetJobsQuery();
-
-
 
   const [jobAndEvents] = useState<JobAndEventType[]>([]);
 
@@ -73,7 +71,7 @@ export default function JobAndEvents() {
           ) : null}
         </div>
       </Card>
-      {jobsData?.jobs?.length == 0 && (
+      {jobsData?.jobs && jobsData?.jobs?.length == 0 && (
         <div className=" w-full">
           <img src="/img/AddProjects.svg" alt="" className="w-full" />
         </div>

@@ -12,6 +12,7 @@ import {
   ViewDetail,
   SeeMoreJobs,
   BusinessDashboard,
+  Details,
   ForgotPassword,
   Home,
   Login,
@@ -77,6 +78,11 @@ export const publicRoutes: RouteObject[] = [
       {
         path: AppConfig.PATHS.Dashboard.Business,
         Component: getProfile(BusinessDashboard),
+        
+      },
+      {
+        path: AppConfig.PATHS.Dashboard.Details,
+        Component: getProfile(Details),
         
       },
 

@@ -23,6 +23,7 @@ export { default as Post } from "./dashboard/Post";
 export { default as Pricing } from "./upgrades/Pricing";
 export {default as ViewDetail} from './dashboard/overview/ViewDetail'
 export {default as BusinessDashboard} from '../pages/dashboard/overview/BusinessDashboard.tsx'
+export {default as Details } from '../pages/details/index.tsx'
 // export { default as DashboardEvents } from './dashboard/Events'
 // export { default as DashboardCreateEvent } from './dashboard/CreateEvent'
 // export { default as DashboardContacts } from './dashboard/Contacts'

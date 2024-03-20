@@ -69,3 +69,6 @@ export { default as BookMarkIcon } from "./BookMarkIcon";
 export { default as ItemDeleteIcon } from "./ItemDeleteIcon";
 export { default as JobPost } from "./dashboard/JobPost.tsx";
 export { default as SubscriptionAndBilling } from "./dashboard/SubscriptionAndBilling.tsx";
+export { default as Loader } from "./Loader";
+export { default as JobPostForm } from "./JobPostForm";
+
