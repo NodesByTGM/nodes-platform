@@ -33,7 +33,7 @@ export default function JobDetails() {
       count: null,
     },
   ]);
-  const [selectedNav, setSelectedNav] = useState(navs[1]);
+  const [selectedNav, setSelectedNav] = useState(navs[0]);
 
   const [links, setLinks] = useState([
     {

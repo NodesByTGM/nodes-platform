@@ -1,15 +1,42 @@
-import React from "react";
-import { ActionIcon } from "../components";
+import React, { useEffect, useState } from "react";
+import { ActionIcon, Modal, DeleteComponent } from "../components";
+import { useDeleteJobMutation } from "../api";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function DetailsActions({ title, type, details }) {
+  const navigate = useNavigate();
+  const [
+    deleteRequest,
+    {
+      isSuccess: isDeleteSuccess,
+      isError: isDeleteError,
+      error: deleteError,
+      isLoading: deleteLoading,
+    },
+  ] = useDeleteJobMutation();
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  useEffect(() => {
+    if (isDeleteError) {
+      toast.error(deleteError?.message?.message);
+    }
+  }, [isDeleteError, deleteError]);
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      toast.success("Successfully deleted job");
+      navigate("/dashboard/see-more/business-jobs");
+    }
+  }, [isDeleteSuccess]);
+
   const edit = () => {
     if (type == "business-jobs") {
-      console.log(details);
+      console.log(details?.id);
     }
   };
   const erase = () => {
     if (type == "business-jobs") {
-      console.log(details);
+      setDeleteModal(true);
     }
   };
   const share = () => {
@@ -39,6 +66,22 @@ export default function DetailsActions({ title, type, details }) {
           </div>
         </div>
       </div>
+
+      <Modal
+        sizeClass="sm:max-w-[506px]"
+        open={deleteModal}
+        setOpen={setDeleteModal}
+      >
+        <DeleteComponent
+          title={"Delete this job post"}
+          text={`You are about to permanently  delete '${details?.name}'. Do you want to proceed?`}
+          action={() => {
+            deleteRequest(details?.id);
+          }}
+          isLoading={deleteLoading}
+          closeModal={() => setDeleteModal(false)}
+        />
+      </Modal>
     </div>
   );
 }
