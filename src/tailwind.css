@@ -18,6 +18,10 @@
   @apply bg-[#FDFDF7] py-[64px] pl-[40px] pr-[40px];
 }
 
+.main-bg{
+  @apply bg-[#FDFDF7]
+}
+
 .profile-card-shadow {
   box-shadow: 4px 3px 10px 4px #00000008;
 }

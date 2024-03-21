@@ -1,12 +1,15 @@
 import React from "react";
 import { FiEdit3 } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
+import { Bell, Mail } from "react-feather";
 // import { FiShare2 } from "react-icons/fi";
 type ActionIconPropType = {
   edit?: boolean;
   edit2?: boolean;
   erase?: boolean;
   erase2?: boolean;
+  bell?: boolean;
+  mail?: boolean;
   share?: boolean;
   hasBorder?: boolean;
   size?: string;
@@ -133,6 +136,8 @@ export default function ActionIcon({
   edit2,
   erase,
   erase2,
+  bell,
+  mail,
   share,
   hasBorder = true,
   size = "size-8",
@@ -148,6 +153,8 @@ export default function ActionIcon({
       {erase2 && <AppDelete />}
       {share && <AppShare />}
       {edit2 && <AppEdit />}
+      {bell && <Bell className={'size-4'}/>}
+      {mail && <Mail className={'size-4'}/>}
     </div>
   );
 }

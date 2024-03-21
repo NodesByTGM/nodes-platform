@@ -9,12 +9,10 @@ import {
   Loader,
   JobPostForm,
   Modal,
-  
 } from "../../../components";
 import { useDashboardContext } from "../../../context/hooks";
 
 import { useGetBusinessUserJobsQuery } from "../../../api";
-
 
 const selectOptions = [
   { id: 1, name: "Option 1" },
@@ -24,7 +22,6 @@ const selectOptions = [
 export default function SeeMoreJobs() {
   const { user } = useDashboardContext();
   const [jobModal, setJobModal] = useState(false);
-
 
   const { type } = useParams();
   const {
@@ -38,8 +35,14 @@ export default function SeeMoreJobs() {
       <Back className={`mb-[64px]`} link={"/dashboard"} />
       <div className="flex items-start justify-between mb-10">
         <h3 className="fonnt-medium text-[20px] text-[#212121]">
-          {type?.toLowerCase() == "business-jobs" ? (
-            <span className="">Manage your job postings</span>
+          {type?.toLowerCase() == "business-jobs" ||
+          type?.toLowerCase() == "business-events" ? (
+            <span className="">
+              Manage your{" "}
+              {type?.toLowerCase() == "business-jobs"
+                ? "job postings"
+                : "events"}
+            </span>
           ) : (
             <span className="">
               Hi, {user?.name}! Welcome to the Nodes Job center
@@ -47,12 +50,14 @@ export default function SeeMoreJobs() {
           )}
         </h3>
 
-        {type?.toLowerCase() == "business-jobs" ? (
+        {type?.toLowerCase() == "business-jobs" ||
+        type?.toLowerCase() == "business-events" ? (
           <ButtonOutline
             onClick={() => setJobModal(true)}
             className="max-w-max"
           >
-            Create a new job posting
+            Create a new{" "}
+            {type?.toLowerCase() == "business-jobs" ? "job posting" : "event"}
           </ButtonOutline>
         ) : (
           <ButtonOutline className="max-w-max">Saved</ButtonOutline>
@@ -62,7 +67,8 @@ export default function SeeMoreJobs() {
       <div className="flex justify-between items-center mb-[64px]">
         <div
           className={`${
-            type?.toLowerCase() == "business-jobs"
+            type?.toLowerCase() == "business-jobs" ||
+            type?.toLowerCase() == "business-events"
               ? "w-full max-w-[455px]"
               : "max-w-[240px] w-full"
           } `}
@@ -70,7 +76,8 @@ export default function SeeMoreJobs() {
           <SearchComponent padding="px-4 py-[13px]" />
         </div>
 
-        {type?.toLowerCase() !== "business-jobs" ? (
+        {type?.toLowerCase() !== "business-jobs" &&
+        type?.toLowerCase() !== "business-events" ? (
           <div className="flex justify-end gap-[32px]">
             <BorderlessSelect label="Role" options={selectOptions} />
             <BorderlessSelect label="Skills" options={selectOptions} />
@@ -88,26 +95,30 @@ export default function SeeMoreJobs() {
         {JSON.stringify(jobsData?.jobs, null, 2)}
       </pre>
 
-      {jobsLoading && !jobsData ? (
-        <div className="my-40">
-          <Loader />
-        </div>
-      ) : null}
-      {!jobsLoading && jobsData?.jobs?.length === 0 ? (
-        <div className="text-base text-primary">Nothing to see.</div>
-      ) : null}
-
-      {!jobsLoading && jobsData && jobsData?.jobs?.length > 0 ? (
-        <div className="grid grid-cols-3 gap-6">
-          {jobsData?.jobs?.map((job) => (
-            <div key={job?.id} className="">
-              <JobItem
-                data={job}
-                isBusiness={type?.toLowerCase() == "business-jobs"}
-                refetchJobs={jobsRefetch}
-              />
+      {type?.toLowerCase() == "business-jobs" ? (
+        <div className="">
+          {jobsLoading && !jobsData ? (
+            <div className="my-40">
+              <Loader />
             </div>
-          ))}
+          ) : null}
+          {!jobsLoading && jobsData?.jobs?.length === 0 ? (
+            <div className="text-base text-primary">Nothing to see.</div>
+          ) : null}
+
+          {!jobsLoading && jobsData && jobsData?.jobs?.length > 0 ? (
+            <div className="grid grid-cols-3 gap-6">
+              {jobsData?.jobs?.map((job) => (
+                <div key={job?.id} className="">
+                  <JobItem
+                    data={job}
+                    isBusiness={type?.toLowerCase() == "business-jobs"}
+                    refetchJobs={jobsRefetch}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
       ) : null}
 
@@ -117,8 +128,6 @@ export default function SeeMoreJobs() {
           closeModal={() => setJobModal(false)}
         />
       </Modal>
-
-   
     </div>
   );
 }
