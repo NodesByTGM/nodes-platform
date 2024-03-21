@@ -19,9 +19,16 @@ export default function IndividualId() {
         {" "}
         {`${profileData?.user?.name ? profileData?.user?.name : user?.name}`}
       </span>
-      <span className="font-normal text-base text-[#757575] ">
-        {profileData?.user?.age ? "" : "Height and Age"}
-      </span>
+      <div className="flex gap-4 font-normal text-base text-[#757575] ">
+        <span className="">
+          {" "}
+          {profileData?.user?.height ? profileData?.user?.height + ' cm' : "Height "}
+        </span>{" "}
+        <span className="">
+          {" "}
+          {profileData?.user?.age ? profileData?.user?.age + ' years' : "Age"}
+        </span>
+      </div>
       <div className="mb-6 font-medium text-base text-[#757575] flex justify-center gap-6">
         <div className="flex items-center gap-[4px]">
           <CiLocationOn className="size-[20px]" />

@@ -43,6 +43,7 @@ export default function Individual() {
   }, [navs]);
   return (
     <div className="flex gap-x-8 h-full">
+      {/* <span className="st">{localStorage.getItem('bearerToken')}</span> */}
       {/* ss {profileLoading ? 'True' : "false"} */}
       <div className="max-h-max">
         <IndividualProfileCard />

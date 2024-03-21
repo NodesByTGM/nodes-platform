@@ -1,19 +1,17 @@
 import axios from "axios";
 import { BASE_API_ENDPOINT } from "./config";
 
-const getAccessToken = () => {
+// const getAccessToken = () => {
 
-  return localStorage.getItem("bearerToken");
-};
+//   return localStorage.getItem("bearerToken");
+// };
 
 export const getClient = (
   baseURL = BASE_API_ENDPOINT,
   multipart = false,
   extraHeaders = {}
 ) => {
-  const accessToken = getAccessToken();
-
-  console.log("getAccessToken: " + accessToken);
+  // console.log("getAccessToken: " + accessToken);
   //   console.log("getAccessToken: " + accessToken);
 
   const instance = axios.create({
@@ -22,12 +20,19 @@ export const getClient = (
         multipart ? "multipart/form-data" : "application/json"
       }`,
       ...extraHeaders,
-      Authorization: accessToken ? `Bearer ${accessToken}` : null,
+      // Authorization: accessToken ? `Bearer ${accessToken}` : null,
     },
     baseURL: baseURL,
     timeout: 60000,
     // withCredentials:true
   });
+
+  instance.interceptors.request.use(function (config) {
+    const token = localStorage.getItem("bearerToken");
+    config.headers["Authorization"] = "Bearer " + token;
+    return config;
+  });
+
   instance?.interceptors?.response?.use(
     (response) => {
       return response;

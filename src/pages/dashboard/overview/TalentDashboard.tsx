@@ -39,7 +39,7 @@ export default function TalentDashboard() {
       text2: "with others",
       icon: "/img/Connect.png",
       buttonText: "Discover",
-      buttonLink: "profile",
+      buttonLink: "/community",
     },
   ]);
   return (

@@ -34,7 +34,7 @@ const DashboardProvider = ({
   return (
     <DashboardContext.Provider value={dashboardContextValue}>
       <div className="">
-        <div className="flex gap-2 mb-4 ">
+        <div className="flex gap-2 mb-10 ">
           <button
             onClick={() => setAccountType("individual")}
             className="px-4 py-2 rounded-md bg-primary text-white"
