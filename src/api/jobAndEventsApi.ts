@@ -111,6 +111,26 @@ export const jobAndEventsApi: any = createApi({
       },
     }),
 
+    createEvent: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
+
+    editEvent: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/${data?.id}`,
+          method: "put",
+          body: data,
+        };
+      },
+    }),
+
    
   }),
 });
@@ -123,5 +143,8 @@ export const {
   useApplyToJobMutation,
   useDeleteJobMutation,
   useEditJobMutation,
-  useGetBusinessUserEventsQuery
+  useGetBusinessUserEventsQuery,
+  useCreateEventMutation,
+  useEditEventMutation,
+
 } = jobAndEventsApi;

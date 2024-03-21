@@ -144,15 +144,38 @@ export const jobSchema = object({
   jobType: number(),
 });
 export type jobValidationType = {
-  name: string,
-  description: string,
-  hoursPerWeek: number,
-  location: string,
-  experience: string,
-  payRate: number,
-  workRate: string,
-  skills: Array<string>,
-  jobType: number,
+  name: string;
+  description: string;
+  hoursPerWeek: number;
+  location: string;
+  experience: string;
+  payRate: number;
+  workRate: string;
+  skills: Array<string>;
+  jobType: number;
+};
+
+export const eventSchema = object({
+  name: string(),
+  description: string(),
+  location: string(),
+  dateTime: string(),
+  workRate: string(),
+  thumbnail: object().shape({
+    id: string(),
+    url: string(),
+  }),
+});
+export type eventValidationType = {
+  name: string;
+  description: string;
+  location: string;
+  dateTime: string;
+  workRate: string;
+  thumbnail: {
+    id: string;
+    url: string;
+  };
 };
 
 export const resetPasswordSchema = object({

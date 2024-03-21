@@ -40,7 +40,7 @@ const API_ENDPOINTS = {
     BusinessURL: `${BASE_API_ENDPOINT}/onboarding/business`,
   },
   Events: {
-    BaseURL: `${BASE_API_ENDPOINT}/events/`,
+    BaseURL: `${BASE_API_ENDPOINT}/events`,
     MineURL: `${BASE_API_ENDPOINT}/events/mine`,
     CreateURL: `${BASE_API_ENDPOINT}/events/create`,
     BuyTicketURL: `${BASE_API_ENDPOINT}/events/create/buy-ticket`,
@@ -272,7 +272,8 @@ const AppConfig = {
     ProjectUrl: "http://",
     JobTitle: 'Enter the title of the job here',
     Hours: 'E.g 20',
-    JobDescription: 'Give more information about the job'
+    JobDescription: 'Give more information about the job',
+    EventDescription: 'Give more information about the event'
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,

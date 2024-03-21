@@ -141,7 +141,7 @@ export default function BusinessDashboard() {
               </div>
             ) : null}
 
-            {(!eventsLoading && eventsData?.jobs?.length === 0) ||
+            {(!eventsLoading && eventsData?.events?.length === 0) ||
             (!eventsLoading && !eventsData) ? (
               <div>
                 <BusinessDashboardSectionEmptyStates
@@ -152,7 +152,7 @@ export default function BusinessDashboard() {
               </div>
             ) : null}
 
-            {!eventsLoading && eventsData && eventsData?.jobs?.length > 0 ? (
+            {!eventsLoading && eventsData && eventsData?.events?.length > 0 ? (
               <CarouselSection
                 data={eventsData?.events || []}
                 navigateTo={() => navigate("/dashboard/see-more/business-jobs")}

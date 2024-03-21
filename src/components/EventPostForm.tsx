@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { MdCancel } from "react-icons/md";
-import { Button, Input, TextArea, FormDebug, LabeledSelect, TagInput } from ".";
+import { Button, Input, TextArea, FormDebug } from ".";
 import AppConfig from "../utilities/config";
 import { useFormik, FormikProvider } from "formik";
-import { jobSchema, jobValidationType } from "../utilities/validation";
-import { useCreateJobMutation, useEditJobMutation } from "../api";
+import { eventSchema, eventValidationType } from "../utilities/validation";
+import { useCreateEventMutation, useEditEventMutation } from "../api";
 import { toast } from "react-toastify";
 
 type IEventPostForm = {
@@ -21,70 +21,65 @@ export default function EventPostForm({
   details,
 }: IEventPostForm) {
   const [
-    createJob,
+    createEvent,
     {
-      isLoading: createJobLoading,
-      isSuccess: createJobSuccess,
-      isError: createJobIsError,
-      error: createJobError,
+      isLoading: createEventLoading,
+      isSuccess: createEventSuccess,
+      isError: createEventIsError,
+      error: creatEventError,
     },
-  ] = useCreateJobMutation();
+  ] = useCreateEventMutation();
 
   const [
-    editJob,
+    editEvent,
     {
-      isLoading: editJobLoading,
-      isSuccess: editJobSuccess,
-      isError: editJobIsError,
-      error: editJobError,
+      isLoading: editEventLoading,
+      isSuccess: editEventSuccess,
+      isError: editEventIsError,
+      error: editEventError,
     },
-  ] = useEditJobMutation();
-
-  const [jobOptions] = useState([
-    { id: 1, name: "Full time", value: 0, returnValue: "FullTime" },
-    { id: 2, name: "Part time", value: 1, returnValue: "PartTime" },
-    { id: 3, name: "Contract", value: 3, returnValue: "Contract" },
-  ]);
+  ] = useEditEventMutation();
 
   const handleClickForm = (values?: any) => {
     const data = {
       name: values.name,
       description: values.description,
-      experience: values.experience,
-      payRate: values.payRate,
+      location: values.location,
+      dateTime: "",
       workRate: values.workRate,
-      skills: values.skills,
-      jobType: values.jobType,
+      thumbnail: {
+        id: "",
+        url: "",
+      },
     };
     // console.log(JSON.stringify(data, null, 2));
     if (details) {
       // console.log(JSON.stringify({ ...details, ...data }, null, 2));
-      
-      editJob({ ...details, ...data });
+
+      editEvent({ ...details, ...data });
     } else {
-      createJob(data);
+      createEvent(data);
     }
   };
 
-  const formik = useFormik<jobValidationType>({
+  const formik = useFormik<eventValidationType>({
     initialValues: {
       name: "",
       description: "",
-      experience: "",
-      payRate: 0,
-      workRate: "",
-      skills: [],
-      jobType: 0,
-      hoursPerWeek: 0,
       location: "",
+      dateTime: "",
+      workRate: "",
+      thumbnail: {
+        id: "",
+        url: "",
+      },
     },
-    validationSchema: jobSchema,
+    validationSchema: eventSchema,
     validateOnBlur: true,
     onSubmit: handleClickForm,
   });
 
   const {
-    setFieldValue,
     setValues,
     handleChange,
     handleSubmit,
@@ -99,34 +94,31 @@ export default function EventPostForm({
     const data = {
       name: details.name,
       description: details.description,
-      experience: details.experience,
-      payRate: details.payRate,
+      location: details.location,
+      dateTime: details.dateTime,
       workRate: details.workRate,
-      skills: details.skills,
-      jobType:
-        jobOptions.find(
-          (option) =>
-            option?.returnValue.toLowerCase() ===
-            details?.jobType?.toLowerCase()
-        )?.value || 0,
+      thumbnail: {
+        id: "string",
+        url: "string",
+      },
     };
-    setValues({ ...data, hoursPerWeek: 0, location: "" });
+    setValues({ ...data });
   };
 
   useEffect(() => {
-    if (createJobSuccess) {
+    if (createEventSuccess) {
       toast.success("Successfully created job");
       refetchAllJobs();
       closeModal();
     }
-  }, [createJobSuccess]);
+  }, [createEventSuccess]);
   useEffect(() => {
-    if (editJobSuccess) {
+    if (editEventSuccess) {
       toast.success("Successfully edited job");
       refetchAllJobs();
       closeModal();
     }
-  }, [editJobSuccess]);
+  }, [editEventSuccess]);
 
   useEffect(() => {
     if (details) {
@@ -135,18 +127,18 @@ export default function EventPostForm({
   }, [details]);
 
   useEffect(() => {
-    if (createJobIsError) {
-      toast.error(createJobError?.message?.message || "Something went wrong");
+    if (createEventIsError) {
+      toast.error(creatEventError?.message?.message || "Something went wrong");
       closeModal();
     }
-  }, [createJobIsError, createJobError]);
-  
+  }, [createEventIsError, creatEventError]);
+
   useEffect(() => {
-    if (editJobIsError) {
-      toast.error(createJobError?.message?.message || "Something went wrong");
+    if (editEventIsError) {
+      toast.error(creatEventError?.message?.message || "Something went wrong");
       closeModal();
     }
-  }, [editJobIsError, editJobError]);
+  }, [editEventIsError, editEventError]);
 
   return (
     <div className={`text-[#000000]`}>
@@ -169,7 +161,7 @@ export default function EventPostForm({
           isValid,
           details,
         }}
-        className="hidden"
+        className=""
       />
       <FormikProvider value={formik}>
         <form
@@ -185,7 +177,7 @@ export default function EventPostForm({
               required
               placeholder={AppConfig.PLACEHOLDERS.JobTitle}
               id="name"
-              label="Job Title"
+              label="Name of event"
               error={errors.name}
               value={values.name}
               touched={touched.name}
@@ -199,12 +191,12 @@ export default function EventPostForm({
                 labelStyle="!text-base"
                 required
                 placeholder={AppConfig.PLACEHOLDERS.Hours}
-                id="hoursPerWeek"
-                label="Hours required per week"
-                error={errors.hoursPerWeek}
-                value={values.hoursPerWeek}
-                touched={touched.hoursPerWeek}
-                onChange={handleChange("hoursPerWeek")}
+                id="dateTime"
+                label="Date of event"
+                error={errors.dateTime}
+                value={values.dateTime}
+                touched={touched.dateTime}
+                onChange={handleChange("dateTime")}
                 onBlur={handleBlur}
               />
             </div>
@@ -213,74 +205,55 @@ export default function EventPostForm({
                 labelStyle="!text-base"
                 required
                 placeholder={AppConfig.PLACEHOLDERS.Hours}
-                id="payRate"
-                label="Rate per hour"
-                error={errors.payRate}
-                value={values.payRate}
-                touched={touched.payRate}
-                onChange={handleChange("payRate")}
+                id="dateTime"
+                label="Time of event"
+                error={errors.dateTime}
+                value={values.dateTime}
+                touched={touched.dateTime}
+                onChange={handleChange("dateTime")}
                 onBlur={handleBlur}
               />
             </div>
           </div>
+
           <div className="w-full">
             <Input
               labelStyle="!text-base"
               required
-              placeholder={AppConfig.PLACEHOLDERS.JobTitle}
-              id="experience"
-              label="Experience"
-              error={errors.experience}
-              value={values.experience}
-              touched={touched.experience}
-              onChange={handleChange("experience")}
+              placeholder={AppConfig.PLACEHOLDERS.Location}
+              id="location"
+              label="Location"
+              error={errors.location}
+              value={values.location}
+              touched={touched.location}
+              onChange={handleChange("location")}
               onBlur={handleBlur}
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="w-full">
-              <Input
-                labelStyle="!text-base"
-                required
-                placeholder={AppConfig.PLACEHOLDERS.Hours}
-                id="workRate"
-                label="Rate per week"
-                error={errors.workRate}
-                value={values.workRate}
-                touched={touched.workRate}
-                onChange={handleChange("workRate")}
-                onBlur={handleBlur}
-              />
-            </div>
-            <div className="w-full">
-              <Input
-                labelStyle="!text-base"
-                required
-                placeholder={AppConfig.PLACEHOLDERS.Hours}
-                id="location"
-                label="Location"
-                error={errors.location}
-                value={values.location}
-                touched={touched.location}
-                onChange={handleChange("location")}
-                onBlur={handleBlur}
-              />
+
+          <div className="flex flex-col gap-2">
+            <span className="font-medium text-base text-[#000000]">
+              Event Type
+            </span>
+
+            <div className="flex gap-4">
+              <div className="flex items-center gap-2">
+                <div className={`size-5 rounded-sm border`}></div>
+                <span className="font-normal text-sm text-[#000000]">Free</span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <div className={`size-5 rounded-sm border`}></div>
+                <span className="font-normal text-sm text-[#000000]">Paid</span>
+              </div>
             </div>
           </div>
-          <div className="flex flex-col gap-1">
-            <span className="font-medium text-base ">Job Type</span>
-            <LabeledSelect
-              paddingy="py-[16px]"
-              defaultValue={values.jobType}
-              options={jobOptions}
-              onChange={(value) => setFieldValue("jobType", value.value)}
-            />
-          </div>
+
           <div className="w-full">
             <TextArea
               labelStyle="!text-base"
               required
-              placeholder={AppConfig.PLACEHOLDERS.JobDescription}
+              placeholder={AppConfig.PLACEHOLDERS.EventDescription}
               id="description"
               label="Description"
               error={errors.description}
@@ -291,24 +264,16 @@ export default function EventPostForm({
             />
           </div>
 
-          <TagInput
-            id="skills"
-            onSelect={() => {}}
-            options={AppConfig.SKILL_OPTIONS}
-            description="Example: Modelling, Video editing"
-            tags={values.skills}
-            setTags={(value) => setFieldValue("skills", value)}
-          />
           <Button
             type="submit"
-            isLoading={createJobLoading || editJobLoading}
+            isLoading={createEventLoading || editEventLoading}
             className={`${!isValid ? "opacity-50" : ""} `}
             disabled={!isValid}
           >
             {details ? (
-              <span className=""> Edit job posting</span>
+              <span className=""> Edit event</span>
             ) : (
-              <span className=""> Create job posting</span>
+              <span className=""> Create event</span>
             )}
           </Button>
         </form>
