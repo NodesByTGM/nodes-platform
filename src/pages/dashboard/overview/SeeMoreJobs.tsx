@@ -9,10 +9,12 @@ import {
   Loader,
   JobPostForm,
   Modal,
+  
 } from "../../../components";
 import { useDashboardContext } from "../../../context/hooks";
 
 import { useGetBusinessUserJobsQuery } from "../../../api";
+
 
 const selectOptions = [
   { id: 1, name: "Option 1" },
@@ -22,6 +24,7 @@ const selectOptions = [
 export default function SeeMoreJobs() {
   const { user } = useDashboardContext();
   const [jobModal, setJobModal] = useState(false);
+
 
   const { type } = useParams();
   const {
@@ -101,6 +104,7 @@ export default function SeeMoreJobs() {
               <JobItem
                 data={job}
                 isBusiness={type?.toLowerCase() == "business-jobs"}
+                refetchJobs={jobsRefetch}
               />
             </div>
           ))}
@@ -113,6 +117,8 @@ export default function SeeMoreJobs() {
           closeModal={() => setJobModal(false)}
         />
       </Modal>
+
+   
     </div>
   );
 }

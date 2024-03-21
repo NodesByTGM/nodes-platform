@@ -1,5 +1,5 @@
 import React from "react";
-import {Button} from "../../components";
+import { Button } from "../../components";
 
 const CloseIcon = ({ close }) => {
   return (
@@ -15,16 +15,16 @@ const CloseIcon = ({ close }) => {
         <path
           d="M16 8L8 16"
           stroke="black"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M8 8L16 16"
           stroke="black"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </div>
@@ -46,8 +46,8 @@ const CheckedIcon = ({ free }: { free: boolean }) => {
           <path
             d="M14 7.25L8.5 12.75L6 10.25"
             stroke="#0C5C56"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       ) : (
@@ -62,8 +62,8 @@ const CheckedIcon = ({ free }: { free: boolean }) => {
           <path
             d="M14 7.25L8.5 12.75L6 10.25"
             stroke="white"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       )}
@@ -148,7 +148,7 @@ export default function SubscriptionAndBilling({ closeModal }) {
         "Networking Opportunities",
         "Stay Informed on Creative Trends",
       ],
-      action: () => closeModal()
+      action: () => closeModal(),
     },
     {
       type: "Pro",
@@ -163,7 +163,7 @@ export default function SubscriptionAndBilling({ closeModal }) {
         "Advanced Analytics and Insights",
         "Access to GridTools Discovery Pack (Free)",
       ],
-      action: () => closeModal()
+      action: () => closeModal(),
     },
     {
       type: "Business",
@@ -178,7 +178,7 @@ export default function SubscriptionAndBilling({ closeModal }) {
         "Access to GridTools Discovery Pack (Free)",
         "Promotion and Marketing Opportunities",
       ],
-      action: () => closeModal()
+      action: () => closeModal(),
     },
   ];
   return (

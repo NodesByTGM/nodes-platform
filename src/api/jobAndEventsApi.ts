@@ -82,6 +82,14 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+    deleteJob: builder.mutation<any, any>({
+      query: (id) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/${id}`,
+          method: "delete",
+        };
+      },
+    }),
   }),
 });
 
@@ -91,4 +99,5 @@ export const {
   useGetBusinessUserJobsQuery,
   useCreateJobMutation,
   useApplyToJobMutation,
+  useDeleteJobMutation
 } = jobAndEventsApi;

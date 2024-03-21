@@ -1,24 +1,60 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TfiLocationPin } from "react-icons/tfi";
 import { CiCalendar } from "react-icons/ci";
-import { BookMarkIcon, ItemDeleteIcon, Modal, JobPost } from "../../components";
+import {
+  BookMarkIcon,
+  ItemDeleteIcon,
+  Modal,
+  JobPost,
+  DeleteComponent,
+} from "../../components";
+import { useDeleteJobMutation } from "../../api";
+import { toast } from "react-toastify";
 export default function JobItem({
   className,
   isBusiness = false,
   data,
+  refetchJobs,
 }: {
   className?: string;
   isBusiness?: boolean;
   data?: any;
+  refetchJobs?: () => void;
 }) {
   const [viewJobOpen, setViewjobOpen] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+
   const navigate = useNavigate();
 
   const navigateToJobDetails = (id) => {
     navigate(`/dashboard/see-more/business-jobs/${id}`);
   };
+
+  const [
+    deleteRequest,
+    {
+      isSuccess: isDeleteSuccess,
+      isError: isDeleteError,
+      error: deleteError,
+      isLoading: deleteLoading,
+    },
+  ] = useDeleteJobMutation();
+
+  useEffect(() => {
+    if (isDeleteError) {
+      toast.error(deleteError?.message?.message);
+    }
+  }, [isDeleteError, deleteError]);
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      toast.success("Successfully deleted job");
+      if(refetchJobs){
+        refetchJobs()
+      }
+    }
+  }, [isDeleteSuccess]);
 
   return (
     <div
@@ -30,7 +66,7 @@ export default function JobItem({
         </div>
 
         {isBusiness ? (
-          <div className="">
+          <div onClick={() => setDeleteModal(true)} className="">
             <ItemDeleteIcon />
           </div>
         ) : (
@@ -102,6 +138,22 @@ export default function JobItem({
         <div className="">
           <JobPost details={data} closeModal={() => setViewjobOpen(false)} />
         </div>
+      </Modal>
+
+      <Modal
+        sizeClass="sm:max-w-[506px]"
+        open={deleteModal}
+        setOpen={setDeleteModal}
+      >
+        <DeleteComponent
+          title={"Delete this job post"}
+          text={`You are about to permanently  delete '${data?.name}'. Do you want to proceed?`}
+          action={() => {
+            deleteRequest(data?.id);
+          }}
+          isLoading={deleteLoading}
+          closeModal={() => setDeleteModal(false)}
+        />
       </Modal>
     </div>
   );
