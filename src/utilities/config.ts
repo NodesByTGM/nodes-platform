@@ -50,8 +50,8 @@ const API_ENDPOINTS = {
     VerifyURL: `${BASE_API_ENDPOINT}/transactions/verify`, // /:description/:reference
   },
   Uploads: {
-    UploadFile: `${BASE_API_ENDPOINT}/uploads/media`
-  }
+    UploadFile: `${BASE_API_ENDPOINT}/uploads/media`,
+  },
 };
 
 const PATHS = {
@@ -80,11 +80,11 @@ const PATHS = {
   Dashboard: {
     Base: "/dashboard",
     Dashboard: "",
-    ViewAll: '/dashboard/view-all',
-    Business: '/dashboard/business',
-    ViewDetail: '/dashboard/view-detail/:id',
-    SeeMore: '/dashboard/see-more/:type',
-    Details: '/dashboard/see-more/:type/:id',
+    ViewAll: "/dashboard/view-all",
+    Business: "/dashboard/business",
+    ViewDetail: "/dashboard/view-detail/:id",
+    SeeMore: "/dashboard/see-more/:type",
+    Details: "/dashboard/see-more/:type/:id",
     Categories: {
       Base: "/dashboard/categories",
       CategoryWithParam: "/dashboard/categories/:id",
@@ -110,8 +110,11 @@ const PATHS = {
   Contact: `${MAIN_APP_URL}/contact`,
   Community: {
     Base: "/community",
-    Overview: ''
-
+    Overview: "",
+  },
+  Spaces: {
+    Base: "/spaces",
+    Overview: "",
   },
   Career: "/career",
   Blog: "/blog",
@@ -274,13 +277,12 @@ const AppConfig = {
     ProjectName: "Ex: Actress, Actor, Director",
     ProjectDescription: "Add a short bio to showcase your best self",
     ProjectUrl: "http://",
-    JobTitle: 'Enter the title of the job here',
-    Hours: 'E.g 20',
-    JobDescription: 'Give more information about the job',
-    EventDescription: 'Give more information about the event',
-    SpaceName: 'Enter the name of the space here',
-    SpaceDescription: 'What is this space about?',
-    
+    JobTitle: "Enter the title of the job here",
+    Hours: "E.g 20",
+    JobDescription: "Give more information about the job",
+    EventDescription: "Give more information about the event",
+    SpaceName: "Enter the name of the space here",
+    SpaceDescription: "What is this space about?",
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,

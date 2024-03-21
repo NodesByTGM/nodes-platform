@@ -7,6 +7,8 @@ import { DashboardContext } from "./dashboard";
 import { IDashboardContext } from "../interfaces/dashboard";
 import { CommunityContext } from "./community";
 import { ICommunityContext } from "../interfaces/community";
+import { SpacesContext } from "./spaces";
+import { ISpacesContext } from "../interfaces/spaces";
 export const useAuth = () => {
   return useContext<IAuthContext>(AuthContext);
 };
@@ -21,4 +23,8 @@ export const useDashboardContext = () => {
 
 export const useCommunityContext = () => {
   return useContext<ICommunityContext>(CommunityContext);
+};
+
+export const useSpacesContext = () => {
+  return useContext<ISpacesContext>(SpacesContext);
 };

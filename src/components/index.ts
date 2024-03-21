@@ -79,3 +79,5 @@ export { default as SpacesCard } from "./spaces/SpacesCard.tsx";
 export { default as SpacesGrid } from "./spaces/SpacesGrid.tsx";
 export { default as EmptySection } from "./EmptySection";
 export { default as CreateSpaceForm } from "./spaces/CreateSpaceForm.tsx";
+export { default as UserPost } from "./community/UserPost.tsx";
+export { default as CommunityCard } from "./community/CommunityCard.tsx";

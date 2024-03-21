@@ -18,8 +18,8 @@
   @apply bg-[#FDFDF7] py-[64px] pl-[40px] pr-[40px];
 }
 
-.main-bg{
-  @apply bg-[#FDFDF7]
+.main-bg {
+  @apply bg-[#FDFDF7];
 }
 
 .profile-card-shadow {
@@ -31,6 +31,12 @@
   transition-duration: 0ms;
   transform: translate3d(0px, 0px, 0px);
   transition-delay: 0ms;
+}
+
+.custom-shadow {
+  /* box-shadow: 0px 4px 2px -2px #00000005; */
+
+  box-shadow: 0px 8px 4px -2px #0000000a;
 }
 
 /* .profile-forms-section {

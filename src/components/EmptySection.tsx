@@ -1,21 +1,23 @@
 import React from "react";
 import { Button } from "../components";
+import { useSpacesContext } from "../context/hooks";
 
 export default function EmptySection({
   description,
   buttonText,
   createAction,
 }) {
+  const { user } = useSpacesContext();
   return (
     <div>
       <div>
         <div className="mb-6"></div>
-        <div className="mx-auto max-w-[274px] flex flex-col justify-center items-center ">
+        <div className="mx-auto max-w-[290px] flex flex-col justify-center items-center ">
           <h3 className="capitalize text-center font-medium text-[20px] text-[#212121]">
-            Hi, Kainechukwu!
+            Hi, {user?.name}
           </h3>
           <span className="mt-2  text-center font-normal text-[20px] text-[#212121]">
-            {description}
+            {description} 
           </span>
         </div>
 

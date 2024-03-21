@@ -7,6 +7,8 @@ import {
   Category,
   Community,
   CommunityBase,
+  Spaces,
+  SpacesBase,
   DashboardBase,
   Dashboard,
   ViewAll,
@@ -74,24 +76,15 @@ export const publicRoutes: RouteObject[] = [
       {
         path: AppConfig.PATHS.Dashboard.SeeMore,
         Component: getProfile(SeeMoreJobs),
-        
       },
       {
         path: AppConfig.PATHS.Dashboard.Business,
         Component: getProfile(BusinessDashboard),
-        
       },
       {
         path: AppConfig.PATHS.Dashboard.Details,
         Component: getProfile(Details),
-        
       },
-
-      
-
-      
-
-      
     ],
   },
   {
@@ -110,16 +103,19 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Community.Overview,
         Component: getProfile(Community),
       },
-      
-
-      
-
-      
-
-      
     ],
-
   },
+  {
+    path: AppConfig.PATHS.Spaces.Base,
+    Component: getProfile(SpacesBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Spaces.Overview,
+        Component: getProfile(Spaces),
+      },
+    ],
+  },
+
   {
     path: AppConfig.PATHS.Dashboard.Profile.Base,
     Component: getProfile(ProfileBase),

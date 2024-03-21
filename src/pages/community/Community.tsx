@@ -1,54 +1,42 @@
 import React, { useState } from "react";
-import {
-  Button,
-  ButtonOutline,
-  SearchComponent,
-  SectionNavs,
-  Modal,
-  CreateSpaceForm,
-} from "../../components";
-import Discover from "./Discover";
-import Following from "./Following";
-import Created from "./Created";
+import { Button, SearchComponent, SectionNavs, Modal } from "../../components";
+import General from "./General";
+import Followed from "./Followed";
+import MyPosts from "./MyPosts";
+import { Link } from "react-router-dom";
 // import { useCommunityContext } from "../../context/hooks";
 function Community() {
   // const { user } = useCommunityContext();
-  const [createSpaceModal, setCreateSpaceModal] = useState(false);
+  const [postModal, setAddPostModal] = useState(false);
   const [navs] = useState([
     {
-      label: "Discover",
+      label: "General",
       count: null,
     },
     {
-      label: "Following",
+      label: "Followed",
       count: null,
     },
     {
-      label: "Created",
+      label: "My posts",
       count: null,
     },
   ]);
-  const [selectedNav, setSelectedNav] = useState(navs[2]);
+  const [selectedNav, setSelectedNav] = useState(navs[0]);
 
   return (
     <div>
       <div className="mb-4 flex items-start justify-between">
         <div className="mb-6 flex flex-col gap-4 text-[20px] text-[#212121]">
-          <h3 className="font-medium ">Welcome to Nodes Spaces!</h3>
+          <h3 className="font-medium ">Welcome to Nodes Community!</h3>
           <span className="font-nnormal">
-            We believe in the power of every individual's creative spark.{" "}
+            something something nice tagline about the community
           </span>
         </div>{" "}
         <div className="flex gap-4">
-          <ButtonOutline
-            onClick={() => setCreateSpaceModal(true)}
-            className={`${
-              selectedNav?.label?.toLowerCase() === "created" ? "" : "hidden"
-            }`}
-          >
-            Create a space
-          </ButtonOutline>
-          <Button className={`max-w-max`}>See Community</Button>
+          <Link to={"/spaces"}>
+            <Button className={`max-w-max`}>See Spaces</Button>
+          </Link>
         </div>
       </div>
 
@@ -65,27 +53,19 @@ function Community() {
       </div>
 
       <div className="">
-        {selectedNav?.label?.toLowerCase() == "discover" && <Discover />}
+        {selectedNav?.label?.toLowerCase() == "general" && <General />}
 
-        {selectedNav?.label?.toLowerCase() == "following" && (
-          <Following createAction={() => {}} />
-        )}
+        {selectedNav?.label?.toLowerCase() == "followed" && <Followed />}
 
-        {selectedNav?.label?.toLowerCase() == "created" && (
-          <Created
-            createAction={() => {
-              setCreateSpaceModal(true);
-            }}
-          />
-        )}
+        {selectedNav?.label?.toLowerCase() == "my posts" && <MyPosts />}
       </div>
 
       <Modal
         sizeClass="sm:max-w-[800px]"
-        open={createSpaceModal}
-        setOpen={setCreateSpaceModal}
+        open={postModal}
+        setOpen={setAddPostModal}
       >
-        <CreateSpaceForm closeModal={() => setCreateSpaceModal(false)}/>
+        Add Post
       </Modal>
     </div>
   );

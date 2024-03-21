@@ -1,7 +1,7 @@
 import { Box, Briefcase, Globe, Home, User } from "react-feather";
 import { Link } from "react-router-dom";
 import AppConfig from "../utilities/config";
-import {SearchComponent} from '../components'
+import { SearchComponent } from "../components";
 
 function Sidebar() {
   const paths = [
@@ -11,8 +11,12 @@ function Sidebar() {
       icon: <User />,
       path: AppConfig.PATHS.Dashboard.Profile.Base,
     },
-    { name: "Community", icon: <Globe />, path: AppConfig.PATHS.Community.Base },
-    { name: "For Business", icon: <Briefcase />, path: AppConfig.PATHS.Dashboard.Business },
+    { name: "Discover", icon: <Globe />, path: AppConfig.PATHS.Spaces.Base },
+    {
+      name: "For Business",
+      icon: <Briefcase />,
+      path: AppConfig.PATHS.Dashboard.Business,
+    },
     { name: "Subscriptions", icon: <Box />, path: "/" },
   ];
   return (
@@ -28,8 +32,6 @@ function Sidebar() {
         />
 
         <SearchComponent />
-
-
       </div>
       <div className="flex flex-col gap-5 ">
         {paths.map((r, i) => (
