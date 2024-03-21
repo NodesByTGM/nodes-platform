@@ -5,6 +5,7 @@ import {
   SearchComponent,
   SectionNavs,
   Modal,
+  CreateSpaceForm,
 } from "../../components";
 import Discover from "./Discover";
 import Following from "./Following";
@@ -27,11 +28,10 @@ function Community() {
       count: null,
     },
   ]);
-  const [selectedNav, setSelectedNav] = useState(navs[0]);
+  const [selectedNav, setSelectedNav] = useState(navs[2]);
 
   return (
     <div>
-     
       <div className="mb-4 flex items-start justify-between">
         <div className="mb-6 flex flex-col gap-4 text-[20px] text-[#212121]">
           <h3 className="font-medium ">Welcome to Nodes Spaces!</h3>
@@ -85,7 +85,7 @@ function Community() {
         open={createSpaceModal}
         setOpen={setCreateSpaceModal}
       >
-        Create A space
+        <CreateSpaceForm closeModal={() => setCreateSpaceModal(false)}/>
       </Modal>
     </div>
   );

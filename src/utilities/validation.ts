@@ -132,6 +132,33 @@ export type projectValidationType = {
   ];
 };
 
+export const spaceSchema = object({
+  name: string().required("Project name is a required field"),
+  category: string(),
+  description: string(),
+
+  rules: array().of(
+    object().shape({
+      title: string(),
+      description: string(),
+      ruleTitle: string(),
+    })
+  ),
+});
+
+export type spaceValidationType = {
+  name: string;
+  category: string;
+  description: string;
+  rules: [
+    {
+      title: string;
+      description: string;
+      ruleTitle: string;
+    }
+  ];
+};
+
 export const jobSchema = object({
   name: string(),
   description: string(),

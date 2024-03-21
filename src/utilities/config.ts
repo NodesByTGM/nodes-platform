@@ -277,7 +277,10 @@ const AppConfig = {
     JobTitle: 'Enter the title of the job here',
     Hours: 'E.g 20',
     JobDescription: 'Give more information about the job',
-    EventDescription: 'Give more information about the event'
+    EventDescription: 'Give more information about the event',
+    SpaceName: 'Enter the name of the space here',
+    SpaceDescription: 'What is this space about?',
+    
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,
