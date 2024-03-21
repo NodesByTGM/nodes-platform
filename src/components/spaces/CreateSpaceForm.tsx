@@ -64,7 +64,7 @@ export default function CreateSpaceForm({ closeModal }) {
   } = formik;
   return (
     <div>
-      <FormDebug form={{ values, errors, touched }} className="" />
+      <FormDebug form={{ values, errors, touched }} className="hidden" />
 
       <FormikProvider value={formik}>
         <form
