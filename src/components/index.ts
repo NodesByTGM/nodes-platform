@@ -74,6 +74,7 @@ export { default as JobPostForm } from "./JobPostForm";
 export { default as DetailsActions } from "./DetailsActions";
 export { default as SectionNavs } from "./SectionNavs";
 export { default as DeleteComponent } from "./DeleteComponent";
+export { default as EventPostForm } from "./EventPostForm";
 
 
 

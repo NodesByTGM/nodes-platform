@@ -99,6 +99,19 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+
+    getBusinessUserEvents: builder.query<any, any>({
+      query: (params) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}?${new URLSearchParams(
+            cleanObject(params)
+          )}`,
+          method: "get",
+        };
+      },
+    }),
+
+   
   }),
 });
 
@@ -109,5 +122,6 @@ export const {
   useCreateJobMutation,
   useApplyToJobMutation,
   useDeleteJobMutation,
-  useEditJobMutation
+  useEditJobMutation,
+  useGetBusinessUserEventsQuery
 } = jobAndEventsApi;

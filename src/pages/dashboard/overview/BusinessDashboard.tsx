@@ -8,10 +8,14 @@ import {
   WelcomeCard,
   Loader,
   JobPostForm,
+  EventPostForm,
   Modal,
 } from "../../../components";
 import { useNavigate } from "react-router-dom";
-import { useGetBusinessUserJobsQuery } from "../../../api";
+import {
+  useGetBusinessUserJobsQuery,
+  useGetBusinessUserEventsQuery,
+} from "../../../api";
 import BusinessDashboardEmptyState from "./BusinessDashboardEmptyState.tsx";
 import { SubscriptionAndBilling } from "../../../components";
 import BusinessDashboardSectionEmptyStates from "./BusinessDashboardSectionEmptyStates";
@@ -19,6 +23,8 @@ import BusinessDashboardSectionEmptyStates from "./BusinessDashboardSectionEmpty
 export default function BusinessDashboard() {
   const { user } = useDashboardContext();
   const [jobModal, setJobModal] = useState(false);
+  const [eventModal, setEventModal] = useState(false);
+
   const [subscriptionModal, setSubscriptionModal] = useState(false);
 
   const {
@@ -26,6 +32,12 @@ export default function BusinessDashboard() {
     refetch: jobsRefetch,
     isFetching: jobsLoading,
   } = useGetBusinessUserJobsQuery({ businessId: user?.business?.id });
+
+  const {
+    data: eventsData,
+    refetch: eventsRefetch,
+    isFetching: eventsLoading,
+  } = useGetBusinessUserEventsQuery({ businessId: user?.business?.id });
 
   const navigate = useNavigate();
   const [WelcomeCardItems] = useState([
@@ -51,6 +63,9 @@ export default function BusinessDashboard() {
     if (type == "job") {
       setJobModal(true);
     }
+    if(type == 'event')[
+      setEventModal(true)
+    ]
   };
   return (
     <div>
@@ -120,11 +135,35 @@ export default function BusinessDashboard() {
               />
             ) : null}
 
-            <CarouselSection
-              trend
-              title={`Exclusive events`}
-              description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
-            />
+            {eventsLoading && !eventsData ? (
+              <div className="my-40">
+                <Loader />
+              </div>
+            ) : null}
+
+            {(!eventsLoading && eventsData?.jobs?.length === 0) ||
+            (!eventsLoading && !eventsData) ? (
+              <div>
+                <BusinessDashboardSectionEmptyStates
+                  type="events"
+                  user={user}
+                  addJobOrEvents={() => addJobOrEvents("event")}
+                />
+              </div>
+            ) : null}
+
+            {!eventsLoading && eventsData && eventsData?.jobs?.length > 0 ? (
+              <CarouselSection
+                data={eventsData?.events || []}
+                navigateTo={() => navigate("/dashboard/see-more/business-jobs")}
+                seeMore
+                trend
+                title={`Exclusive events`}
+                description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
+              />
+            ) : null}
+
+         
           </div>
         </div>
       )}
@@ -142,6 +181,12 @@ export default function BusinessDashboard() {
         <JobPostForm
           refetchAllJobs={jobsRefetch}
           closeModal={() => setJobModal(false)}
+        />
+      </Modal>
+      <Modal sizeClass="sm:max-w-[800px]" open={eventModal} setOpen={setEventModal}>
+        <EventPostForm
+          refetchAllJobs={eventsRefetch}
+          closeModal={() => setEventModal(false)}
         />
       </Modal>
     </div>
