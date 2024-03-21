@@ -1,9 +1,18 @@
 import React, { useState } from "react";
-import { Button, SearchComponent, SectionNavs } from "../../components";
+import {
+  Button,
+  ButtonOutline,
+  SearchComponent,
+  SectionNavs,
+  Modal,
+} from "../../components";
 import Discover from "./Discover";
 import Following from "./Following";
 import Created from "./Created";
+// import { useCommunityContext } from "../../context/hooks";
 function Community() {
+  // const { user } = useCommunityContext();
+  const [createSpaceModal, setCreateSpaceModal] = useState(false);
   const [navs] = useState([
     {
       label: "Discover",
@@ -22,6 +31,7 @@ function Community() {
 
   return (
     <div>
+     
       <div className="mb-4 flex items-start justify-between">
         <div className="mb-6 flex flex-col gap-4 text-[20px] text-[#212121]">
           <h3 className="font-medium ">Welcome to Nodes Spaces!</h3>
@@ -29,7 +39,17 @@ function Community() {
             We believe in the power of every individual's creative spark.{" "}
           </span>
         </div>{" "}
-        <Button className={`max-w-max`}>See Community</Button>
+        <div className="flex gap-4">
+          <ButtonOutline
+            onClick={() => setCreateSpaceModal(true)}
+            className={`${
+              selectedNav?.label?.toLowerCase() === "created" ? "" : "hidden"
+            }`}
+          >
+            Create a space
+          </ButtonOutline>
+          <Button className={`max-w-max`}>See Community</Button>
+        </div>
       </div>
 
       <div className="mb-10 flex justify-between items-center">
@@ -47,10 +67,26 @@ function Community() {
       <div className="">
         {selectedNav?.label?.toLowerCase() == "discover" && <Discover />}
 
-        {selectedNav?.label?.toLowerCase() == "following" && <Following />}
+        {selectedNav?.label?.toLowerCase() == "following" && (
+          <Following createAction={() => {}} />
+        )}
 
-        {selectedNav?.label?.toLowerCase() == "created" && <Created />}
+        {selectedNav?.label?.toLowerCase() == "created" && (
+          <Created
+            createAction={() => {
+              setCreateSpaceModal(true);
+            }}
+          />
+        )}
       </div>
+
+      <Modal
+        sizeClass="sm:max-w-[800px]"
+        open={createSpaceModal}
+        setOpen={setCreateSpaceModal}
+      >
+        Create A space
+      </Modal>
     </div>
   );
 }

@@ -1,7 +1,11 @@
 import React from "react";
 import { Button } from "../components";
 
-export default function EmptySection({ description, buttonText }) {
+export default function EmptySection({
+  description,
+  buttonText,
+  createAction,
+}) {
   return (
     <div>
       <div>
@@ -23,7 +27,9 @@ export default function EmptySection({ description, buttonText }) {
           />
         </div>
 
-        <Button className="max-w-max mx-auto">{buttonText}</Button>
+        <Button onClick={() => createAction()} className="max-w-max mx-auto">
+          {buttonText}
+        </Button>
       </div>
     </div>
   );

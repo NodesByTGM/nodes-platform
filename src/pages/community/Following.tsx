@@ -1,7 +1,7 @@
 import React from "react";
 import { SpacesGrid, EmptySection } from "../../components";
 
-export default function Following() {
+export default function Following({createAction}) {
   const spaces = [
     {
       id: 1,
@@ -81,6 +81,8 @@ export default function Following() {
               "You are just getting started. Discover spaces to follow now."
             }
             buttonText={"Discover spaces"}
+
+            createAction={createAction}
           />
         </div>
       )}

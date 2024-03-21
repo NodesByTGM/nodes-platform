@@ -11,22 +11,18 @@ export const getClient = (
   multipart = false,
   extraHeaders = {}
 ) => {
-  // console.log("getAccessToken: " + accessToken);
-  //   console.log("getAccessToken: " + accessToken);
-
   const instance = axios.create({
     headers: {
       "Content-Type": `${
         multipart ? "multipart/form-data" : "application/json"
       }`,
       ...extraHeaders,
-      // Authorization: accessToken ? `Bearer ${accessToken}` : null,
     },
     baseURL: baseURL,
     timeout: 60000,
     // withCredentials:true
   });
-
+  //set auth header on every request to ensure its most recent auth header
   instance.interceptors.request.use(function (config) {
     const token = localStorage.getItem("bearerToken");
     config.headers["Authorization"] = "Bearer " + token;
