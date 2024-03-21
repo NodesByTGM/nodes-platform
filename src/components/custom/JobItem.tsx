@@ -45,14 +45,19 @@ export default function JobItem({
   useEffect(() => {
     if (isDeleteError) {
       toast.error(deleteError?.message?.message);
+      setDeleteModal(false)
+      if (refetchJobs) {
+        refetchJobs();
+      }
     }
   }, [isDeleteError, deleteError]);
   useEffect(() => {
     if (isDeleteSuccess) {
       toast.success("Successfully deleted job");
-      if(refetchJobs){
-        refetchJobs()
+      if (refetchJobs) {
+        refetchJobs();
       }
+      setDeleteModal(false)
     }
   }, [isDeleteSuccess]);
 
@@ -147,7 +152,7 @@ export default function JobItem({
       >
         <DeleteComponent
           title={"Delete this job post"}
-          text={`You are about to permanently  delete '${data?.name}'. Do you want to proceed?`}
+          text={`You are about to permanently delete '${data?.name}'. Do you want to proceed?`}
           action={() => {
             deleteRequest(data?.id);
           }}

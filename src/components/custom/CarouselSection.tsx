@@ -26,6 +26,7 @@ type ICarouselSection = {
   description?: string;
   data?: Array<any>;
   navigateTo?: () => void;
+  refetchJobs?: () => void
 };
 export default function CarouselSection({
   data = [],
@@ -43,6 +44,7 @@ export default function CarouselSection({
   description = "",
   navigateTo,
   children,
+  refetchJobs
 }: ICarouselSection) {
   return (
     <div className={`flex flex-col !max-w-[100%] `}>
@@ -82,6 +84,7 @@ export default function CarouselSection({
                       {job && (
                         <JobItem
                           data={item}
+                          refetchJobs={() => refetchJobs && refetchJobs()}
                           isBusiness={isBusiness}
                           className={"!w-[310px]"}
                         />

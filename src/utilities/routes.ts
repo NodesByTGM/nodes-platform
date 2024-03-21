@@ -6,6 +6,7 @@ import {
   BusinessUpgrade,
   Category,
   Community,
+  CommunityBase,
   DashboardBase,
   Dashboard,
   ViewAll,
@@ -102,8 +103,22 @@ export const publicRoutes: RouteObject[] = [
     Component: getProfile(Post),
   },
   {
-    path: AppConfig.PATHS.Community,
-    Component: getProfile(Community),
+    path: AppConfig.PATHS.Community.Base,
+    Component: getProfile(CommunityBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Community.Overview,
+        Component: getProfile(Community),
+      },
+      
+
+      
+
+      
+
+      
+    ],
+
   },
   {
     path: AppConfig.PATHS.Dashboard.Profile.Base,

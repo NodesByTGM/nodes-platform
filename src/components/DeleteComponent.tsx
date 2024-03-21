@@ -53,7 +53,7 @@ export default function DeleteComponent({
         <div onClick={() => action()} className="">
           <Button
             isLoading={isLoading}
-            className={`bg-[#D11F54] text-[#ffffff] focus:text-[#ffffff]`}
+            className={`!bg-[#D11F54] text-[#ffffff] focus:text-[#ffffff]`}
           >
             Yes, Delete
           </Button>

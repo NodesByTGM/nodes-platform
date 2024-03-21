@@ -6,14 +6,18 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 type IDetailsActions = {
-title: string;
-type?: string;
-details: any;
-jobsRefetch?: () => void
+  title: string;
+  type?: string;
+  details: any;
+  jobsRefetch?: () => void;
+};
 
-}
-
-export default function DetailsActions({ title, type, details, jobsRefetch }: IDetailsActions) {
+export default function DetailsActions({
+  title,
+  type,
+  details,
+  jobsRefetch,
+}: IDetailsActions) {
   const navigate = useNavigate();
   const [
     deleteRequest,
@@ -30,18 +34,21 @@ export default function DetailsActions({ title, type, details, jobsRefetch }: ID
   useEffect(() => {
     if (isDeleteError) {
       toast.error(deleteError?.message?.message);
+      setDeleteModal(false);
     }
   }, [isDeleteError, deleteError]);
   useEffect(() => {
     if (isDeleteSuccess) {
       toast.success("Successfully deleted job");
+      setDeleteModal(false);
+      jobsRefetch && jobsRefetch();
       navigate("/dashboard/see-more/business-jobs");
     }
   }, [isDeleteSuccess]);
 
   const edit = () => {
     if (type == "business-jobs") {
-      setEditJobOpen(true)
+      setEditJobOpen(true);
     }
   };
   const erase = () => {
@@ -92,9 +99,13 @@ export default function DetailsActions({ title, type, details, jobsRefetch }: ID
           closeModal={() => setDeleteModal(false)}
         />
       </Modal>
-      <Modal sizeClass="sm:max-w-[800px]" open={editJobOpen} setOpen={setEditJobOpen}>
+      <Modal
+        sizeClass="sm:max-w-[800px]"
+        open={editJobOpen}
+        setOpen={setEditJobOpen}
+      >
         <JobPostForm
-        details={details}
+          details={details}
           refetchAllJobs={jobsRefetch}
           closeModal={() => setEditJobOpen(false)}
         />

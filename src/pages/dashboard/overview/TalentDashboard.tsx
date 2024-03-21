@@ -4,11 +4,18 @@ import {
   HeaderAndDescription,
   WelcomeComponent,
   WelcomeCard,
+  Loader,
 } from "../../../components";
 import { useNavigate } from "react-router-dom";
+import { useGetJobsQuery } from "../../../api";
 
 export default function TalentDashboard() {
   const navigate = useNavigate();
+  const {
+    data: jobsData,
+    // refetch: jobsRefetch,
+    isFetching: jobsLoading,
+  } = useGetJobsQuery();
   const [WelcomeCardItems] = useState([
     {
       id: 1,
@@ -16,7 +23,7 @@ export default function TalentDashboard() {
       text2: "your profile",
       icon: "/img/CompleteProfile.png",
       buttonText: "Complete profile",
-      buttonLink: "profile",
+      buttonLink: "/dashboard/profile",
     },
     {
       id: 2,
@@ -24,7 +31,7 @@ export default function TalentDashboard() {
       text2: "next job",
       icon: "/img/FindJob.png",
       buttonText: "Browse Jobs",
-      buttonLink: "profile",
+      buttonLink: "/dashboard/see-more/talent-jobs",
     },
     {
       id: 3,
@@ -62,20 +69,47 @@ export default function TalentDashboard() {
           </div>
         </WelcomeComponent>
 
-        <CarouselSection
-          navigateTo={() => navigate("/dashboard/see-more/talent")}
-          seeMore
-          job
-          title={`Jobs you have applied to`}
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
-        />
-        <CarouselSection
-          navigateTo={() => navigate("/dashboard/see-more/talent")}
-          seeMore
-          job
-          title={`Jobs for you`}
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
-        />
+        {jobsLoading && !jobsData ? (
+          <div className="my-40">
+            <Loader />
+          </div>
+        ) : null}
+
+        {(!jobsLoading && jobsData?.jobs?.length === 0) ||
+        (!jobsLoading && !jobsData) ? (
+          <div>
+            {/* <BusinessDashboardSectionEmptyStates
+                  type="job"
+                  user={user}
+                  addJobOrEvents={() => addJobOrEvents("job")}
+                /> */}
+            Nothing to see
+          </div>
+        ) : null}
+
+        {!jobsLoading && jobsData && jobsData?.jobs?.length > 0 ? (
+          <CarouselSection
+            data={jobsData?.jobs || []}
+            navigateTo={() => navigate("/dashboard/see-more/talent")}
+            seeMore
+            job
+            title={`Jobs you have applied to`}
+            description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
+          />
+        ) : null}
+
+        {!jobsLoading && jobsData && jobsData?.jobs?.length > 0 ? (
+          <CarouselSection
+            data={jobsData?.jobs || []}
+            navigateTo={() => navigate("/dashboard/see-more/talent")}
+            seeMore
+            job
+            title={`Jobs for you`}
+            description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
+          />
+        ) : null}
+
+      
         <CarouselSection
           navigateTo={() => navigate("/dashboard/see-more/talent")}
           seeMore

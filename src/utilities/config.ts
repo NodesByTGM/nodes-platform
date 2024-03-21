@@ -108,7 +108,11 @@ const PATHS = {
     },
   },
   Contact: `${MAIN_APP_URL}/contact`,
-  Community: "/community",
+  Community: {
+    Base: "/community",
+    Overview: ''
+
+  },
   Career: "/career",
   Blog: "/blog",
   Partner: "/partner",

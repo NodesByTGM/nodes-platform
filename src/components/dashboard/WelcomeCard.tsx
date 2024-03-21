@@ -9,6 +9,7 @@ type IWelcomeCardProps = {
   icon?: any;
   buttonText?: string;
   buttonLink: string;
+  action?: () => void;
 };
 export default function WelcomeCard({
   text1,
@@ -16,6 +17,7 @@ export default function WelcomeCard({
   icon,
   buttonText,
   buttonLink,
+  action,
 }: IWelcomeCardProps) {
   return (
     <div className={"bg-[#ffffff] p-6 rounded-lg"}>
@@ -29,11 +31,19 @@ export default function WelcomeCard({
           </span>
           <img src={icon} alt="" className="" />
         </div>
-        <Link to={buttonLink}>
-          <Button>
-            <span className="text-base font-medium">{buttonText}</span>
-          </Button>
-        </Link>
+        {action ? (
+          
+            <Button onClick={() => action()}>
+              <span className="text-base font-medium">{buttonText}</span>
+            </Button>
+          
+        ) : (
+          <Link to={buttonLink}>
+            <Button>
+              <span className="text-base font-medium">{buttonText}</span>
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );

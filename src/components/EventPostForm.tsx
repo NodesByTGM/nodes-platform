@@ -161,7 +161,7 @@ export default function EventPostForm({
           isValid,
           details,
         }}
-        className=""
+        className="hidden"
       />
       <FormikProvider value={formik}>
         <form

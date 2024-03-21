@@ -12,7 +12,7 @@ import {
 } from "../../../components";
 import { useDashboardContext } from "../../../context/hooks";
 
-import { useGetBusinessUserJobsQuery } from "../../../api";
+import { useGetBusinessUserJobsQuery, useGetJobsQuery } from "../../../api";
 
 const selectOptions = [
   { id: 1, name: "Option 1" },
@@ -24,6 +24,11 @@ export default function SeeMoreJobs() {
   const [jobModal, setJobModal] = useState(false);
 
   const { type } = useParams();
+  const {
+    data: allJobsData,
+    refetch: allJobsRefetch,
+    isFetching: allJobsLoading,
+  } = useGetJobsQuery();
   const {
     data: jobsData,
     refetch: jobsRefetch,
@@ -120,7 +125,32 @@ export default function SeeMoreJobs() {
             </div>
           ) : null}
         </div>
-      ) : null}
+      ) : (
+        <div className="">
+          {allJobsLoading && !allJobsData ? (
+            <div className="my-40">
+              <Loader />
+            </div>
+          ) : null}
+          {!allJobsLoading && allJobsData?.jobs?.length === 0 ? (
+            <div className="text-base text-primary">Nothing to see.</div>
+          ) : null}
+
+          {!allJobsLoading && allJobsData && allJobsData?.jobs?.length > 0 ? (
+            <div className="grid grid-cols-3 gap-6">
+              {allJobsData?.jobs?.map((job) => (
+                <div key={job?.id} className="">
+                  <JobItem
+                    data={job}
+                    isBusiness={type?.toLowerCase() == "business-jobs"}
+                    refetchJobs={allJobsRefetch}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      )}
 
       <Modal sizeClass="sm:max-w-[800px]" open={jobModal} setOpen={setJobModal}>
         <JobPostForm

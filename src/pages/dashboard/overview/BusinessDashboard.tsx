@@ -40,6 +40,14 @@ export default function BusinessDashboard() {
   } = useGetBusinessUserEventsQuery({ businessId: user?.business?.id });
 
   const navigate = useNavigate();
+  const addJobOrEvents = (type) => {
+    if (type == "job") {
+      setJobModal(true);
+    }
+    if(type == 'event')[
+      setEventModal(true)
+    ]
+  };
   const [WelcomeCardItems] = useState([
     {
       id: 1,
@@ -48,6 +56,7 @@ export default function BusinessDashboard() {
       icon: "/img/Connect.png",
       buttonText: "Create a job post",
       buttonLink: "/dashboard/profile",
+      action: () => addJobOrEvents('job')
     },
     {
       id: 2,
@@ -59,14 +68,7 @@ export default function BusinessDashboard() {
     },
   ]);
 
-  const addJobOrEvents = (type) => {
-    if (type == "job") {
-      setJobModal(true);
-    }
-    if(type == 'event')[
-      setEventModal(true)
-    ]
-  };
+
   return (
     <div>
       <pre className="hidden text-blue-400 text-wrap max-w-[600px]">
@@ -101,6 +103,7 @@ export default function BusinessDashboard() {
                       icon={item.icon}
                       buttonText={item.buttonText}
                       buttonLink={item.buttonLink}
+                      action={item.action}
                     />
                   </div>
                 ))}
@@ -127,8 +130,10 @@ export default function BusinessDashboard() {
             {!jobsLoading && jobsData && jobsData?.jobs?.length > 0 ? (
               <CarouselSection
                 data={jobsData?.jobs || []}
+                refetchJobs={jobsRefetch}
                 navigateTo={() => navigate("/dashboard/see-more/business-jobs")}
                 seeMore
+                isBusiness
                 job
                 title={`Jobs by you`}
                 description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}

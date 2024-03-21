@@ -103,7 +103,7 @@ function Header() {
     };
   }, []);
   return (
-    <div className="main-bg pt-8  px-10 w-full flex justify-end items-center  ">
+    <div className="z-[99999] main-bg pt-8  px-10 w-full flex justify-end items-center  ">
       <div className=" gap-4 items-center hidden">
         <Menu className="w-[50px] cursor-pointer" />
         <div className="flex items-center gap-2">
@@ -121,7 +121,7 @@ function Header() {
         </div>
       </div>
 
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-4 items-center z-[99999]">
         <div className="md:block hidden">
           <Button
             theme={"secondary"}
