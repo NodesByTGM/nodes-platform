@@ -19,7 +19,7 @@ export default function JobDetails() {
     // refetch: jobsRefetch,
     isFetching: jobsLoading,
   } = useGetJobByIdQuery(id);
-  const [navs] = useState([
+  const [navs, setNavs] = useState([
     {
       label: "Details",
       count: null,
@@ -33,7 +33,7 @@ export default function JobDetails() {
       count: null,
     },
   ]);
-  const [selectedNav, setSelectedNav] = useState(navs[0]);
+  const [selectedNav, setSelectedNav] = useState(navs[1]);
 
   const [links, setLinks] = useState([
     {
@@ -54,6 +54,11 @@ export default function JobDetails() {
 
   useEffect(() => {
     setBreadcrumbList();
+    setNavs([
+      navs[0],
+      { ...navs[1], count: jobsData?.job?.applicants?.length },
+      navs[2],
+    ]);
   }, [jobsData]);
   return (
     <div className="">
@@ -67,7 +72,7 @@ export default function JobDetails() {
             <Breadcrumbs links={links} />
           </div>
 
-          <pre className="text-blue-400">
+          <pre className="hidden text-blue-400">
             {JSON.stringify(jobsData?.job, null, 2)}
           </pre>
 
