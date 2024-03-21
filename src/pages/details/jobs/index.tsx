@@ -16,7 +16,7 @@ export default function JobDetails() {
 
   const {
     data: jobsData,
-    // refetch: jobsRefetch,
+    refetch: jobsRefetch,
     isFetching: jobsLoading,
   } = useGetJobByIdQuery(id);
   const [navs, setNavs] = useState([
@@ -80,6 +80,7 @@ export default function JobDetails() {
             title={jobsData?.job?.name}
             type={type?.toLowerCase()}
             details={jobsData?.job}
+            jobsRefetch={jobsRefetch}
           />
 
           <SectionNavs

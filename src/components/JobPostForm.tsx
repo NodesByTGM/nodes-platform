@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { MdCancel } from "react-icons/md";
@@ -5,24 +6,44 @@ import { Button, Input, TextArea, FormDebug, LabeledSelect, TagInput } from ".";
 import AppConfig from "../utilities/config";
 import { useFormik, FormikProvider } from "formik";
 import { jobSchema, jobValidationType } from "../utilities/validation";
-import { useCreateJobMutation } from "../api";
+import { useCreateJobMutation, useEditJobMutation } from "../api";
 import { toast } from "react-toastify";
 
-export default function JobPostForm({ closeModal, refetchAllJobs = () => {} }) {
+type IJobPostForm = {
+  closeModal: () => void;
+  refetchAllJobs?: () => void;
+  details?: any;
+};
+
+export default function JobPostForm({
+  closeModal,
+  refetchAllJobs = () => {},
+  details,
+}: IJobPostForm) {
   const [
     createJob,
     {
       isLoading: createJobLoading,
       isSuccess: createJobSuccess,
       isError: createJobIsError,
-      //   error: createJobError,
+      error: createJobError,
     },
   ] = useCreateJobMutation();
 
-  const [options] = useState([
-    { id: 1, name: "Full time", value: 0 },
-    { id: 2, name: "Part time", value: 1 },
-    { id: 3, name: "Contract", value: 3 },
+  const [
+    editJob,
+    {
+      isLoading: editJobLoading,
+      isSuccess: editJobSuccess,
+      isError: editJobIsError,
+      error: editJobError,
+    },
+  ] = useEditJobMutation();
+
+  const [jobOptions] = useState([
+    { id: 1, name: "Full time", value: 0, returnValue: "FullTime" },
+    { id: 2, name: "Part time", value: 1, returnValue: "PartTime" },
+    { id: 3, name: "Contract", value: 3, returnValue: "Contract" },
   ]);
 
   const handleClickForm = (values?: any) => {
@@ -35,21 +56,27 @@ export default function JobPostForm({ closeModal, refetchAllJobs = () => {} }) {
       skills: values.skills,
       jobType: values.jobType,
     };
-    console.log(JSON.stringify(data, null, 2));
-    createJob(data);
+    // console.log(JSON.stringify(data, null, 2));
+    if (details) {
+      // console.log(JSON.stringify({ ...details, ...data }, null, 2));
+      
+      editJob({ ...details, ...data });
+    } else {
+      createJob(data);
+    }
   };
 
   const formik = useFormik<jobValidationType>({
     initialValues: {
       name: "",
       description: "",
-      hoursPerWeek: 0,
-      location: "",
       experience: "",
       payRate: 0,
       workRate: "",
       skills: [],
       jobType: 0,
+      hoursPerWeek: 0,
+      location: "",
     },
     validationSchema: jobSchema,
     validateOnBlur: true,
@@ -58,7 +85,7 @@ export default function JobPostForm({ closeModal, refetchAllJobs = () => {} }) {
 
   const {
     setFieldValue,
-    // setValues,
+    setValues,
     handleChange,
     handleSubmit,
     errors,
@@ -68,6 +95,24 @@ export default function JobPostForm({ closeModal, refetchAllJobs = () => {} }) {
     handleBlur,
   } = formik;
 
+  const handleFormPopulation = () => {
+    const data = {
+      name: details.name,
+      description: details.description,
+      experience: details.experience,
+      payRate: details.payRate,
+      workRate: details.workRate,
+      skills: details.skills,
+      jobType:
+        jobOptions.find(
+          (option) =>
+            option?.returnValue.toLowerCase() ===
+            details?.jobType?.toLowerCase()
+        )?.value || 0,
+    };
+    setValues({ ...data, hoursPerWeek: 0, location: "" });
+  };
+
   useEffect(() => {
     if (createJobSuccess) {
       toast.success("Successfully created job");
@@ -75,13 +120,33 @@ export default function JobPostForm({ closeModal, refetchAllJobs = () => {} }) {
       closeModal();
     }
   }, [createJobSuccess]);
+  useEffect(() => {
+    if (editJobSuccess) {
+      toast.success("Successfully edited job");
+      refetchAllJobs();
+      closeModal();
+    }
+  }, [editJobSuccess]);
+
+  useEffect(() => {
+    if (details) {
+      handleFormPopulation();
+    }
+  }, [details]);
 
   useEffect(() => {
     if (createJobIsError) {
-      toast.error("Something went wrong");
+      toast.error(createJobError?.message?.message || "Something went wrong");
       closeModal();
     }
-  }, [createJobIsError]);
+  }, [createJobIsError, createJobError]);
+  
+  useEffect(() => {
+    if (editJobIsError) {
+      toast.error(createJobError?.message?.message || "Something went wrong");
+      closeModal();
+    }
+  }, [editJobIsError, editJobError]);
 
   return (
     <div className={`text-[#000000]`}>
@@ -102,6 +167,7 @@ export default function JobPostForm({ closeModal, refetchAllJobs = () => {} }) {
           errors,
           touched,
           isValid,
+          details,
         }}
         className="hidden"
       />
@@ -206,7 +272,7 @@ export default function JobPostForm({ closeModal, refetchAllJobs = () => {} }) {
             <LabeledSelect
               paddingy="py-[16px]"
               defaultValue={values.jobType}
-              options={options}
+              options={jobOptions}
               onChange={(value) => setFieldValue("jobType", value.value)}
             />
           </div>
@@ -235,11 +301,15 @@ export default function JobPostForm({ closeModal, refetchAllJobs = () => {} }) {
           />
           <Button
             type="submit"
-            isLoading={createJobLoading}
+            isLoading={createJobLoading || editJobLoading}
             className={`${!isValid ? "opacity-50" : ""} `}
             disabled={!isValid}
           >
-            Create job posting
+            {details ? (
+              <span className=""> Edit job posting</span>
+            ) : (
+              <span className=""> Create job posting</span>
+            )}
           </Button>
         </form>
       </FormikProvider>

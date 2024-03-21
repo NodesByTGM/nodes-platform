@@ -1,10 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { ActionIcon, Modal, DeleteComponent } from "../components";
+import { ActionIcon, Modal, DeleteComponent, JobPostForm } from "../components";
 import { useDeleteJobMutation } from "../api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-export default function DetailsActions({ title, type, details }) {
+type IDetailsActions = {
+title: string;
+type?: string;
+details: any;
+jobsRefetch?: () => void
+
+}
+
+export default function DetailsActions({ title, type, details, jobsRefetch }: IDetailsActions) {
   const navigate = useNavigate();
   const [
     deleteRequest,
@@ -16,6 +25,7 @@ export default function DetailsActions({ title, type, details }) {
     },
   ] = useDeleteJobMutation();
   const [deleteModal, setDeleteModal] = useState(false);
+  const [editJobOpen, setEditJobOpen] = useState(false);
 
   useEffect(() => {
     if (isDeleteError) {
@@ -31,7 +41,7 @@ export default function DetailsActions({ title, type, details }) {
 
   const edit = () => {
     if (type == "business-jobs") {
-      console.log(details?.id);
+      setEditJobOpen(true)
     }
   };
   const erase = () => {
@@ -80,6 +90,13 @@ export default function DetailsActions({ title, type, details }) {
           }}
           isLoading={deleteLoading}
           closeModal={() => setDeleteModal(false)}
+        />
+      </Modal>
+      <Modal sizeClass="sm:max-w-[800px]" open={editJobOpen} setOpen={setEditJobOpen}>
+        <JobPostForm
+        details={details}
+          refetchAllJobs={jobsRefetch}
+          closeModal={() => setEditJobOpen(false)}
         />
       </Modal>
     </div>
