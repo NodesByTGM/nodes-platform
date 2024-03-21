@@ -113,7 +113,7 @@ export default function JobPost({ closeModal, details }) {
       <div className="flex justify-between gap-6">
         <div className="flex flex-col gap-6 rounded-[4px] border border-[#EFEFEF] p-4 text-[#212121] font-medium">
           <span className="text-base">Experience </span>
-          <span className="text-[20px]">{details?.business?.yoe}</span>
+          <span className="text-[20px]">{details?.experience}</span>
         </div>
         <div className="flex flex-col gap-6 rounded-[4px] border border-[#EFEFEF] p-4 text-[#212121] font-medium">
           <span className="text-base">Rate </span>

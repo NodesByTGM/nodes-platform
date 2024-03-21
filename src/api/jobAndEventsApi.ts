@@ -46,6 +46,14 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+    getJobById: builder.query<any, any>({
+      query: (id) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/${id}`,
+          method: "get",
+        };
+      },
+    }),
     getBusinessUserJobs: builder.query<any, any>({
       query: (params) => {
         return {
@@ -79,6 +87,7 @@ export const jobAndEventsApi: any = createApi({
 
 export const {
   useGetJobsQuery,
+  useGetJobByIdQuery,
   useGetBusinessUserJobsQuery,
   useCreateJobMutation,
   useApplyToJobMutation,
