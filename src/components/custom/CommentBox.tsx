@@ -2,7 +2,7 @@
 import clsx from "clsx";
 import { useState } from "react";
 import { MoreHorizontal, ThumbsDown, ThumbsUp, X } from "react-feather";
-import { Button, Checkbox,  } from "..";
+import { Button, Checkbox } from "..";
 import Avatar from "../Avatar";
 import { LabeledSelect } from "../../components";
 
@@ -113,7 +113,7 @@ function CommentBox({ opened = false, setOpened = () => {} }: any) {
               showCarret
               onSelect={handleSelect}
             /> */}
-            <LabeledSelect options={selectOptions} />
+            <LabeledSelect options={selectOptions} onChange={() => {}} />
           </div>
           <div className="">
             {Array(2)
