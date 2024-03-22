@@ -23,6 +23,7 @@ const API_ENDPOINTS = {
   },
   Job: {
     JobUrl: `${BASE_API_ENDPOINT}/jobs`,
+    MyJobsUrl: `${BASE_API_ENDPOINT}/jobs/mine`,
   },
   Project: {
     Projects: `${BASE_API_ENDPOINT}/projects`,

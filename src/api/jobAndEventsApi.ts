@@ -64,6 +64,16 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+    // Use AppConfig.API_ENDPOINTS.Job.MyJobsUrl, no need for params, 
+    // also pagination has been added to all these
+    getMyBusinessUserJobs: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Job.MyJobsUrl}`,
+          method: "get",
+        };
+      },
+    }),
     createJob: builder.mutation<any, any>({
       query: (data) => {
         return {
