@@ -1,37 +1,34 @@
 import axios from "axios";
 import { BASE_API_ENDPOINT } from "./config";
-// import {store} from "../store"; // Import your Redux store instance
 
-// Function to get the access token from the Redux store
-const getAccessToken = () => {
-  // Access the Redux store state and retrieve the access token
-//   const state = store.getState();
-  return localStorage.getItem('bearerToken')
-};
+// const getAccessToken = () => {
+
+//   return localStorage.getItem("bearerToken");
+// };
 
 export const getClient = (
   baseURL = BASE_API_ENDPOINT,
   multipart = false,
   extraHeaders = {}
 ) => {
- 
-  const accessToken = getAccessToken();
-
-  console.log("getAccessToken: " + accessToken);
-//   console.log("getAccessToken: " + accessToken);
-
   const instance = axios.create({
     headers: {
       "Content-Type": `${
         multipart ? "multipart/form-data" : "application/json"
       }`,
       ...extraHeaders,
-      Authorization: accessToken ? `Token ${accessToken}` : null,
     },
     baseURL: baseURL,
     timeout: 60000,
     // withCredentials:true
   });
+  //set auth header on every request to ensure its most recent auth header
+  instance.interceptors.request.use(function (config) {
+    const token = localStorage.getItem("bearerToken");
+    config.headers["Authorization"] = "Bearer " + token;
+    return config;
+  });
+
   instance?.interceptors?.response?.use(
     (response) => {
       return response;

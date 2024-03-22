@@ -1,7 +1,7 @@
 export const BASE_API_ENDPOINT =
   process.env.NODE_ENV === "development"
-    ? "https://nodes-server-v1.onrender.com/api/v1"
-    : "https://nodes-server-v1.onrender.com/api/v1";
+    ? "https://nodes-api.thegridmanagement.com/api/v1"
+    : "https://nodes-api.thegridmanagement.com/api/v1";
 export const MAIN_APP_URL = "https://nodes.com";
 
 const API_ENDPOINTS = {
@@ -19,7 +19,13 @@ const API_ENDPOINTS = {
     ProfileURL: `${BASE_API_ENDPOINT}/users/profile`,
   },
   Profile: {
-  UserProfile: `${BASE_API_ENDPOINT}/profile`,
+    UserProfile: `${BASE_API_ENDPOINT}/users/profile`,
+  },
+  Job: {
+    JobUrl: `${BASE_API_ENDPOINT}/jobs`,
+  },
+  Project: {
+    Projects: `${BASE_API_ENDPOINT}/projects`,
   },
   Submissions: {
     ContactURL: `${BASE_API_ENDPOINT}/submissions/contact`,
@@ -34,7 +40,7 @@ const API_ENDPOINTS = {
     BusinessURL: `${BASE_API_ENDPOINT}/onboarding/business`,
   },
   Events: {
-    BaseURL: `${BASE_API_ENDPOINT}/events/`,
+    BaseURL: `${BASE_API_ENDPOINT}/events`,
     MineURL: `${BASE_API_ENDPOINT}/events/mine`,
     CreateURL: `${BASE_API_ENDPOINT}/events/create`,
     BuyTicketURL: `${BASE_API_ENDPOINT}/events/create/buy-ticket`,
@@ -42,6 +48,9 @@ const API_ENDPOINTS = {
   },
   Transactions: {
     VerifyURL: `${BASE_API_ENDPOINT}/transactions/verify`, // /:description/:reference
+  },
+  Uploads: {
+    UploadFile: `${BASE_API_ENDPOINT}/uploads/media`,
   },
 };
 
@@ -70,6 +79,12 @@ const PATHS = {
   },
   Dashboard: {
     Base: "/dashboard",
+    Dashboard: "",
+    ViewAll: "/dashboard/view-all",
+    Business: "/dashboard/business",
+    ViewDetail: "/dashboard/view-detail/:id",
+    SeeMore: "/dashboard/see-more/:type",
+    Details: "/dashboard/see-more/:type/:id",
     Categories: {
       Base: "/dashboard/categories",
       CategoryWithParam: "/dashboard/categories/:id",
@@ -93,7 +108,14 @@ const PATHS = {
     },
   },
   Contact: `${MAIN_APP_URL}/contact`,
-  Community: "/community",
+  Community: {
+    Base: "/community",
+    Overview: "",
+  },
+  Spaces: {
+    Base: "/spaces",
+    Overview: "",
+  },
   Career: "/career",
   Blog: "/blog",
   Partner: "/partner",
@@ -114,7 +136,7 @@ export const AccountTypesObj = {
   individual: 0,
   talent: 1,
   business: 2,
-}
+};
 
 export enum OnboaringPurpose {
   NotSelected = 0,
@@ -146,9 +168,7 @@ export const DAYS = Array(31)
 
 const currentYear = new Date().getFullYear();
 const startingYear = currentYear - 100;
-const stopYear = currentYear - 18
-
-
+const stopYear = currentYear - 18;
 
 export const YEARS = Array.from(
   { length: stopYear - startingYear + 1 },
@@ -235,6 +255,8 @@ const AppConfig = {
     Businessname: "Enter your business name",
     Lastname: "Enter your last name",
     Location: "Enter your city",
+    Height: "Enter your height",
+    Age: "Enter your age",
     Username: "Enter username",
     Profession: "Profession",
     Gender: "Gender",
@@ -249,13 +271,18 @@ const AppConfig = {
     PersomalWebsite: "http://",
     Instagram: "https://www.Instagram.com/in/jane-doe/",
     X: "https://www.Twitter.com/in/jane-doe/",
-    LinkedIn: 'https://www.linkedin.com/in/jane-doe/',
-    Headline: 'Ex: Actress, Actor, Director',
-    Bio: 'Add a short bio to showcase your best self',
-    ProjectName: 'Ex: Actress, Actor, Director',
-    ProjectDescription: 'Add a short bio to showcase your best self',
-    ProjectUrl: 'http://',
-
+    LinkedIn: "https://www.linkedin.com/in/jane-doe/",
+    Headline: "Ex: Actress, Actor, Director",
+    Bio: "Add a short bio to showcase your best self",
+    ProjectName: "Ex: Actress, Actor, Director",
+    ProjectDescription: "Add a short bio to showcase your best self",
+    ProjectUrl: "http://",
+    JobTitle: "Enter the title of the job here",
+    Hours: "E.g 20",
+    JobDescription: "Give more information about the job",
+    EventDescription: "Give more information about the event",
+    SpaceName: "Enter the name of the space here",
+    SpaceDescription: "What is this space about?",
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,

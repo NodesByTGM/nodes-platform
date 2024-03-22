@@ -3,7 +3,7 @@ import AppConfig from "../utilities/config"
 
 function Footer() {
   return (
-    <div className="text-sm bg-grey-footer">
+    <div className="text-sm bg-grey-footer hidden">
       <div className="p-20 flex lg:flex-row flex-col justify-between">
         <div>
           <Link to="/">

@@ -45,9 +45,17 @@ function Login() {
             toast.success("Login successful!");
             setUser(r.data.user);
             dispatch(loginUser(r.data.user));
-            localStorage.setItem("bearerToken", r.data?.user?.accessToken);
+            const accessToken = r.data?.user?.accessToken;
+            localStorage.setItem("bearerToken", accessToken);
 
-            navigate("/dashboard/profile");
+            if (localStorage.getItem("bearerToken") == accessToken) {
+              
+              navigate("/dashboard/profile")
+            } else {
+              toast.error('Something went wrong')
+            }
+
+            // navigate("/dashboard/profile");
           } else toast.error(r.data.message);
           setSubmitLoading(false);
         })

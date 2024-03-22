@@ -1,6 +1,7 @@
 import { InputHTMLAttributes } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  id: string;
   label?: string;
   description?: string;
   flex?: boolean;
@@ -10,6 +11,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   textSize?: string;
 }
 export default function CollaboratorInput({
+  id,
+  name,
   className = "",
   value = "",
   label = "",
@@ -31,6 +34,8 @@ export default function CollaboratorInput({
         </div>
       ) : null}
       <input
+        name={name}
+        id={id}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

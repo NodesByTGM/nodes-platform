@@ -6,7 +6,16 @@ import {
   BusinessUpgrade,
   Category,
   Community,
+  CommunityBase,
+  Spaces,
+  SpacesBase,
+  DashboardBase,
   Dashboard,
+  ViewAll,
+  ViewDetail,
+  SeeMoreJobs,
+  BusinessDashboard,
+  Details,
   ForgotPassword,
   Home,
   Login,
@@ -49,7 +58,34 @@ export const publicRoutes: RouteObject[] = [
   },
   {
     path: AppConfig.PATHS.Dashboard.Base,
-    Component: getProfile(Dashboard),
+    Component: getProfile(DashboardBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Dashboard.Dashboard,
+        Component: getProfile(Dashboard),
+      },
+      {
+        path: AppConfig.PATHS.Dashboard.ViewAll,
+        Component: getProfile(ViewAll),
+      },
+      {
+        path: AppConfig.PATHS.Dashboard.ViewDetail,
+        Component: getProfile(ViewDetail),
+      },
+
+      {
+        path: AppConfig.PATHS.Dashboard.SeeMore,
+        Component: getProfile(SeeMoreJobs),
+      },
+      {
+        path: AppConfig.PATHS.Dashboard.Business,
+        Component: getProfile(BusinessDashboard),
+      },
+      {
+        path: AppConfig.PATHS.Dashboard.Details,
+        Component: getProfile(Details),
+      },
+    ],
   },
   {
     path: AppConfig.PATHS.Dashboard.Categories.CategoryWithParam,
@@ -60,9 +96,26 @@ export const publicRoutes: RouteObject[] = [
     Component: getProfile(Post),
   },
   {
-    path: AppConfig.PATHS.Community,
-    Component: getProfile(Community),
+    path: AppConfig.PATHS.Community.Base,
+    Component: getProfile(CommunityBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Community.Overview,
+        Component: getProfile(Community),
+      },
+    ],
   },
+  {
+    path: AppConfig.PATHS.Spaces.Base,
+    Component: getProfile(SpacesBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Spaces.Overview,
+        Component: getProfile(Spaces),
+      },
+    ],
+  },
+
   {
     path: AppConfig.PATHS.Dashboard.Profile.Base,
     Component: getProfile(ProfileBase),

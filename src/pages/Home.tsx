@@ -26,7 +26,7 @@ function Home() {
   };
   return (
     <div>
-      <div className="mb-4">
+      <div className="mb-4 px-10">
         {user ? (
           <p>You account is currently a {AccountTypes[user?.type]} Account</p>
         ) : (

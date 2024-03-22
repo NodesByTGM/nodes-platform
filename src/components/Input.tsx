@@ -6,6 +6,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   flex?: boolean;
   error?: string;
   touched?: boolean;
+  width?: string;
+  disabled?: boolean;
+  labelStyle?: string;
 }
 export default function Input({
   className = "",
@@ -16,17 +19,21 @@ export default function Input({
   error,
   required,
   onChange,
+  width,
+  disabled,
+  labelStyle,
   ...props
 }: InputProps) {
   return (
-    <div>
+    <div className={`${width}`}>
       {label ? (
-        <div className="font-medium text-sm mb-1">
+        <div className={`${labelStyle} font-medium text-sm mb-1`}>
           {label}
           {required ? "*" : null}
         </div>
       ) : null}
       <input
+        disabled={disabled}
         value={value}
         onChange={onChange}
         className={`w-full p-4 transition-all outline-none bg-transparent border rounded-[5px] 

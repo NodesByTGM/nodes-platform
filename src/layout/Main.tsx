@@ -1,22 +1,27 @@
-import { Outlet } from "react-router-dom"
-import { Footer, Header, SEO, Sidebar } from "../components"
+import { Outlet } from "react-router-dom";
+import { Footer, Header, SEO, Sidebar } from "../components";
 
 function Main() {
-    return (
-        <div className="">
-            <SEO />
-            <Header />
-            <div className="flex">
-                <Sidebar />
-                <div className="flex-1">
-                    <div className="">
-                        <Outlet />
-                    </div>
-                    <Footer />
-                </div>
-            </div>
+  return (
+    <div className="">
+      <SEO />
+
+      <div className="flex max-h-screen h-full">
+        <div className="lg:w-[300px] fixed h-full">
+          <Sidebar />
         </div>
-    )
+        <div className="flex-1 ml-[300px]">
+          <div className="sticky top-0">
+            <Header />
+          </div>
+          <div className="">
+            <Outlet />
+          </div>
+          <Footer />
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Main
+export default Main;

@@ -8,7 +8,8 @@ import {
 } from "react";
 import { IProfileContext } from "../interfaces/profile";
 import { useGetUserProfileQuery } from "../api";
-import { AccountTypesObj } from "../utilities";
+import { AccountTypesObj, projectModalTypes } from "../utilities";
+
 // import {
 //   // FormikHelpers,
 //    useFormik } from "formik";
@@ -22,14 +23,18 @@ const initialState = {
   setHasProject: () => {},
   projectDetailsModal: false,
   setProjectDetailsModal: () => {},
+  jobModal: false,
+  setJobModal: () => {},
   projectDetails: null,
   setProjectDetails: () => {},
-  editProjectmodal: false,
+  editProjectModal: false,
   setEditProjectModal: () => {},
   profileData: null,
   profileIsSuccess: false,
   profileLoading: false,
   profileRefetch: () => {},
+  projectAction: "add",
+  setProjectAction: () => {},
   user: null,
 };
 
@@ -48,10 +53,13 @@ const ProfileProvider = ({
   } = useGetUserProfileQuery();
 
   const user = useSelector((state: RootState) => state.user.user);
-  const [profileType, setProfileType] = useState("talent");
+  const [profileType, setProfileType] = useState("individual");
   const [hasProject, setHasProject] = useState(false);
   const [projectDetailsModal, setProjectDetailsModal] = useState(false);
-  const [editProjectmodal, setEditProjectModal] = useState(false);
+  const [editProjectModal, setEditProjectModal] = useState(false);
+  const [jobModal, setJobModal] = useState(false);
+
+  const [projectAction, setProjectAction] = useState(projectModalTypes.add);
 
   const [projectDetails, setProjectDetails] = useState(null);
 
@@ -63,14 +71,18 @@ const ProfileProvider = ({
       setHasProject,
       projectDetailsModal,
       setProjectDetailsModal,
+      jobModal,
+      setJobModal,
       projectDetails,
       setProjectDetails,
-      editProjectmodal,
+      editProjectModal,
       setEditProjectModal,
       profileData,
       profileIsSuccess,
       profileLoading,
       profileRefetch,
+      projectAction,
+      setProjectAction,
       user,
     }),
 
@@ -81,14 +93,18 @@ const ProfileProvider = ({
       setHasProject,
       projectDetailsModal,
       setProjectDetailsModal,
+      jobModal,
+      setJobModal,
       projectDetails,
       setProjectDetails,
-      editProjectmodal,
+      editProjectModal,
       setEditProjectModal,
       profileData,
       profileIsSuccess,
       profileLoading,
       profileRefetch,
+      projectAction,
+      setProjectAction,
       user,
     ]
   );
