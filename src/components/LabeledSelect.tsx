@@ -15,7 +15,8 @@ type IProps = {
   error?: any;
   touched?: boolean;
   defaultValue?: any;
-  onChange: (e) => void
+  onChange: (e) => void;
+  isSort?: boolean;
 };
 
 export default function LabeledSelect({
@@ -26,14 +27,17 @@ export default function LabeledSelect({
   error,
   touched,
   defaultValue,
-  onChange
+  onChange,
+  isSort,
 }: IProps) {
   const handlePrefill = () => {
     const defaultdata = options.find(
-      (option) => String(option?.value)?.toLowerCase() == String(defaultValue)?.toLowerCase()
+      (option) =>
+        String(option?.value)?.toLowerCase() ==
+        String(defaultValue)?.toLowerCase()
     );
-    if(!defaultdata){
-      return options[0]
+    if (!defaultdata) {
+      return options[0];
     }
 
     return defaultdata;
@@ -41,10 +45,8 @@ export default function LabeledSelect({
   const [selected, setSelected] = useState(handlePrefill());
 
   useEffect(() => {
-    onChange(selected)
-  }, [selected])
-
-
+    onChange(selected);
+  }, [selected]);
 
   return (
     <div className={`${width}`}>
@@ -63,7 +65,13 @@ export default function LabeledSelect({
                   <Listbox.Button
                     className={`${paddingy} border border-[#D6D6D6] flex items-center justify-between  gap-6 relative w-full cursor-default rounded-md bg-white px-4 py-[10.5px] text-left text-gray-900  ring-inset ring-primary outline-none ring-0 focus:outline-none focus:ring-[0.5px] sm:text-sm sm:leading-6`}
                   >
-                    <span className="block truncate">{selected.name}</span>
+                    <span className="block truncate">
+                      <span className="text-[#757575] mr-1">
+                        {isSort ? "Sort by:" : ""}
+                      </span>
+
+                      {selected.name}
+                    </span>
                     <span className="">
                       <svg
                         width="14"
