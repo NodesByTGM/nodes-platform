@@ -5,6 +5,8 @@ import {
   BusinessOnboarding,
   BusinessUpgrade,
   Category,
+  Subscription,
+  SubscriptionBase,
   Community,
   CommunityBase,
   Spaces,
@@ -112,6 +114,16 @@ export const publicRoutes: RouteObject[] = [
       {
         path: AppConfig.PATHS.Spaces.Overview,
         Component: getProfile(Spaces),
+      },
+    ],
+  },
+  {
+    path: AppConfig.PATHS.Subscription.Base,
+    Component: getProfile(SubscriptionBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Subscription.Subscription,
+        Component: getProfile(Subscription),
       },
     ],
   },

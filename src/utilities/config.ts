@@ -106,6 +106,7 @@ const PATHS = {
       EditWithParam: "/dashboard/events/edit/:id",
       Guests: "/dashboard/events/guests/",
     },
+  
   },
   Contact: `${MAIN_APP_URL}/contact`,
   Community: {
@@ -115,6 +116,10 @@ const PATHS = {
   Spaces: {
     Base: "/spaces",
     Overview: "",
+  },
+  Subscription: {
+    Base: "/subscription",
+    Subscription: "",
   },
   Career: "/career",
   Blog: "/blog",

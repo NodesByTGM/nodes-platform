@@ -17,7 +17,11 @@ function Sidebar() {
       icon: <Briefcase />,
       path: AppConfig.PATHS.Dashboard.Business,
     },
-    { name: "Subscriptions", icon: <Box />, path: "/" },
+    {
+      name: "Subscriptions",
+      icon: <Box />,
+      path: AppConfig.PATHS.Subscription.Base,
+    },
   ];
   return (
     <div className="w-full transition-all duration-300 h-full border-r border-gray-300 px-6">

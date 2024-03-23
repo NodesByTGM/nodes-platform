@@ -1,76 +1,6 @@
 import React from "react";
 import { Button } from "../../components";
-
-const CloseIcon = ({ close }) => {
-  return (
-    <div onClick={() => close()} className="max-w-max">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="24" height="24" rx="12" fill="#D9D9D9" />
-        <path
-          d="M16 8L8 16"
-          stroke="black"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M8 8L16 16"
-          stroke="black"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </div>
-  );
-};
-
-export const CheckedIcon = ({ free }: { free: boolean }) => {
-  return (
-    <div>
-      {free ? (
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="20" height="20" rx="10" fill="#EFEFEF" />
-          <path
-            d="M14 7.25L8.5 12.75L6 10.25"
-            stroke="#0C5C56"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      ) : (
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="20" height="20" rx="10" fill="#0C5C56" />
-          <path
-            d="M14 7.25L8.5 12.75L6 10.25"
-            stroke="white"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      )}
-    </div>
-  );
-};
-
+import { CheckedIcon } from "../../components/dashboard/SubscriptionAndBilling";
 const SubSection = ({ plan }) => {
   return (
     <div className="grid grid-cols-2 p-6   border border-[#D6D6D6] rounded-lg        ">
@@ -120,22 +50,25 @@ const SubSection = ({ plan }) => {
             Features:
           </span>
 
-          {plan?.features?.map((feature, index) => (
-            <div key={index} className="flex items-center gap-2">
-              <CheckedIcon
-                free={plan?.type?.toLowerCase() == "free" ? true : false}
-              />
-              <span className="font-notmel text-sm text-[#000000]">
-                {feature}
-              </span>
-            </div>
-          ))}
+          <div className="grid grid-cols-2 gap-6">
+            {plan?.features?.map((feature, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <CheckedIcon
+                  free={plan?.type?.toLowerCase() == "free" ? true : false}
+                />
+                <span className="font-notmel text-sm text-[#000000]">
+                  {feature}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 };
-export default function SubscriptionAndBilling({ closeModal }) {
+
+export default function Subscription() {
   const plans = [
     {
       type: "Free",
@@ -148,7 +81,7 @@ export default function SubscriptionAndBilling({ closeModal }) {
         "Networking Opportunities",
         "Stay Informed on Creative Trends",
       ],
-      action: () => closeModal(),
+      action: () => {},
     },
     {
       type: "Pro",
@@ -163,7 +96,7 @@ export default function SubscriptionAndBilling({ closeModal }) {
         "Advanced Analytics and Insights",
         "Access to GridTools Discovery Pack (Free)",
       ],
-      action: () => closeModal(),
+      action: () => {},
     },
     {
       type: "Business",
@@ -178,17 +111,15 @@ export default function SubscriptionAndBilling({ closeModal }) {
         "Access to GridTools Discovery Pack (Free)",
         "Promotion and Marketing Opportunities",
       ],
-      action: () => closeModal(),
+      action: () => {},
     },
   ];
   return (
-    <div className="text-[#212121]">
-      <div className="flex items-center justify-between mb-[42px] cursor-pointer">
-        <span className="font-medium text-[18px] ">
-          Subscriptions and Billing
-        </span>
-        <CloseIcon close={() => closeModal()} />
-      </div>
+    <div className="flex flex-col gap-10">
+      <h3 className="font-medium text-[#212121] text-[20px]">
+        Subscriptions and Billing
+      </h3>
+
       <div className="flex flex-col gap-6">
         {plans?.map((plan, index) => (
           <div key={index} className="">
