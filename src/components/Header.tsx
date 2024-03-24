@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from "react";
-import {ActionIcon} from '../components'
+import { ActionIcon } from "../components";
 import {
- 
   ChevronDown,
   Flag,
   LogOut,
- 
   Menu,
   Settings,
   Smartphone,
@@ -103,7 +101,7 @@ function Header() {
     };
   }, []);
   return (
-    <div className="z-[99999] main-bg pt-8  px-10 w-full flex justify-end items-center  ">
+    <div className="z-[99999] relative main-bg pt-8  px-10 w-full flex justify-end items-center  ">
       <div className=" gap-4 items-center hidden">
         <Menu className="w-[50px] cursor-pointer" />
         <div className="flex items-center gap-2">
@@ -125,7 +123,7 @@ function Header() {
         <div className="md:block hidden">
           <Button
             theme={"secondary"}
-            className="!border-grey-dark "
+            className="!border-grey-dark bg-white"
             onClick={() => setAppOpened(!appOpened)}
           >
             <div className="flex items-center gap-3">
@@ -136,8 +134,8 @@ function Header() {
           </Button>
         </div>
 
-        <ActionIcon bell/>
-        <ActionIcon mail/>
+        <ActionIcon bell bgColor='bg-[#ffffff]'/>
+        <ActionIcon mail bgColor='bg-[#ffffff]'/>
         {/* <Bell className="w-8 text-primary" />
         <Mail className="w-8 text-primary" /> */}
         <div

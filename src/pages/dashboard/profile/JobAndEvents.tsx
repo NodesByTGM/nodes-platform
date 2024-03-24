@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Modal, JobItem } from "../../../components";
+import { Card, Modal, JobItem, Loader } from "../../../components";
 import { useProfileContext } from "../../../context/hooks";
 import JobPostForm from "../../../components/JobPostForm";
 import { useGetJobsQuery } from "../../../api";
@@ -39,7 +39,9 @@ export default function JobAndEvents() {
 
         <div className="">
           {jobsLoading && !jobsData?.jobs ? (
-            <span className="">...Loading</span>
+              <div className="my-20">
+              <Loader />
+            </div>
           ) : null}
 
           {jobsData?.jobs?.length > 0 ? (

@@ -8,7 +8,7 @@ export default function SearchComponent({
   placeholder?: string;
 }) {
   return (
-    <div className={"w-full z-[-1]"}>
+    <div className={"w-full  relative"}>
       <div className="w-full relative">
         <input
           type="text"
