@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { Card, ProjectsCard, Modal } from "../../../components";
+import { Card, ProjectsCard, Modal, Loader } from "../../../components";
 import ProjectDetail from "./ProjectDetail";
 import ProjectForm from "./ProjectForm";
 import { useProfileContext } from "../../../context/hooks";
@@ -92,7 +92,12 @@ export default function Projects() {
             )}
           </div>
         ) : (
-          <div className="animate-pulse">Loading {projectLoading}</div>
+          <div className="">
+          
+            <div className="my-20">
+              <Loader />
+            </div>
+          </div>
         )}
       </Card>
       {projects?.length == 0 && (
