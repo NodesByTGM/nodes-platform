@@ -71,11 +71,12 @@ export default function JobAndEvents() {
           ) : null}
         </div>
       </Card>
-      {jobsData?.jobs && jobsData?.jobs?.length == 0 && (
+      {!jobsData?.jobs || jobsData?.jobs?.length == 0 ? (
         <div className=" w-full">
           <img src="/img/AddProjects.svg" alt="" className="w-full" />
         </div>
-      )}
+      ) : null}
+
 
       <Modal sizeClass="sm:max-w-[800px]" open={jobModal} setOpen={setJobModal}>
         <JobPostForm

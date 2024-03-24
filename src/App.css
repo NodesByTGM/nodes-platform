@@ -28,13 +28,13 @@
 */
 
 @font-face {
-    font-family: "GeneralSans-Variable";
-    src: url("./assets/fonts/GeneralSans-Variable.woff2") format("woff2"),
-        url("./assets/fonts/GeneralSans-Variable.woff") format("woff"),
-        url("./assets/fonts/GeneralSans-Variable.ttf") format("truetype");
-    font-weight: 200 700;
-    font-display: swap;
-    font-style: normal;
+  font-family: "GeneralSans-Variable";
+  src: url("./assets/fonts/GeneralSans-Variable.woff2") format("woff2"),
+    url("./assets/fonts/GeneralSans-Variable.woff") format("woff"),
+    url("./assets/fonts/GeneralSans-Variable.ttf") format("truetype");
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
 }
 
 /**
@@ -49,25 +49,28 @@
 */
 
 @font-face {
-    font-family: "GeneralSans-VariableItalic";
-    src: url("./assets/fonts/GeneralSans-VariableItalic.woff2") format("woff2"),
-        url("./assets/fonts/GeneralSans-VariableItalic.woff") format("woff"),
-        url("./assets/fonts/GeneralSans-VariableItalic.ttf") format("truetype");
-    font-weight: 200 700;
-    font-display: swap;
-    font-style: italic;
+  font-family: "GeneralSans-VariableItalic";
+  src: url("./assets/fonts/GeneralSans-VariableItalic.woff2") format("woff2"),
+    url("./assets/fonts/GeneralSans-VariableItalic.woff") format("woff"),
+    url("./assets/fonts/GeneralSans-VariableItalic.ttf") format("truetype");
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: italic;
 }
-
 
 * {
-    font-family: "GeneralSans-Variable", sans-serif !important;
+  font-family: "GeneralSans-Variable", sans-serif !important;
 }
 
-.swiper-pagination-bullet-active{
-    background: #000;
-    transition: all 0.3s ease-in-out;
+.swiper-pagination-bullet-active {
+  background: #000;
+  transition: all 0.3s ease-in-out;
 }
 
-.m{
-    background-color: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 62.92%);
+.m {
+  background-color: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.7) 62.92%
+  );
 }
