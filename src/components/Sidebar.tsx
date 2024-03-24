@@ -1,21 +1,23 @@
-import { Box, Briefcase, Globe, Home, User } from "react-feather";
-import { Link } from "react-router-dom";
+import { Box, Briefcase, Globe, Home, User, Bookmark } from "react-feather";
+import { NavLink } from "react-router-dom";
 import AppConfig from "../utilities/config";
 import { SearchComponent } from "../components";
 
 function Sidebar() {
   const paths = [
-    { name: "Home", icon: <Home />, path: AppConfig.PATHS.Dashboard.Base },
+    { name: "Dashboard", icon: <Home />, path: AppConfig.PATHS.Dashboard.Base },
     {
       name: "Profile",
       icon: <User />,
       path: AppConfig.PATHS.Dashboard.Profile.Base,
     },
     { name: "Discover", icon: <Globe />, path: AppConfig.PATHS.Spaces.Base },
+    { name: "Saved", icon: <Bookmark />, path: AppConfig.PATHS.Saved.Base },
+
     {
       name: "For Business",
       icon: <Briefcase />,
-      path: AppConfig.PATHS.Dashboard.Business,
+      path: AppConfig.PATHS.Business.Base,
     },
     {
       name: "Subscriptions",
@@ -39,14 +41,16 @@ function Sidebar() {
       </div>
       <div className="flex flex-col gap-5 ">
         {paths.map((r, i) => (
-          <Link
+          <NavLink
             to={String(r.path)}
-            className="flex gap-4 items-center hover:bg-[#F2F3F2] transition-all p-2 rounded"
+            className={({ isActive,  isPending}) =>
+              isActive ? "bg-primary text-white navLink" : isPending? 'bg-primary text-white navLink' : "navLink"
+            }
             key={i}
           >
             <div>{r.icon}</div>
             <div className="hidden lg:block">{r.name}</div>
-          </Link>
+          </NavLink>
         ))}
       </div>
     </div>

@@ -44,9 +44,7 @@ export default function BusinessDashboard() {
     if (type == "job") {
       setJobModal(true);
     }
-    if(type == 'event')[
-      setEventModal(true)
-    ]
+    if (type == "event") [setEventModal(true)];
   };
   const [WelcomeCardItems] = useState([
     {
@@ -55,8 +53,8 @@ export default function BusinessDashboard() {
       text2: "post",
       icon: "/img/Connect.png",
       buttonText: "Create a job post",
-      buttonLink: "/dashboard/profile",
-      action: () => addJobOrEvents('job')
+      buttonLink: "/profile",
+      action: () => addJobOrEvents("job"),
     },
     {
       id: 2,
@@ -64,10 +62,9 @@ export default function BusinessDashboard() {
       text2: "business profile",
       icon: "/img/CompleteProfile.png",
       buttonText: "Complete profile",
-      buttonLink: "/dashboard/profile/edit-profile",
+      buttonLink: "/profile/edit-profile",
     },
   ]);
-
 
   return (
     <div>
@@ -167,8 +164,6 @@ export default function BusinessDashboard() {
                 description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
               />
             ) : null}
-
-         
           </div>
         </div>
       )}
@@ -188,7 +183,11 @@ export default function BusinessDashboard() {
           closeModal={() => setJobModal(false)}
         />
       </Modal>
-      <Modal sizeClass="sm:max-w-[800px]" open={eventModal} setOpen={setEventModal}>
+      <Modal
+        sizeClass="sm:max-w-[800px]"
+        open={eventModal}
+        setOpen={setEventModal}
+      >
         <EventPostForm
           refetchAllJobs={eventsRefetch}
           closeModal={() => setEventModal(false)}

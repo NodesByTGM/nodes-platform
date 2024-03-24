@@ -5,6 +5,8 @@ import {
   BusinessOnboarding,
   BusinessUpgrade,
   Category,
+  Saved,
+  SavedBase,
   Subscription,
   SubscriptionBase,
   MakePayment,
@@ -91,6 +93,18 @@ export const publicRoutes: RouteObject[] = [
     ],
   },
   {
+    path: AppConfig.PATHS.Business.Base,
+    Component: getProfile(DashboardBase),
+    children: [
+   
+      {
+        path: AppConfig.PATHS.Business.Dashboard,
+        Component: getProfile(BusinessDashboard),
+      },
+     
+    ],
+  },
+  {
     path: AppConfig.PATHS.Dashboard.Categories.CategoryWithParam,
     Component: getProfile(Category),
   },
@@ -115,6 +129,16 @@ export const publicRoutes: RouteObject[] = [
       {
         path: AppConfig.PATHS.Spaces.Overview,
         Component: getProfile(Spaces),
+      },
+    ],
+  },
+  {
+    path: AppConfig.PATHS.Saved.Base,
+    Component: getProfile(SavedBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Saved.Overview,
+        Component: getProfile(Saved),
       },
     ],
   },

@@ -39,6 +39,10 @@
   box-shadow: 0px 8px 4px -2px #0000000a;
 }
 
+.navLink {
+  @apply flex gap-4 items-center active:bg-primary active:text-white hover:bg-primary hover:text-white transition-all px-4 py-2 rounded;
+}
+
 /* .profile-forms-section {
   height: calc(100vh - 144px);
 } */

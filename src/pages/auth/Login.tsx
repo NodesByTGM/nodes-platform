@@ -49,13 +49,12 @@ function Login() {
             localStorage.setItem("bearerToken", accessToken);
 
             if (localStorage.getItem("bearerToken") == accessToken) {
-              
-              navigate("/dashboard/profile")
+              navigate("/profile");
             } else {
-              toast.error('Something went wrong')
+              toast.error("Something went wrong");
             }
 
-            // navigate("/dashboard/profile");
+            // navigate("/profile");
           } else toast.error(r.data.message);
           setSubmitLoading(false);
         })
