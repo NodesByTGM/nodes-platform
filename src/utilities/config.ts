@@ -133,6 +133,7 @@ const PATHS = {
   Career: "/career",
   Blog: "/blog",
   Partner: "/partner",
+  GridTools: "/grid-tools",
   Terms: "/terms-and-conditions",
   Privacy: "/privacy-policy",
 };

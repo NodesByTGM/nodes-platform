@@ -1,4 +1,12 @@
-import { Box, Briefcase, Globe, Home, User, Bookmark } from "react-feather";
+import {
+  Box,
+  Briefcase,
+  Globe,
+  Home,
+  User,
+  Bookmark,
+  Circle,
+} from "react-feather";
 import { NavLink } from "react-router-dom";
 import AppConfig from "../utilities/config";
 import { SearchComponent } from "../components";
@@ -24,6 +32,11 @@ function Sidebar() {
       icon: <Box />,
       path: AppConfig.PATHS.Subscription.Base,
     },
+    {
+      name: "Grid Tools",
+      icon: <Circle />,
+      path: AppConfig.PATHS.GridTools,
+    },
   ];
   return (
     <div className="w-full transition-all duration-300 h-full border-r border-gray-300 px-6">
@@ -43,8 +56,12 @@ function Sidebar() {
         {paths.map((r, i) => (
           <NavLink
             to={String(r.path)}
-            className={({ isActive,  isPending}) =>
-              isActive ? "bg-primary text-white navLink" : isPending? 'bg-primary text-white navLink' : "navLink"
+            className={({ isActive, isPending }) =>
+              isActive
+                ? "bg-primary text-white navLink"
+                : isPending
+                ? "bg-primary text-white navLink"
+                : "navLink"
             }
             key={i}
           >

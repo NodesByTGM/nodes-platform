@@ -5,6 +5,7 @@ import {
   BusinessOnboarding,
   BusinessUpgrade,
   Category,
+  GridTools,
   Saved,
   SavedBase,
   Subscription,
@@ -96,12 +97,10 @@ export const publicRoutes: RouteObject[] = [
     path: AppConfig.PATHS.Business.Base,
     Component: getProfile(DashboardBase),
     children: [
-   
       {
         path: AppConfig.PATHS.Business.Dashboard,
         Component: getProfile(BusinessDashboard),
       },
-     
     ],
   },
   {
@@ -133,6 +132,10 @@ export const publicRoutes: RouteObject[] = [
     ],
   },
   {
+    path: AppConfig.PATHS.GridTools,
+    Component: GridTools,
+  },
+  {
     path: AppConfig.PATHS.Saved.Base,
     Component: getProfile(SavedBase),
     children: [
@@ -154,7 +157,6 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Subscription.MakePayment,
         Component: getProfile(MakePayment),
       },
-      
     ],
   },
 
