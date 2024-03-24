@@ -12,7 +12,7 @@ import {
   profileSchema,
   profileValidationType,
 } from "../../../utilities/validation";
-import { FormDebug } from "../../../components";
+import { FormDebug, EventPostForm } from "../../../components";
 import { toast } from "react-toastify";
 import {
   Button,
@@ -145,6 +145,18 @@ export default function EditIndividual() {
 
   const handleProjectThumbnail = (value) => {
     console.log(value);
+  };
+
+  const handleAddProject = () => {
+    const data = {
+      projectName: values.projectName,
+      description: values.description,
+      projectUrl: values.projectUrl,
+      collaborators: values.collaborators,
+      // thumbnail: values.thumbnail
+    };
+
+    console.log(JSON.stringify(data));
   };
 
   const handleClickForm = (values: any) => {
@@ -314,8 +326,6 @@ export default function EditIndividual() {
               Save and Continue
             </Button>
           </div>
-
-       
 
           <FormDebug
             form={{ values, touched, errors }}
@@ -722,7 +732,9 @@ export default function EditIndividual() {
                           <div className="w-full flex items-center justify-end">
                             <div className="max-w-max">
                               {" "}
-                              <Button>Add Projects</Button>
+                              <Button onClick={() => handleAddProject()}>
+                                Add Projects
+                              </Button>
                             </div>
                           </div>
                           <AddedProject
@@ -736,6 +748,16 @@ export default function EditIndividual() {
               </FormDiv>
             </div>
           )}
+
+          <div className="">
+            <FormDiv title="Create an event ">
+              <EventPostForm
+                isProfilePage
+                refetchEvents={() => {}}
+                closeModal={() => {}}
+              />
+            </FormDiv>
+          </div>
 
           <div ref={interactions}>
             <FormDiv title="Interactions">

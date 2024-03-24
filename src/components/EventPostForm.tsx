@@ -7,18 +7,21 @@ import AppConfig from "../utilities/config";
 import { useFormik, FormikProvider } from "formik";
 import { eventSchema, eventValidationType } from "../utilities/validation";
 import { useCreateEventMutation, useEditEventMutation } from "../api";
+import { Check } from "react-feather";
 import { toast } from "react-toastify";
 
 type IEventPostForm = {
   closeModal: () => void;
-  refetchAllJobs?: () => void;
+  refetchEvents?: () => void;
   details?: any;
+  isProfilePage?: boolean;
 };
 
 export default function EventPostForm({
   closeModal,
-  refetchAllJobs = () => {},
+  refetchEvents = () => {},
   details,
+  isProfilePage,
 }: IEventPostForm) {
   const [
     createEvent,
@@ -46,7 +49,7 @@ export default function EventPostForm({
       description: values.description,
       location: values.location,
       dateTime: "",
-      workRate: values.workRate,
+      paymentType: values.paymentType,
       thumbnail: {
         id: "",
         url: "",
@@ -68,7 +71,7 @@ export default function EventPostForm({
       description: "",
       location: "",
       dateTime: "",
-      workRate: "",
+      paymentType: "free",
       thumbnail: {
         id: "",
         url: "",
@@ -80,6 +83,7 @@ export default function EventPostForm({
   });
 
   const {
+    setFieldValue,
     setValues,
     handleChange,
     handleSubmit,
@@ -96,7 +100,7 @@ export default function EventPostForm({
       description: details.description,
       location: details.location,
       dateTime: details.dateTime,
-      workRate: details.workRate,
+      paymentType: details.paymentType,
       thumbnail: {
         id: "string",
         url: "string",
@@ -108,14 +112,14 @@ export default function EventPostForm({
   useEffect(() => {
     if (createEventSuccess) {
       toast.success("Successfully created job");
-      refetchAllJobs();
+      refetchEvents();
       closeModal();
     }
   }, [createEventSuccess]);
   useEffect(() => {
     if (editEventSuccess) {
       toast.success("Successfully edited job");
-      refetchAllJobs();
+      refetchEvents();
       closeModal();
     }
   }, [editEventSuccess]);
@@ -142,7 +146,11 @@ export default function EventPostForm({
 
   return (
     <div className={`text-[#000000]`}>
-      <div className="flex items-center justify-between mb-[32px]">
+      <div
+        className={`${
+          isProfilePage ? "hidden" : ""
+        } flex items-center justify-between mb-[32px]`}
+      >
         <span className="">Create an event</span>
 
         <div
@@ -161,7 +169,7 @@ export default function EventPostForm({
           isValid,
           details,
         }}
-        className="hidden"
+        className=""
       />
       <FormikProvider value={formik}>
         <form
@@ -237,13 +245,35 @@ export default function EventPostForm({
             </span>
 
             <div className="flex gap-4">
-              <div className="flex items-center gap-2">
-                <div className={`size-5 rounded-sm border`}></div>
+              <div
+                onClick={() => setFieldValue("paymentType", "free")}
+                className={`cursor-pointer flex items-center gap-2`}
+              >
+                <div
+                  className={`${
+                    values?.paymentType.toLowerCase() == "free"
+                      ? "bg-primary text-white"
+                      : "bg-white"
+                  }  size-5 rounded-sm border flex items-center justify-center `}
+                >
+                  <Check className="size-4" />
+                </div>
                 <span className="font-normal text-sm text-[#000000]">Free</span>
               </div>
 
-              <div className="flex items-center gap-2">
-                <div className={`size-5 rounded-sm border`}></div>
+              <div
+                onClick={() => setFieldValue("paymentType", "paid")}
+                className={` cursor-pointer flex items-center gap-2`}
+              >
+                <div
+                  className={`${
+                    values?.paymentType.toLowerCase() == "paid"
+                      ? "bg-primary text-white"
+                      : "bg-white"
+                  } size-5 rounded-sm border flex items-center justify-center `}
+                >
+                  <Check className="size-4" />
+                </div>
                 <span className="font-normal text-sm text-[#000000]">Paid</span>
               </div>
             </div>
@@ -267,7 +297,9 @@ export default function EventPostForm({
           <Button
             type="submit"
             isLoading={createEventLoading || editEventLoading}
-            className={`${!isValid ? "opacity-50" : ""} `}
+            className={`${!isValid ? "opacity-50" : ""} ${
+              isProfilePage ? "max-w-max ml-auto" : ""
+            }`}
             disabled={!isValid}
           >
             {details ? (

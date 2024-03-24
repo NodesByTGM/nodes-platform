@@ -11,7 +11,7 @@ function Main() {
           <Sidebar />
         </div>
         <div className="flex-1 ml-[300px]">
-          <div className="sticky top-0 z-[9999999999]">
+          <div className="sticky top-0 z-[9999]">
             <Header />
           </div>
           <div className="">

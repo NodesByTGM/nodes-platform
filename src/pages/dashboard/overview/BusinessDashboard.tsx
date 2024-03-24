@@ -189,7 +189,7 @@ export default function BusinessDashboard() {
         setOpen={setEventModal}
       >
         <EventPostForm
-          refetchAllJobs={eventsRefetch}
+          refetchEvents={eventsRefetch}
           closeModal={() => setEventModal(false)}
         />
       </Modal>
