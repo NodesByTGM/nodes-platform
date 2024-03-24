@@ -35,3 +35,55 @@ export const filterOptions = {
     
   ],
 };
+
+export const plans = [
+  {
+    type: "Free",
+    subPlan: "Current plan",
+    amount: "Free",
+    tenor: null,
+    supportingText: "One sentence supporting text",
+    features: [
+      "Community Engagement",
+      "Networking Opportunities",
+      "Stay Informed on Creative Trends",
+    ],
+    action: (navigate) => {
+      navigate("/subscription/free");
+    },
+  },
+  {
+    type: "Pro",
+    subPlan: "Recommended plan",
+    amount: "₦7,900",
+    tenor: "/month",
+    supportingText: "One sentence supporting text",
+    features: [
+      "Enhanced Visibility",
+      "Access to Premium Jobs 1",
+      "Expanded Project Showcase",
+      "Advanced Analytics and Insights",
+      "Access to GridTools Discovery Pack (Free)",
+    ],
+    action: (navigate) => {
+      navigate("/subscription/pro");
+    },
+  },
+  {
+    type: "Business",
+    subPlan: null,
+    amount: "₦19,800",
+    tenor: "/month",
+    supportingText: "One sentence supporting text",
+    features: [
+      "Premium Talent Pool Access",
+      "Featured Job Listings",
+      "Analytics and Performance Metrics",
+      "Access to GridTools Discovery Pack (Free)",
+      "Promotion and Marketing Opportunities",
+    ],
+    action: (navigate) => {
+      navigate("/subscription/business");
+    },
+  },
+];

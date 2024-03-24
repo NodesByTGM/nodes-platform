@@ -1,9 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Button } from "../../components";
 import { CheckedIcon } from "../../components/dashboard/SubscriptionAndBilling";
-const SubSection = ({ plan }) => {
+import { useNavigate } from "react-router-dom";
+import { plans } from "../../utilities/constants";
+export const SubSection = ({
+  plan,
+  light,
+  viewOthers,
+}: {
+  plan: any;
+  light?: boolean;
+  viewOthers?: boolean;
+}) => {
+  const navigate = useNavigate();
   return (
-    <div className="grid grid-cols-2 p-6   border border-[#D6D6D6] rounded-lg        ">
+    <div className="bg-[#ffffff] grid grid-cols-2 p-6   border border-[#D6D6D6] rounded-lg ">
       <div className="flex-1 flex flex-col border-r border-px border-[#D6D6D6] pr-8 h-full">
         <div className="flex justify-between flex-1">
           <div className="flex flex-col gap-4">
@@ -33,16 +45,23 @@ const SubSection = ({ plan }) => {
             </span>
           </div>
         </div>
-        <div onClick={() => plan.action()} className="mt-auto">
-          {plan?.type?.toLowerCase() == "free" ? (
-            <button className="flex items-center justify-center text-primary font-medium text-sm rounded h-[48px] w-full bg-[#EFEFEF]">
-              {" "}
-              Current Plan
-            </button>
-          ) : (
-            <Button className="w-full">Upgrade plan</Button>
-          )}
-        </div>
+        {!viewOthers ? (
+          <div onClick={() => plan.action(navigate)} className="mt-[53px]">
+            {plan?.type?.toLowerCase() == "free" ? (
+              <button className="flex items-center justify-center text-primary font-medium text-sm rounded h-[48px] w-full bg-[#EFEFEF]">
+                {" "}
+                Current Plan
+              </button>
+            ) : (
+              <Button className="w-full">Upgrade plan</Button>
+            )}
+          </div>
+        ) : (
+          <button className="mt-[53px] flex items-center justify-center text-primary font-medium text-sm rounded h-[48px] w-full bg-[#EFEFEF]">
+            {" "}
+            View other plans
+          </button>
+        )}
       </div>
       <div className="flex-1 pl-8 h-full">
         <div className="flex flex-col gap-6">
@@ -53,9 +72,7 @@ const SubSection = ({ plan }) => {
           <div className="grid grid-cols-2 gap-6">
             {plan?.features?.map((feature, index) => (
               <div key={index} className="flex items-center gap-2">
-                <CheckedIcon
-                  free={plan?.type?.toLowerCase() == "free" ? true : false}
-                />
+                <CheckedIcon light={light} />
                 <span className="font-notmel text-sm text-[#000000]">
                   {feature}
                 </span>
@@ -69,51 +86,6 @@ const SubSection = ({ plan }) => {
 };
 
 export default function Subscription() {
-  const plans = [
-    {
-      type: "Free",
-      subPlan: "Current plan",
-      amount: "Free",
-      tenor: null,
-      supportingText: "One sentence supporting text",
-      features: [
-        "Community Engagement",
-        "Networking Opportunities",
-        "Stay Informed on Creative Trends",
-      ],
-      action: () => {},
-    },
-    {
-      type: "Pro",
-      subPlan: "Recommended plan",
-      amount: "₦7,900",
-      tenor: "/month",
-      supportingText: "One sentence supporting text",
-      features: [
-        "Enhanced Visibility",
-        "Access to Premium Jobs 1",
-        "Expanded Project Showcase",
-        "Advanced Analytics and Insights",
-        "Access to GridTools Discovery Pack (Free)",
-      ],
-      action: () => {},
-    },
-    {
-      type: "Business",
-      subPlan: null,
-      amount: "₦19,800",
-      tenor: "/month",
-      supportingText: "One sentence supporting text",
-      features: [
-        "Premium Talent Pool Access",
-        "Featured Job Listings",
-        "Analytics and Performance Metrics",
-        "Access to GridTools Discovery Pack (Free)",
-        "Promotion and Marketing Opportunities",
-      ],
-      action: () => {},
-    },
-  ];
   return (
     <div className="flex flex-col gap-10">
       <h3 className="font-medium text-[#212121] text-[20px]">
@@ -124,7 +96,10 @@ export default function Subscription() {
         {plans?.map((plan, index) => (
           <div key={index} className="">
             {" "}
-            <SubSection plan={plan} />
+            <SubSection
+              plan={plan}
+              light={plan?.type?.toLowerCase() == "free" ? true : false}
+            />
           </div>
         ))}
       </div>

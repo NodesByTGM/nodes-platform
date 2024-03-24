@@ -84,4 +84,5 @@ export { default as CommunityCard } from "./community/CommunityCard.tsx";
 export { default as CommunityPost } from "./community/CommunityPost.tsx";
 export { default as UserPostInitials } from "./UserPostInitials";
 export { default as PostInteraction } from "./community/PostInteraction.tsx";
+export { default as PayStackIcon } from "./PayStackIcon";
 

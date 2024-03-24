@@ -53,7 +53,7 @@ const ProfileProvider = ({
   } = useGetUserProfileQuery();
 
   const user = useSelector((state: RootState) => state.user.user);
-  const [profileType, setProfileType] = useState("individual");
+  const [profileType, setProfileType] = useState("business");
   const [hasProject, setHasProject] = useState(false);
   const [projectDetailsModal, setProjectDetailsModal] = useState(false);
   const [editProjectModal, setEditProjectModal] = useState(false);

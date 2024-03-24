@@ -12,7 +12,10 @@ export default function Back({
 }) {
   const navigate = useNavigate();
   return (
-    <div className={`${className} flex gap-2 items-center `}>
+    <div
+      onClick={() => navigate(link)}
+      className={`${className} cursor-pointer  text-[#000000] flex gap-2 items-center `}
+    >
       <svg
         width="24"
         height="24"
@@ -29,12 +32,7 @@ export default function Back({
         />
       </svg>
 
-      <span
-        onClick={() => navigate(link)}
-        className=" text-base font-normal text-[#000000] cursor-pointer"
-      >
-        {text}
-      </span>
+      <span className=" text-base font-normal ">{text}</span>
     </div>
   );
 }

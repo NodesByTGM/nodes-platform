@@ -120,6 +120,7 @@ const PATHS = {
   Subscription: {
     Base: "/subscription",
     Subscription: "",
+    MakePayment: "/subscription/:plan"
   },
   Career: "/career",
   Blog: "/blog",
@@ -288,6 +289,7 @@ const AppConfig = {
     EventDescription: "Give more information about the event",
     SpaceName: "Enter the name of the space here",
     SpaceDescription: "What is this space about?",
+    CardNumber: '1234 1234 1234 1234'
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,

@@ -7,6 +7,7 @@ import {
   Category,
   Subscription,
   SubscriptionBase,
+  MakePayment,
   Community,
   CommunityBase,
   Spaces,
@@ -125,6 +126,11 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Subscription.Subscription,
         Component: getProfile(Subscription),
       },
+      {
+        path: AppConfig.PATHS.Subscription.MakePayment,
+        Component: getProfile(MakePayment),
+      },
+      
     ],
   },
 
