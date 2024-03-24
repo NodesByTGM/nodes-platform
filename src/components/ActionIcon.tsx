@@ -13,6 +13,7 @@ type ActionIconPropType = {
   share?: boolean;
   hasBorder?: boolean;
   size?: string;
+  bgColor?: string;
 };
 
 const AppDelete = () => {
@@ -141,10 +142,11 @@ export default function ActionIcon({
   share,
   hasBorder = true,
   size = "size-8",
+  bgColor=''
 }: ActionIconPropType) {
   return (
     <div
-      className={`${size} ${
+      className={`${bgColor} ${size} ${
         hasBorder ? "border border-[#000000] rounded-full" : ""
       } cursor-pointer   flex items-center justify-center`}
     >
