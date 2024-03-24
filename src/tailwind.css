@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.border-dash {
+  @apply border border-[#000000]  border-dashed border-spacing-[5px];
+}
+
+.pricing-padding {
+  @apply px-6 sm:px-[40px] lg:px-[120px];
+}
+
+.main-container {
+  @apply bg-[#FDFDF7] py-[64px] pl-[64px] pr-[80px];
+  background-image: url("/img/Dots.png");
+}
+.main-plain-container {
+  @apply bg-[#FDFDF7] py-[64px] pl-[40px] pr-[40px];
+}
+
+.main-bg {
+  @apply bg-[#FDFDF7];
+}
+
+.profile-card-shadow {
+  box-shadow: 4px 3px 10px 4px #00000008;
+}
+
+.swiper-wrapper {
+  max-width: 1000px;
+  transition-duration: 0ms;
+  transform: translate3d(0px, 0px, 0px);
+  transition-delay: 0ms;
+}
+
+.custom-shadow {
+  /* box-shadow: 0px 4px 2px -2px #00000005; */
+
+  box-shadow: 0px 8px 4px -2px #0000000a;
+}
+
+.navLink {
+  @apply flex gap-4 items-center active:bg-primary active:text-white hover:bg-primary hover:text-white transition-all px-4 py-2 rounded;
+}
+
+/* .profile-forms-section {
+  height: calc(100vh - 144px);
+} */

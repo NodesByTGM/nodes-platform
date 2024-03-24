@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import { TextareaHTMLAttributes } from 'react';
+import { TextareaHTMLAttributes } from "react";
 
 interface InputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
@@ -7,19 +6,26 @@ interface InputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   flex?: boolean;
   error?: string;
   touched?: boolean;
+  labelStyle?: string;
 }
 export default function TextArea({
-  className = '',
-  value = '',
-  label = '',
+  className = "",
+  value = "",
+  label = "",
   required,
   onChange,
+  labelStyle,
+
   ...props
 }: InputProps) {
-
   return (
     <div>
-      {label ? (<div className='font-medium text-sm mb-1'>{label}{required ? "*" : null}</div>) : null}
+      {label ? (
+        <div className={`${labelStyle} font-medium text-sm mb-1`}>
+          {label}
+          {required ? "*" : null}
+        </div>
+      ) : null}
       <textarea
         {...props}
         value={value}

@@ -1,26 +1,17 @@
 import { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
-import {
-  RouterProvider,
-  createBrowserRouter
-} from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import 'swiper/css';
-import './App.css';
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+// import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "swiper/css";
+import "./App.css";
+import "./tailwind.css";
 import AuthProvider from "./context/auth";
-import {
-  AuthLayout,
-  MainLayout,
-} from "./layout";
+import { AuthLayout, MainLayout } from "./layout";
 import { Register } from "./pages";
 import AppConfig, { BASE_API_ENDPOINT } from "./utilities/config";
-import {
-  authRoutes,
-  publicRoutes,
-  upgradeRoutes
-} from './utilities/routes';
-
+import { authRoutes, publicRoutes, upgradeRoutes } from "./utilities/routes";
+import AppWrapper from "./AppWrapper";
 const router = createBrowserRouter([
   {
     // parent route component
@@ -31,8 +22,12 @@ const router = createBrowserRouter([
       ...publicRoutes.map((route) => ({
         path: route.path,
         Component: route.Component,
-
-      }))
+        children:
+          route?.children?.map((childRoute) => ({
+            path: childRoute.path,
+            Component: childRoute.Component,
+          })) || [],
+      })),
     ],
   },
   {
@@ -43,17 +38,16 @@ const router = createBrowserRouter([
       ...authRoutes.map((route) => ({
         path: route.path,
         Component: route.Component,
-
-      }))
+      })),
     ],
   },
-  ...upgradeRoutes.map(route => ({
+  ...upgradeRoutes.map((route) => ({
     path: route.path,
     Component: route.Component,
   })),
   {
     path: AppConfig.PATHS.Auth.Register,
-    Component: Register
+    Component: Register,
   },
 ]);
 
@@ -66,17 +60,18 @@ function App() {
       .catch(() => {
         // handle the error
       });
-  }, [])
+  }, []);
   return (
     <div className="">
-      <ToastContainer />
-      <HelmetProvider>
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
-      </HelmetProvider>
+      <AppWrapper>
+        <HelmetProvider>
+          <AuthProvider>
+            <RouterProvider router={router} />
+          </AuthProvider>
+        </HelmetProvider>
+      </AppWrapper>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

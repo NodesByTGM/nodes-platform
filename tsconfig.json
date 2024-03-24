@@ -8,7 +8,7 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "Node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -19,8 +19,34 @@
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "baseUrl": ".",
+
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@context/*": ["src/context/*"],
+      "@utils/*": ["src/utils/*"]
+    }
   },
   "include": ["src"],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
+
+// {
+//   "compilerOptions": {
+//     // Existing compiler options...
+//     "baseUrl": "./src",
+//     "paths": {
+//       "@components/*": ["components/*"],
+//       "@utils/*": ["utils/*"],
+//       // Add more aliases as needed
+//     }
+//   },
+//   "include": ["src"]
+// }
