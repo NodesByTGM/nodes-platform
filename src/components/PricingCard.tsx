@@ -63,7 +63,7 @@ export default function PricingCard({ info }) {
       </div>
 
       <div
-        onClick={() => navigate("/dashboard/profile")}
+        onClick={() => navigate("/profile")}
         className="cursor-pointer bg-primary rounded-[5px] p-4"
       >
         <span className="text-white font-normal text-base">

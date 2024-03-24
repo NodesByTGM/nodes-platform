@@ -23,7 +23,7 @@ export default function TalentDashboard() {
       text2: "your profile",
       icon: "/img/CompleteProfile.png",
       buttonText: "Complete profile",
-      buttonLink: "/dashboard/profile",
+      buttonLink: "/profile",
     },
     {
       id: 2,
@@ -109,7 +109,6 @@ export default function TalentDashboard() {
           />
         ) : null}
 
-      
         <CarouselSection
           navigateTo={() => navigate("/dashboard/see-more/talent")}
           seeMore

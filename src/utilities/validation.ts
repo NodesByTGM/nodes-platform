@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { object, string, ref, bool, array, number } from "yup";
+import { object, string, ref, bool, array, number,  } from "yup";
 
 export const signupSchema = object({
   name: string().required("Name is a required field"),
@@ -157,6 +157,41 @@ export type spaceValidationType = {
       ruleTitle: string;
     }
   ];
+};
+
+export const paymentSchema = object({
+  name: string().required("Name is a required field"),
+  cardNumber: number()
+    .required("Card number is a required field")
+    .nullable()
+    .test(
+      "len",
+      "Must be exactly 12 characters",
+      (val) => String(val)?.length === 12
+    ),
+  expDate: number()
+    .required("Expiration date is a required field")
+    .nullable()
+    .test(
+      "len",
+      "Must be exactly 12 characters",
+      (val) => String(val)?.length === 12
+    ),
+  cvc: number()
+    .required("CVC is a required field")
+    .nullable()
+    .test(
+      "len",
+      "Must be exactly 12 characters",
+      (val) => String(val)?.length === 12
+    ),
+});
+
+export type paymentValidationType = {
+  name: string;
+  cardNumber: number | null | undefined;
+  expDate: number | null | undefined;
+  cvc: number | null | undefined;
 };
 
 export const jobSchema = object({

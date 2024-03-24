@@ -1,5 +1,5 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Applicants({ details }) {
   console.log(details);
@@ -54,7 +54,7 @@ export default function Applicants({ details }) {
 
                         <td className="relative whitespace-nowrap py-8 pl-3 pr-4 text-left text-sm font-medium sm:pr-0">
                           <Link
-                            to={`/dashboard/profile?${details?.id}`}
+                            to={`/profile?${details?.id}`}
                             className="text-primary hover:text-primary font-medium text-sm"
                           >
                             View profile

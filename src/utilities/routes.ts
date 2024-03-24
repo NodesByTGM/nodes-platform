@@ -5,6 +5,12 @@ import {
   BusinessOnboarding,
   BusinessUpgrade,
   Category,
+  GridTools,
+  Saved,
+  SavedBase,
+  Subscription,
+  SubscriptionBase,
+  MakePayment,
   Community,
   CommunityBase,
   Spaces,
@@ -88,6 +94,16 @@ export const publicRoutes: RouteObject[] = [
     ],
   },
   {
+    path: AppConfig.PATHS.Business.Base,
+    Component: getProfile(DashboardBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Business.Dashboard,
+        Component: getProfile(BusinessDashboard),
+      },
+    ],
+  },
+  {
     path: AppConfig.PATHS.Dashboard.Categories.CategoryWithParam,
     Component: getProfile(Category),
   },
@@ -112,6 +128,34 @@ export const publicRoutes: RouteObject[] = [
       {
         path: AppConfig.PATHS.Spaces.Overview,
         Component: getProfile(Spaces),
+      },
+    ],
+  },
+  {
+    path: AppConfig.PATHS.GridTools,
+    Component: GridTools,
+  },
+  {
+    path: AppConfig.PATHS.Saved.Base,
+    Component: getProfile(SavedBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Saved.Overview,
+        Component: getProfile(Saved),
+      },
+    ],
+  },
+  {
+    path: AppConfig.PATHS.Subscription.Base,
+    Component: getProfile(SubscriptionBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Subscription.Subscription,
+        Component: getProfile(Subscription),
+      },
+      {
+        path: AppConfig.PATHS.Subscription.MakePayment,
+        Component: getProfile(MakePayment),
       },
     ],
   },

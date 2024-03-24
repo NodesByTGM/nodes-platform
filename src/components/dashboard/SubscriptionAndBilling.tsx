@@ -31,10 +31,10 @@ const CloseIcon = ({ close }) => {
   );
 };
 
-const CheckedIcon = ({ free }: { free: boolean }) => {
+export const CheckedIcon = ({ light }: { light?: boolean }) => {
   return (
     <div>
-      {free ? (
+      {light ? (
         <svg
           width="20"
           height="20"
@@ -123,7 +123,7 @@ const SubSection = ({ plan }) => {
           {plan?.features?.map((feature, index) => (
             <div key={index} className="flex items-center gap-2">
               <CheckedIcon
-                free={plan?.type?.toLowerCase() == "free" ? true : false}
+                light={plan?.type?.toLowerCase() == "free" ? true : false}
               />
               <span className="font-notmel text-sm text-[#000000]">
                 {feature}

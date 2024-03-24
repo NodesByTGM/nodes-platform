@@ -78,6 +78,11 @@ const PATHS = {
       Base: "/upgrade/pricing",
     },
   },
+  Business: {
+    Base: "/business",
+    Dashboard: "",
+  },
+
   Dashboard: {
     Base: "/dashboard",
     Dashboard: "",
@@ -95,10 +100,10 @@ const PATHS = {
       PostWithParam: "/dashboard/posts/:id",
     },
     Profile: {
-      Base: "/dashboard/profile",
+      Base: "/profile",
       Profile: "",
-      EditProfile: "/dashboard/profile/edit-profile",
-      EditTalent: "/dashboard/profile/edit-talent",
+      EditProfile: "/profile/edit-profile",
+      EditTalent: "/profile/edit-talent",
     },
     Events: {
       Base: "/dashboard/events",
@@ -113,13 +118,23 @@ const PATHS = {
     Base: "/community",
     Overview: "",
   },
+  Saved: {
+    Base: "/saved",
+    Overview: "",
+  },
   Spaces: {
     Base: "/spaces",
     Overview: "",
   },
+  Subscription: {
+    Base: "/subscription",
+    Subscription: "",
+    MakePayment: "/subscription/:plan",
+  },
   Career: "/career",
   Blog: "/blog",
   Partner: "/partner",
+  GridTools: "/grid-tools",
   Terms: "/terms-and-conditions",
   Privacy: "/privacy-policy",
 };
@@ -284,6 +299,7 @@ const AppConfig = {
     EventDescription: "Give more information about the event",
     SpaceName: "Enter the name of the space here",
     SpaceDescription: "What is this space about?",
+    CardNumber: "1234 1234 1234 1234",
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,

@@ -16,16 +16,22 @@ export { default as Community } from "./community/Community.tsx";
 export { default as ProfileBase } from "./dashboard/profile/ProfileBase";
 export { default as Profile } from "./dashboard/profile/Profile";
 export { default as EditProfile } from "./dashboard/profile/EditProfile";
-export {default as ViewAll} from './dashboard/overview/ViewAll.tsx'
+export { default as ViewAll } from "./dashboard/overview/ViewAll.tsx";
 export { default as EditTalent } from "./dashboard/profile/EditTalent";
-export {default as SeeMoreJobs} from './dashboard/overview/SeeMoreJobs.tsx'
+export { default as SeeMoreJobs } from "./dashboard/overview/SeeMoreJobs.tsx";
 export { default as Post } from "./dashboard/Post";
 export { default as Pricing } from "./upgrades/Pricing";
-export {default as ViewDetail} from './dashboard/overview/ViewDetail'
-export {default as BusinessDashboard} from '../pages/dashboard/overview/BusinessDashboard.tsx'
-export {default as Details } from '../pages/details/index.tsx'
-export {default as CommunityBase} from './community/CommunityBase.tsx'
-export {default as SpacesBase} from './spaces/SpacesBase.tsx'
-export {default as Spaces} from './spaces/Spaces.tsx'
+export { default as ViewDetail } from "./dashboard/overview/ViewDetail";
+export { default as BusinessDashboard } from "../pages/dashboard/overview/BusinessDashboard.tsx";
+export { default as Details } from "../pages/details/index.tsx";
+export { default as CommunityBase } from "./community/CommunityBase.tsx";
+export { default as SpacesBase } from "./spaces/SpacesBase.tsx";
+export { default as Spaces } from "./spaces/Spaces.tsx";
+export { default as SubscriptionBase } from "./subscription/SubscriptionBase.tsx";
+export { default as Subscription } from "./subscription/Subscription.tsx";
+export { default as MakePayment } from "./subscription/MakePayment.tsx";
+export { default as SavedBase } from "./saved/SavedBase.tsx";
+export { default as Saved } from "./saved/Saved.tsx";
+export { default as GridTools } from "./grid-tools/GridTools.tsx";
 
 
