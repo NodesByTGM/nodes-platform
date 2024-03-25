@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { ActionIcon, Modal, DeleteComponent, JobPostForm } from "../components";
-import { useDeleteJobMutation } from "../api";
+import {
+  ActionIcon,
+  Modal,
+  DeleteComponent,
+  JobPostForm,
+  EventPostForm,
+} from "../components";
+import { useDeleteJobMutation, useDeleteEventMutation } from "../api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +16,7 @@ type IDetailsActions = {
   type?: string;
   details: any;
   jobsRefetch?: () => void;
+  eventsRefetch?: () => void;
 };
 
 export default function DetailsActions({
@@ -17,6 +24,7 @@ export default function DetailsActions({
   type,
   details,
   jobsRefetch,
+  eventsRefetch,
 }: IDetailsActions) {
   const navigate = useNavigate();
   const [
@@ -28,33 +36,82 @@ export default function DetailsActions({
       isLoading: deleteLoading,
     },
   ] = useDeleteJobMutation();
+
+  const [
+    deleteEventRequest,
+    {
+      isSuccess: isDeleteEventSuccess,
+      isError: isDeleteEventError,
+      error: deleteEventError,
+      isLoading: deleteEventLoading,
+    },
+  ] = useDeleteEventMutation();
+
+  const handleDelete = () => {
+    if (type == "business-jobs") {
+      deleteRequest(details?.id);
+    }
+    if (type == "business-events") {
+      deleteEventRequest(details?.id);
+    }
+  };
   const [deleteModal, setDeleteModal] = useState(false);
   const [editJobOpen, setEditJobOpen] = useState(false);
+  const [editEventOpen, setEditEventOpen] = useState(false);
 
+  //jobs
   useEffect(() => {
     if (isDeleteError) {
       toast.error(deleteError?.message?.message);
       setDeleteModal(false);
     }
   }, [isDeleteError, deleteError]);
+
   useEffect(() => {
     if (isDeleteSuccess) {
       toast.success("Successfully deleted job");
       setDeleteModal(false);
-      jobsRefetch && jobsRefetch();
-      navigate("/dashboard/see-more/business-jobs");
+      if (type == "business-jobs") {
+        jobsRefetch && jobsRefetch();
+      }
+
+      navigate(`/dashboard/see-more/${type}`);
     }
   }, [isDeleteSuccess]);
+
+  //events
+  useEffect(() => {
+    if (isDeleteEventError) {
+      toast.error(deleteEventError?.message?.message);
+      setDeleteModal(false);
+    }
+  }, [isDeleteEventError, deleteEventError]);
+
+  useEffect(() => {
+    if (isDeleteEventSuccess) {
+      toast.success("Successfully deleted event");
+      setDeleteModal(false);
+
+      if (type == "business-events") {
+        eventsRefetch && eventsRefetch();
+      }
+      navigate(`/dashboard/see-more/${type}`);
+    }
+  }, [isDeleteEventSuccess]);
 
   const edit = () => {
     if (type == "business-jobs") {
       setEditJobOpen(true);
     }
+
+    if (type == "business-events") {
+      setEditEventOpen(true);
+    }
   };
   const erase = () => {
-    if (type == "business-jobs") {
-      setDeleteModal(true);
-    }
+    // if (type == "business-jobs") {
+    setDeleteModal(true);
+    // }
   };
   const share = () => {
     if (type == "business-jobs") {
@@ -93,9 +150,9 @@ export default function DetailsActions({
           title={"Delete this job post"}
           text={`You are about to permanently  delete '${details?.name}'. Do you want to proceed?`}
           action={() => {
-            deleteRequest(details?.id);
+            handleDelete();
           }}
-          isLoading={deleteLoading}
+          isLoading={deleteLoading || deleteEventLoading}
           closeModal={() => setDeleteModal(false)}
         />
       </Modal>
@@ -107,6 +164,18 @@ export default function DetailsActions({
         <JobPostForm
           details={details}
           refetchAllJobs={jobsRefetch}
+          closeModal={() => setEditJobOpen(false)}
+        />
+      </Modal>
+
+      <Modal
+        sizeClass="sm:max-w-[800px]"
+        open={editEventOpen}
+        setOpen={setEditEventOpen}
+      >
+        <EventPostForm
+          details={details}
+          refetchEvents={eventsRefetch}
           closeModal={() => setEditJobOpen(false)}
         />
       </Modal>

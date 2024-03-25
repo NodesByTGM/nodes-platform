@@ -48,7 +48,7 @@ export default function EventPostForm({
       name: values.name,
       description: values.description,
       location: values.location,
-      dateTime: "",
+      dateTime: values.dateTime,
       paymentType: values.paymentType,
       thumbnail: {
         id: "",
@@ -111,14 +111,14 @@ export default function EventPostForm({
 
   useEffect(() => {
     if (createEventSuccess) {
-      toast.success("Successfully created job");
+      toast.success("Successfully created event");
       refetchEvents();
       closeModal();
     }
   }, [createEventSuccess]);
   useEffect(() => {
     if (editEventSuccess) {
-      toast.success("Successfully edited job");
+      toast.success("Successfully edited event");
       refetchEvents();
       closeModal();
     }

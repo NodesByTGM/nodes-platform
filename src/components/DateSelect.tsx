@@ -1,5 +1,8 @@
-import { InputHTMLAttributes } from "react";
-
+import React, {
+  InputHTMLAttributes,
+  // useEffect, useState
+} from "react";
+// import moment from "moment";
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   description?: string;
@@ -9,6 +12,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: string;
   disabled?: boolean;
   labelStyle?: string;
+  value?: string;
 }
 export default function DateSelect({
   className = "",
@@ -24,8 +28,16 @@ export default function DateSelect({
   labelStyle,
   ...props
 }: InputProps) {
+  // const [defaultVal, setDefaultVal] = useState('');
+  // useEffect(() => {
+  //   if (value) {
+  //     setDefaultVal(moment(value).format("yyyy/mm/DD"));
+  //   }
+  // }, [value]);
   return (
     <div className={`${width}`}>
+      {/* {defaultVal}
+      {moment(value).format("yyyy/mm/DD")} */}
       {label ? (
         <div className={`${labelStyle} font-medium text-sm mb-1`}>
           {label}
@@ -33,7 +45,7 @@ export default function DateSelect({
         </div>
       ) : null}
       <input
-      type='date'
+        type="date"
         disabled={disabled}
         value={value}
         onChange={onChange}

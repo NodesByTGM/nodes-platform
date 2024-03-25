@@ -157,9 +157,10 @@ export default function BusinessDashboard() {
             {!eventsLoading && eventsData && eventsData?.events?.length > 0 ? (
               <CarouselSection
                 data={eventsData?.events || []}
-                navigateTo={() => navigate("/dashboard/see-more/business-jobs")}
+                refetchEvents={eventsRefetch}
+                navigateTo={() => navigate("/dashboard/see-more/business-events")}
                 seeMore
-                trend
+                event
                 title={`Exclusive events`}
                 description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
               />
