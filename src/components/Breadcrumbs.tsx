@@ -27,7 +27,7 @@ export default function Breadcrumbs({
               idx == 0 ? "text-[#757575]" : "font-medium text-[#212121]"
             }  ${
               item.url !== "#" ? " cursor-pointer" : ""
-            } font-normal text-sm    rounded first-of-type:cursor-pointer relative text-[#8F8F8F]  last-of-type:text-[#636363] after:absolute after:content-[''] after:right-[-16px] after:top-1/2 after:translate-y-[-50%] after:w-2 after:h-2 after:border-b-2 after:border-r-2 after:border-[#636363] after:-rotate-45 last-of-type:after:content-none`}
+            } capitalize  font-normal text-sm    rounded first-of-type:cursor-pointer relative text-[#8F8F8F]  last-of-type:text-[#636363] after:absolute after:content-[''] after:right-[-16px] after:top-1/2 after:translate-y-[-50%] after:w-2 after:h-2 after:border-b-2 after:border-r-2 after:border-[#636363] after:-rotate-45 last-of-type:after:content-none`}
           >
             <span>{item.title}</span>
           </li>

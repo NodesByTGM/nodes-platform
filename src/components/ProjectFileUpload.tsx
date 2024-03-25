@@ -5,7 +5,7 @@ import { convertToBase64 } from "../utilities/common";
 // import AppConfig from "../utilities/config";
 // import { mainClient } from "../utilities/client";
 // import AppConfig from "../utilities/config";
-
+import { Loader } from "../components";
 import { toast } from "react-toastify";
 import { InputHTMLAttributes } from "react";
 
@@ -48,7 +48,6 @@ export default function ProjectFileUpload({
     const files = e.target.files;
     console.log("My upload: " + JSON.stringify(files), null, 2);
     setSelectedFile(files[0]);
-  
   };
 
   const handleFileConversion = async () => {
@@ -94,7 +93,6 @@ export default function ProjectFileUpload({
     };
   };
 
-
   return (
     <div>
       {label ? (
@@ -109,9 +107,9 @@ export default function ProjectFileUpload({
         className="border-dash cursor-pointer flex flex-col gap-[10px] px-6 py-[53px] rounded-[5px] items-center justify-center"
       >
         {uploadFileLoading ? (
-          <span className="text-[16px] animate-pulse text-primary font-normal">
-            Uploading...
-          </span>
+          <div className="">
+            <Loader />
+          </div>
         ) : (
           <div className="min-h-[42px]">
             {!value ? (

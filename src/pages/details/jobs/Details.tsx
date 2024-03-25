@@ -2,6 +2,8 @@ import React from "react";
 import { PiSuitcase } from "react-icons/pi";
 import { TfiLocationPin } from "react-icons/tfi";
 import { CiCalendar } from "react-icons/ci";
+import { formatDate } from "../../../utilities";
+
 export default function Details({ details }) {
   return (
     <div>
@@ -42,7 +44,7 @@ export default function Details({ details }) {
             <span className="">
               <CiCalendar />
             </span>
-            <span className="font-medium text-base">{details?.workRate}</span>
+            <span className="font-medium text-base">{formatDate(details?.workRate)}</span>
           </div>
 
           <div className="flex items-center gap-2">

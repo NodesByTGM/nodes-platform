@@ -81,6 +81,8 @@ function Register() {
           setUser(r.data.user);
           dispatch(loginUser(r.data.user));
           const accessToken = r.data?.user?.accessToken;
+          
+          console.log(JSON.stringify(accessToken))
           localStorage.setItem("bearerToken", accessToken);
           
           if (localStorage.getItem("bearerToken") == accessToken) {

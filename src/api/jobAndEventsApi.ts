@@ -15,28 +15,7 @@ export const jobAndEventsApi: any = createApi({
     }
   },
   endpoints: (builder) => ({
-    // /api/v1/jobs/
-    // Create a new job
 
-    // GET
-    // /api/v1/jobs/
-    // Get all jobs
-
-    // GET
-    // /api/v1/jobs/{id}
-    // Get a specific job by ID
-
-    // PUT
-    // /api/v1/jobs/{id}
-    // Update a specific job by ID
-
-    // DELETE
-    // /api/v1/jobs/{id}
-    // Delete a specific job by ID
-
-    // POST
-    // /api/v1/jobs/apply/{id}
-    // Apply to a specific job by ID
 
     getJobs: builder.query<any, any>({
       query: () => {
@@ -121,6 +100,26 @@ export const jobAndEventsApi: any = createApi({
       },
     }),
 
+    getEvents: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}`,
+          method: "get",
+        };
+      },
+    }),
+
+    getEventById: builder.query<any, any>({
+      query: (id) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/${id}`,
+          method: "get",
+        };
+      },
+    }),
+    
+ 
+
     createEvent: builder.mutation<any, any>({
       query: (data) => {
         return {
@@ -141,6 +140,15 @@ export const jobAndEventsApi: any = createApi({
       },
     }),
 
+    deleteEvent: builder.mutation<any, any>({
+      query: (id) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/${id}`,
+          method: "delete",
+        };
+      },
+    }),
+
    
   }),
 });
@@ -153,8 +161,11 @@ export const {
   useApplyToJobMutation,
   useDeleteJobMutation,
   useEditJobMutation,
+  useGetEventsQuery,
   useGetBusinessUserEventsQuery,
   useCreateEventMutation,
   useEditEventMutation,
+  useGetEventByIdQuery,
+  useDeleteEventMutation
 
 } = jobAndEventsApi;

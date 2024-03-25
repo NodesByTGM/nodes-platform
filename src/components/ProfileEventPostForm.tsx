@@ -17,7 +17,7 @@ type IEventPostForm = {
   isProfilePage?: boolean;
 };
 
-export default function EventPostForm({
+export default function ProfileEventPostForm({
   closeModal,
   refetchEvents = () => {},
   details,
@@ -55,7 +55,7 @@ export default function EventPostForm({
         url: "",
       },
     };
-    // console.log(JSON.stringify(data, null, 2));
+    console.log(JSON.stringify(data, null, 2));
     if (details) {
       // console.log(JSON.stringify({ ...details, ...data }, null, 2));
 
@@ -172,11 +172,8 @@ export default function EventPostForm({
         className="hidden"
       />
       <FormikProvider value={formik}>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
+        <div
+        
           className="flex flex-col gap-6"
         >
           <div className="w-full">
@@ -297,6 +294,10 @@ export default function EventPostForm({
           </div>
 
           <Button
+          onClick={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
             type="submit"
             isLoading={createEventLoading || editEventLoading}
             className={`${!isValid ? "opacity-50" : ""} ${
@@ -310,7 +311,7 @@ export default function EventPostForm({
               <span className=""> Create event</span>
             )}
           </Button>
-        </form>
+        </div>
       </FormikProvider>
     </div>
   );

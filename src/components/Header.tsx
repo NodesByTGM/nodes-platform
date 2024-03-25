@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { Button, Searchbar } from ".";
 import { useAuth } from "../context/hooks";
 import Avatar from "./Avatar";
+import { LogoutComponent } from "././../components";
 
 function QRCode() {
   return (
@@ -101,7 +102,7 @@ function Header() {
     };
   }, []);
   return (
-    <div className="z-[99999] relative main-bg pt-8  px-10 w-full flex justify-end items-center  ">
+    <div className="z-[99] relative main-bg pt-8  px-10 w-full flex justify-end items-center  ">
       <div className=" gap-4 items-center hidden">
         <Menu className="w-[50px] cursor-pointer" />
         <div className="flex items-center gap-2">
@@ -119,7 +120,7 @@ function Header() {
         </div>
       </div>
 
-      <div className="flex gap-4 items-center z-[99999]">
+      <div className="flex gap-4 items-center z-[99]">
         <div className="md:block hidden">
           <Button
             theme={"secondary"}
@@ -134,8 +135,8 @@ function Header() {
           </Button>
         </div>
 
-        <ActionIcon bell bgColor='bg-[#ffffff]'/>
-        <ActionIcon mail bgColor='bg-[#ffffff]'/>
+        <ActionIcon bell bgColor="bg-[#ffffff]" />
+        <ActionIcon mail bgColor="bg-[#ffffff]" />
         {/* <Bell className="w-8 text-primary" />
         <Mail className="w-8 text-primary" /> */}
         <div
@@ -154,7 +155,7 @@ function Header() {
                 <Flag /> <span>Report Issue</span>
               </div>
               <div className="flex items-center gap-2 p-2 hover:bg-primary-light opacity-70 hover:opacity-100 transition-all ">
-                <LogOut /> <span>Sign Out</span>
+                <LogOut /> <LogoutComponent><span>Sign Out</span></LogoutComponent>
               </div>
             </div>
           ) : null}

@@ -222,7 +222,7 @@ export const eventSchema = object({
   description: string(),
   location: string(),
   dateTime: string(),
-  workRate: string(),
+  paymentType: string(),
   thumbnail: object().shape({
     id: string(),
     url: string(),
@@ -233,7 +233,7 @@ export type eventValidationType = {
   description: string;
   location: string;
   dateTime: string;
-  workRate: string;
+  paymentType: string;
   thumbnail: {
     id: string;
     url: string;

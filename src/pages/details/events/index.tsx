@@ -8,40 +8,36 @@ import {
   Loader,
 } from "../../../components";
 import Details from "./Details";
-import Applicants from "./Applicants";
-import Analytics from "./Analytics";
-import { useGetJobByIdQuery } from "../../../api";
-export default function JobDetails() {
+import Saves from "./Saves";
+import { useGetEventByIdQuery } from "../../../api";
+export default function EventDetails() {
   const { type, id } = useParams();
 
   const {
-    data: jobsData,
-    refetch: jobsRefetch,
-    isFetching: jobsLoading,
-  } = useGetJobByIdQuery(id);
+    data: eventsData,
+    refetch: eventsRefetch,
+    isFetching: eventsLoading,
+  } = useGetEventByIdQuery(id);
   const [navs, setNavs] = useState([
-    {id: 1,
+    {
+      id: 1,
       label: "Details",
       count: null,
     },
     {
       id: 2,
-      label: "Applicants",
+      label: "Saves",
       count: null,
     },
-    {
-      id: 3,
-      label: "Analytics",
-      count: null,
-    },
+  
   ]);
   const [selectedNav, setSelectedNav] = useState(navs[0]);
 
   const [links, setLinks] = useState([
     {
       id: 1,
-      title: "Jobs by you",
-      url: "/dashboard/see-more/business-jobs",
+      title: "Events by you",
+      url: "/dashboard/see-more/business-events",
     },
     {
       id: 2,
@@ -51,20 +47,20 @@ export default function JobDetails() {
   ]);
 
   const setBreadcrumbList = () => {
-    setLinks([links[0], { ...links[1], title: jobsData?.job?.name }]);
+    setLinks([links[0], { ...links[1], title: eventsData?.event?.name }]);
   };
 
   useEffect(() => {
     setBreadcrumbList();
     setNavs([
       navs[0],
-      { ...navs[1], count: jobsData?.job?.applicants?.length },
+      { ...navs[1], count: eventsData?.event?.saves?.length },
       navs[2],
     ]);
-  }, [jobsData]);
+  }, [eventsData]);
   return (
     <div className="">
-      {jobsLoading ? (
+      {eventsLoading ? (
         <div className="my-40 mx-auto">
           <Loader />
         </div>
@@ -75,14 +71,14 @@ export default function JobDetails() {
           </div>
 
           <pre className="hidden text-blue-400">
-            {JSON.stringify(jobsData?.job, null, 2)}
+            {JSON.stringify(eventsData?.event, null, 2)}
           </pre>
 
           <DetailsActions
-            title={jobsData?.job?.name}
+            title={eventsData?.event?.name}
             type={type?.toLowerCase()}
-            details={jobsData?.job}
-            jobsRefetch={jobsRefetch}
+            details={eventsData?.event}
+            eventsRefetch={eventsRefetch}
           />
 
           <SectionNavs
@@ -93,16 +89,14 @@ export default function JobDetails() {
 
           <div className="">
             {selectedNav?.label?.toLowerCase() == "details" && (
-              <Details details={jobsData?.job} />
+              <Details details={eventsData?.event} />
             )}
 
-            {selectedNav?.label?.toLowerCase() == "applicants" && (
-              <Applicants details={jobsData?.job} />
+            {selectedNav?.label?.toLowerCase() == "saves" && (
+              <Saves details={eventsData?.event} />
             )}
 
-            {selectedNav?.label?.toLowerCase() == "analytics" && (
-              <Analytics details={jobsData?.job} />
-            )}
+         
           </div>
         </div>
       )}
