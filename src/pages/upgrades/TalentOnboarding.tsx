@@ -112,7 +112,7 @@ const [submitLoading, setSubmitLoading] = useState(false)
               dispatch(loginUser(r?.data?.user));
             }
            
-          localStorage.setItem('bearerToken', r.data?.user?.accessToken)
+          // localStorage.setItem('bearerToken', r.data?.user?.accessToken)
             navigate("/upgrade/pricing");
           } else toast.error(r.data.message);
         })

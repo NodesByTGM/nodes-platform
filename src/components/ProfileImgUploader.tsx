@@ -51,8 +51,8 @@ export default function ProfileImgUploader({ value, onChange }) {
     if (uploadFileSuccess) {
       onChange(uploadResponse?.data?.url);
     }
-    // alert(JSON.stringify(uploadResponse?.data, null, 2))
-  }, [uploadFileSuccess]);
+   
+  }, [uploadFileSuccess, uploadResponse?.data?.url]);
 
   useEffect(() => {
     if (isUploadError) {
@@ -99,6 +99,7 @@ export default function ProfileImgUploader({ value, onChange }) {
           "Replace"
         )}
       </span>
+      {/* <span className="">{value}</span> */}
       {/* <span className="">{value}</span> */}
     </div>
   );

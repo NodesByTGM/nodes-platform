@@ -12,7 +12,7 @@ import {
   profileSchema,
   profileValidationType,
 } from "../../../utilities/validation";
-import { FormDebug, EventPostForm } from "../../../components";
+import { FormDebug, ProfileEventPostForm } from "../../../components";
 import { toast } from "react-toastify";
 import {
   Button,
@@ -21,19 +21,13 @@ import {
   Input,
   TextArea,
   Switch,
-  AddCollaboratorInputDiv,
-  ProjectFileUpload,
   ProfileImgUploader,
-  CollaboratorInput,
-  AddProjectsItem,
-  AddedProject,
 } from "../../../components";
-import { FaPlus } from "react-icons/fa6";
-import { FaTimes } from "react-icons/fa";
+import ProfileProjectForm from "./ProfileProjectForm";
 
 import { Link } from "react-router-dom";
 import { useProfileContext } from "../../../context/hooks";
-import { useFormik, FormikProvider, FieldArray } from "formik";
+import { useFormik, FormikProvider } from "formik";
 import { useUpdateUserProfileMutation } from "../../../api";
 
 function InteractionsSwitch({ label, description, value, setValue }) {
@@ -82,7 +76,7 @@ export default function EditIndividual() {
 
   const onlineProfiles = useRef<HTMLDivElement>(null);
   const addAProject = useRef<HTMLDivElement>(null);
-
+  const createEvent = useRef<HTMLDivElement>(null);
   const interactions = useRef<HTMLDivElement>(null);
   const navOptions = useMemo(
     () => [
@@ -124,6 +118,14 @@ export default function EditIndividual() {
       },
       {
         id: "5",
+        title: "Create Event",
+        link: "Create Event",
+        ref: createEvent,
+        conditions: ["business"],
+      },
+
+      {
+        id: "6",
         title: "Interactions",
         link: "interactions",
         ref: interactions,
@@ -135,6 +137,7 @@ export default function EditIndividual() {
       introduceYourself,
       onlineProfiles,
       interactions,
+      createEvent,
       addAProject,
       businessInfo,
     ]
@@ -142,22 +145,6 @@ export default function EditIndividual() {
 
   const [navs, setNavs] = useState(navOptions);
   const [selected, setSelected] = useState(navs[0]);
-
-  const handleProjectThumbnail = (value) => {
-    console.log(value);
-  };
-
-  const handleAddProject = () => {
-    const data = {
-      projectName: values.projectName,
-      description: values.description,
-      projectUrl: values.projectUrl,
-      collaborators: values.collaborators,
-      // thumbnail: values.thumbnail
-    };
-
-    console.log(JSON.stringify(data));
-  };
 
   const handleClickForm = (values: any) => {
     console.log(JSON.stringify(values, null, 2));
@@ -181,6 +168,7 @@ export default function EditIndividual() {
       logo: values.projectUrl,
       yoe: 0,
     };
+    // console.log(JSON.stringify(values, null, 2))
     updateUserProfile(data);
   };
 
@@ -287,6 +275,7 @@ export default function EditIndividual() {
         }}
         className="flex gap-x-8 h-full"
       >
+        <pre className="hidden">{JSON.stringify(profileData, null, 2)}</pre>
         <div className="max-h-max w-[400px]">
           <div className="flex flex-col">
             <div className="rounded-lg p-6 bg-white flex flex-col gap-4">
@@ -342,6 +331,7 @@ export default function EditIndividual() {
                     <ProfileImgUploader
                       value={values?.avatar}
                       onChange={(value) => {
+                        // alert(value)
                         setFieldValue("avatar", value);
                       }}
                     />
@@ -582,182 +572,25 @@ export default function EditIndividual() {
             </div>
           )}
           {hasProject && (
-            <div ref={addAProject}>
-              <FormDiv title="Add a project">
-                <div className="">
-                  <div className="grid grid-col-1 gap-6">
-                    <div className="w-full">
-                      <Input
-                        required
-                        placeholder={AppConfig.PLACEHOLDERS.ProjectName}
-                        id="projectName"
-                        label="Project Name"
-                        error={errors.projectName}
-                        value={values.projectName}
-                        touched={touched.projectName}
-                        onChange={handleChange("projectName")}
-                        onBlur={handleBlur}
-                      />
-                    </div>
-                    <div className="w-full">
-                      <TextArea
-                        required
-                        placeholder={AppConfig.PLACEHOLDERS.ProjectDescription}
-                        id="description"
-                        label="Description"
-                        error={errors.description}
-                        value={values.description}
-                        touched={touched.description}
-                        onChange={handleChange("description")}
-                        onBlur={handleBlur}
-                      />
-                    </div>
-                    <div className="w-full">
-                      <Input
-                        required
-                        placeholder={AppConfig.PLACEHOLDERS.ProjectUrl}
-                        id="projectUrl"
-                        label="Project Url"
-                        error={errors.projectUrl}
-                        value={values.projectUrl}
-                        touched={touched.projectUrl}
-                        onChange={handleChange("projectUrl")}
-                        onBlur={handleBlur}
-                      />
-                    </div>
-                    <div className="w-full flex flex-col gap-6">
-                      <div className="flex flex-col gap-2">
-                        <span className="font-medium text-base">
-                          Add collaborators
-                        </span>
-                        <span className="font-normal text-base">
-                          You can add cast members...etc here
-                        </span>
-                      </div>
-                      <div className="flex flex-col gap-6">
-                        <FieldArray
-                          name="collaborators"
-                          render={(arrayHelpers) => (
-                            <div className="w-full flex flex-col gap-6">
-                              {values.collaborators.map(
-                                (collaborator, index) => (
-                                  <div
-                                    key={collaborator?.name + String(index)}
-                                    className="flex items-center gap-6"
-                                  >
-                                    <div className="rounded-full font-normal text-xs text-[#757575] h-6 w-6 border border-[#D6D6D6] flex items-center justify-center">
-                                      {index + 1}
-                                    </div>
-                                    <div className="flex flex-1">
-                                      <AddCollaboratorInputDiv>
-                                        <CollaboratorInput
-                                          id={`collaborators[${index}].collabName`}
-                                          name={`collaborators[${index}].collabName`}
-                                          value={
-                                            values.collaborators[index]
-                                              .collabName
-                                          }
-                                          onChange={handleChange}
-                                          placeholder="Name"
-                                          textSize="text-base"
-                                        />
-                                        <CollaboratorInput
-                                          id={`collaborators[${index}].role`}
-                                          name={`collaborators[${index}].role`}
-                                          value={
-                                            values.collaborators[index].role
-                                          }
-                                          onChange={handleChange}
-                                          placeholder="role"
-                                          textSize="text-xs"
-                                        />
-                                      </AddCollaboratorInputDiv>
-                                    </div>
-                                    {values.collaborators?.length > 1 && (
-                                      <span
-                                        onClick={() =>
-                                          arrayHelpers.remove(index)
-                                        }
-                                        className=""
-                                      >
-                                        <FaTimes />
-                                      </span>
-                                    )}
-                                  </div>
-                                )
-                              )}
-                              <div
-                                onClick={() =>
-                                  arrayHelpers.push(initialCollaborator)
-                                }
-                                className="cursor-pointer flex items-center gap-6 mb-[16px]"
-                              >
-                                <div className="rounded-full bg-primary font-normal text-xs text-white h-6 w-6   flex items-center justify-center">
-                                  <FaPlus />
-                                </div>
-                                <span className="text-primary font-normal text-base">
-                                  Add another collaborator
-                                </span>
-                              </div>
-                            </div>
-                          )}
-                        />
-                        <div className="flex flex-col gap-10 mb-2">
-                          <ProjectFileUpload
-                            onChange={(e) => {
-                              handleProjectThumbnail(e);
-                            }}
-                            label="Project thumbnail"
-                          />
-                          {/* <ProjectFileUpload
-                            onChange={() => {}}
-                            label="Project images"
-                          /> */}
-                        </div>
-
-                        <div className="grid grid-cols-3 gap-6">
-                          <AddProjectsItem
-                            data={{ img: "/img/ProjectThumbnailSample.png" }}
-                          />
-                          <AddProjectsItem
-                            data={{ img: "/img/ProjectThumbnailSample.png" }}
-                          />
-
-                          <AddProjectsItem
-                            data={{ img: "/img/ProjectThumbnailSample.png" }}
-                          />
-                        </div>
-
-                        <div className="flex flex-col gap-10">
-                          <div className="w-full flex items-center justify-end">
-                            <div className="max-w-max">
-                              {" "}
-                              <Button onClick={() => handleAddProject()}>
-                                Add Projects
-                              </Button>
-                            </div>
-                          </div>
-                          <AddedProject
-                            data={{ img: "/img/ProjectThumbnailSample.png" }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="bg-" ref={addAProject}>
+                <FormDiv title="Create a project ">
+                <ProfileProjectForm />
               </FormDiv>
+              
             </div>
           )}
 
-          <div className="">
-            <FormDiv title="Create an event ">
-              <EventPostForm
-                isProfilePage
-                refetchEvents={() => {}}
-                closeModal={() => {}}
-              />
-            </FormDiv>
-          </div>
+          {profileType.toLowerCase() == "business" ? (
+            <div ref={createEvent} className="">
+              <FormDiv title="Create an event ">
+                <ProfileEventPostForm
+                  isProfilePage
+                  refetchEvents={() => {}}
+                  closeModal={() => {}}
+                />
+              </FormDiv>
+            </div>
+          ) : null}
 
           <div ref={interactions}>
             <FormDiv title="Interactions">
