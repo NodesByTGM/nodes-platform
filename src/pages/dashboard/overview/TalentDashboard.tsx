@@ -7,7 +7,7 @@ import {
   Loader,
 } from "../../../components";
 import { useNavigate } from "react-router-dom";
-import { useGetJobsQuery } from "../../../api";
+import { useGetJobsQuery, useGetEventsQuery } from "../../../api";
 
 export default function TalentDashboard() {
   const navigate = useNavigate();
@@ -16,6 +16,13 @@ export default function TalentDashboard() {
     refetch: jobsRefetch,
     isFetching: jobsLoading,
   } = useGetJobsQuery();
+
+  const {
+    data: eventsData,
+    refetch: eventsRefetch,
+    isFetching: eventsLoading,
+  } = useGetEventsQuery();
+
   const [WelcomeCardItems] = useState([
     {
       id: 1,
@@ -79,13 +86,8 @@ export default function TalentDashboard() {
 
         {(!jobsLoading && jobsData?.jobs?.length === 0) ||
         (!jobsLoading && !jobsData) ? (
-          <div>
-            {/* <BusinessDashboardSectionEmptyStates
-                  type="job"
-                  user={user}
-                  addJobOrEvents={() => addJobOrEvents("job")}
-                /> */}
-            Nothing to see
+          <div className="text-base text-primary my-40  text-center">
+            Nothing to see.
           </div>
         ) : null}
 
@@ -112,6 +114,36 @@ export default function TalentDashboard() {
             description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
           />
         ) : null}
+
+
+        {/* //Events */}
+
+        {eventsLoading && !eventsData ? (
+          <div className="my-40">
+            <Loader />
+          </div>
+        ) : null}
+
+        {(!eventsLoading && eventsData?.events?.length === 0) ||
+        (!eventsLoading && !eventsData) ? (
+          <div className="text-base text-primary my-40  text-center">
+            Nothing to see.
+          </div>
+        ) : null}
+
+        {!eventsLoading && eventsData && eventsData?.events?.length > 0 ? (
+          <CarouselSection
+            data={eventsData?.events || []}
+            navigateTo={() => navigate("/dashboard/see-more/talent")}
+            seeMore
+            event
+            refetchEvents={eventsRefetch}
+            title={`Trending Events`}
+            description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
+          />
+        ) : null}
+
+     
 
         <CarouselSection
           navigateTo={() => navigate("/dashboard/see-more/talent")}

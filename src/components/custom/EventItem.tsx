@@ -4,7 +4,7 @@ import { ArrowRight } from "react-feather";
 import { Link } from "react-router-dom";
 import { TfiLocationPin } from "react-icons/tfi";
 import AppConfig from "../../utilities/config";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import {
   BookMarkIcon,
   ItemDeleteIcon,
@@ -12,7 +12,7 @@ import {
   DeleteComponent,
 } from "../../components";
 import { toast } from "react-toastify";
-import { useDeleteEventMutation } from "../../api";
+import { useDeleteEventMutation, useSaveEventMutation } from "../../api";
 
 function EventItem({
   className,
@@ -25,7 +25,7 @@ function EventItem({
   isBusiness?: boolean;
   refetchEvents?: () => void;
 }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [deleteModal, setDeleteModal] = useState(false);
   const [
     deleteRequest,
@@ -36,6 +36,30 @@ function EventItem({
       isLoading: deleteLoading,
     },
   ] = useDeleteEventMutation();
+
+  const [
+    saveRequest,
+    {
+      isSuccess: isSaveSuccess,
+      isLoading: isSaveLoading,
+      isError: isSaveError,
+      error: saveError,
+    },
+  ] = useSaveEventMutation();
+
+  useEffect(() => {
+    if (isSaveError) {
+      toast.error(saveError?.message?.message);
+    }
+  }, [isSaveError, saveError]);
+
+  useEffect(() => {
+    if (isSaveSuccess) {
+      // if (refetchJobs) {
+      //   refetchJobs();
+      // }
+    }
+  }, [isSaveSuccess]);
 
   useEffect(() => {
     if (isDeleteError) {
@@ -72,7 +96,10 @@ function EventItem({
                 <ItemDeleteIcon white />
               </div>
             ) : (
-              <div className="">
+              <div
+                onClick={() => saveRequest({ id: data?.id })}
+                className={`${isSaveLoading ? "animate-pulse" : ""}`}
+              >
                 <BookMarkIcon white />
               </div>
             )}
@@ -87,7 +114,14 @@ function EventItem({
             </div>
             <div className="mt-10 flex justify-between">
               <div className=""></div>
-              <span onClick={() => navigate(`/dashboard/see-more/business-events/${data?.id}`)} className="cursor-pointer text-sm">View details</span>
+              <span
+                onClick={() =>
+                  navigate(`/dashboard/see-more/business-events/${data?.id}`)
+                }
+                className="cursor-pointer text-sm"
+              >
+                View details
+              </span>
             </div>
           </div>
 
