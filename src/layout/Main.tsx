@@ -1,8 +1,24 @@
+import React, {useEffect} from "react";
+
 import { Outlet } from "react-router-dom";
 import { Footer, Header, SEO, Sidebar } from "../components";
+import {
+ useLocation
+} from "react-router-dom";
+
+const ScrollToTop = ({ children }) => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return <div className="">{children}</div>;
+};
 
 function Main() {
   return (
+    <ScrollToTop>
     <div className="">
       <SEO />
 
@@ -21,6 +37,7 @@ function Main() {
         </div>
       </div>
     </div>
+    </ScrollToTop>
   );
 }
 

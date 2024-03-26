@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const PrimaryFill = ({ white = false }: { white?: boolean }) => {
   return (
@@ -39,8 +39,24 @@ const PrimaryStroke = ({ white = false }: { white?: boolean }) => {
     </svg>
   );
 };
-export default function BookMarkIcon({ white = false }: { white?: boolean }) {
+export default function BookMarkIcon({
+  white = false,
+  saved = false,
+}: {
+  white?: boolean;
+  saved?: boolean;
+}) {
   const [active, setActive] = useState(false);
+  useEffect(() => {
+    if (saved === true) {
+      setActive(true);
+      return;
+    }
+    if (saved === false) {
+      setActive(false);
+      return;
+    }
+  }, [saved]);
   return (
     <div className="cursor-pointer">
       {active ? (

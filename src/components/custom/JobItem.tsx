@@ -90,7 +90,7 @@ export default function JobItem({
     <div
       className={`${className} bg-[#ffffff] text-[#000000] w-full p-6 rounded-lg border border-[#EFEFEF] flex flex-col gap-8`}
     >
-      <pre className="text-gray-500 hidden">
+      <pre className="text-gray-500 hidden ">
         {JSON.stringify(data, null, 2)}
       </pre>
 
@@ -108,7 +108,7 @@ export default function JobItem({
             onClick={() => saveRequest({ id: data?.id })}
             className={`${isSaveLoading ? "animate-pulse" : ""}`}
           >
-            <BookMarkIcon />
+            <BookMarkIcon saved={data?.saved} />
           </div>
         )}
       </div>

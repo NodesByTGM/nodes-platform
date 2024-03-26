@@ -100,7 +100,7 @@ function EventItem({
                 onClick={() => saveRequest({ id: data?.id })}
                 className={`${isSaveLoading ? "animate-pulse" : ""}`}
               >
-                <BookMarkIcon white />
+                <BookMarkIcon white saved={data?.saved}/>
               </div>
             )}
           </div>

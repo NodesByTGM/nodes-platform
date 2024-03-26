@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import MoreEvents from "./MoreEvents";
 import {
   Back,
@@ -14,7 +14,11 @@ import {
 } from "../../../components";
 import { useDashboardContext } from "../../../context/hooks";
 
-import { useGetBusinessUserJobsQuery, useGetJobsQuery, useGetBusinessUserEventsQuery } from "../../../api";
+import {
+  useGetBusinessUserJobsQuery,
+  useGetJobsQuery,
+  useGetBusinessUserEventsQuery,
+} from "../../../api";
 
 const selectOptions = [
   { id: 1, name: "Option 1" },
@@ -23,6 +27,7 @@ const selectOptions = [
 ];
 export default function SeeMoreJobs() {
   const { user } = useDashboardContext();
+  const navigate = useNavigate();
   const [jobModal, setJobModal] = useState(false);
   const [eventModal, setEventModal] = useState(false);
 
@@ -82,7 +87,12 @@ export default function SeeMoreJobs() {
             {type?.toLowerCase() == "business-jobs" ? "job posting" : "event"}
           </ButtonOutline>
         ) : (
-          <ButtonOutline className="max-w-max">Saved</ButtonOutline>
+          <ButtonOutline
+            onClick={() => navigate("/saved")}
+            className="max-w-max"
+          >
+            Saved
+          </ButtonOutline>
         )}
       </div>
 
