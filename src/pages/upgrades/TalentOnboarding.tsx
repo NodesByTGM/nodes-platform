@@ -186,7 +186,7 @@ function TalentOnboarding() {
             </div>
           </Link>
 
-          {currentIndex + 1 > 1 || currentIndex + 1 < 5 ? (
+          {currentIndex + 1 > 1 && currentIndex + 1 < 5 ? (
             <span
               onClick={() => nextStep()}
               className="text-primary font-normal text-base cursor-pointer"

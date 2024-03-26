@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "react-feather";
@@ -10,6 +11,7 @@ interface IOption {
 interface SelectProps {
   className?: string;
   label?: string;
+  handleBlur?: any;
   onSelect?: ({ id, value }: { id: string; value: string }) => void;
   id?: string;
   placeholder?: string;
@@ -28,6 +30,7 @@ function Select({
   className = "",
   label = "",
   onSelect = () => {},
+  handleBlur = () => {},
   id = "",
   placeholder = "",
   // required = false,
@@ -64,7 +67,7 @@ function Select({
   };
 
   const handleClickOutside = (event: any) => {
-    console.log('blur')
+    console.log("blur");
     setTouched(true);
     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
       setIsFocused(false);
@@ -120,7 +123,7 @@ function Select({
       onClick={toggleMenu}
       ref={wrapperRef}
     >
-      {/* <div className='font-medium text-sm mb-1'>{label}</div> */}
+      <div className='font-medium text-sm mb-1 hidden'>{label}</div>
       <div
         className={clsx(
           `flex justify-between items-center p-4- p-3.5 bg-transparent border border-grey-dark focus-visible:border-primary rounded-[5px]`,
@@ -149,6 +152,7 @@ function Select({
           {searchable ? (
             <div className="p-2">
               <input
+                onBlur={handleBlur}
                 id={id}
                 type="text"
                 value={inputValue}

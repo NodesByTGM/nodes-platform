@@ -6,9 +6,9 @@ export const signupSchema = object({
   email: string().email().required("Email is a required field"),
   username: string().required("Username is a required field"),
   // dob: date().default(() => new Date()),
-  day: string(),
-  month: string(),
-  year: string(),
+  day: string().required(),
+  month: string().required(),
+  year: string().required(),
   password: string().required("Password is a required field"),
   confirmPassword: string()
     .required("Confirm Password is a required field")
