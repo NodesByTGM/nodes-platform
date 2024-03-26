@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import AppConfig from "../../../utilities/config";
+import JobSection from "./sections/JobSection";
+import EventsSection from "./sections/EventsSection";
 
 import {
   HeaderAndDescription,
@@ -18,12 +20,9 @@ export default function IndividualDashboard() {
             description={"Checkout the blah blah blah blah blah blah"}
           />
         </div>
+        <EventsSection />
+        <JobSection />
 
-        <CarouselSection
-          title={`Trending`}
-          trend
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`}
-        />
         <CarouselSection
           title={`Top Movies`}
           movie
@@ -33,7 +32,7 @@ export default function IndividualDashboard() {
         />
         <UpgradeCTA />
         <CarouselSection
-        job
+          job
           title={`Trending jobs on Nodes`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         />
