@@ -31,7 +31,7 @@ function CustomSwiper({
         loop={true}
         // autoplay={{ delay: 2000 }}
         spaceBetween={spaceBetween}
-        onSlideChange={() => console.log("slide change")}
+        onSlideChange={() => console.log("")}
         onSwiper={(swiper) => console.log(swiper)}
         modules={[Autoplay, Navigation, Pagination]}
         navigation={

@@ -189,9 +189,9 @@ export const paymentSchema = object({
 
 export type paymentValidationType = {
   name: string;
-  cardNumber: number | null | undefined;
-  expDate: number | null | undefined;
-  cvc: number | null | undefined;
+  cardNumber: number | string;
+  expDate: number | string;
+  cvc: number | string;
 };
 
 export const jobSchema = object({

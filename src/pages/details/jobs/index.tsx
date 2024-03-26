@@ -20,10 +20,7 @@ export default function JobDetails() {
     isFetching: jobsLoading,
   } = useGetJobByIdQuery(id);
   const [navs, setNavs] = useState([
-    {id: 1,
-      label: "Details",
-      count: null,
-    },
+    { id: 1, label: "Details", count: null },
     {
       id: 2,
       label: "Applicants",
