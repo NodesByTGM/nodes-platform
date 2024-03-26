@@ -13,7 +13,7 @@ export default function TalentDashboard() {
   const navigate = useNavigate();
   const {
     data: jobsData,
-    // refetch: jobsRefetch,
+    refetch: jobsRefetch,
     isFetching: jobsLoading,
   } = useGetJobsQuery();
   const [WelcomeCardItems] = useState([
@@ -69,6 +69,8 @@ export default function TalentDashboard() {
           </div>
         </WelcomeComponent>
 
+        {/* //should show jobs the user has applied to */}
+
         {jobsLoading && !jobsData ? (
           <div className="my-40">
             <Loader />
@@ -93,6 +95,7 @@ export default function TalentDashboard() {
             navigateTo={() => navigate("/dashboard/see-more/talent")}
             seeMore
             job
+            refetchJobs={jobsRefetch}
             title={`Jobs you have applied to`}
             description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
           />
@@ -104,6 +107,7 @@ export default function TalentDashboard() {
             navigateTo={() => navigate("/dashboard/see-more/talent")}
             seeMore
             job
+            refetchJobs={jobsRefetch}
             title={`Jobs for you`}
             description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
           />

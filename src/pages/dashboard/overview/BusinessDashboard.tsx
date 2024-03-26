@@ -158,6 +158,7 @@ export default function BusinessDashboard() {
               <CarouselSection
                 data={eventsData?.events || []}
                 refetchEvents={eventsRefetch}
+                isBusiness
                 navigateTo={() => navigate("/dashboard/see-more/business-events")}
                 seeMore
                 event

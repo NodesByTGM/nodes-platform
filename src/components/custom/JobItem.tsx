@@ -10,7 +10,7 @@ import {
   JobPost,
   DeleteComponent,
 } from "../../components";
-import { useDeleteJobMutation } from "../../api";
+import { useDeleteJobMutation, useSaveJobMutation } from "../../api";
 import { toast } from "react-toastify";
 export default function JobItem({
   className,
@@ -42,22 +42,47 @@ export default function JobItem({
     },
   ] = useDeleteJobMutation();
 
+  const [
+    saveRequest,
+    {
+      isSuccess: isSaveSuccess,
+      isLoading: isSaveLoading,
+      isError: isSaveError,
+      error: saveError,
+    },
+  ] = useSaveJobMutation();
+
+  useEffect(() => {
+    if (isSaveError) {
+      toast.error(saveError?.message?.message);
+    }
+  }, [isSaveError, saveError]);
+
+  useEffect(() => {
+    if (isSaveSuccess) {
+      // if (refetchJobs) {
+      //   refetchJobs();
+      // }
+    }
+  }, [isSaveSuccess]);
+
   useEffect(() => {
     if (isDeleteError) {
       toast.error(deleteError?.message?.message);
-      setDeleteModal(false)
+      setDeleteModal(false);
       if (refetchJobs) {
         refetchJobs();
       }
     }
   }, [isDeleteError, deleteError]);
+
   useEffect(() => {
     if (isDeleteSuccess) {
       toast.success("Successfully deleted job");
       if (refetchJobs) {
         refetchJobs();
       }
-      setDeleteModal(false)
+      setDeleteModal(false);
     }
   }, [isDeleteSuccess]);
 
@@ -65,6 +90,10 @@ export default function JobItem({
     <div
       className={`${className} bg-[#ffffff] text-[#000000] w-full p-6 rounded-lg border border-[#EFEFEF] flex flex-col gap-8`}
     >
+      <pre className="text-gray-500 hidden">
+        {JSON.stringify(data, null, 2)}
+      </pre>
+
       <div className="flex items-start justify-between">
         <div className="">
           <img src="/img/SmallCheck.png" alt="" className="size-[72px]" />
@@ -75,7 +104,10 @@ export default function JobItem({
             <ItemDeleteIcon />
           </div>
         ) : (
-          <div className="">
+          <div
+            onClick={() => saveRequest({ id: data?.id })}
+            className={`${isSaveLoading ? "animate-pulse" : ""}`}
+          >
             <BookMarkIcon />
           </div>
         )}

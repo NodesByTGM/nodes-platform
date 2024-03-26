@@ -16,18 +16,9 @@ function Community() {
   // const { pageName } = useSpacesContext();
   const [createSpaceModal, setCreateSpaceModal] = useState(false);
   const [navs] = useState([
-    {
-      label: "Discover",
-      count: null,
-    },
-    {
-      label: "Following",
-      count: null,
-    },
-    {
-      label: "Created",
-      count: null,
-    },
+    { id: 1, label: "Discover", count: null },
+    { id: 2, label: "Following", count: null },
+    { id: 3, label: "Created", count: null },
   ]);
   const [selectedNav, setSelectedNav] = useState(navs[0]);
 

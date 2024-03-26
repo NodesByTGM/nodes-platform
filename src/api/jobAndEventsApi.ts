@@ -139,6 +139,55 @@ export const jobAndEventsApi: any = createApi({
       },
     }),
 
+    saveJob: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/save/${data.id}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
+
+    getSavedJobs: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/saved`,
+          method: "get",
+        };
+      },
+    }),
+
+    saveEvent: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/save/${data.id}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
+
+    getSavedEvents: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/saved`,
+          method: "get",
+        };
+      },
+    }),
+
+
+
+
+
+// GET
+// /api/v1/jobs/saved
+// Get saved jobs
+
+
+
+
    
   }),
 });
@@ -156,6 +205,10 @@ export const {
   useCreateEventMutation,
   useEditEventMutation,
   useGetEventByIdQuery,
-  useDeleteEventMutation
+  useDeleteEventMutation,
+  useSaveJobMutation,
+  useGetSavedJobsQuery,
+  useSaveEventMutation,
+  useGetSavedEventsQuery
 
 } = jobAndEventsApi;

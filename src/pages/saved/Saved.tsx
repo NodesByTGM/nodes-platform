@@ -1,17 +1,65 @@
-import React, { useState } from "react";
-import { SectionNavs, JobItem, EventItem } from "../../components";
+import React, { useState, useEffect } from "react";
+import SavedJobs from "./SavedJobs";
+import SavedEvents from "./SavedEvents";
+import { useGetSavedJobsQuery, useGetSavedEventsQuery } from "../../api";
+
+import { SectionNavs } from "../../components";
 export default function Saved() {
-  const [navs] = useState([
+  const [navs, setNavs] = useState([
+    { id: 1, label: "Jobs", count: null },
     {
-      label: "Jobs",
-      count: 1,
-    },
-    {
+      id: 2,
       label: "Events",
-      count: 1,
+      count: null,
     },
   ]);
   const [selectedNav, setSelectedNav] = useState(navs[0]);
+
+  const {
+    data: savedJobsData,
+    refetch: savedJobsRefetch,
+    isFetching: savedJobsLoading,
+  } = useGetSavedJobsQuery();
+
+  const {
+    data: savedEventsData,
+    refetch: savedEventsRefetch,
+    isFetching: savedEventsLoading,
+  } = useGetSavedEventsQuery();
+
+
+
+
+  const handleCount = (tab, count) => {
+    setNavs((prevNavs) => {
+      return prevNavs.map((nav) => {
+        if (nav.label.toLowerCase() === tab) {
+          return { ...nav, count: count };
+        }
+        return nav;
+      });
+    });
+  };
+
+  useEffect(() => {
+    const jobCount = savedJobsData?.jobs?.length;
+
+    if (jobCount > 0) {
+      handleCount("jobs", jobCount);
+    }
+  }, [savedJobsData?.jobs?.length]);
+
+  useEffect(() => {
+
+    const eventCount = savedEventsData?.events?.length;
+
+    
+
+    if (eventCount > 0) {
+      handleCount("events", eventCount);
+    }
+  }, [savedEventsData?.events?.length]);
+
   return (
     <div>
       <div className="flex flex-col gap-10">
@@ -25,18 +73,22 @@ export default function Saved() {
           />
         </div>
 
-        <div className="grid grid-cols-3 gap-8">
-          {selectedNav.label.toLowerCase() === "jobs" && (
-            <div className="">
-              <JobItem />
-            </div>
-          )}
-          {selectedNav.label.toLowerCase() === "events" && (
-            <div className="">
-              <EventItem />
-            </div>
-          )}
-        </div>
+        {selectedNav.label.toLowerCase() === "jobs" && (
+          <SavedJobs
+            data={savedJobsData?.jobs || []}
+            refetch={savedJobsRefetch}
+            isFetching={savedJobsLoading}
+          />
+        )}
+        {selectedNav.label.toLowerCase() === "events" && (
+          <div className="">
+            <SavedEvents 
+              data={savedEventsData?.events || []}
+              refetch={savedEventsRefetch}
+              isFetching={savedEventsLoading}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

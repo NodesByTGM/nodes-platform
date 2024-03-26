@@ -5,7 +5,7 @@ import { TfiLocationPin } from "react-icons/tfi";
 import { CiCalendar } from "react-icons/ci";
 import { PiSuitcase } from "react-icons/pi";
 import { formatDate } from "../../utilities";
-import { useApplyToJobMutation } from "../../api";
+import { useApplyToJobMutation, useSaveJobMutation } from "../../api";
 import { toast } from "react-toastify";
 export default function JobPost({ closeModal, details }) {
   const [
@@ -17,6 +17,31 @@ export default function JobPost({ closeModal, details }) {
       error,
     },
   ] = useApplyToJobMutation();
+
+  const [
+    saveRequest,
+    {
+      isSuccess: isSaveSuccess,
+      isLoading: isSaveLoading,
+      isError: isSaveError,
+      error: saveError,
+    },
+  ] = useSaveJobMutation();
+
+
+  useEffect(() => {
+    if (isSaveError) {
+      toast.error(saveError?.message?.message);
+    }
+  }, [isSaveError, saveError]);
+
+  useEffect(() => {
+    if (isSaveSuccess) {
+      // if (refetchJobs) {
+      //   refetchJobs();
+      // }
+    }
+  }, [isSaveSuccess]);
 
   useEffect(() => {
     if (applyToJobIsSuccess) {
@@ -71,7 +96,12 @@ export default function JobPost({ closeModal, details }) {
         </span>
 
         <div className="flex items-center justify-between gap-4">
-          <BookMarkIcon />
+        <div
+            onClick={() => saveRequest({ id: details?.id })}
+            className={`${isSaveLoading ? "animate-pulse" : ""}`}
+          >
+            <BookMarkIcon />
+          </div>
           <Button
             isLoading={applyToJobLoading}
             disabled={applyToJobLoading}

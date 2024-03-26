@@ -155,7 +155,10 @@ function Header() {
                 <Flag /> <span>Report Issue</span>
               </div>
               <div className="flex items-center gap-2 p-2 hover:bg-primary-light opacity-70 hover:opacity-100 transition-all ">
-                <LogOut /> <LogoutComponent><span>Sign Out</span></LogoutComponent>
+                <LogOut />{" "}
+                <LogoutComponent>
+                  <span>Sign Out</span>
+                </LogoutComponent>
               </div>
             </div>
           ) : null}

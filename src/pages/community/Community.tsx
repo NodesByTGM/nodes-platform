@@ -9,18 +9,9 @@ function Community() {
   // const { user } = useCommunityContext();
   const [postModal, setAddPostModal] = useState(false);
   const [navs] = useState([
-    {
-      label: "General",
-      count: null,
-    },
-    {
-      label: "Followed",
-      count: null,
-    },
-    {
-      label: "My posts",
-      count: null,
-    },
+    { id: 1, label: "General", count: null },
+    { id: 2, label: "Followed", count: null },
+    { id: 3, label: "My posts", count: null },
   ]);
   const [selectedNav, setSelectedNav] = useState(navs[0]);
 
