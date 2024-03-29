@@ -10,14 +10,20 @@ import {
   JobPost,
   DeleteComponent,
 } from "../../components";
-import { useDeleteJobMutation } from "../../api";
+import {
+  useDeleteJobMutation,
+  useSaveJobMutation,
+  useUnSaveJobMutation,
+} from "../../api";
 import { toast } from "react-toastify";
 export default function JobItem({
   className,
   isBusiness = false,
+  canViewJob = false,
   data,
   refetchJobs,
 }: {
+  canViewJob?: boolean;
   className?: string;
   isBusiness?: boolean;
   data?: any;
@@ -42,22 +48,87 @@ export default function JobItem({
     },
   ] = useDeleteJobMutation();
 
+  const [
+    saveRequest,
+    {
+      isSuccess: isSaveSuccess,
+      isLoading: isSaveLoading,
+      isError: isSaveError,
+      error: saveError,
+    },
+  ] = useSaveJobMutation();
+
+  const [
+    unSaveRequest,
+    {
+      isSuccess: isUnSaveSuccess,
+      isLoading: isUnSaveLoading,
+      isError: isUnSaveError,
+      error: unSaveError,
+    },
+  ] = useUnSaveJobMutation();
+
+  const handleSave = (data) => {
+    // console.log(JSON.stringify(data, null, 2));
+
+    if (data?.saved) {
+      unSaveRequest({ id: data?.id });
+      return;
+    }
+    if (!data?.saved) {
+      saveRequest({ id: data?.id });
+      return;
+    }
+  };
+
+  //save
+  useEffect(() => {
+    if (isSaveError) {
+      toast.error(saveError?.message?.message);
+    }
+  }, [isSaveError, saveError]);
+
+  useEffect(() => {
+    if (isSaveSuccess) {
+      // if (refetchJobs) {
+      //   refetchJobs();
+      // }
+    }
+  }, [isSaveSuccess]);
+
+  //Unsave
+
+  useEffect(() => {
+    if (isUnSaveError) {
+      toast.error(unSaveError?.message?.message);
+    }
+  }, [isUnSaveError, unSaveError]);
+
+  useEffect(() => {
+    if (isUnSaveSuccess) {
+      // if (refetchJobs) {
+      //   refetchJobs();
+      // }
+    }
+  }, [isUnSaveSuccess]);
+
   useEffect(() => {
     if (isDeleteError) {
       toast.error(deleteError?.message?.message);
-      setDeleteModal(false)
+      setDeleteModal(false);
       if (refetchJobs) {
         refetchJobs();
       }
     }
   }, [isDeleteError, deleteError]);
+
   useEffect(() => {
     if (isDeleteSuccess) {
       toast.success("Successfully deleted job");
       if (refetchJobs) {
         refetchJobs();
       }
-      setDeleteModal(false)
+      setDeleteModal(false);
     }
   }, [isDeleteSuccess]);
 
@@ -65,6 +136,10 @@ export default function JobItem({
     <div
       className={`${className} bg-[#ffffff] text-[#000000] w-full p-6 rounded-lg border border-[#EFEFEF] flex flex-col gap-8`}
     >
+      <pre className="text-gray-500 hidden ">
+        {JSON.stringify(data, null, 2)}
+      </pre>
+
       <div className="flex items-start justify-between">
         <div className="">
           <img src="/img/SmallCheck.png" alt="" className="size-[72px]" />
@@ -75,8 +150,13 @@ export default function JobItem({
             <ItemDeleteIcon />
           </div>
         ) : (
-          <div className="">
-            <BookMarkIcon />
+          <div
+            onClick={() => handleSave(data)}
+            className={`${
+              isSaveLoading || isUnSaveLoading ? "animate-pulse" : ""
+            }`}
+          >
+            <BookMarkIcon saved={data?.saved} />
           </div>
         )}
       </div>
@@ -113,7 +193,14 @@ export default function JobItem({
         </div>
       </div>
 
-      {isBusiness ? (
+      {canViewJob ? (
+        <div
+          onClick={() => setViewjobOpen(true)}
+          className="flex justify-end text-primary font-medium text-sm cursor-pointer"
+        >
+          View job
+        </div>
+      ) : (
         <div className="flex items-center justify-between">
           <div className="flex justify-end text-primary font-normal text-base cursor-pointer">
             {data?.applicants?.length > 0 ? data?.applicants?.length : 0}{" "}
@@ -125,13 +212,6 @@ export default function JobItem({
           >
             View details
           </div>
-        </div>
-      ) : (
-        <div
-          onClick={() => setViewjobOpen(true)}
-          className="flex justify-end text-primary font-medium text-sm cursor-pointer"
-        >
-          View job
         </div>
       )}
 

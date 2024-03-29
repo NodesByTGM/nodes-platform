@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import MoreEvents from "./MoreEvents";
 import {
   Back,
   ButtonOutline,
@@ -8,11 +9,16 @@ import {
   JobItem,
   Loader,
   JobPostForm,
+  EventPostForm,
   Modal,
 } from "../../../components";
 import { useDashboardContext } from "../../../context/hooks";
 
-import { useGetBusinessUserJobsQuery, useGetJobsQuery } from "../../../api";
+import {
+  useGetBusinessUserJobsQuery,
+  useGetJobsQuery,
+  useGetBusinessUserEventsQuery,
+} from "../../../api";
 
 const selectOptions = [
   { id: 1, name: "Option 1" },
@@ -21,9 +27,25 @@ const selectOptions = [
 ];
 export default function SeeMoreJobs() {
   const { user } = useDashboardContext();
+  const navigate = useNavigate();
   const [jobModal, setJobModal] = useState(false);
+  const [eventModal, setEventModal] = useState(false);
 
   const { type } = useParams();
+
+  const handleCreateModal = () => {
+    if (type?.toLowerCase() == "business-jobs") {
+      setJobModal(true);
+    }
+
+    if (type?.toLowerCase() == "business-events") {
+      setEventModal(true);
+    }
+  };
+
+  const { refetch: eventsRefetch } = useGetBusinessUserEventsQuery({
+    businessId: user?.business?.id,
+  });
   const {
     data: allJobsData,
     refetch: allJobsRefetch,
@@ -58,14 +80,19 @@ export default function SeeMoreJobs() {
         {type?.toLowerCase() == "business-jobs" ||
         type?.toLowerCase() == "business-events" ? (
           <ButtonOutline
-            onClick={() => setJobModal(true)}
+            onClick={() => handleCreateModal()}
             className="max-w-max"
           >
             Create a new{" "}
             {type?.toLowerCase() == "business-jobs" ? "job posting" : "event"}
           </ButtonOutline>
         ) : (
-          <ButtonOutline className="max-w-max">Saved</ButtonOutline>
+          <ButtonOutline
+            onClick={() => navigate("/saved")}
+            className="max-w-max"
+          >
+            Saved
+          </ButtonOutline>
         )}
       </div>
 
@@ -125,7 +152,16 @@ export default function SeeMoreJobs() {
             </div>
           ) : null}
         </div>
-      ) : (
+      ) : null}
+
+      {type?.toLowerCase() == "business-events" ? (
+        <div className="">
+          <MoreEvents getRequest={useGetBusinessUserEventsQuery} />
+        </div>
+      ) : null}
+
+      {type?.toLowerCase() !== "business-jobs" &&
+      type?.toLowerCase() !== "business-events" ? (
         <div className="">
           {allJobsLoading && !allJobsData ? (
             <div className="my-40">
@@ -150,12 +186,23 @@ export default function SeeMoreJobs() {
             </div>
           ) : null}
         </div>
-      )}
+      ) : null}
 
       <Modal sizeClass="sm:max-w-[800px]" open={jobModal} setOpen={setJobModal}>
         <JobPostForm
           refetchAllJobs={jobsRefetch}
           closeModal={() => setJobModal(false)}
+        />
+      </Modal>
+
+      <Modal
+        sizeClass="sm:max-w-[800px]"
+        open={eventModal}
+        setOpen={setEventModal}
+      >
+        <EventPostForm
+          refetchEvents={eventsRefetch}
+          closeModal={() => setEventModal(false)}
         />
       </Modal>
     </div>

@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+ 
+} from "react-router-dom";
 // import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
@@ -9,7 +13,9 @@ import "./tailwind.css";
 import AuthProvider from "./context/auth";
 import { AuthLayout, MainLayout } from "./layout";
 import { Register } from "./pages";
-import AppConfig, { BASE_API_ENDPOINT } from "./utilities/config";
+import AppConfig
+// { BASE_API_ENDPOINT } 
+from "./utilities/config";
 import { authRoutes, publicRoutes, upgradeRoutes } from "./utilities/routes";
 import AppWrapper from "./AppWrapper";
 const router = createBrowserRouter([
@@ -51,22 +57,29 @@ const router = createBrowserRouter([
   },
 ]);
 
+// const ScrollToTop = ({ children }) => {
+//   const { route } = useRoute();
+
+//   useEffect(() => {
+//     window.scrollTo(0, 0);
+//   }, [route]);
+
+//   return <div className="">{children}</div>;
+// };
+
+
 function App() {
   useEffect(() => {
-    fetch(BASE_API_ENDPOINT)
-      .then(() => {
-        // handle the response
-      })
-      .catch(() => {
-        // handle the error
-      });
+ 
   }, []);
   return (
     <div className="">
       <AppWrapper>
         <HelmetProvider>
           <AuthProvider>
-            <RouterProvider router={router} />
+            {/* <ScrollToTop> */}
+              <RouterProvider router={router} />
+            {/* </ScrollToTop> */}
           </AuthProvider>
         </HelmetProvider>
       </AppWrapper>

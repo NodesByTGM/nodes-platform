@@ -81,8 +81,10 @@ function Register() {
           setUser(r.data.user);
           dispatch(loginUser(r.data.user));
           const accessToken = r.data?.user?.accessToken;
+
+          console.log(JSON.stringify(accessToken));
           localStorage.setItem("bearerToken", accessToken);
-          
+
           if (localStorage.getItem("bearerToken") == accessToken) {
             navigate(AppConfig.PATHS.Upgrades.Talent.Onboarding);
           } else {
@@ -304,6 +306,8 @@ function Register() {
                     options={AppConfig.DATE_OPTIONS.DAYS}
                     onSelect={handleSelect}
                     error={errors.day}
+                    //  touched={touched.day}
+                    handleBlur={handleBlur}
                   />
                   <Select
                     className="flex-1"
@@ -312,6 +316,7 @@ function Register() {
                     options={AppConfig.DATE_OPTIONS.MONTHS}
                     onSelect={handleSelect}
                     error={errors.month}
+                    //  touched={touched.month}
                   />
                   <Select
                     className="flex-1"
@@ -320,6 +325,7 @@ function Register() {
                     options={AppConfig.DATE_OPTIONS.YEARS}
                     onSelect={handleSelect}
                     error={errors.year}
+                    //  touched={touched.year}
                   />
                 </div>
               </div>

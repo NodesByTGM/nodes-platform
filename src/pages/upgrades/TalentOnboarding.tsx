@@ -26,7 +26,7 @@ function TalentOnboarding() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
-const [submitLoading, setSubmitLoading] = useState(false)
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [tags, setTags] = useState<any>([]);
   const [preview, setPreview] = useState("");
   const [selectedFile, setSelectedFile] = useState<any>(null);
@@ -90,7 +90,7 @@ const [submitLoading, setSubmitLoading] = useState(false)
     //     return
     // }
     const submitForm = async () => {
-      setSubmitLoading(true)
+      setSubmitLoading(true);
       // const binaryAvatar: any = await convertToBase64(selectedFile)
       mainClient
         .post(AppConfig.API_ENDPOINTS.Upgrades.TalentURL, {
@@ -100,7 +100,7 @@ const [submitLoading, setSubmitLoading] = useState(false)
           avatar: preview,
         })
         .then((r) => {
-           setSubmitLoading(false)
+          setSubmitLoading(false);
           if (r.status === 200) {
             toast.success(r.data.message);
             const newUser = {
@@ -108,16 +108,16 @@ const [submitLoading, setSubmitLoading] = useState(false)
               type: AppConfig.ACCOUNT_TYPES.TALENT,
             } as IUser;
             setUser(newUser);
-            if(r?.data?.user){
+            if (r?.data?.user) {
               dispatch(loginUser(r?.data?.user));
             }
-           
-          localStorage.setItem('bearerToken', r.data?.user?.accessToken)
+
+            // localStorage.setItem('bearerToken', r.data?.user?.accessToken)
             navigate("/upgrade/pricing");
           } else toast.error(r.data.message);
         })
         .catch((e) => {
-           setSubmitLoading(false)
+          setSubmitLoading(false);
           handleAxiosError(e);
         });
     };
@@ -186,14 +186,14 @@ const [submitLoading, setSubmitLoading] = useState(false)
             </div>
           </Link>
 
-          {currentIndex + 1 > 1 && (
+          {currentIndex + 1 > 1 && currentIndex + 1 < 5 ? (
             <span
               onClick={() => nextStep()}
               className="text-primary font-normal text-base cursor-pointer"
             >
               Skip
             </span>
-          )}
+          ) : null}
         </div>
 
         <div className="mb-10">
@@ -345,7 +345,7 @@ const [submitLoading, setSubmitLoading] = useState(false)
               />
 
               <ButtonWithBack
-              submitLoading={submitLoading}
+                submitLoading={submitLoading}
                 backAction={previousStep}
                 btnAction={handleClickForm}
               />

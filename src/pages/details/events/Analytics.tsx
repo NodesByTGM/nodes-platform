@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Analytics({ details }) {
+  console.log(details);
   const analytics = [
     {
       title: "No. of Clicks",

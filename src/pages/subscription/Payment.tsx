@@ -22,9 +22,9 @@ export default function Payment() {
   const formik = useFormik<paymentValidationType>({
     initialValues: {
       name: "",
-      cardNumber: undefined,
-      expDate: undefined,
-      cvc: undefined,
+      cardNumber: '',
+      expDate: '',
+      cvc: '',
     },
     validationSchema: paymentSchema,
     validateOnBlur: true,

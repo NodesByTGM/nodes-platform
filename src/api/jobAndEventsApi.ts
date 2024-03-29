@@ -15,29 +15,6 @@ export const jobAndEventsApi: any = createApi({
     }
   },
   endpoints: (builder) => ({
-    // /api/v1/jobs/
-    // Create a new job
-
-    // GET
-    // /api/v1/jobs/
-    // Get all jobs
-
-    // GET
-    // /api/v1/jobs/{id}
-    // Get a specific job by ID
-
-    // PUT
-    // /api/v1/jobs/{id}
-    // Update a specific job by ID
-
-    // DELETE
-    // /api/v1/jobs/{id}
-    // Delete a specific job by ID
-
-    // POST
-    // /api/v1/jobs/apply/{id}
-    // Apply to a specific job by ID
-
     getJobs: builder.query<any, any>({
       query: () => {
         return {
@@ -46,6 +23,16 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+
+    getAppliedJobs: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/applied`,
+          method: "get",
+        };
+      },
+    }),
+
     getJobById: builder.query<any, any>({
       query: (id) => {
         return {
@@ -54,12 +41,13 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+
+    // Use AppConfig.API_ENDPOINTS.Job.MyJobsUrl, no need for params,
+    // also pagination has been added to all these
     getBusinessUserJobs: builder.query<any, any>({
-      query: (params) => {
+      query: () => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}?${new URLSearchParams(
-            cleanObject(params)
-          )}`,
+          url: `${AppConfig.API_ENDPOINTS.Job.MyJobsUrl}`,
           method: "get",
         };
       },
@@ -90,6 +78,7 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+
     editJob: builder.mutation<any, any>({
       query: (data) => {
         return {
@@ -100,12 +89,41 @@ export const jobAndEventsApi: any = createApi({
       },
     }),
 
+    // getBusinessUserEvents: builder.query<any, any>({
+    //   query: (params) => {
+    //     return {
+    //       url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}?${new URLSearchParams(
+    //         cleanObject(params)
+    //       )}`,
+    //       method: "get",
+    //     };
+    //   },
+    // }),
+
     getBusinessUserEvents: builder.query<any, any>({
       query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}?${new URLSearchParams(
-            cleanObject(params)
-          )}`,
+          url: `${
+            AppConfig.API_ENDPOINTS.Events.BaseURL
+          }/mine?${new URLSearchParams(cleanObject(params))}`,
+          method: "get",
+        };
+      },
+    }),
+
+    getEvents: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}`,
+          method: "get",
+        };
+      },
+    }),
+
+    getEventById: builder.query<any, any>({
+      query: (id) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/${id}`,
           method: "get",
         };
       },
@@ -131,20 +149,92 @@ export const jobAndEventsApi: any = createApi({
       },
     }),
 
-   
+    deleteEvent: builder.mutation<any, any>({
+      query: (id) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/${id}`,
+          method: "delete",
+        };
+      },
+    }),
+
+    saveJob: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/save/${data.id}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
+    unSaveJob: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/unsave/${data.id}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
+
+    getSavedJobs: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/saved`,
+          method: "get",
+        };
+      },
+    }),
+
+    saveEvent: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/save/${data.id}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
+    unSaveEvent: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/unsave/${data.id}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
+
+    getSavedEvents: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/saved`,
+          method: "get",
+        };
+      },
+    }),
   }),
 });
 
 export const {
   useGetJobsQuery,
+  useGetAppliedJobsQuery,
   useGetJobByIdQuery,
   useGetBusinessUserJobsQuery,
   useCreateJobMutation,
   useApplyToJobMutation,
   useDeleteJobMutation,
   useEditJobMutation,
+  useGetEventsQuery,
   useGetBusinessUserEventsQuery,
   useCreateEventMutation,
   useEditEventMutation,
-
+  useGetEventByIdQuery,
+  useDeleteEventMutation,
+  useSaveJobMutation,
+  useGetSavedJobsQuery,
+  useSaveEventMutation,
+  useGetSavedEventsQuery,
+  useUnSaveEventMutation,
+  useUnSaveJobMutation,
 } = jobAndEventsApi;

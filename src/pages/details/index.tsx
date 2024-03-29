@@ -1,5 +1,7 @@
 import React from "react";
 import JobDetails from "./jobs/index.tsx";
+import EventDetails from "./events/index.tsx";
+
 import { useParams } from "react-router-dom";
 
 export default function Details() {
@@ -10,7 +12,7 @@ export default function Details() {
       {type?.toLowerCase() == "business-jobs" ? (
         <JobDetails />
       ) : (
-        <div>Event details</div>
+        <div><EventDetails /></div>
       )}
     </div>
   );

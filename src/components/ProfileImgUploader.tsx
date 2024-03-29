@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect, MutableRefObject } from "react";
 import { useUploadFileMutation } from "../api";
 import { toast } from "react-toastify";
+import { Loader } from "../components";
 
 import { convertToBase64, checkFileSize } from "../utilities/common";
 
@@ -50,8 +51,8 @@ export default function ProfileImgUploader({ value, onChange }) {
     if (uploadFileSuccess) {
       onChange(uploadResponse?.data?.url);
     }
-    // alert(JSON.stringify(uploadResponse?.data, null, 2))
-  }, [uploadFileSuccess]);
+   
+  }, [uploadFileSuccess, uploadResponse?.data?.url]);
 
   useEffect(() => {
     if (isUploadError) {
@@ -90,8 +91,15 @@ export default function ProfileImgUploader({ value, onChange }) {
         onClick={() => inputRef.current?.click()}
         className="text-primary font-normal text-base cursor-pointer"
       >
-        {uploadFileLoading ? "...Loading" : "Replace"}
+        {uploadFileLoading ? (
+          <div className="">
+            <Loader className="size-6"/>
+          </div>
+        ) : (
+          "Replace"
+        )}
       </span>
+      {/* <span className="">{value}</span> */}
       {/* <span className="">{value}</span> */}
     </div>
   );

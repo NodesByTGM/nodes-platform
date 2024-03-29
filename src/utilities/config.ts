@@ -1,7 +1,7 @@
 export const BASE_API_ENDPOINT =
   process.env.NODE_ENV === "development"
-    ? "https://nodes-api.thegridmanagement.com/api/v1"
-    : "https://nodes-api.thegridmanagement.com/api/v1";
+    ? "http://localhost:3001/api/v1"
+    : "https://nodes-server-v1.onrender.com/api/v1";
 export const MAIN_APP_URL = "https://nodes.com";
 
 const API_ENDPOINTS = {
@@ -23,6 +23,7 @@ const API_ENDPOINTS = {
   },
   Job: {
     JobUrl: `${BASE_API_ENDPOINT}/jobs`,
+    MyJobsUrl: `${BASE_API_ENDPOINT}/jobs/mine`,
   },
   Project: {
     Projects: `${BASE_API_ENDPOINT}/projects`,
@@ -129,6 +130,10 @@ const PATHS = {
     Base: "/subscription",
     Subscription: "",
     MakePayment: "/subscription/:plan",
+  },
+  AccountSettings: {
+    Base: "/settings",
+   
   },
   Career: "/career",
   Blog: "/blog",
