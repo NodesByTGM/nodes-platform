@@ -11,6 +11,7 @@ import {
 } from "../../components";
 
 type ICarouselSection = {
+  canViewJob?: boolean;
   isBusiness?: boolean;
   hasCarousel?: boolean;
   trend?: boolean;
@@ -31,6 +32,7 @@ type ICarouselSection = {
 };
 export default function CarouselSection({
   data = [],
+  canViewJob = false,
   isBusiness = false,
   hasCarousel = true,
   trend,
@@ -46,7 +48,7 @@ export default function CarouselSection({
   navigateTo,
   children,
   refetchJobs,
-  refetchEvents
+  refetchEvents,
 }: ICarouselSection) {
   return (
     <div className={`flex flex-col !max-w-[100%] `}>
@@ -92,6 +94,7 @@ export default function CarouselSection({
                       )}
                       {job && (
                         <JobItem
+                          canViewJob={canViewJob}
                           data={item}
                           refetchJobs={() => refetchJobs && refetchJobs()}
                           isBusiness={isBusiness}

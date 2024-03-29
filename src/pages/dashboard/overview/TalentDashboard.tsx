@@ -7,7 +7,7 @@ import {
   Loader,
 } from "../../../components";
 import { useNavigate } from "react-router-dom";
-import { useGetJobsQuery, useGetEventsQuery } from "../../../api";
+import { useGetJobsQuery, useGetEventsQuery, useGetAppliedJobsQuery } from "../../../api";
 
 export default function TalentDashboard() {
   const navigate = useNavigate();
@@ -16,6 +16,12 @@ export default function TalentDashboard() {
     refetch: jobsRefetch,
     isFetching: jobsLoading,
   } = useGetJobsQuery();
+
+  const {
+    data: appliedJobsData,
+    refetch: appliedJobsRefetch,
+    isFetching: appliedJobsLoading,
+  } = useGetAppliedJobsQuery();
 
   const {
     data: eventsData,
@@ -75,40 +81,54 @@ export default function TalentDashboard() {
             ))}
           </div>
         </WelcomeComponent>
-
         {/* //should show jobs the user has applied to */}
+        
+        {appliedJobsLoading && !appliedJobsData ? (
+          <div className="my-40">
+            <Loader />
+          </div>
+        ) : null}
+        {(!appliedJobsLoading && appliedJobsData?.jobs?.length === 0) ||
+        (!appliedJobsLoading && !appliedJobsData) ? (
+          <div className="text-base text-primary my-40  text-center">
+            Nothing to see.
+          </div>
+        ) : null}
+        {!appliedJobsLoading && appliedJobsData && appliedJobsData?.jobs?.length > 0 ? (
+          <CarouselSection
+            data={appliedJobsData?.jobs || []}
+            navigateTo={() => navigate("/dashboard/see-more/talent")}
+            seeMore
+            job
+            canViewJob
+            refetchJobs={appliedJobsRefetch}
+            title={`Jobs you have applied to`}
+            description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
+          />
+        ) : null}
+      
 
+        {/* //should show jobs for the user */}
+        
         {jobsLoading && !jobsData ? (
           <div className="my-40">
             <Loader />
           </div>
         ) : null}
-
         {(!jobsLoading && jobsData?.jobs?.length === 0) ||
         (!jobsLoading && !jobsData) ? (
           <div className="text-base text-primary my-40  text-center">
             Nothing to see.
           </div>
         ) : null}
-
+    
         {!jobsLoading && jobsData && jobsData?.jobs?.length > 0 ? (
           <CarouselSection
             data={jobsData?.jobs || []}
             navigateTo={() => navigate("/dashboard/see-more/talent")}
             seeMore
             job
-            refetchJobs={jobsRefetch}
-            title={`Jobs you have applied to`}
-            description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
-          />
-        ) : null}
-
-        {!jobsLoading && jobsData && jobsData?.jobs?.length > 0 ? (
-          <CarouselSection
-            data={jobsData?.jobs || []}
-            navigateTo={() => navigate("/dashboard/see-more/talent")}
-            seeMore
-            job
+            canViewJob
             refetchJobs={jobsRefetch}
             title={`Jobs for you`}
             description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
@@ -116,21 +136,19 @@ export default function TalentDashboard() {
         ) : null}
 
 
-        {/* //Events */}
 
+        {/* //Events */}
         {eventsLoading && !eventsData ? (
           <div className="my-40">
             <Loader />
           </div>
         ) : null}
-
         {(!eventsLoading && eventsData?.events?.length === 0) ||
         (!eventsLoading && !eventsData) ? (
           <div className="text-base text-primary my-40  text-center">
             Nothing to see.
           </div>
         ) : null}
-
         {!eventsLoading && eventsData && eventsData?.events?.length > 0 ? (
           <CarouselSection
             data={eventsData?.events || []}
@@ -142,9 +160,6 @@ export default function TalentDashboard() {
             description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
           />
         ) : null}
-
-     
-
         <CarouselSection
           navigateTo={() => navigate("/dashboard/see-more/talent")}
           seeMore

@@ -19,7 +19,7 @@ const DashboardProvider = ({
 }) => {
   const user = useSelector((state: RootState) => state.user.user);
   const [pageName] = useState("Dashboard");
-  const [accountType, setAccountType] = useState("individual");
+  const [accountType, setAccountType] = useState("business");
   const dashboardContextValue = useMemo(
     () => ({
       pageName,
@@ -34,7 +34,7 @@ const DashboardProvider = ({
   return (
     <DashboardContext.Provider value={dashboardContextValue}>
       <div className="">
-        <div className="flex gap-2 mb-10 hidden">
+        <div className="flex gap-2 mb-10 ">
           <button
             onClick={() => setAccountType("individual")}
             className="px-4 py-2 rounded-md bg-primary text-white"
