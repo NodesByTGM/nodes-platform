@@ -25,6 +25,18 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+
+    getAppliedJobs: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/applied`,
+          method: "get",
+        };
+      },
+    }),
+
+
+
     getJobById: builder.query<any, any>({
       query: (id) => {
         return {
@@ -36,13 +48,14 @@ export const jobAndEventsApi: any = createApi({
     getBusinessUserJobs: builder.query<any, any>({
       query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}?${new URLSearchParams(
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/mine?${new URLSearchParams(
             cleanObject(params)
           )}`,
           method: "get",
         };
       },
     }),
+
     createJob: builder.mutation<any, any>({
       query: (data) => {
         return {
@@ -69,6 +82,7 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+
     editJob: builder.mutation<any, any>({
       query: (data) => {
         return {
@@ -79,16 +93,32 @@ export const jobAndEventsApi: any = createApi({
       },
     }),
 
+
+
+
+    // getBusinessUserEvents: builder.query<any, any>({
+    //   query: (params) => {
+    //     return {
+    //       url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}?${new URLSearchParams(
+    //         cleanObject(params)
+    //       )}`,
+    //       method: "get",
+    //     };
+    //   },
+    // }),
+
     getBusinessUserEvents: builder.query<any, any>({
       query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}?${new URLSearchParams(
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/mine?${new URLSearchParams(
             cleanObject(params)
           )}`,
           method: "get",
         };
       },
     }),
+
+    
 
     getEvents: builder.query<any, any>({
       query: () => {
@@ -148,6 +178,15 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+    unSaveJob: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/unsave/${data.id}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
 
     getSavedJobs: builder.query<any, any>({
       query: () => {
@@ -167,6 +206,15 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+    unSaveEvent: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/unsave/${data.id}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
 
     getSavedEvents: builder.query<any, any>({
       query: () => {
@@ -181,19 +229,34 @@ export const jobAndEventsApi: any = createApi({
 
 
 
-// GET
-// /api/v1/jobs/saved
-// Get saved jobs
-
-
-
-
+    // POST
+    // /api/v1/jobs/unsave/{id}
+    // Unsave a job using a specific job by ID
+    
+    
+    
+    // GET
+    // /api/v1/jobs/saved
+    // Get saved jobs
+    
+    
+    // GET
+    // /api/v1/jobs/applied
+    // Get applied jobs
+    
+    
+    // GET
+    // /api/v1/jobs/mine
+    // Get jobs created by you
+    
+    
    
   }),
 });
 
 export const {
   useGetJobsQuery,
+  useGetAppliedJobsQuery,
   useGetJobByIdQuery,
   useGetBusinessUserJobsQuery,
   useCreateJobMutation,
@@ -209,6 +272,8 @@ export const {
   useSaveJobMutation,
   useGetSavedJobsQuery,
   useSaveEventMutation,
-  useGetSavedEventsQuery
+  useGetSavedEventsQuery,
+  useUnSaveEventMutation,
+  useUnSaveJobMutation
 
 } = jobAndEventsApi;

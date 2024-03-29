@@ -10,14 +10,20 @@ import {
   JobPost,
   DeleteComponent,
 } from "../../components";
-import { useDeleteJobMutation, useSaveJobMutation } from "../../api";
+import {
+  useDeleteJobMutation,
+  useSaveJobMutation,
+  useUnSaveJobMutation,
+} from "../../api";
 import { toast } from "react-toastify";
 export default function JobItem({
   className,
   isBusiness = false,
+  canViewJob = false,
   data,
   refetchJobs,
 }: {
+  canViewJob?: boolean;
   className?: string;
   isBusiness?: boolean;
   data?: any;
@@ -52,6 +58,30 @@ export default function JobItem({
     },
   ] = useSaveJobMutation();
 
+  const [
+    unSaveRequest,
+    {
+      isSuccess: isUnSaveSuccess,
+      isLoading: isUnSaveLoading,
+      isError: isUnSaveError,
+      error: unSaveError,
+    },
+  ] = useUnSaveJobMutation();
+
+  const handleSave = (data) => {
+    // console.log(JSON.stringify(data, null, 2));
+
+    if (data?.saved) {
+      unSaveRequest({ id: data?.id });
+      return;
+    }
+    if (!data?.saved) {
+      saveRequest({ id: data?.id });
+      return;
+    }
+  };
+
+  //save
   useEffect(() => {
     if (isSaveError) {
       toast.error(saveError?.message?.message);
@@ -65,6 +95,22 @@ export default function JobItem({
       // }
     }
   }, [isSaveSuccess]);
+
+  //Unsave
+
+  useEffect(() => {
+    if (isUnSaveError) {
+      toast.error(unSaveError?.message?.message);
+    }
+  }, [isUnSaveError, unSaveError]);
+
+  useEffect(() => {
+    if (isUnSaveSuccess) {
+      // if (refetchJobs) {
+      //   refetchJobs();
+      // }
+    }
+  }, [isUnSaveSuccess]);
 
   useEffect(() => {
     if (isDeleteError) {
@@ -105,8 +151,10 @@ export default function JobItem({
           </div>
         ) : (
           <div
-            onClick={() => saveRequest({ id: data?.id })}
-            className={`${isSaveLoading ? "animate-pulse" : ""}`}
+            onClick={() => handleSave(data)}
+            className={`${
+              isSaveLoading || isUnSaveLoading ? "animate-pulse" : ""
+            }`}
           >
             <BookMarkIcon saved={data?.saved} />
           </div>
@@ -145,7 +193,14 @@ export default function JobItem({
         </div>
       </div>
 
-      {isBusiness ? (
+      {canViewJob ? (
+        <div
+          onClick={() => setViewjobOpen(true)}
+          className="flex justify-end text-primary font-medium text-sm cursor-pointer"
+        >
+          View job
+        </div>
+      ) : (
         <div className="flex items-center justify-between">
           <div className="flex justify-end text-primary font-normal text-base cursor-pointer">
             {data?.applicants?.length > 0 ? data?.applicants?.length : 0}{" "}
@@ -157,13 +212,6 @@ export default function JobItem({
           >
             View details
           </div>
-        </div>
-      ) : (
-        <div
-          onClick={() => setViewjobOpen(true)}
-          className="flex justify-end text-primary font-medium text-sm cursor-pointer"
-        >
-          View job
         </div>
       )}
 

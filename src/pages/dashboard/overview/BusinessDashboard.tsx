@@ -71,7 +71,8 @@ export default function BusinessDashboard() {
       <pre className="hidden text-blue-400 text-wrap max-w-[600px]">
         {JSON.stringify(jobsData?.jobs, null, 2)}
       </pre>
-      {!user?.business?.id ? (
+      {/* //remember to change back to !user?.business?.id */}
+      {user?.business?.id ? (
         <BusinessDashboardEmptyState
           user={user}
           addBusinessAccount={() => {
@@ -131,6 +132,7 @@ export default function BusinessDashboard() {
                 navigateTo={() => navigate("/dashboard/see-more/business-jobs")}
                 seeMore
                 isBusiness
+                canViewJob
                 job
                 title={`Jobs by you`}
                 description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
@@ -159,7 +161,9 @@ export default function BusinessDashboard() {
                 data={eventsData?.events || []}
                 refetchEvents={eventsRefetch}
                 isBusiness
-                navigateTo={() => navigate("/dashboard/see-more/business-events")}
+                navigateTo={() =>
+                  navigate("/dashboard/see-more/business-events")
+                }
                 seeMore
                 event
                 title={`Exclusive events`}

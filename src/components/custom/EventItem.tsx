@@ -12,7 +12,11 @@ import {
   DeleteComponent,
 } from "../../components";
 import { toast } from "react-toastify";
-import { useDeleteEventMutation, useSaveEventMutation } from "../../api";
+import {
+  useDeleteEventMutation,
+  useSaveEventMutation,
+  useUnSaveEventMutation,
+} from "../../api";
 
 function EventItem({
   className,
@@ -47,6 +51,30 @@ function EventItem({
     },
   ] = useSaveEventMutation();
 
+  const [
+    unSaveRequest,
+    {
+      isSuccess: isUnSaveSuccess,
+      isLoading: isUnSaveLoading,
+      isError: isUnSaveError,
+      error: unSaveError,
+    },
+  ] = useUnSaveEventMutation();
+
+  const handleSave = (data) => {
+    console.log(JSON.stringify(data, null, 2));
+
+    if (data?.saved) {
+      unSaveRequest({ id: data?.id });
+      return;
+    }
+    if (!data?.saved) {
+      saveRequest({ id: data?.id });
+      return;
+    }
+  };
+
+  //save
   useEffect(() => {
     if (isSaveError) {
       toast.error(saveError?.message?.message);
@@ -55,11 +83,27 @@ function EventItem({
 
   useEffect(() => {
     if (isSaveSuccess) {
-      // if (refetchJobs) {
-      //   refetchJobs();
+      // if (refetchEvents) {
+      //   refetchEvents();
       // }
     }
   }, [isSaveSuccess]);
+
+  //Unsave
+
+  useEffect(() => {
+    if (isUnSaveError) {
+      toast.error(unSaveError?.message?.message);
+    }
+  }, [isUnSaveError, unSaveError]);
+
+  useEffect(() => {
+    if (isUnSaveSuccess) {
+      // if (refetchEvents) {
+      //   refetchEvents();
+      // }
+    }
+  }, [isUnSaveSuccess]);
 
   useEffect(() => {
     if (isDeleteError) {
@@ -97,10 +141,12 @@ function EventItem({
               </div>
             ) : (
               <div
-                onClick={() => saveRequest({ id: data?.id })}
-                className={`${isSaveLoading ? "animate-pulse" : ""}`}
+                onClick={() => handleSave(data)}
+                className={`${
+                  isSaveLoading || isUnSaveLoading ? "animate-pulse" : ""
+                }`}
               >
-                <BookMarkIcon white saved={data?.saved}/>
+                <BookMarkIcon white saved={data?.saved} />
               </div>
             )}
           </div>
