@@ -148,18 +148,19 @@ function Header() {
 
           {menuOpened ? (
             <div className="shadow-normal border rounded-lg bg-white w-[200px] absolute right-4 top-14">
-              <div className="flex items-center gap-2 p-2 hover:bg-primary-light opacity-70 hover:opacity-100 transition-all ">
-                <Settings /> <span>Settings</span>
-              </div>
+              <Link to={"/settings"}>
+                <div className="flex items-center gap-2 p-2 hover:bg-primary-light opacity-70 hover:opacity-100 transition-all ">
+                  <Settings /> <span>Settings</span>
+                </div>
+              </Link>
               <div className="flex items-center gap-2 p-2 hover:bg-primary-light opacity-70 hover:opacity-100 transition-all ">
                 <Flag /> <span>Report Issue</span>
               </div>
-              <div className="flex items-center gap-2 p-2 hover:bg-primary-light opacity-70 hover:opacity-100 transition-all ">
-                <LogOut />{" "}
-                <LogoutComponent>
-                  <span>Sign Out</span>
-                </LogoutComponent>
-              </div>
+              <LogoutComponent>
+                <div className="flex items-center gap-2 p-2 hover:bg-primary-light opacity-70 hover:opacity-100 transition-all ">
+                  <LogOut /> <span>Sign Out</span>
+                </div>
+              </LogoutComponent>
             </div>
           ) : null}
 

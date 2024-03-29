@@ -35,6 +35,7 @@ import {
   TalentOnboarding,
   TalentUpgrade,
   Pricing,
+  AccountSettingsBase
 } from "../pages";
 import AppConfig from "./config";
 
@@ -158,6 +159,10 @@ export const publicRoutes: RouteObject[] = [
         Component: getProfile(MakePayment),
       },
     ],
+  },
+  {
+    path: AppConfig.PATHS.AccountSettings.Base,
+    Component: AccountSettingsBase,
   },
 
   {

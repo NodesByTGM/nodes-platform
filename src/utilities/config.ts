@@ -131,6 +131,10 @@ const PATHS = {
     Subscription: "",
     MakePayment: "/subscription/:plan",
   },
+  AccountSettings: {
+    Base: "/settings",
+   
+  },
   Career: "/career",
   Blog: "/blog",
   Partner: "/partner",
