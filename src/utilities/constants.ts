@@ -5,22 +5,53 @@ export const pricing = {
     payment: "Free",
     duration: "",
     tenor: "Free forever",
-    incentives: ["Free forever", "Free forever", "Free forever"],
+    incentives: [
+      "Community Engagement",
+      "Networking Opportunities",
+      "Stay Informed on Creative Trends",
+    ],
     buttonText: "Continue for free",
-    logo: "/img/pricing-standard.svg",
+    logo: "/img/pricing-free.svg",
     radius: "lg:rounded-l-[8px]",
+    buttonLink: '/dashboard'
   },
   pro: {
     title: "Pro",
     description: "Lorem Ipsum dolor sit amet",
-    payment: "₦4900",
+    payment: "₦7,900",
     duration: "/month",
-    tenor: "For the next 3 months and 7900",
-    incentives: ["Free forever", "Free forever", "Free forever"],
-    buttonText: "Start your 30-day free trial",
+    tenor: "Get one month free if you subscribe now",
+    incentives: [
+      "Enhanced Visibility",
+      "Access to Premium Jobs",
+      "Expanded Project Showcase",
+      "Advanced Analytics and Insights",
+      "Advanced Analytics and Insights",
+    ],
+    buttonText: "Subscribe now",
     logo: "/img/pricing-pro.svg",
 
+    radius: "!rounded-[0]",
+    buttonLink: '/subscription/pro'
+  },
+  business: {
+    title: "Pro",
+    description: "Lorem Ipsum dolor sit amet",
+    payment: "₦19,800",
+    duration: "/month",
+    tenor: "For the next 3 months and 7900",
+    incentives: [
+      "Premium Talent Pool Access",
+      "Featured Job Listings",
+      "Analytics and Performance Metrics",
+      "Promotion and Marketing Opportunities",
+      "Access to GridTools Discovery Pack (Free)",
+    ],
+    buttonText: "Subscribe now",
+    logo: "/img/pricing-business.svg",
+
     radius: "lg:rounded-r-[8px]",
+    buttonLink: '/subscription/business'
   },
 };
 
@@ -32,7 +63,6 @@ export const projectModalTypes = {
 export const filterOptions = {
   postsSort: [
     { id: 1, name: "Most recent", value: 0, returnValue: "Most recent" },
-    
   ],
 };
 

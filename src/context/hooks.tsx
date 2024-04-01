@@ -9,6 +9,9 @@ import { CommunityContext } from "./community";
 import { ICommunityContext } from "../interfaces/community";
 import { SpacesContext } from "./spaces";
 import { ISpacesContext } from "../interfaces/spaces";
+
+import { SettingsContext } from "./settings";
+import { ISettingsContext } from "../interfaces/settings";
 export const useAuth = () => {
   return useContext<IAuthContext>(AuthContext);
 };
@@ -27,4 +30,7 @@ export const useCommunityContext = () => {
 
 export const useSpacesContext = () => {
   return useContext<ISpacesContext>(SpacesContext);
+};
+export const useSettingsContext = () => {
+  return useContext<ISettingsContext>(SettingsContext);
 };

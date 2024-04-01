@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import { CautionCircleIcon } from "../../assets/svg";
 import { Link } from "react-router-dom";
 import { Check } from "react-feather";
+import { useSettingsContext } from "../../context/hooks";
 
 import {
   accountSettingsSchema,
@@ -33,6 +34,7 @@ const CheckButton = ({ setFieldValue, values, label, value }) => {
 };
 
 export default function Account() {
+  const { pageName } = useSettingsContext();
   const handleClickForm = (e?: any) => {
     console.log(JSON.stringify(e, null, 2));
   };
@@ -63,22 +65,26 @@ export default function Account() {
     handleBlur,
   } = formik;
 
-  const handleSelect = ({ id, value }: any) => {
-    console.log({ id, value });
-    if (id.toLowerCase() == "day") {
-      values.day = value;
-    }
-    if (id.toLowerCase() == "month") {
-      values.month = value;
-    }
-    if (id.toLowerCase() == "year") {
-      values.year = value;
-    }
-  };
+  //   const handleSelect = ({ id, value }: any) => {
+  //     console.log({ id, value });
+  //     if (id.toLowerCase() == "day") {
+  //       setFieldValue("day");
+  //     }
+  //     if (id.toLowerCase() == "month") {
+  //       values.month = value;
+  //     }
+  //     if (id.toLowerCase() == "year") {
+  //       values.year = value;
+  //     }
+  //   };
 
   return (
     <div>
-      <FormDebug form={{ values, touched, errors, isValid }} />
+      <span className="hidden">Page is: {pageName}</span>
+      <FormDebug
+        className="hidden"
+        form={{ values, touched, errors, isValid }}
+      />
       <form onSubmit={handleSubmit} className="flex flex-col gap-10">
         <div className="flex lg:flex-row flex-col gap-5">
           <div className="w-full">
@@ -143,13 +149,12 @@ export default function Account() {
             </Tooltip>
           </div>
           <div className="flex gap-2">
-        
             <Select
               className="flex-1"
               placeholder={"Day"}
               id="day"
               options={AppConfig.DATE_OPTIONS.DAYS}
-              onSelect={handleSelect}
+              onSelect={({ value }) => setFieldValue("day", value)}
               error={errors.day}
               //  touched={touched.day}
               handleBlur={handleBlur}
@@ -159,7 +164,7 @@ export default function Account() {
               placeholder={"Month"}
               id="month"
               options={AppConfig.DATE_OPTIONS.MONTHS}
-              onSelect={handleSelect}
+              onSelect={({ value }) => setFieldValue("month", value)}
               error={errors.month}
               //  touched={touched.month}
             />
@@ -168,7 +173,7 @@ export default function Account() {
               placeholder={"Year"}
               id="year"
               options={AppConfig.DATE_OPTIONS.YEARS}
-              onSelect={handleSelect}
+              onSelect={({ value }) => setFieldValue("year", value)}
               error={errors.year}
               //  touched={touched.year}
             />

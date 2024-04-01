@@ -6,10 +6,14 @@ import {
   WelcomeCard,
   Loader,
 } from "../../../components";
+import { useDashboardContext } from "../../../context/hooks";
+
 import { useNavigate } from "react-router-dom";
 import { useGetJobsQuery, useGetEventsQuery, useGetAppliedJobsQuery } from "../../../api";
 
 export default function TalentDashboard() {
+  const { user } = useDashboardContext();
+
   const navigate = useNavigate();
   const {
     data: jobsData,
@@ -57,7 +61,7 @@ export default function TalentDashboard() {
   ]);
   return (
     <div>
-      <HeaderAndDescription title="Hi, Jane! Nice to have you here." />
+      <HeaderAndDescription title={`Hi, ${user?.name}! Nice to have you here.`} />
 
       <div className={` h-4 mb-10 border-b border-[#D6D6D6]`}></div>
 
