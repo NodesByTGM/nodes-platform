@@ -133,12 +133,15 @@ const PATHS = {
   },
   AccountSettings: {
     Base: "/settings",
-   
   },
   Career: "/career",
   Blog: "/blog",
   Partner: "/partner",
   GridTools: "/grid-tools",
+  Trending: {
+    Base: "/trending",
+    Overview: ''
+  },
   Terms: "/terms-and-conditions",
   Privacy: "/privacy-policy",
 };

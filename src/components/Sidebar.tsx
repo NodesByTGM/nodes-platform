@@ -6,6 +6,7 @@ import {
   User,
   Bookmark,
   Circle,
+  Star
 } from "react-feather";
 import { NavLink } from "react-router-dom";
 import AppConfig from "../utilities/config";
@@ -36,6 +37,11 @@ function Sidebar() {
       name: "Grid Tools",
       icon: <Circle />,
       path: AppConfig.PATHS.GridTools,
+    },
+    {
+      name: "Trending",
+      icon: <Star />,
+      path: AppConfig.PATHS.Trending.Base,
     },
   ];
   return (

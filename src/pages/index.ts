@@ -34,3 +34,6 @@ export { default as SavedBase } from "./saved/SavedBase.tsx";
 export { default as Saved } from "./saved/Saved.tsx";
 export { default as GridTools } from "./grid-tools/GridTools.tsx";
 export { default as AccountSettingsBase } from "./settings/AccountSettingsBase.tsx";
+export { default as TrendingBase } from "./trending/TrendingBase.tsx";
+export { default as Trending } from "./trending/Trending.tsx";
+export { default as IndividualDashboard } from "../pages/dashboard/overview/IndividualDashboard.tsx";

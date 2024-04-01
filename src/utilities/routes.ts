@@ -10,6 +10,8 @@ import {
   SavedBase,
   Subscription,
   SubscriptionBase,
+  Trending,
+  TrendingBase,
   MakePayment,
   Community,
   CommunityBase,
@@ -158,6 +160,17 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Subscription.MakePayment,
         Component: getProfile(MakePayment),
       },
+    ],
+  },
+  {
+    path: AppConfig.PATHS.Trending.Base,
+    Component: getProfile(TrendingBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Trending.Overview,
+        Component: getProfile(Trending),
+      },
+   
     ],
   },
   {
