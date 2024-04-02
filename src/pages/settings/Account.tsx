@@ -219,8 +219,8 @@ export default function Account() {
           <span className="text-[#212121] font-normal text-base">
             Once you delete your account, you can’t undo it. Please be certain.{" "}
           </span>
-          <Button className="max-w-max text-[#ffffff] bg-[#D11F54] ">
-            Reset your password
+          <Button className="max-w-max text-[#ffffff] !bg-[#D11F54] ">
+            Delete your password
           </Button>
         </div>
       </form>

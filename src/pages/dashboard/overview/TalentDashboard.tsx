@@ -9,7 +9,11 @@ import {
 import { useDashboardContext } from "../../../context/hooks";
 
 import { useNavigate } from "react-router-dom";
-import { useGetJobsQuery, useGetEventsQuery, useGetAppliedJobsQuery } from "../../../api";
+import {
+  useGetJobsQuery,
+  useGetEventsQuery,
+  useGetAppliedJobsQuery,
+} from "../../../api";
 
 export default function TalentDashboard() {
   const { user } = useDashboardContext();
@@ -61,7 +65,9 @@ export default function TalentDashboard() {
   ]);
   return (
     <div>
-      <HeaderAndDescription title={`Hi, ${user?.name}! Nice to have you here.`} />
+      <HeaderAndDescription
+        title={`Hi, ${user?.name}! Nice to have you here.`}
+      />
 
       <div className={` h-4 mb-10 border-b border-[#D6D6D6]`}></div>
 
@@ -86,7 +92,7 @@ export default function TalentDashboard() {
           </div>
         </WelcomeComponent>
         {/* //should show jobs the user has applied to */}
-        
+      
         {appliedJobsLoading && !appliedJobsData ? (
           <div className="my-40">
             <Loader />
@@ -98,7 +104,9 @@ export default function TalentDashboard() {
             Nothing to see.
           </div>
         ) : null}
-        {!appliedJobsLoading && appliedJobsData && appliedJobsData?.jobs?.length > 0 ? (
+        {!appliedJobsLoading &&
+        appliedJobsData &&
+        appliedJobsData?.jobs?.length > 0 ? (
           <CarouselSection
             data={appliedJobsData?.jobs || []}
             navigateTo={() => navigate("/dashboard/see-more/talent")}
@@ -110,10 +118,9 @@ export default function TalentDashboard() {
             description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
           />
         ) : null}
-      
 
         {/* //should show jobs for the user */}
-        
+
         {jobsLoading && !jobsData ? (
           <div className="my-40">
             <Loader />
@@ -125,7 +132,7 @@ export default function TalentDashboard() {
             Nothing to see.
           </div>
         ) : null}
-    
+
         {!jobsLoading && jobsData && jobsData?.jobs?.length > 0 ? (
           <CarouselSection
             data={jobsData?.jobs || []}
@@ -133,13 +140,14 @@ export default function TalentDashboard() {
             seeMore
             job
             canViewJob
-            refetchJobs={jobsRefetch}
+            refetchJobs={() => {
+              jobsRefetch();
+              appliedJobsRefetch();
+            }}
             title={`Jobs for you`}
             description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
           />
         ) : null}
-
-
 
         {/* //Events */}
         {eventsLoading && !eventsData ? (

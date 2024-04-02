@@ -15,9 +15,13 @@ import { Title } from "../../components/Typography";
 import { useAuth } from "../../context/hooks";
 import { IUser } from "../../interfaces/auth";
 import { mainClient } from "../../utilities/client";
+import { convertToBase64,  } from "../../utilities/common";
+
 import { handleAxiosError } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
 import { loginUser } from "../../api/reducers/userSlice";
+import { useUploadFileMutation } from "../../api";
+
 import { useDispatch } from "react-redux";
 // import FormDebug from "../../components/FormDebug";
 
@@ -41,6 +45,17 @@ function TalentOnboarding() {
     onboardingPurpose: 0,
     step: currentIndex + 1,
   });
+
+  const [
+    upload,
+    {
+      data: uploadResponse,
+      // isLoading: uploadFileLoading,
+      isSuccess: uploadFileSuccess,
+      error: uploadFileError,
+      isError: isUploadError,
+    },
+  ] = useUploadFileMutation();
 
   const nextStep = () => {
     if (currentIndex + 1 < 5) {
@@ -97,7 +112,7 @@ function TalentOnboarding() {
           ...formData,
           skills: formData.skills.join(", "),
           //   avatar: `data:image/jpeg;base64,${binaryAvatar}`
-          avatar: preview,
+          // avatar: preview,
         })
         .then((r) => {
           setSubmitLoading(false);
@@ -128,6 +143,35 @@ function TalentOnboarding() {
     // handle avatar image
     setSelectedFile(e);
   };
+  const handleFileConversion = async () => {
+    if (selectedFile) {
+      const res = await convertToBase64(selectedFile);
+      let binary = "";
+      // console.log(res, null, 2);
+      if (res) {
+        binary = String(res);
+        // const binaryBlob = atob(binary);
+        upload({ file: binary });
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleFileConversion();
+  }, [selectedFile]);
+
+  useEffect(() => {
+    if (uploadFileSuccess) {
+      setFormData({...formData, avatar: uploadResponse?.data?.url});
+    }
+   
+  }, [uploadFileSuccess, uploadResponse?.data?.url]);
+
+  useEffect(() => {
+    if (isUploadError) {
+      toast.error(uploadFileError);
+    }
+  }, [uploadFileError, isUploadError]);
 
   const previousStep = () => {
     if (currentIndex > 0) {

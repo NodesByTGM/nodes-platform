@@ -3,12 +3,15 @@ import React from "react";
 import { Button, Input, FormDebug, PayStackIcon } from "../../components";
 import AppConfig from "../../utilities/config";
 import { useFormik } from "formik";
+// import { useDashboardContext } from "../../context/hooks";
+import { payWithPaystack } from "../../utilities/common";
 import {
   paymentSchema,
   paymentValidationType,
 } from "../../utilities/validation";
 
 export default function Payment() {
+  // const {user}
   const handleClickForm = (values?: any) => {
     const data = {
       name: values.name,
@@ -22,9 +25,9 @@ export default function Payment() {
   const formik = useFormik<paymentValidationType>({
     initialValues: {
       name: "",
-      cardNumber: '',
-      expDate: '',
-      cvc: '',
+      cardNumber: "",
+      expDate: "",
+      cvc: "",
     },
     validationSchema: paymentSchema,
     validateOnBlur: true,
@@ -42,6 +45,14 @@ export default function Payment() {
   } = formik;
 
   const payStack = () => {
+    const data = {
+      email: "",
+      amount: 7900,
+      plan: "PLN_e11atwl7oyvnajq",
+      onSuccess: () => {},
+      onClose: () => {},
+    };
+    payWithPaystack(data);
     return;
   };
 
