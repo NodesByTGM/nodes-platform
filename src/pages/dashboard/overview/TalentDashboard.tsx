@@ -172,7 +172,7 @@ export default function TalentDashboard() {
             description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
           />
         ) : null}
-        <CarouselSection
+        {/* <CarouselSection
           navigateTo={() => navigate("/dashboard/see-more/talent")}
           seeMore
           title={`Spaces you might like`}
@@ -182,7 +182,7 @@ export default function TalentDashboard() {
           trend
           title={`Trending events`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
-        />
+        /> */}
       </div>
     </div>
   );

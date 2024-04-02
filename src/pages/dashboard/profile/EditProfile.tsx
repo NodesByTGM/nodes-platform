@@ -500,9 +500,9 @@ export default function EditIndividual() {
                       <TextArea
                         id="bio"
                         label="Bio"
-                        error={errors.bio}
+                        // error={errors.bio}
                         value={values.bio}
-                        touched={touched.bio}
+                        // touched={touched.bio}
                         onChange={handleChange("bio")}
                         onBlur={handleBlur}
                       />

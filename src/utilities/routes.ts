@@ -15,6 +15,7 @@ import {
   MakePayment,
   Community,
   CommunityBase,
+  Space,
   Spaces,
   SpacesBase,
   DashboardBase,
@@ -131,6 +132,10 @@ export const publicRoutes: RouteObject[] = [
       {
         path: AppConfig.PATHS.Spaces.Overview,
         Component: getProfile(Spaces),
+      },
+      {
+        path: AppConfig.PATHS.Spaces.Space,
+        Component: getProfile(Space),
       },
     ],
   },
