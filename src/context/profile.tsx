@@ -53,7 +53,7 @@ const ProfileProvider = ({
   } = useGetUserProfileQuery();
 
   const user = useSelector((state: RootState) => state.user.user);
-  const [profileType, setProfileType] = useState("business");
+  const [profileType, setProfileType] = useState("talent");
   const [hasProject, setHasProject] = useState(false);
   const [projectDetailsModal, setProjectDetailsModal] = useState(false);
   const [editProjectModal, setEditProjectModal] = useState(false);
@@ -137,7 +137,7 @@ const ProfileProvider = ({
           Stuff: {JSON.stringify(user, null, 2)}
         </pre>
       </div>
-      <div className="flex gap-2 mb-4 ">
+      <div className="flex gap-2 mb-4 hidden">
         <button
           onClick={() => setProfileType("individual")}
           className="px-4 py-2 rounded-md bg-primary text-white"

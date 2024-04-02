@@ -27,9 +27,6 @@ export default function Saved() {
     isFetching: savedEventsLoading,
   } = useGetSavedEventsQuery();
 
-
-
-
   const handleCount = (tab, count) => {
     setNavs((prevNavs) => {
       return prevNavs.map((nav) => {
@@ -50,10 +47,7 @@ export default function Saved() {
   }, [savedJobsData?.jobs?.length]);
 
   useEffect(() => {
-
     const eventCount = savedEventsData?.events?.length;
-
-    
 
     if (eventCount > 0) {
       handleCount("events", eventCount);
@@ -82,7 +76,7 @@ export default function Saved() {
         )}
         {selectedNav.label.toLowerCase() === "events" && (
           <div className="">
-            <SavedEvents 
+            <SavedEvents
               data={savedEventsData?.events || []}
               refetch={savedEventsRefetch}
               isFetching={savedEventsLoading}

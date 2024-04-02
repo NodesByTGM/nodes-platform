@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { object, string, ref, bool, array, number,  } from "yup";
+import { object, string, ref, bool, array, number } from "yup";
+
+
 
 export const signupSchema = object({
   name: string().required("Name is a required field"),
@@ -295,4 +297,24 @@ export const PersonalIndividualInformationSchema = {
   x: string(),
   spaces: bool(),
   comments: bool(),
+};
+
+export const accountSettingsSchema = object({
+  name: string().required("Name is a required field"),
+  username: string().required("Username is a required field"),
+  email: string().email().required("Email is a required field"),
+  day: string().required(),
+  month: string().required(),
+  year: string().required(),
+  visibility: string().required(),
+});
+
+export type AccountSettingsValidationType = {
+  name: string;
+  username: string,
+  email: string,
+  day: string,
+  month: string,
+  year: string,
+  visibility: string,
 };

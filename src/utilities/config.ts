@@ -1,6 +1,6 @@
 export const BASE_API_ENDPOINT =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:3001/api/v1"
+    ? "https://nodes-server-v1.onrender.com/api/v1"
     : "https://nodes-server-v1.onrender.com/api/v1";
 export const MAIN_APP_URL = "https://nodes.com";
 
@@ -131,10 +131,17 @@ const PATHS = {
     Subscription: "",
     MakePayment: "/subscription/:plan",
   },
+  AccountSettings: {
+    Base: "/settings",
+  },
   Career: "/career",
   Blog: "/blog",
   Partner: "/partner",
   GridTools: "/grid-tools",
+  Trending: {
+    Base: "/trending",
+    Overview: ''
+  },
   Terms: "/terms-and-conditions",
   Privacy: "/privacy-policy",
 };

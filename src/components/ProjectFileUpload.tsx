@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useRef, MutableRefObject } from "react";
 import { useUploadFileMutation } from "../api";
-import { convertToBase64 } from "../utilities/common";
-// import AppConfig from "../utilities/config";
+import { convertToBase64, checkFileSize } from "../utilities/common";
+import AppConfig from "../utilities/config";
 // import { mainClient } from "../utilities/client";
 // import AppConfig from "../utilities/config";
 import { Loader } from "../components";
@@ -47,6 +47,17 @@ export default function ProjectFileUpload({
   const handleFileUpload = (e: any) => {
     const files = e.target.files;
     console.log("My upload: " + JSON.stringify(files), null, 2);
+    if (!files || files.length === 0) {
+      // setSelectedFile(undefined);
+      return;
+    }
+    if (!checkFileSize(files[0])) {
+      // setSelectedFile(undefined);
+      toast.error(
+        `File selected exceeded file limit size of ${AppConfig.FILE_SIZE_LIMIT}mb`
+      );
+      return;
+    }
     setSelectedFile(files[0]);
   };
 

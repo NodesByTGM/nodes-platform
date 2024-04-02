@@ -10,6 +10,8 @@ import {
   SavedBase,
   Subscription,
   SubscriptionBase,
+  Trending,
+  TrendingBase,
   MakePayment,
   Community,
   CommunityBase,
@@ -35,6 +37,7 @@ import {
   TalentOnboarding,
   TalentUpgrade,
   Pricing,
+  AccountSettingsBase
 } from "../pages";
 import AppConfig from "./config";
 
@@ -158,6 +161,21 @@ export const publicRoutes: RouteObject[] = [
         Component: getProfile(MakePayment),
       },
     ],
+  },
+  {
+    path: AppConfig.PATHS.Trending.Base,
+    Component: getProfile(TrendingBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Trending.Overview,
+        Component: getProfile(Trending),
+      },
+   
+    ],
+  },
+  {
+    path: AppConfig.PATHS.AccountSettings.Base,
+    Component: AccountSettingsBase,
   },
 
   {

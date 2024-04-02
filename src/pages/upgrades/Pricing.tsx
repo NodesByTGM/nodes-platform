@@ -60,9 +60,10 @@ export default function Pricing() {
             </div>
           </div>
         </div>
-        <div className="grid  grid-cols-1 xl:grid-cols-2 gap-[2px] xl:min-w-[806px]">
+        <div className="grid  grid-cols-1 xl:grid-cols-3 gap-[2px] xl:min-w-[806px]">
           <PricingCard info={pricing.standard} />
           <PricingCard info={pricing.pro} />
+          <PricingCard info={pricing.business} />
         </div>
 
         <div className="hidden   xl:block w-[140px]"></div>

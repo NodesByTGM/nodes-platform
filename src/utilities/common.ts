@@ -151,6 +151,7 @@ export const validateFormData = (formData: FormData) => {
 export const payWithPaystack = ({
   email,
   amount,
+  plan,
   onSuccess,
   onClose,
 }: IPayWithPaystack) => {
@@ -158,6 +159,7 @@ export const payWithPaystack = ({
     key: `${import.meta.env.VITE_APP_PAYSTACK_API_PUBLIC_KEY}`,
     email,
     amount: amount * 100,
+    plan,
     onSuccess,
     onClose,
   });

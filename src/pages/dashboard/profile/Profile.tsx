@@ -43,6 +43,7 @@ export default function Individual() {
   }, [navs]);
   return (
     <div className="flex gap-x-8 h-full">
+      {/* <pre className="text-blue-200">{JSON.stringify(profileData,null,2)}</pre> */}
       {/* <span className="st">{localStorage.getItem('bearerToken')}</span> */}
       {/* ss {profileLoading ? 'True' : "false"} */}
       <div className="max-h-max">

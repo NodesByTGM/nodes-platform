@@ -221,7 +221,7 @@ export default function JobItem({
         setOpen={setViewjobOpen}
       >
         <div className="">
-          <JobPost details={data} closeModal={() => setViewjobOpen(false)} />
+          <JobPost details={data} refetchJobs={refetchJobs} closeModal={() => setViewjobOpen(false)} />
         </div>
       </Modal>
 
