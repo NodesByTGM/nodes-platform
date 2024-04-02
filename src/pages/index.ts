@@ -27,6 +27,7 @@ export { default as Details } from "../pages/details/index.tsx";
 export { default as CommunityBase } from "./community/CommunityBase.tsx";
 export { default as SpacesBase } from "./spaces/SpacesBase.tsx";
 export { default as Spaces } from "./spaces/Spaces.tsx";
+export { default as Space } from "./spaces/Space.tsx";
 export { default as SubscriptionBase } from "./subscription/SubscriptionBase.tsx";
 export { default as Subscription } from "./subscription/Subscription.tsx";
 export { default as MakePayment } from "./subscription/MakePayment.tsx";

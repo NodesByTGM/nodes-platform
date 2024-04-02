@@ -125,6 +125,7 @@ const PATHS = {
   Spaces: {
     Base: "/spaces",
     Overview: "",
+    Space: "/spaces/:id",
   },
   Subscription: {
     Base: "/subscription",
@@ -140,7 +141,7 @@ const PATHS = {
   GridTools: "/grid-tools",
   Trending: {
     Base: "/trending",
-    Overview: ''
+    Overview: "",
   },
   Terms: "/terms-and-conditions",
   Privacy: "/privacy-policy",
