@@ -11,9 +11,9 @@ export default function JobSection() {
   } = useGetJobsQuery();
 
   useEffect(() => {
-    if (allJobsIsSuccess) {
+    if (allJobsIsSuccess && allJobs?.result?.items?.length > 0) {
      
-      setJobsData(allJobs?.jobs);
+      setJobsData(allJobs?.result?.items);
     }
   }, [allJobs, allJobsIsSuccess]);
   return (
