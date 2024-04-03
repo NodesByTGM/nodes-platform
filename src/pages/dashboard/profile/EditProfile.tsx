@@ -64,6 +64,7 @@ export default function EditIndividual() {
       // error: updateProfileError,
     },
   ] = useUpdateUserProfileMutation();
+
   const initialCollaborator = {
     name: "",
     role: "",
@@ -142,7 +143,6 @@ export default function EditIndividual() {
       businessInfo,
     ]
   );
-
   const [navs, setNavs] = useState(navOptions);
   const [selected, setSelected] = useState(navs[0]);
 
@@ -174,25 +174,24 @@ export default function EditIndividual() {
 
   const formik = useFormik<profileValidationType>({
     initialValues: {
-      firstName: profileData?.user?.name?.split(" ")[0],
-      lastName: profileData?.user?.name?.split(" ")[1],
-      username: profileData?.user?.username,
-      avatar: profileData?.user?.avatar,
-      location: profileData?.user?.location,
-      height: profileData?.user?.height,
-      age: profileData?.user?.age,
-
-      headline: profileData?.user?.headline,
-      bio: profileData?.user?.bio,
-      website: profileData?.user?.website,
-      linkedIn: profileData?.user?.linkedIn,
-      instagram: profileData?.user?.instagram,
-      twitter: profileData?.user?.twitter,
-      projectName: profileData?.user?.projectName,
-      description: profileData?.user?.description,
-      projectUrl: profileData?.user?.projectUrl,
-      spaces: profileData?.user?.spaces,
-      comments: profileData?.user?.comments,
+      firstName: profileData?.result?.name?.split(" ")[0],
+      lastName: profileData?.result?.name?.split(" ")[1],
+      username: profileData?.result?.username,
+      avatar: profileData?.result?.avatar,
+      location: profileData?.result?.location,
+      height: profileData?.result?.height,
+      age: profileData?.result?.age,
+      headline: profileData?.result?.headline,
+      bio: profileData?.result?.bio,
+      website: profileData?.result?.website,
+      linkedIn: profileData?.result?.linkedIn,
+      instagram: profileData?.result?.instagram,
+      twitter: profileData?.result?.twitter,
+      projectName: profileData?.result?.projectName,
+      description: profileData?.result?.description,
+      projectUrl: profileData?.result?.projectUrl,
+      spaces: profileData?.result?.spaces,
+      comments: profileData?.result?.comments,
       collaborators: [initialCollaborator],
     },
     validationSchema: profileSchema,
@@ -233,6 +232,53 @@ export default function EditIndividual() {
   const populateFormValues = () => {
     console.log(JSON.stringify(profileData.user, null, 2));
   };
+  const {
+    setValues,
+    setFieldValue,
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+    values,
+    isValid,
+    handleBlur,
+  } = formik;
+
+  const handleInputPrefill = useCallback(() => {
+    setValues({
+      firstName: profileData?.result?.name?.split(" ")[0],
+      lastName: profileData?.result?.name?.split(" ")[1],
+      username: profileData?.result?.username,
+      avatar: profileData?.result?.avatar,
+      location: profileData?.result?.location,
+      height: profileData?.result?.height,
+      age: profileData?.result?.age,
+      headline: profileData?.result?.headline,
+      bio: profileData?.result?.bio,
+      website: profileData?.result?.website,
+      linkedIn: profileData?.result?.linkedIn,
+      instagram: profileData?.result?.instagram,
+      twitter: profileData?.result?.twitter,
+      projectName: profileData?.result?.projectName,
+      description: profileData?.result?.description,
+      projectUrl: profileData?.result?.projectUrl,
+      spaces: profileData?.result?.spaces,
+      comments: profileData?.result?.comments,
+      collaborators: [initialCollaborator],
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profileData, setValues]);
+
+  const handleSetSwitch = useCallback((field, value) => {
+    setFieldValue(field, value);
+  }, []);
+
+  useEffect(() => {
+    if (profileData?.result) {
+      // setUserData(profileData?.result);
+      handleInputPrefill();
+    }
+  }, [profileData, handleInputPrefill]);
 
   useEffect(() => {
     handleNavs();
@@ -254,17 +300,6 @@ export default function EditIndividual() {
       populateFormValues();
     }
   }, [profileIsSuccess]);
-
-  const {
-    setFieldValue,
-    handleChange,
-    handleSubmit,
-    errors,
-    touched,
-    values,
-    isValid,
-    handleBlur,
-  } = formik;
 
   return (
     <FormikProvider value={formik}>
@@ -317,7 +352,12 @@ export default function EditIndividual() {
           </div>
 
           <FormDebug
-            form={{ values, touched, errors }}
+            form={{
+              values,
+              touched,
+              errors,
+              // userData: profileData?.result
+            }}
             className="mt-4 hidden"
           />
         </div>
@@ -573,10 +613,9 @@ export default function EditIndividual() {
           )}
           {hasProject && (
             <div className="bg-" ref={addAProject}>
-                <FormDiv title="Create a project ">
+              <FormDiv title="Create a project ">
                 <ProfileProjectForm />
               </FormDiv>
-              
             </div>
           )}
 
@@ -598,9 +637,7 @@ export default function EditIndividual() {
                 <div className="grid grid-col-1 gap-6">
                   <InteractionsSwitch
                     value={values.spaces}
-                    setValue={(value) => {
-                      setFieldValue("spaces", value);
-                    }}
+                    setValue={(value) => handleSetSwitch("spaces", value)}
                     label="Spaces"
                     description="Enabling this will allow all your acitivity in spaces show up on your profile"
                   />

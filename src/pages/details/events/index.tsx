@@ -47,14 +47,14 @@ export default function EventDetails() {
   ]);
 
   const setBreadcrumbList = () => {
-    setLinks([links[0], { ...links[1], title: eventsData?.event?.name }]);
+    setLinks([links[0], { ...links[1], title: eventsData?.result?.name }]);
   };
 
   useEffect(() => {
     setBreadcrumbList();
     setNavs([
       navs[0],
-      { ...navs[1], count: eventsData?.event?.saves?.length },
+      { ...navs[1], count: eventsData?.result?.saves?.length },
       navs[2],
     ]);
   }, [eventsData]);
@@ -71,13 +71,13 @@ export default function EventDetails() {
           </div>
 
           <pre className="hidden text-blue-400">
-            {JSON.stringify(eventsData?.event, null, 2)}
+            {JSON.stringify(eventsData?.result, null, 2)}
           </pre>
 
           <DetailsActions
-            title={eventsData?.event?.name}
+            title={eventsData?.result?.name}
             type={type?.toLowerCase()}
-            details={eventsData?.event}
+            details={eventsData?.result}
             eventsRefetch={eventsRefetch}
           />
 
@@ -89,11 +89,11 @@ export default function EventDetails() {
 
           <div className="">
             {selectedNav?.label?.toLowerCase() == "details" && (
-              <Details details={eventsData?.event} />
+              <Details details={eventsData?.result} />
             )}
 
             {selectedNav?.label?.toLowerCase() == "saves" && (
-              <Saves details={eventsData?.event} />
+              <Saves details={eventsData?.result} />
             )}
 
          

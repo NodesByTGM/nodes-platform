@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
 import { useDashboardContext } from "../../../context/hooks";
 import {
@@ -22,19 +23,22 @@ import BusinessDashboardSectionEmptyStates from "./BusinessDashboardSectionEmpty
 
 export default function BusinessDashboard() {
   const { user } = useDashboardContext();
+  const [jobsData, setJobsData] = useState<any>([]);
+  const [eventsData, setEventsData] = useState<any>([]);
+
   const [jobModal, setJobModal] = useState(false);
   const [eventModal, setEventModal] = useState(false);
 
   const [subscriptionModal, setSubscriptionModal] = useState(false);
 
   const {
-    data: jobsData,
+    data: jobsResponse,
     refetch: jobsRefetch,
     isFetching: jobsLoading,
   } = useGetBusinessUserJobsQuery({ businessId: user?.business?.id });
 
   const {
-    data: eventsData,
+    data: eventsResponse,
     refetch: eventsRefetch,
     isFetching: eventsLoading,
   } = useGetBusinessUserEventsQuery({ businessId: user?.business?.id });
@@ -66,13 +70,26 @@ export default function BusinessDashboard() {
     },
   ]);
 
+  useEffect(() => {
+    if (eventsResponse?.result?.items?.length > 0) {
+      setEventsData(eventsResponse?.result.items);
+    }
+  }, [eventsResponse]);
+
+  useEffect(() => {
+    if (jobsResponse?.result?.items?.length > 0) {
+      setJobsData(jobsResponse?.result.items);
+    }
+  }, [jobsResponse]);
+
   return (
     <div>
       <pre className="hidden text-blue-400 text-wrap max-w-[600px]">
-        {JSON.stringify(jobsData?.jobs, null, 2)}
+        {/* {JSON.stringify(jobsData, null, 2)} */}
+        {JSON.stringify(!user?.business?.id, null, 2)}
       </pre>
       {/* //remember to change back to !user?.business?.id */}
-      {user?.business?.id ? (
+      {!user?.business?.id ? (
         <BusinessDashboardEmptyState
           user={user}
           addBusinessAccount={() => {
@@ -108,14 +125,13 @@ export default function BusinessDashboard() {
               </div>
             </WelcomeComponent>
 
-            {jobsLoading && !jobsData ? (
+            {jobsLoading && jobsData.length === 0 ? (
               <div className="my-40">
                 <Loader />
               </div>
             ) : null}
 
-            {(!jobsLoading && jobsData?.jobs?.length === 0) ||
-            (!jobsLoading && !jobsData) ? (
+            {!jobsLoading && jobsData.length === 0 ? (
               <div>
                 <BusinessDashboardSectionEmptyStates
                   type="job"
@@ -125,9 +141,9 @@ export default function BusinessDashboard() {
               </div>
             ) : null}
 
-            {!jobsLoading && jobsData && jobsData?.jobs?.length > 0 ? (
+            {jobsData?.length > 0 ? (
               <CarouselSection
-                data={jobsData?.jobs || []}
+                data={jobsData || []}
                 refetchJobs={jobsRefetch}
                 navigateTo={() => navigate("/dashboard/see-more/business-jobs")}
                 seeMore
@@ -139,14 +155,13 @@ export default function BusinessDashboard() {
               />
             ) : null}
 
-            {eventsLoading && !eventsData ? (
+            {eventsLoading && eventsData.length === 0 ? (
               <div className="my-40">
                 <Loader />
               </div>
             ) : null}
 
-            {(!eventsLoading && eventsData?.events?.length === 0) ||
-            (!eventsLoading && !eventsData) ? (
+            {!eventsLoading && eventsData.length === 0 ? (
               <div>
                 <BusinessDashboardSectionEmptyStates
                   type="events"
@@ -156,9 +171,9 @@ export default function BusinessDashboard() {
               </div>
             ) : null}
 
-            {!eventsLoading && eventsData && eventsData?.events?.length > 0 ? (
+            {eventsData?.length > 0 ? (
               <CarouselSection
-                data={eventsData?.events || []}
+                data={eventsData || []}
                 refetchEvents={eventsRefetch}
                 isBusiness
                 navigateTo={() =>

@@ -53,7 +53,7 @@ const ProfileProvider = ({
   } = useGetUserProfileQuery();
 
   const user = useSelector((state: RootState) => state.user.user);
-  const [profileType, setProfileType] = useState("talent");
+  const [profileType, setProfileType] = useState("individual");
   const [hasProject, setHasProject] = useState(false);
   const [projectDetailsModal, setProjectDetailsModal] = useState(false);
   const [editProjectModal, setEditProjectModal] = useState(false);
@@ -129,7 +129,7 @@ const ProfileProvider = ({
   return (
     <ProfileContext.Provider value={profileContextValue}>
       <div className="hidden">
-        <pre>{"Data:" + JSON.stringify(profileData, null, 2)}</pre>
+        <pre>{"Data:" + JSON.stringify(profileData?.result, null, 2)}</pre>
       </div>
       <div className="hidden">
         <pre className="Test-primary">

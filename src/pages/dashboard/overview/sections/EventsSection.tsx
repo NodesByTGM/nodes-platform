@@ -11,8 +11,8 @@ export default function EventsSection() {
   } = useGetEventsQuery();
 
   useEffect(() => {
-    if (allEventsIsSuccess) {
-      setEventsData(allEvents?.events);
+    if (allEventsIsSuccess && allEvents?.result?.items?.length > 0) {
+      setEventsData(allEvents?.result?.items);
     }
   }, [allEvents, allEventsIsSuccess]);
   return (

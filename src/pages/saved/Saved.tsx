@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import SavedJobs from "./SavedJobs";
 import SavedEvents from "./SavedEvents";
@@ -5,6 +6,10 @@ import { useGetSavedJobsQuery, useGetSavedEventsQuery } from "../../api";
 
 import { SectionNavs } from "../../components";
 export default function Saved() {
+  const [savedJobsData, setSavedJobsData] = useState<any>([])
+
+  const [savedEventsData, setSavedEventsData] = useState<any>([])
+
   const [navs, setNavs] = useState([
     { id: 1, label: "Jobs", count: null },
     {
@@ -16,13 +21,13 @@ export default function Saved() {
   const [selectedNav, setSelectedNav] = useState(navs[0]);
 
   const {
-    data: savedJobsData,
+    data: savedJobsResponse,
     refetch: savedJobsRefetch,
     isFetching: savedJobsLoading,
   } = useGetSavedJobsQuery();
 
   const {
-    data: savedEventsData,
+    data: savedEventsResponse,
     refetch: savedEventsRefetch,
     isFetching: savedEventsLoading,
   } = useGetSavedEventsQuery();
@@ -39,20 +44,34 @@ export default function Saved() {
   };
 
   useEffect(() => {
-    const jobCount = savedJobsData?.jobs?.length;
+    if(savedJobsResponse?.result?.items?.length > 0){
+      setSavedJobsData(savedJobsResponse?.result.items)
+    }
+
+  }, [savedJobsResponse])
+
+  useEffect(() => {
+    if(savedEventsResponse?.result?.items?.length > 0){
+      setSavedEventsData(savedEventsResponse?.result.items)
+    }
+
+  }, [savedEventsResponse])
+
+  useEffect(() => {
+    const jobCount = savedJobsData?.length;
 
     if (jobCount > 0) {
       handleCount("jobs", jobCount);
     }
-  }, [savedJobsData?.jobs?.length]);
+  }, [savedJobsData?.length]);
 
   useEffect(() => {
-    const eventCount = savedEventsData?.events?.length;
+    const eventCount = savedEventsData?.length;
 
     if (eventCount > 0) {
       handleCount("events", eventCount);
     }
-  }, [savedEventsData?.events?.length]);
+  }, [savedEventsData?.length]);
 
   return (
     <div>
@@ -69,7 +88,7 @@ export default function Saved() {
 
         {selectedNav.label.toLowerCase() === "jobs" && (
           <SavedJobs
-            data={savedJobsData?.jobs || []}
+            data={savedJobsData || []}
             refetch={savedJobsRefetch}
             isFetching={savedJobsLoading}
           />
@@ -77,7 +96,7 @@ export default function Saved() {
         {selectedNav.label.toLowerCase() === "events" && (
           <div className="">
             <SavedEvents
-              data={savedEventsData?.events || []}
+              data={savedEventsData || []}
               refetch={savedEventsRefetch}
               isFetching={savedEventsLoading}
             />

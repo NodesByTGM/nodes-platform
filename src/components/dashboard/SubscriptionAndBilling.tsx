@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "../../components";
-
+import { useNavigate } from "react-router-dom";
 const CloseIcon = ({ close }) => {
   return (
     <div onClick={() => close()} className="max-w-max">
@@ -136,6 +136,7 @@ const SubSection = ({ plan }) => {
   );
 };
 export default function SubscriptionAndBilling({ closeModal }) {
+  const navigate = useNavigate()
   const plans = [
     {
       type: "Free",
@@ -148,7 +149,10 @@ export default function SubscriptionAndBilling({ closeModal }) {
         "Networking Opportunities",
         "Stay Informed on Creative Trends",
       ],
-      action: () => closeModal(),
+      action: () => {
+        navigate('/subscription/free')
+        closeModal()
+      },
     },
     {
       type: "Pro",
@@ -163,7 +167,10 @@ export default function SubscriptionAndBilling({ closeModal }) {
         "Advanced Analytics and Insights",
         "Access to GridTools Discovery Pack (Free)",
       ],
-      action: () => closeModal(),
+      action: () => {
+        navigate('/subscription/pro')
+        closeModal()
+      },
     },
     {
       type: "Business",
@@ -178,7 +185,10 @@ export default function SubscriptionAndBilling({ closeModal }) {
         "Access to GridTools Discovery Pack (Free)",
         "Promotion and Marketing Opportunities",
       ],
-      action: () => closeModal(),
+      action: () => {
+        navigate('/subscription/business')
+        closeModal()
+      },
     },
   ];
   return (

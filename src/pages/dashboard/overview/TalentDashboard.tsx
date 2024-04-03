@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState, useEffect } from "react";
 import {
   CarouselSection,
   HeaderAndDescription,
@@ -16,23 +17,29 @@ import {
 } from "../../../api";
 
 export default function TalentDashboard() {
+  const [jobsData, setJobsData] = useState<any>([])
+
+  const [appliedJobsData, setAppliedJobsData] = useState<any>([])
+
+  const [eventsData, setEventsData] = useState<any>([])
+
   const { user } = useDashboardContext();
 
   const navigate = useNavigate();
   const {
-    data: jobsData,
+    data: jobsResponse,
     refetch: jobsRefetch,
     isFetching: jobsLoading,
   } = useGetJobsQuery();
 
   const {
-    data: appliedJobsData,
+    data: appliedJobsResponse,
     refetch: appliedJobsRefetch,
     isFetching: appliedJobsLoading,
   } = useGetAppliedJobsQuery();
 
   const {
-    data: eventsData,
+    data: eventsResponse,
     refetch: eventsRefetch,
     isFetching: eventsLoading,
   } = useGetEventsQuery();
@@ -63,6 +70,27 @@ export default function TalentDashboard() {
       buttonLink: "/community",
     },
   ]);
+
+  useEffect(() => {
+    if(jobsResponse?.result?.items?.length > 0){
+      setJobsData(jobsResponse?.result.items)
+    }
+
+  }, [jobsResponse])
+
+  useEffect(() => {
+    if(appliedJobsResponse?.result?.items?.length > 0){
+      setAppliedJobsData(appliedJobsResponse?.result.items)
+    }
+
+  }, [appliedJobsResponse])
+
+  useEffect(() => {
+    if(eventsResponse?.result?.items?.length > 0){
+      setEventsData(eventsResponse?.result.items)
+    }
+
+  }, [eventsResponse])
   return (
     <div>
       <HeaderAndDescription
@@ -93,22 +121,19 @@ export default function TalentDashboard() {
         </WelcomeComponent>
         {/* //should show jobs the user has applied to */}
       
-        {appliedJobsLoading && !appliedJobsData ? (
+        {appliedJobsLoading && appliedJobsData.length === 0  ? (
           <div className="my-40">
             <Loader />
           </div>
         ) : null}
-        {(!appliedJobsLoading && appliedJobsData?.jobs?.length === 0) ||
-        (!appliedJobsLoading && !appliedJobsData) ? (
+        {!appliedJobsLoading && appliedJobsData.length === 0 ? (
           <div className="text-base text-primary my-40  text-center">
             Nothing to see.
           </div>
         ) : null}
-        {!appliedJobsLoading &&
-        appliedJobsData &&
-        appliedJobsData?.jobs?.length > 0 ? (
+        {appliedJobsData?.length > 0 ? (
           <CarouselSection
-            data={appliedJobsData?.jobs || []}
+            data={appliedJobsData || []}
             navigateTo={() => navigate("/dashboard/see-more/talent")}
             seeMore
             job
@@ -121,21 +146,20 @@ export default function TalentDashboard() {
 
         {/* //should show jobs for the user */}
 
-        {jobsLoading && !jobsData ? (
+        {jobsLoading && jobsData.length === 0 ? (
           <div className="my-40">
             <Loader />
           </div>
         ) : null}
-        {(!jobsLoading && jobsData?.jobs?.length === 0) ||
-        (!jobsLoading && !jobsData) ? (
+        {!jobsLoading && jobsData.length === 0  ? (
           <div className="text-base text-primary my-40  text-center">
             Nothing to see.
           </div>
         ) : null}
 
-        {!jobsLoading && jobsData && jobsData?.jobs?.length > 0 ? (
+        {jobsData?.length > 0? (
           <CarouselSection
-            data={jobsData?.jobs || []}
+            data={jobsData || []}
             navigateTo={() => navigate("/dashboard/see-more/talent")}
             seeMore
             job
@@ -150,20 +174,19 @@ export default function TalentDashboard() {
         ) : null}
 
         {/* //Events */}
-        {eventsLoading && !eventsData ? (
+        {eventsLoading && eventsData.length === 0 ? (
           <div className="my-40">
             <Loader />
           </div>
         ) : null}
-        {(!eventsLoading && eventsData?.events?.length === 0) ||
-        (!eventsLoading && !eventsData) ? (
+        {!eventsLoading && eventsData.length === 0  ? (
           <div className="text-base text-primary my-40  text-center">
             Nothing to see.
           </div>
         ) : null}
-        {!eventsLoading && eventsData && eventsData?.events?.length > 0 ? (
+        {eventsData?.length > 0? (
           <CarouselSection
-            data={eventsData?.events || []}
+            data={eventsData || []}
             navigateTo={() => navigate("/dashboard/see-more/talent")}
             seeMore
             event
