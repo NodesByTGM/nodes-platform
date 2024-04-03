@@ -35,7 +35,7 @@ export const pricing = {
     buttonLink: '/subscription/pro'
   },
   business: {
-    title: "Pro",
+    title: "Business",
     description: "Lorem Ipsum dolor sit amet",
     payment: "₦19,800",
     duration: "/month",

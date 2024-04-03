@@ -76,14 +76,19 @@ function Register() {
     mainClient
       .post(AppConfig.API_ENDPOINTS.Auth.RegisterURL, data)
       .then((r) => {
-        if (r.status === 200) {
-          toast.success(r.data.message);
-          setUser(r.data.user);
-          dispatch(loginUser(r.data.user));
-          const accessToken = r.data?.user?.accessToken;
+        if (r?.data?.status === "success") {
+       
+          // console.log(JSON.stringify(r, null, 2));
+          const result = r?.data?.result;
+          const user = result?.user;
+          const accessToken = result?.accessToken;
 
-          console.log(JSON.stringify(accessToken));
+          // console.log(JSON.stringify(accessToken));
           localStorage.setItem("bearerToken", accessToken);
+          toast.success(r.data.message);
+
+          setUser(user);
+          dispatch(loginUser(user));
 
           if (localStorage.getItem("bearerToken") == accessToken) {
             navigate(AppConfig.PATHS.Upgrades.Talent.Onboarding);
@@ -163,6 +168,7 @@ function Register() {
     mainClient
       .post(AppConfig.API_ENDPOINTS.Auth.SendOTP, { email: values.email })
       .then((r) => {
+        console.log(JSON.stringify(r, null, 2));
         if (r.status === 200) {
           toast.success(r.data.message);
           setSent(true);
