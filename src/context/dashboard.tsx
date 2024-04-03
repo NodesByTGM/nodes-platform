@@ -19,7 +19,7 @@ const DashboardProvider = ({
 }) => {
   const user = useSelector((state: RootState) => state.user.user);
   const [pageName] = useState("Dashboard");
-  const [accountType, setAccountType] = useState("talent");
+  const [accountType, setAccountType] = useState("business");
   const dashboardContextValue = useMemo(
     () => ({
       pageName,
