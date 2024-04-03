@@ -49,10 +49,10 @@ export default function ProfileImgUploader({ value, onChange }) {
 
   useEffect(() => {
     if (uploadFileSuccess) {
-      onChange(uploadResponse?.data?.url);
+      onChange(uploadResponse?.data?.result?.url);
     }
    
-  }, [uploadFileSuccess, uploadResponse?.data?.url]);
+  }, [uploadFileSuccess, uploadResponse?.data?.result?.url]);
 
   useEffect(() => {
     if (isUploadError) {

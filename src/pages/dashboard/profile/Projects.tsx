@@ -74,8 +74,8 @@ export default function Projects() {
               <div className="mx-auto max-w-[219px] flex flex-col justify-center items-center ">
                 <h3 className="text-center font-medium text-base text-[#212121]">
                   Hi,{" "}
-                  {profileData?.user?.name
-                    ? profileData?.user?.name
+                  {profileData?.result?.name
+                    ? profileData?.result?.name
                     : user?.name}
                 </h3>
                 <span className="mt-8 text-center font-normal text-base text-[#212121]">
@@ -93,7 +93,6 @@ export default function Projects() {
           </div>
         ) : (
           <div className="">
-          
             <div className="my-20">
               <Loader />
             </div>

@@ -22,7 +22,7 @@ const checkAuth = (WrappedComponent: FC) => {
                             headers: { Authorization: 'Token ' + localStorage.getItem("nodesToken") }
                         });
                         if (response.status === 200) {
-                            setUser(response.data.user);
+                            setUser(response?.data?.result?.user);
                         } else {
                             // Redirect to the login page if the authentication fails
                             navigate(AppConfig.PATHS.Auth.Login, { replace: true })
