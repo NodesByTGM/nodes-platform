@@ -1,32 +1,41 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { Loader, EventItem } from "../../../components";
 // import { useGetBusinessUserEventsQuery } from "../../../api";
 import { useDashboardContext } from "../../../context/hooks";
 
-export default function MoreEvents({getRequest}) {
+export default function MoreEvents({ getRequest }) {
+  const [eventsData, setEventsData] = useState<any>([]);
+
   const { user } = useDashboardContext();
-    const { type } = useParams();
+  const { type } = useParams();
   const {
-    data: eventsData,
+    data: eventsResponse,
     refetch: eventsRefetch,
     isFetching: eventsLoading,
   } = getRequest({ businessId: user?.business?.id });
+
+  useEffect(() => {
+    if (eventsResponse?.result?.items?.length > 0) {
+      setEventsData(eventsResponse?.result.items);
+    }
+  }, [eventsResponse]);
   return (
     <div className="">
-      {eventsLoading && !eventsData ? (
+      {eventsLoading && eventsData.length === 0 ? (
         <div className="my-40">
           <Loader />
         </div>
       ) : null}
-      {!eventsLoading && eventsData?.events?.length === 0 ? (
+      {!eventsLoading && eventsData.length === 0  ? (
         <div className="text-base text-primary">Nothing to see.</div>
       ) : null}
 
-      {!eventsLoading && eventsData && eventsData?.events?.length > 0 ? (
+      {eventsData?.length > 0? (
         <div className="grid grid-cols-3 gap-6">
-          {eventsData?.events?.map((event) => (
+          {eventsData?.map((event) => (
             <div key={event?.id} className="">
               <EventItem
                 data={event}
