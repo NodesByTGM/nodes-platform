@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from "react";
 import { Card, Modal, JobItem, Loader } from "../../../components";
 import { useProfileContext } from "../../../context/hooks";
 import JobPostForm from "../../../components/JobPostForm";
@@ -11,9 +12,10 @@ type JobAndEventType = {
 };
 
 export default function JobAndEvents() {
+  const [jobsData, setJobsData] = useState<any>([])
   const { jobModal, setJobModal, user } = useProfileContext();
   const {
-    data: jobsData,
+    data: jobsResponse,
     refetch: jobsRefetch,
     isFetching: jobsLoading,
   } = useGetJobsQuery();
@@ -23,6 +25,12 @@ export default function JobAndEvents() {
   const addJobAndEvents = () => {
     setJobModal(true);
   };
+  useEffect(() => {
+    if(jobsResponse?.result?.items?.length > 0){
+      setJobsData(jobsResponse?.result.items)
+    }
+
+  }, [jobsResponse])
   return (
     <div className="relative flex flex-col min-h-[400px]">
       {/* {JSON.stringify(user, null, 2)} */}
@@ -34,27 +42,27 @@ export default function JobAndEvents() {
         editFunction={() => addJobAndEvents()}
       >
         <pre className="text-blue-500 hidden">
-          {JSON.stringify(jobsData, null, 2)}
+          {JSON.stringify(jobsResponse?.result.items, null, 2)}
         </pre>
 
         <div className="">
-          {jobsLoading && !jobsData?.jobs ? (
+          {jobsLoading && jobsData.length === 0 ? (
               <div className="my-20">
               <Loader />
             </div>
           ) : null}
 
-          {jobsData?.jobs?.length > 0 ? (
+          {jobsData?.length > 0 ? (
             <div className="grid grid-cols-2 gap-4">
-              {jobsData?.jobs?.map((data) => (
-                <div key={data.id} className="">
+              {jobsData?.map((data) => (
+                <div key={data?.id} className="">
                   <JobItem data={data} />
                 </div>
               ))}
             </div>
           ) : null}
 
-          {!jobsLoading && !jobsData?.jobs ? (
+          {!jobsLoading && jobsData.length === 0 ? (
             <div className="mx-auto max-w-[239px] flex flex-col justify-center items-center ">
               <h3 className="text-center font-medium text-base text-[#212121]">
                 Hi, {user?.username}
@@ -73,7 +81,7 @@ export default function JobAndEvents() {
           ) : null}
         </div>
       </Card>
-      {!jobsData?.jobs || jobsData?.jobs?.length == 0 ? (
+      {jobsData?.length == 0 ? (
         <div className=" w-full">
           <img src="/img/AddProjects.svg" alt="" className="w-full" />
         </div>

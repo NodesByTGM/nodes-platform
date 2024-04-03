@@ -129,7 +129,7 @@ const ProfileProvider = ({
   return (
     <ProfileContext.Provider value={profileContextValue}>
       <div className="hidden">
-        <pre>{"Data:" + JSON.stringify(profileData, null, 2)}</pre>
+        <pre>{"Data:" + JSON.stringify(profileData?.result, null, 2)}</pre>
       </div>
       <div className="hidden">
         <pre className="Test-primary">

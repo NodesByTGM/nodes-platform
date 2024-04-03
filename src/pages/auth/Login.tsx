@@ -41,11 +41,14 @@ function Login() {
       mainClient
         .post(AppConfig.API_ENDPOINTS.Auth.LoginURL, values)
         .then((r) => {
-          if (r.status === 200) {
+          if (r?.data?.status === "success") {
+            const result = r?.data?.result;
+            const user = result?.user;
+            const accessToken = result?.accessToken;
+
             toast.success("Login successful!");
-            setUser(r.data.user);
-            dispatch(loginUser(r.data.user));
-            const accessToken = r.data?.user?.accessToken;
+            setUser(user);
+            dispatch(loginUser(user));
             localStorage.setItem("bearerToken", accessToken);
 
             if (localStorage.getItem("bearerToken") == accessToken) {
