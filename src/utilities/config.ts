@@ -51,7 +51,7 @@ const API_ENDPOINTS = {
     GuestsURL: `${BASE_API_ENDPOINT}/events/guests/`,
   },
   Transactions: {
-    VerifyURL: `${BASE_API_ENDPOINT}/transactions/verify`, // /:description/:reference
+    VerifyURL: `${BASE_API_ENDPOINT}/verify/internal`, // /:description/:reference
   },
   Uploads: {
     UploadFile: `${BASE_API_ENDPOINT}/uploads/media`,

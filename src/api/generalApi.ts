@@ -2,7 +2,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { axiosBaseQuery } from "./axiosBaseQuery";
 import { REHYDRATE } from "redux-persist";
-// import { cleanObject } from "../utilities";
+import { cleanObject } from "../utilities";
 import AppConfig from "../utilities/config";
 
 export const generalApi: any = createApi({
@@ -25,7 +25,17 @@ export const generalApi: any = createApi({
         };
       },
     }),
+
+    verifyTransaction: builder.query<any, any>({
+      query: (params) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Transactions.VerifyURL}?${new URLSearchParams(cleanObject(params))}`,
+          method: "get",
+          
+        };
+      },
+    }),
   }),
 });
 
-export const { useUploadFileMutation } = generalApi;
+export const { useUploadFileMutation, useVerifyTransactionQuery } = generalApi;
