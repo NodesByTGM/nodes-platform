@@ -2,6 +2,7 @@
 import React from "react";
 import { UserPost, UserPostInitials, PostInteraction } from "../../components";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
+import { formatDate } from "../../utilities";
 
 type ICommunityPost = {
   data?: any;
@@ -20,7 +21,7 @@ export default function CommunityPost({
           <UserPostInitials name={data?.author?.name} />
           <span className="text-[#000000]">{data?.author?.name}</span>
           <div className="size-1 rounded-full bg-[#D9D9D9]"></div>
-          <span className=" text-[#828282]">2 hours ago</span>
+          <span className=" text-[#828282]">{formatDate(data?.updatedAt)}</span>
         </div>
 
         <div className="">
