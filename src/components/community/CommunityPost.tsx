@@ -5,11 +5,13 @@ import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 import { formatDate } from "../../utilities";
 
 type ICommunityPost = {
+  updatePosts?: (e) => void;
   data?: any;
   canShare?: boolean;
   canReply?: boolean;
 };
 export default function CommunityPost({
+  updatePosts = () => {},
   data,
   canShare = true,
   canReply = true,
@@ -43,7 +45,7 @@ export default function CommunityPost({
         })}
       </div>
       <div className="flex justify-end">
-        <PostInteraction data={data} canShare={canShare} />
+        <PostInteraction data={data} canShare={canShare} updatePosts={updatePosts} />
       </div>
       {canReply ? (
         <div className="mt-8">

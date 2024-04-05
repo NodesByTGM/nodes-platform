@@ -16,6 +16,7 @@ import {useGetCommunityPostQuery} from '../../api'
 function Community() {
   const { postModal, setAddPostModal } = useCommunityContext();
   const {
+    
    
     refetch: communityPostsRefetch,
   

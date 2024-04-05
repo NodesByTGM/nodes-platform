@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useEffect } from "react";
 import { FiShare } from "react-icons/fi";
 import { BiLike } from "react-icons/bi";
 import {
@@ -7,6 +7,7 @@ import {
   useUnlikeCommunityPostMutation,
 } from "../../api";
 type IPostInteraction = {
+  updatePosts?: (e) => void;
   data?: any;
   canShare?: boolean;
 };
@@ -31,11 +32,14 @@ const CommentIcon = () => {
   );
 };
 export default function PostInteraction({
+  updatePosts,
   canShare = true,
   data,
 }: IPostInteraction) {
-  const [likeCommunityPost] = useLikeCommunityPostMutation();
-  const [unlikeCommunityPost] = useUnlikeCommunityPostMutation();
+  const [likeCommunityPost, { data: likePostResponse }] =
+    useLikeCommunityPostMutation();
+  const [unlikeCommunityPost, { data: unlikePostResponse }] =
+    useUnlikeCommunityPostMutation();
 
   const unlikePost = () => {
     unlikeCommunityPost({ id: data?.id });
@@ -44,6 +48,20 @@ export default function PostInteraction({
   const likePost = () => {
     likeCommunityPost({ id: data?.id });
   };
+
+  useEffect(() => {
+    if (likePostResponse) {
+      updatePosts &&  updatePosts(likePostResponse?.result)
+      // alert(JSON.stringify(likePostResponse, null, 2));
+    }
+  }, [likePostResponse]);
+
+  useEffect(() => {
+    if (unlikePostResponse) {
+      updatePosts &&  updatePosts(unlikePostResponse?.result)
+      // alert(JSON.stringify(unlikePostResponse, null, 2));
+    }
+  }, [unlikePostResponse]);
   return (
     <div className={`text-[#000000] font-normal text-base flex gap-6`}>
       <div className="bg-[#FBFBFB] cursor-pointer flex items-center px-4 py-3 gap-[10px]">
