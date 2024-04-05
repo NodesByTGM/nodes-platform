@@ -2,6 +2,8 @@
 import React, { useEffect } from "react";
 import { FiShare } from "react-icons/fi";
 import { BiLike } from "react-icons/bi";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 import {
   useLikeCommunityPostMutation,
   useUnlikeCommunityPostMutation,
@@ -36,6 +38,8 @@ export default function PostInteraction({
   canShare = true,
   data,
 }: IPostInteraction) {
+  const user = useSelector((state: RootState) => state.user.user);
+
   const [likeCommunityPost, { data: likePostResponse }] =
     useLikeCommunityPostMutation();
   const [unlikeCommunityPost, { data: unlikePostResponse }] =
@@ -51,17 +55,18 @@ export default function PostInteraction({
 
   useEffect(() => {
     if (likePostResponse) {
-      updatePosts &&  updatePosts(likePostResponse?.result)
+      updatePosts && updatePosts(likePostResponse?.result);
       // alert(JSON.stringify(likePostResponse, null, 2));
     }
   }, [likePostResponse]);
 
   useEffect(() => {
     if (unlikePostResponse) {
-      updatePosts &&  updatePosts(unlikePostResponse?.result)
+      updatePosts && updatePosts(unlikePostResponse?.result);
       // alert(JSON.stringify(unlikePostResponse, null, 2));
     }
   }, [unlikePostResponse]);
+
   return (
     <div className={`text-[#000000] font-normal text-base flex gap-6`}>
       <div className="bg-[#FBFBFB] cursor-pointer flex items-center px-4 py-3 gap-[10px]">
@@ -71,7 +76,7 @@ export default function PostInteraction({
         </span>
       </div>
       <div className="bg-[#FBFBFB] cursor-pointer flex items-center px-4 py-3 gap-[10px]">
-        {data?.liked ? (
+        {data?.liked || data?.likes?.some((item) => item.email === user.email) ? (
           <div
             onClick={() => {
               unlikePost();
