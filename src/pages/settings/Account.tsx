@@ -22,7 +22,7 @@ const CheckButton = ({ setFieldValue, values, label, value }) => {
       <div
         className={`${
           values?.visibility.toLowerCase() == value
-            ? "bg-primary text-white"
+            ? "bg-customsecondary text-white"
             : "bg-white"
         } size-5 rounded-full border border-primary flex items-center justify-center `}
       >

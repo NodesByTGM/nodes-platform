@@ -37,19 +37,19 @@ const DashboardProvider = ({
         <div className="flex gap-2 mb-10 hidden">
           <button
             onClick={() => setAccountType("individual")}
-            className="px-4 py-2 rounded-md bg-primary text-white"
+            className="px-4 py-2 rounded-md bg-customsecondary text-white"
           >
             Switch to Individual
           </button>
           <button
             onClick={() => setAccountType("talent")}
-            className="px-4 py-2 rounded-md bg-primary text-white"
+            className="px-4 py-2 rounded-md bg-customsecondary text-white"
           >
             Switch to Talent
           </button>
           <button
             onClick={() => setAccountType("business")}
-            className="px-4 py-2 rounded-md bg-primary text-white"
+            className="px-4 py-2 rounded-md bg-customsecondary text-white"
           >
             Switch to Business
           </button>

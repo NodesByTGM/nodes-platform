@@ -32,6 +32,19 @@ export default {
           dark: "#D6D6D6",
           footer: "#F9F9F9",
         },
+        adminprimary:{
+          DEFAULT: '#212121'
+
+        },
+        customprimary:{
+          DEFAULT: '#085A55'
+
+        },
+        customsecondary:{
+          DEFAULT: '#212121'
+
+        }
+        
       },
       boxShadow: {
         normal: "0px 6px 20px 0px #0000000A",

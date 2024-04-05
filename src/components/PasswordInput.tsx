@@ -15,6 +15,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   touched?: boolean;
   check?: boolean;
+  isAdmin?: boolean;
 }
 export default function Input({
   className = "",
@@ -26,6 +27,7 @@ export default function Input({
   required = false,
   touched = false,
   error,
+  isAdmin = false,
 
   onChange,
   ...props
@@ -64,7 +66,7 @@ export default function Input({
         </div>
         {forgotPasswordLink ? (
           <Link
-            to={AppConfig.PATHS.Auth.ForgotPassword}
+            to={isAdmin ?AppConfig.PATHS.Admin.Auth.ForgotPassword : AppConfig.PATHS.Auth.ForgotPassword}
             className="text-primary cursor-pointer"
           >
             Forgot?

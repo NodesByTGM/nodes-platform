@@ -23,7 +23,7 @@ export default function Switchcomponent({ value, setValue }) {
       checked={value}
       onChange={setValue}
       className={classNames(
-        value ? "bg-primary" : "bg-gray-300",
+        value ? "bg-customsecondary" : "bg-gray-300",
         "relative inline-flex h-6 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none  focus:ring-0 focus:ring-offset-2"
       )}
     >

@@ -15,7 +15,7 @@ import { Title } from "../../components/Typography";
 import { useAuth } from "../../context/hooks";
 import { IUser } from "../../interfaces/auth";
 import { mainClient } from "../../utilities/client";
-import { convertToBase64,  } from "../../utilities/common";
+import { convertToBase64 } from "../../utilities/common";
 
 import { handleAxiosError } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
@@ -162,9 +162,8 @@ function TalentOnboarding() {
 
   useEffect(() => {
     if (uploadFileSuccess) {
-      setFormData({...formData, avatar: uploadResponse?.data?.result.url});
+      setFormData({ ...formData, avatar: uploadResponse?.data?.result.url });
     }
-   
   }, [uploadFileSuccess, uploadResponse?.data?.result?.url]);
 
   useEffect(() => {
@@ -397,7 +396,7 @@ function TalentOnboarding() {
           </div>
         ) : null}
       </div>
-      <div className="bg-primary p-5 w-1/2 lg:block hidden">
+      <div className="bg-customsecondary p-5 w-1/2 lg:block hidden">
         {/* <FormDebug form={{ formData, preview, checked }} /> */}
         <TalentReviewCard
           name={user?.name}

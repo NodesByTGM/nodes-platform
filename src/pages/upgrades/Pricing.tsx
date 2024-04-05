@@ -11,7 +11,7 @@ export default function Pricing() {
   ];
   const [selected, setSelected] = useState(paymentPlans[1]);
   return (
-    <div className="bg-primary w-full min-h-[100vh] flex flex-col pb-[210px]">
+    <div className="bg-customsecondary w-full min-h-[100vh] flex flex-col pb-[210px]">
       <div className="py-6 pricing-padding">
         <img
           onClick={() => navigate("/")}

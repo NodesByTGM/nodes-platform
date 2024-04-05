@@ -1,7 +1,7 @@
 export const BASE_API_ENDPOINT =
   process.env.NODE_ENV === "development"
-    ? "https://nodes-server-v1.onrender.com/api/v1"
-    : "https://nodes-server-v1.onrender.com/api/v1";
+    ? "https://nodes-api.thegridmanagement.com/api/v1"
+    : "https://nodes-api.thegridmanagement.com/api/v1";
 export const MAIN_APP_URL = "https://nodes.com";
 
 const API_ENDPOINTS = {
@@ -17,6 +17,9 @@ const API_ENDPOINTS = {
     SendOTP: `${BASE_API_ENDPOINT}/auth/send-otp`,
     VerfiyEmail: `${BASE_API_ENDPOINT}/auth/verify-email`,
     ProfileURL: `${BASE_API_ENDPOINT}/users/profile`,
+  },
+  Community: {
+    Post: `${BASE_API_ENDPOINT}/community/posts`,
   },
   Profile: {
     UserProfile: `${BASE_API_ENDPOINT}/users/profile`,
@@ -48,7 +51,7 @@ const API_ENDPOINTS = {
     GuestsURL: `${BASE_API_ENDPOINT}/events/guests/`,
   },
   Transactions: {
-    VerifyURL: `${BASE_API_ENDPOINT}/transactions/verify`, // /:description/:reference
+    VerifyURL: `${BASE_API_ENDPOINT}/transactions/verify/internal`, // /:description/:reference
   },
   Uploads: {
     UploadFile: `${BASE_API_ENDPOINT}/uploads/media`,
@@ -56,6 +59,31 @@ const API_ENDPOINTS = {
 };
 
 const PATHS = {
+  Admin: {
+    Auth: {
+      Base: "/admin",
+      Default: "",
+      Signup: "/admin/auth/signup",
+      Login: "/admin/auth/login",
+      Register: "/admin/auth/register",
+      ForgotPassword: "/admin/auth/forgot-password",
+      ResetPassword: "/admin/auth/reset-password/",
+      ResetPasswordWithParams: "/admin/auth/reset-password/:accountId/:token",
+    },
+    Content: {
+      Base: "/admin/content",
+      Default: "",
+    },
+    User: {
+      Base: "/admin/user",
+      Default: "",
+    },
+    Subscription: {
+      Base: "/admin/subscription",
+      Default: "",
+    },
+  },
+
   Auth: {
     Login: "/auth/login",
     Register: "/auth/register",
@@ -308,6 +336,8 @@ const AppConfig = {
     SpaceName: "Enter the name of the space here",
     SpaceDescription: "What is this space about?",
     CardNumber: "1234 1234 1234 1234",
+    AddTitle: "Add a title",
+    WritePost: "What is your post...",
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,

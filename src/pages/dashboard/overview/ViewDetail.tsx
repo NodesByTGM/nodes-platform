@@ -3,18 +3,17 @@ import React, { useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { TfiComment } from "react-icons/tfi";
 import {
- 
   CarouselSection,
   TrendingItem,
   CommentBox,
-  Back
+  Back,
 } from "../../../components";
 export default function ViewDetail() {
   const [commentOpen, setCommentOpen] = useState(false);
 
   return (
     <div>
-     <Back className={`mb-[64px]`} link={'/dashboard'}/>
+      <Back className={`mb-[64px]`} link={"/dashboard"} />
       <div className="mb-[64px] flex items-start justify-between gap-6">
         <div className="flex gap-4 flex-col text-[#000000] max-w-[500px]">
           <span className="text-[#000000] font-normal text-sm">Top Movies</span>
@@ -52,7 +51,7 @@ export default function ViewDetail() {
             <div className="flex items-center gap-4 w-full">
               <div
                 onClick={() => setCommentOpen(true)}
-                className="flex items-center justify-center text-[#ffffff] font-medium text-base rounded-full bg-primary max-h-max max-w-max p-4 "
+                className="flex items-center justify-center text-[#ffffff] font-medium text-base rounded-full bg-customsecondary max-h-max max-w-max p-4 "
               >
                 AA
               </div>

@@ -1,13 +1,25 @@
 import React, { useState } from "react";
-import { Button, SearchComponent, SectionNavs, Modal } from "../../components";
+import {
+  Button,
+  SearchComponent,
+  SectionNavs,
+  Modal,
+  AddPost,
+} from "../../components";
 import General from "./General";
 import Followed from "./Followed";
 import MyPosts from "./MyPosts";
 import { Link } from "react-router-dom";
-// import { useCommunityContext } from "../../context/hooks";
+import { useCommunityContext } from "../../context/hooks";
+import {useGetCommunityPostQuery} from '../../api'
+
 function Community() {
-  // const { user } = useCommunityContext();
-  const [postModal, setAddPostModal] = useState(false);
+  const { postModal, setAddPostModal } = useCommunityContext();
+  const {
+   
+    refetch: communityPostsRefetch,
+  
+  } = useGetCommunityPostQuery();
   const [navs] = useState([
     { id: 1, label: "General", count: null },
     { id: 2, label: "Followed", count: null },
@@ -44,7 +56,7 @@ function Community() {
       </div>
 
       <div className="">
-        {selectedNav?.label?.toLowerCase() == "general" && <General />}
+        {selectedNav?.label?.toLowerCase() == "general" && <General getCommunityPostsQuery={useGetCommunityPostQuery}/>}
 
         {selectedNav?.label?.toLowerCase() == "followed" && <Followed />}
 
@@ -56,7 +68,7 @@ function Community() {
         open={postModal}
         setOpen={setAddPostModal}
       >
-        Add Post
+        <AddPost refetch={() => {communityPostsRefetch()}} closeModal={() => setAddPostModal(false)}/>{" "}
       </Modal>
     </div>
   );

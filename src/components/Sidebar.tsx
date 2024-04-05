@@ -6,7 +6,7 @@ import {
   User,
   Bookmark,
   Circle,
-  Star
+  Star,
 } from "react-feather";
 import { NavLink } from "react-router-dom";
 import AppConfig from "../utilities/config";
@@ -64,9 +64,9 @@ function Sidebar() {
             to={String(r.path)}
             className={({ isActive, isPending }) =>
               isActive
-                ? "bg-primary text-white navLink"
+                ? "bg-customsecondary text-white navLink"
                 : isPending
-                ? "bg-primary text-white navLink"
+                ? "bg-customsecondary text-white navLink"
                 : "navLink"
             }
             key={i}

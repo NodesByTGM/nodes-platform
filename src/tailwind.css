@@ -22,6 +22,10 @@
   @apply bg-[#FDFDF7];
 }
 
+.admin-main-plain-container {
+  @apply border border-[#F2F2F2] rounded-[16px] bg-[#ffffff] py-[64px] pl-[40px] pr-[40px];
+}
+
 .profile-card-shadow {
   box-shadow: 4px 3px 10px 4px #00000008;
 }
@@ -40,7 +44,10 @@
 }
 
 .navLink {
-  @apply flex gap-4 items-center active:bg-primary active:text-white hover:bg-primary hover:text-white transition-all px-4 py-2 rounded;
+  @apply flex gap-4 items-center active:bg-customsecondary active:text-white hover:bg-customsecondary hover:text-white transition-all px-4 py-2 rounded;
+}
+.authNavLink {
+  @apply flex gap-4 items-center active:bg-[#212121] active:text-white hover:bg-[#212121] hover:text-white transition-all px-4 py-2 rounded;
 }
 
 /* .profile-forms-section {

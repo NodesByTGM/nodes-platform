@@ -77,7 +77,6 @@ function Register() {
       .post(AppConfig.API_ENDPOINTS.Auth.RegisterURL, data)
       .then((r) => {
         if (r?.data?.status === "success") {
-       
           // console.log(JSON.stringify(r, null, 2));
           const result = r?.data?.result;
           const user = result?.user;
@@ -421,7 +420,7 @@ function Register() {
       <div
         className={clsx(
           "bg-light p-5 w-1/2 lg:block hidden",
-          currentIndex === 0 ? "bg-light" : "bg-primary"
+          currentIndex === 0 ? "bg-light" : "bg-customsecondary"
         )}
       >
         {currentIndex === 0 ? (

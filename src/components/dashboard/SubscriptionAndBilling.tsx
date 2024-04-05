@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../../components";
 import { useNavigate } from "react-router-dom";
+import {pricing} from '../../utilities/constants'
 const CloseIcon = ({ close }) => {
   return (
     <div onClick={() => close()} className="max-w-max">
@@ -157,7 +158,7 @@ export default function SubscriptionAndBilling({ closeModal }) {
     {
       type: "Pro",
       subPlan: "Recommended plan",
-      amount: "₦7,900",
+      amount: pricing.pro.payment,
       tenor: "/month",
       supportingText: "One sentence supporting text",
       features: [
@@ -175,7 +176,7 @@ export default function SubscriptionAndBilling({ closeModal }) {
     {
       type: "Business",
       subPlan: null,
-      amount: "₦19,800",
+      amount: pricing.business.payment,
       tenor: "/month",
       supportingText: "One sentence supporting text",
       features: [

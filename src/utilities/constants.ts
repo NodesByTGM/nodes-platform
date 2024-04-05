@@ -1,3 +1,9 @@
+export const planPrices = {
+  pro:"₦89,800",
+  business: "₦214,800",
+
+}
+
 export const pricing = {
   standard: {
     title: "Standard",
@@ -18,7 +24,7 @@ export const pricing = {
   pro: {
     title: "Pro",
     description: "Lorem Ipsum dolor sit amet",
-    payment: "₦7,900",
+    payment: planPrices.pro,
     duration: "/month",
     tenor: "Get one month free if you subscribe now",
     incentives: [
@@ -37,7 +43,7 @@ export const pricing = {
   business: {
     title: "Business",
     description: "Lorem Ipsum dolor sit amet",
-    payment: "₦19,800",
+    payment: planPrices.business,
     duration: "/month",
     tenor: "For the next 3 months and 7900",
     incentives: [
@@ -85,7 +91,7 @@ export const plans = [
   {
     type: "Pro",
     subPlan: "Recommended plan",
-    amount: "₦7,900",
+    amount: planPrices.pro,
     tenor: "/month",
     supportingText: "One sentence supporting text",
     features: [
@@ -102,7 +108,7 @@ export const plans = [
   {
     type: "Business",
     subPlan: null,
-    amount: "₦19,800",
+    amount: planPrices.business,
     tenor: "/month",
     supportingText: "One sentence supporting text",
     features: [

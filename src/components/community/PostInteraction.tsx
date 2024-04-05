@@ -1,10 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { FiShare } from "react-icons/fi";
 import { BiLike } from "react-icons/bi";
-
+import {
+  useLikeCommunityPostMutation,
+  useUnlikeCommunityPostMutation,
+} from "../../api";
 type IPostInteraction = {
-    canShare?: boolean;
-  };
+  data?: any;
+  canShare?: boolean;
+};
 const CommentIcon = () => {
   return (
     <div className="">
@@ -25,18 +30,55 @@ const CommentIcon = () => {
     </div>
   );
 };
-export default function PostInteraction({ canShare = true } : IPostInteraction) {
+export default function PostInteraction({
+  canShare = true,
+  data,
+}: IPostInteraction) {
+  const [likeCommunityPost] = useLikeCommunityPostMutation();
+  const [unlikeCommunityPost] = useUnlikeCommunityPostMutation();
+
+  const unlikePost = () => {
+    unlikeCommunityPost({ id: data?.id });
+  };
+
+  const likePost = () => {
+    likeCommunityPost({ id: data?.id });
+  };
   return (
     <div className={`text-[#000000] font-normal text-base flex gap-6`}>
       <div className="bg-[#FBFBFB] cursor-pointer flex items-center px-4 py-3 gap-[10px]">
         <CommentIcon />
-        <span className="">24</span>
+        <span className="">
+          24 <span className="text-red-400">*</span>
+        </span>
       </div>
       <div className="bg-[#FBFBFB] cursor-pointer flex items-center px-4 py-3 gap-[10px]">
-        <BiLike />
-        <span className="">24</span>
+        {data?.liked ? (
+          <div
+            onClick={() => {
+              unlikePost();
+            }}
+            className="text-primary "
+          >
+            <BiLike />
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              likePost();
+            }}
+            className=""
+          >
+            <BiLike />
+          </div>
+        )}
+        <span className="">{data?.likes?.length}</span>
       </div>
-      <div className={` ${canShare ? '' : 'hidden'} bg-[#FBFBFB] cursor-pointer flex items-center px-4 py-3 gap-[10px]`}>
+      <div
+        className={` ${
+          canShare ? "" : "hidden"
+        } bg-[#FBFBFB] cursor-pointer flex items-center px-4 py-3 gap-[10px]`}
+      >
         <FiShare />
         <span className="">Share</span>
       </div>

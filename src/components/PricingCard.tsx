@@ -64,7 +64,7 @@ export default function PricingCard({ info }) {
 
       <div
         onClick={() => navigate(info.buttonLink)}
-        className="cursor-pointer bg-primary rounded-[5px] p-4 mt-auto"
+        className="cursor-pointer bg-customsecondary rounded-[5px] p-4 mt-auto"
       >
         <span className="text-white font-normal text-base">
           {info.buttonText}

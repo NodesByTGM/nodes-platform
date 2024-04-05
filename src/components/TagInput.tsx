@@ -149,7 +149,7 @@ const TagInput = ({
                   <li
                     key={i}
                     className={
-                      "p-3 hover:bg-primary-light-hover cursor-pointer transition-all"
+                      "p-3 hover:bg-customsecondary-light-hover cursor-pointer transition-all"
                     }
                     ref={(reference) => (optionsRef.current[i] = reference)}
                     onClick={() => handleSelect(v)}
@@ -158,7 +158,7 @@ const TagInput = ({
                   </li>
                 ))}
               {suggestions.length === 0 ? (
-                <li className="p-3 hover:bg-primary-light-hover cursor-pointer transition-all">
+                <li className="p-3 hover:bg-customsecondary-light-hover cursor-pointer transition-all">
                   No item matches your search.
                 </li>
               ) : null}
@@ -176,7 +176,7 @@ export default TagInput;
 
 {
   /* <li key={i}
-    className={`p-3 hover:bg-primary-light-hover cursor-pointer transition-all ${currentIndex === i ?  'bg-primary-light-hover':''}`}
+    className={`p-3 hover:bg-customsecondary-light-hover cursor-pointer transition-all ${currentIndex === i ?  'bg-customsecondary-light-hover':''}`}
     ref={(reference) => (optionsRef.current[i] = reference)}
     onClick={() => handleSelect(v)}>{v}</li> */
 }
