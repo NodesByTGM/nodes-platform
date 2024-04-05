@@ -31,7 +31,7 @@ export default function About() {
                 <div className="flex items-start gap-4">
                   <div className="">
                     {" "}
-                    <div className="size-8 font-medium text-sm flex items-center justify-center rounded-full text-[#ffffff] bg-primary">
+                    <div className="size-8 font-medium text-sm flex items-center justify-center rounded-full text-[#ffffff] bg-customsecondary">
                       1
                     </div>
                   </div>
@@ -46,7 +46,7 @@ export default function About() {
                 <div className="flex items-start gap-4">
                   <div className="">
                     {" "}
-                    <div className="size-8 font-medium text-sm flex items-center justify-center rounded-full text-[#ffffff] bg-primary">
+                    <div className="size-8 font-medium text-sm flex items-center justify-center rounded-full text-[#ffffff] bg-customsecondary">
                       2
                     </div>
                   </div>
@@ -61,7 +61,7 @@ export default function About() {
                 <div className="flex items-start gap-4">
                   <div className="">
                     {" "}
-                    <div className="size-8 font-medium text-sm flex items-center justify-center rounded-full text-[#ffffff] bg-primary">
+                    <div className="size-8 font-medium text-sm flex items-center justify-center rounded-full text-[#ffffff] bg-customsecondary">
                       3
                     </div>
                   </div>

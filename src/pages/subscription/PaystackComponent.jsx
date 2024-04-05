@@ -22,7 +22,7 @@ const PaystackComponent = ({ user, ref }) => {
 
   const componentProps = {
     email: user?.email,
-    amount: 7900,
+
     plan:
       plan.toLowerCase() == "pro"
         ? PRO_PLAN

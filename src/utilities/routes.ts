@@ -38,9 +38,84 @@ import {
   TalentOnboarding,
   TalentUpgrade,
   Pricing,
-  AccountSettingsBase
+  AccountSettingsBase,
 } from "../pages";
+import {
+  AdminAuthBase,
+  AdminLogin,
+  AdminSignup,
+  AdminForgotPassword,
+  AdminResetPassword,
+  AuthContent,
+  AuthContentBase,
+  AuthUser,
+  AuthUserBase,
+  AuthSubscription,
+  AuthSubscriptionBase,
+} from "../pagesAdmin";
 import AppConfig from "./config";
+
+export const adminAuthRoutes: RouteObject[] = [
+  {
+    path: AppConfig.PATHS.Admin.Auth.Base,
+    Component: AdminAuthBase,
+    children: [
+      {
+        path: AppConfig.PATHS.Admin.Auth.Default,
+        Component: AdminLogin,
+      },
+      {
+        path: AppConfig.PATHS.Admin.Auth.Login,
+        Component: AdminLogin,
+      },
+      {
+        path: AppConfig.PATHS.Admin.Auth.Signup,
+        Component: AdminSignup,
+      },
+      {
+        path: AppConfig.PATHS.Admin.Auth.ForgotPassword,
+        Component: AdminForgotPassword,
+      },
+      {
+        path: AppConfig.PATHS.Admin.Auth.ResetPassword,
+        Component: AdminResetPassword,
+      },
+    ],
+  },
+];
+
+export const adminMainRoutes: RouteObject[] = [
+  {
+    path: AppConfig.PATHS.Admin.Content.Base,
+    Component: AuthContentBase,
+    children: [
+      {
+        path: AppConfig.PATHS.Admin.Content.Default,
+        Component: AuthContent,
+      },
+    ],
+  },
+  {
+    path: AppConfig.PATHS.Admin.User.Base,
+    Component: AuthUserBase,
+    children: [
+      {
+        path: AppConfig.PATHS.Admin.User.Default,
+        Component: AuthUser,
+      },
+    ],
+  },
+  {
+    path: AppConfig.PATHS.Admin.Subscription.Base,
+    Component: AuthSubscriptionBase,
+    children: [
+      {
+        path: AppConfig.PATHS.Admin.Subscription.Default,
+        Component: AuthSubscription,
+      },
+    ],
+  },
+];
 
 export const authRoutes: RouteObject[] = [
   {
@@ -175,7 +250,6 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Trending.Overview,
         Component: getProfile(Trending),
       },
-   
     ],
   },
   {

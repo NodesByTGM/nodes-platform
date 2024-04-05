@@ -33,13 +33,13 @@ export default function WelcomeCard({
         </div>
         {action ? (
           
-            <Button onClick={() => action()}>
+            <Button  className="bg-primary" onClick={() => action()}>
               <span className="text-base font-medium">{buttonText}</span>
             </Button>
           
         ) : (
           <Link to={buttonLink}>
-            <Button>
+            <Button className="bg-primary" >
               <span className="text-base font-medium">{buttonText}</span>
             </Button>
           </Link>

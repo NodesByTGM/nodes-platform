@@ -1,0 +1,60 @@
+import { Globe, Home, User } from "react-feather";
+import { NavLink } from "react-router-dom";
+import AppConfig from "../../utilities/config";
+import { SearchComponent } from "../../components";
+
+function Sidebar() {
+  const paths = [
+    {
+      name: "Content",
+      icon: <Home />,
+      path: AppConfig.PATHS.Admin.Content.Base,
+    },
+    {
+      name: "User",
+      icon: <User />,
+      path: AppConfig.PATHS.Admin.User.Base,
+    },
+    {
+      name: "Subscription",
+      icon: <Globe />,
+      path: AppConfig.PATHS.Admin.Subscription.Base,
+    },
+  ];
+  return (
+    <div className="bg-[#FBFBFB] w-full transition-all duration-300 h-full  px-6">
+      {/* <div className="mt-3 pb-4 border-b p-3 mb-4">
+                  <Menu />
+              </div> */}
+      <div className="flex flex-col gap-8 pt-8 pb-6">
+        <img
+          src="/NodesLogoPrimary.png"
+          alt=""
+          className="h-[24px] w-[89.37px]"
+        />
+
+        <SearchComponent />
+      </div>
+      <div className="flex flex-col gap-5 ">
+        {paths.map((r, i) => (
+          <NavLink
+            to={String(r.path)}
+            className={({ isActive, isPending }) =>
+              isActive
+                ? "bg-[#212121] text-white authNavLink"
+                : isPending
+                ? "bg-[#212121] text-white authNavLink"
+                : "authNavLink"
+            }
+            key={i}
+          >
+            <div>{r.icon}</div>
+            <div className="hidden lg:block">{r.name}</div>
+          </NavLink>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Sidebar;

@@ -29,6 +29,29 @@ export type SignupValidationType = {
   confirmPassword: string;
   otp: string;
 };
+
+export const adminSignupSchema = object({
+  firstName: string().required("First name is a required field"),
+  lastName: string().required("Last name is a required field"),
+  email: string().email().required("Email is a required field"),
+
+  password: string().required("Password is a required field"),
+  confirmPassword: string()
+    .required("Confirm Password is a required field")
+    .oneOf([ref("password")], "Passwords must match"),
+  otp: string(),
+});
+
+export type AdminSignupValidationType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+
+  password: string;
+  confirmPassword: string;
+  otp: string;
+ 
+};
 export const profileSchema = object({
   firstName: string().required("first name is a required field"),
   lastName: string().required("Last name is a required field"),
