@@ -50,6 +50,14 @@ export const communityApi: any = createApi({
           };
         },
       }),
+      getSpaces: builder.query<any, any>({
+        query: () => {
+          return {
+            url: `${AppConfig.API_ENDPOINTS.Community.Post}`,
+            method: "get",
+          };
+        },
+      }),
   }),
 });
 
