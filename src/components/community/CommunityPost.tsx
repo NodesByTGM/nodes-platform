@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { UserPost, UserPostInitials, PostInteraction } from "../../components";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 
 type ICommunityPost = {
+  data?: any;
   canShare?: boolean;
   canReply?: boolean;
 };
 export default function CommunityPost({
+  data,
   canShare = true,
   canReply = true,
 }: ICommunityPost) {
@@ -14,8 +17,8 @@ export default function CommunityPost({
     <div className="flex flex-col w-full">
       <div className="mb-8 flex items-center justify-between">
         <div className="flex gap-2 items-center font-medium text-sm">
-          <UserPostInitials />
-          <span className="text-[#000000]">Minato Namikaze</span>
+          <UserPostInitials name={data?.author?.name} />
+          <span className="text-[#000000]">{data?.author?.name}</span>
           <div className="size-1 rounded-full bg-[#D9D9D9]"></div>
           <span className=" text-[#828282]">2 hours ago</span>
         </div>
@@ -25,10 +28,7 @@ export default function CommunityPost({
         </div>
       </div>
       <span className="mb-10 text-[#000000] text-base font-normal">
-        Lorem ipsum dolor sit amet consectetur. Feugiat senectus ut aenean
-        commodo dictum malesuada. Imperdiet orci magnis donec malesuada mi massa
-        magna lectus viverra. Nunc quam congue vulputate etiam dapibus vel
-        suscipit cras pretium. Ut donec vulputate etiam consectetur vel.
+        {data?.body}
       </span>
       <div className="flex mb-10">
         <img
@@ -38,7 +38,7 @@ export default function CommunityPost({
         />
       </div>
       <div className="flex justify-end">
-        <PostInteraction canShare={canShare} />
+        <PostInteraction data={data} canShare={canShare} />
       </div>
       {canReply ? (
         <div className="mt-8">

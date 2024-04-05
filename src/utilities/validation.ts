@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { object, string, ref, bool, array, number } from "yup";
 
-
-
 export const signupSchema = object({
   name: string().required("Name is a required field"),
   email: string().email().required("Email is a required field"),
@@ -242,6 +240,27 @@ export type eventValidationType = {
   };
 };
 
+export const postSchema = object({
+  body: string(),
+  attachments: array().of( object().shape({
+    id: string(),
+    url: string(),
+   
+  })),
+  hashtags: array().of(string()),
+});
+
+export type postValidationType = {
+  body: string;
+  attachments: [
+    {
+      id: string;
+      url: string;
+    }
+  ];
+  hashtags: [string];
+};
+
 export const resetPasswordSchema = object({
   password: string().required("Password is a required field"),
   confirmPassword: string()
@@ -311,10 +330,10 @@ export const accountSettingsSchema = object({
 
 export type AccountSettingsValidationType = {
   name: string;
-  username: string,
-  email: string,
-  day: string,
-  month: string,
-  year: string,
-  visibility: string,
+  username: string;
+  email: string;
+  day: string;
+  month: string;
+  year: string;
+  visibility: string;
 };

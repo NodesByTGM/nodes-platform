@@ -27,6 +27,27 @@ export const checkFileSize = (file: File) => {
   return true;
 };
 
+
+
+export const getNameInitials = (name: string): string => {
+  // Split the name into words
+  const words = name.split(' ');
+
+  // Initialize an empty string to store initials
+  let initials = '';
+
+  // Iterate over each word
+  words.forEach((word, ) => {
+    // If the initials are less than 2 and there's a character in the current word, add it to initials
+    if (initials.length < 2 && word.length > 0) {
+      // Add the first character of the word to initials
+      initials += word[0].toUpperCase();
+    }
+  });
+
+  return initials;
+};
+
 export const getExtension = (fileName: string) => {
   return fileName.substring(fileName.lastIndexOf(".") + 1);
 };

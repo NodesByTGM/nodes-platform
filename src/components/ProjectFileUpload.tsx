@@ -80,10 +80,12 @@ export default function ProjectFileUpload({
 
   useEffect(() => {
     if (uploadFileSuccess) {
-      onChange(uploadResponse?.data);
+      console.log("Data: " + JSON.stringify(uploadResponse, null, 2))
+
+      onChange(uploadResponse?.result);
     }
     // alert(JSON.stringify(uploadResponse?.data, null, 2))
-  }, [uploadFileSuccess]);
+  }, [uploadFileSuccess, uploadResponse]);
 
   useEffect(() => {
     if (isUploadError) {

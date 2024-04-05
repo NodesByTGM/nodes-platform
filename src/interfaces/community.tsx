@@ -2,4 +2,6 @@
 export interface ICommunityContext {
   pageName: string;
   user: any;
+  postModal: boolean;
+  setAddPostModal: (e) => void;
 }
