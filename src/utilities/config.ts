@@ -74,12 +74,20 @@ const PATHS = {
       Base: "/admin/content",
       Default: "",
     },
+    UserDetails: {
+      Base: "/admin/user/:id",
+      Default: "",
+    },
     User: {
       Base: "/admin/user",
       Default: "",
     },
     Subscription: {
       Base: "/admin/subscription",
+      Default: "",
+    },
+    Analytics: {
+      Base: "/admin/analytics",
       Default: "",
     },
   },

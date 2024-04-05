@@ -1,7 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Active() {
-
+  const navigate = useNavigate();
 
   const contentList = [
     {
@@ -22,10 +23,8 @@ export default function Active() {
     },
   ];
   return (
-    <div >
-
-        <div className="border-t border-[#D9D9D9]"></div>
-     
+    <div>
+      <div className="border-t border-[#D9D9D9]"></div>
 
       <div className=" py-6">
         {contentList?.length > 0 ? (
@@ -77,7 +76,11 @@ export default function Active() {
                   </thead>
                   <tbody className="divide-y divide-[#D9D9D9]">
                     {contentList?.map((item) => (
-                      <tr key={item.id}>
+                      <tr
+                        onClick={() => navigate(`/admin/user/${item.id}`)}
+                        className="cursor-pointer"
+                        key={item.id}
+                      >
                         <td className="whitespace-nowrap py-8 pl-4 pr-3 text-base font-normal text-[#212121] sm:pl-0">
                           {item.fullName}
                         </td>
