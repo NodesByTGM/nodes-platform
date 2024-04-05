@@ -1,4 +1,4 @@
-import { Globe, Home, User } from "react-feather";
+import { CreditCard, BarChart, File, User } from "react-feather";
 import { NavLink } from "react-router-dom";
 import AppConfig from "../../utilities/config";
 import { SearchComponent } from "../../components";
@@ -7,7 +7,7 @@ function Sidebar() {
   const paths = [
     {
       name: "Content",
-      icon: <Home />,
+      icon: <File />,
       path: AppConfig.PATHS.Admin.Content.Base,
     },
     {
@@ -17,8 +17,13 @@ function Sidebar() {
     },
     {
       name: "Subscription",
-      icon: <Globe />,
+      icon: <CreditCard />,
       path: AppConfig.PATHS.Admin.Subscription.Base,
+    },
+    {
+      name: "Analytics",
+      icon: <BarChart />,
+      path: AppConfig.PATHS.Admin.Analytics.Base,
     },
   ];
   return (

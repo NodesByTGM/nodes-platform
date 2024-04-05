@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import { AdminPageHeader, AdminPageNav } from "../../components";
-import Active from "./Active";
-import DeletedUsers from "./DeletedUsers";
+import Overview from "./Overview";
+import List from "./List";
 
-export default function User() {
+export default function Analytics() {
   const navs = [
     {
-      label: "Active",
+      label: "Overview",
     },
     {
-      label: "Deleted",
+      label: "List",
     },
   ];
 
   const [selectedNav, setSelectedNav] = useState(navs[0]);
-  
+
   return (
     <div>
       <div className="flex justify-between mb-[26px]">
         <AdminPageHeader
-          title="User"
-          subTitle="Something something about user management"
+          title="Analytics"
+          subTitle="Something something about analytics management"
         />
       </div>
       <div className="mb-[28px]">
@@ -31,10 +31,10 @@ export default function User() {
         />
       </div>
 
-      {selectedNav.label.toLowerCase() == "active" && <Active />}
-      {selectedNav.label.toLowerCase() == "deleted" && (
+      {selectedNav.label.toLowerCase() == "overview" && <Overview />}
+      {selectedNav.label.toLowerCase() == "list" && (
         <div>
-          <DeletedUsers />
+          <List />
         </div>
       )}
     </div>

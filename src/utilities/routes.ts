@@ -46,12 +46,16 @@ import {
   AdminSignup,
   AdminForgotPassword,
   AdminResetPassword,
-  AuthContent,
-  AuthContentBase,
-  AuthUser,
-  AuthUserBase,
-  AuthSubscription,
-  AuthSubscriptionBase,
+  AdminContent,
+  AdminContentBase,
+  AdminUser,
+  AdminUserBase,
+  AdminSubscription,
+  AdminSubscriptionBase,
+  AdminUserDetails,
+  AdminUserDetailsBase,
+  AdminAnalytics,
+  AdminAnalyticsBase,
 } from "../pagesAdmin";
 import AppConfig from "./config";
 
@@ -87,31 +91,52 @@ export const adminAuthRoutes: RouteObject[] = [
 export const adminMainRoutes: RouteObject[] = [
   {
     path: AppConfig.PATHS.Admin.Content.Base,
-    Component: AuthContentBase,
+    Component: AdminContentBase,
     children: [
       {
         path: AppConfig.PATHS.Admin.Content.Default,
-        Component: AuthContent,
+        Component: AdminContent,
       },
     ],
   },
   {
     path: AppConfig.PATHS.Admin.User.Base,
-    Component: AuthUserBase,
+    Component: AdminUserBase,
     children: [
       {
         path: AppConfig.PATHS.Admin.User.Default,
-        Component: AuthUser,
+        Component: AdminUser,
       },
     ],
   },
   {
     path: AppConfig.PATHS.Admin.Subscription.Base,
-    Component: AuthSubscriptionBase,
+    Component: AdminSubscriptionBase,
     children: [
       {
         path: AppConfig.PATHS.Admin.Subscription.Default,
-        Component: AuthSubscription,
+        Component: AdminSubscription,
+      },
+    ],
+  },
+  {
+    path: AppConfig.PATHS.Admin.UserDetails.Base,
+    Component: AdminUserDetailsBase,
+    children: [
+      {
+        path: AppConfig.PATHS.Admin.UserDetails.Default,
+        Component: AdminUserDetails,
+      },
+    ],
+  },
+
+  {
+    path: AppConfig.PATHS.Admin.Analytics.Base,
+    Component: AdminAnalyticsBase,
+    children: [
+      {
+        path: AppConfig.PATHS.Admin.Analytics.Default,
+        Component: AdminAnalytics,
       },
     ],
   },

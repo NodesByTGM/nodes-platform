@@ -3,9 +3,13 @@ export { default as AdminLogin } from "./auth/Login";
 export { default as AdminSignup } from "./auth/Signup";
 export { default as AdminForgotPassword } from "./auth/ForgotPassword";
 export { default as AdminResetPassword } from "./auth/ResetPassword";
-export { default as AuthContent } from "./Content/Content";
-export { default as AuthContentBase } from "./Content/ContentBase";
-export { default as AuthUser } from "./User/User";
-export { default as AuthUserBase } from "./User/UserBase";
-export { default as AuthSubscription } from "./Subscription/Subscription";
-export { default as AuthSubscriptionBase } from "./Subscription/SubscriptionBase";
+export { default as AdminContent } from "./Content/Content";
+export { default as AdminContentBase } from "./Content/ContentBase";
+export { default as AdminUser } from "./User/User";
+export { default as AdminUserBase } from "./User/UserBase";
+export { default as AdminSubscription } from "./Subscription/Subscription";
+export { default as AdminSubscriptionBase } from "./Subscription/SubscriptionBase";
+export {default as AdminUserDetails } from './User/UserDetails.tsx'
+export {default as AdminUserDetailsBase } from './User/UserDetailsBase.tsx'
+export { default as AdminAnalytics } from "./Analytics/Analytics";
+export { default as AdminAnalyticsBase } from "./Analytics/AnalyticsBase";
