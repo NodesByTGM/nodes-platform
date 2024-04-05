@@ -18,7 +18,7 @@ export const pricing = {
   pro: {
     title: "Pro",
     description: "Lorem Ipsum dolor sit amet",
-    payment: "₦7,900",
+    payment: "₦89,800",
     duration: "/month",
     tenor: "Get one month free if you subscribe now",
     incentives: [
@@ -37,7 +37,7 @@ export const pricing = {
   business: {
     title: "Business",
     description: "Lorem Ipsum dolor sit amet",
-    payment: "₦19,800",
+    payment: "₦214,800",
     duration: "/month",
     tenor: "For the next 3 months and 7900",
     incentives: [
