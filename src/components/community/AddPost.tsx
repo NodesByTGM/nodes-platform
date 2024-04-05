@@ -15,13 +15,16 @@ import { useCommunityPostMutation } from "../../api";
 import { toast } from "react-toastify";
 import { postValidationType, postSchema } from "../../utilities/validation";
 import { Plus } from "react-feather";
-export default function AddPost({closeModal, refetch}) {
+export default function AddPost({ closeModal, refetch }) {
   const [
     postToCommunity,
     { isLoading: postToCommunityLoading, isSuccess: isPostToCommunitySuccess },
   ] = useCommunityPostMutation();
+
   const handleClickForm = (values?: any) => {
-    const data = values;
+    const data = {
+      ...values,
+    };
     console.log(JSON.stringify(data, null, 2));
     postToCommunity(data);
   };
@@ -30,10 +33,10 @@ export default function AddPost({closeModal, refetch}) {
     initialValues: {
       body: "",
       attachments: [
-        {
-          id: "string",
-          url: "string",
-        },
+        // {
+        //   id: "",
+        //   url: "",
+        // },
       ],
       hashtags: [""],
     },
@@ -46,8 +49,8 @@ export default function AddPost({closeModal, refetch}) {
     formik;
   useEffect(() => {
     if (isPostToCommunitySuccess) {
-        closeModal()
-        refetch()
+      closeModal();
+      refetch();
       toast.success("Post sent");
     }
   }, [isPostToCommunitySuccess]);
@@ -57,8 +60,10 @@ export default function AddPost({closeModal, refetch}) {
         <span className="font-medium text-[#000000] text-[24px]">
           Ask the members a question
         </span>
-        <div onClick={() => closeModal()} className="">  <ModalCancel /></div>
-      
+        <div onClick={() => closeModal()} className="">
+          {" "}
+          <ModalCancel />
+        </div>
       </div>
       <FormDebug form={{ values, errors, isValid }} className="hidden" />
 

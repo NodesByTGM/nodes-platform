@@ -242,22 +242,25 @@ export type eventValidationType = {
 
 export const postSchema = object({
   body: string(),
-  attachments: array().of( object().shape({
-    id: string(),
-    url: string(),
-   
-  })),
+  attachments: array().of(
+    object().shape({
+      id: string(),
+      url: string(),
+    })
+  ),
   hashtags: array().of(string()),
 });
 
 export type postValidationType = {
   body: string;
-  attachments: [
-    {
-      id: string;
-      url: string;
-    }
-  ];
+  attachments:
+    | [
+        {
+          id: string;
+          url: string;
+        }
+      ]
+    | any;
   hashtags: [string];
 };
 
