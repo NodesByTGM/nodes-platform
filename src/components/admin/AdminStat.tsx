@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function AdminStat({ accountType, numberOfUsers, trending , percentage}) {
+export default function AdminStat({
+  accountType,
+  numberOfUsers,
+  trending,
+  percentage,
+}) {
   return (
     <div className={"p-6 rounded border border-[#D9D9D9"}>
       <div className="flex flex-col">
@@ -14,11 +19,13 @@ export default function AdminStat({ accountType, numberOfUsers, trending , perce
         <div className="flex text-sm font-normal text-[#808785]">
           {trending ? (
             <span className="flex gap-1">
-              <UpTrendArrow /> <span className="text-[#05A405]">{percentage}%</span>
+              <UpTrendArrow />{" "}
+              <span className="text-[#05A405]">{percentage}%</span>
             </span>
           ) : (
             <span className="flex gap-1">
-              <DownTrendArrow /> <span className="text-[#ED254E]">{percentage}%</span>
+              <DownTrendArrow />{" "}
+              <span className="text-[#ED254E]">{percentage}%</span>
             </span>
           )}
           <span className="ml-1"> versus yesterday</span>
@@ -43,16 +50,16 @@ function UpTrendArrow() {
           stroke="#05A405"
           stroke-width="1.5"
           stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M7 11.9581V2.14062"
           stroke="#05A405"
           stroke-width="1.5"
           stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </div>
@@ -73,16 +80,16 @@ function DownTrendArrow() {
           stroke="#ED254E"
           stroke-width="1.5"
           stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M7 2.04188V11.8594"
           stroke="#ED254E"
           stroke-width="1.5"
           stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </div>

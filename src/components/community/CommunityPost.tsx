@@ -18,7 +18,8 @@ export default function CommunityPost({
 }: ICommunityPost) {
   return (
     <div className="flex flex-col w-full">
-      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(data.attachments, null, 2)}</pre> */}
+
       <div className="mb-8 flex items-center justify-between">
         <div className="flex gap-2 items-center font-medium text-sm">
           <UserPostInitials name={data?.author?.name} />
@@ -35,17 +36,21 @@ export default function CommunityPost({
         {data?.body}
       </span>
       <div className="flex mb-10">
-        {data?.attachments?.map((img) => {
+        {data?.attachments?.map((img) => (
           <img
             key={img?.id}
-            src="/img/CommunityPostImgSample.png"
+            src={img.url}
             alt=""
             className="rounded-md h-[173px] w-full max-w-[274px]"
-          />;
-        })}
+          />
+        ))}
       </div>
       <div className="flex justify-end">
-        <PostInteraction data={data} canShare={canShare} updatePosts={updatePosts} />
+        <PostInteraction
+          data={data}
+          canShare={canShare}
+          updatePosts={updatePosts}
+        />
       </div>
       {canReply ? (
         <div className="mt-8">
