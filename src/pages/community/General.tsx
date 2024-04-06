@@ -27,6 +27,15 @@ export default function General({ getCommunityPostsQuery }) {
     }
   }, [communityPostsResponse]);
 
+  const updatePosts = (post) => {
+      console.log(JSON.stringify('Post: '+ post.id, null, 2));
+      const updatedCommunityPostsData = communityPostsData.map(item => item.id === post.id ? post : item);
+
+
+   
+    setCommunityPostsData(updatedCommunityPostsData);
+  };
+
   return (
     <div>
       <div className="flex flex-col">
@@ -62,7 +71,7 @@ export default function General({ getCommunityPostsQuery }) {
             {communityPostsData?.map((data) => (
               <div key={data?.id} className="">
                 <CommunityCard>
-                  <CommunityPost data={data}/>
+                  <CommunityPost data={data} updatePosts={updatePosts} />
                 </CommunityCard>
               </div>
             ))}

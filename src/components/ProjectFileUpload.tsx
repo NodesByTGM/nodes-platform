@@ -48,11 +48,9 @@ export default function ProjectFileUpload({
     const files = e.target.files;
     console.log("My upload: " + JSON.stringify(files), null, 2);
     if (!files || files.length === 0) {
-      // setSelectedFile(undefined);
       return;
     }
     if (!checkFileSize(files[0])) {
-      // setSelectedFile(undefined);
       toast.error(
         `File selected exceeded file limit size of ${AppConfig.FILE_SIZE_LIMIT}mb`
       );
@@ -80,7 +78,7 @@ export default function ProjectFileUpload({
 
   useEffect(() => {
     if (uploadFileSuccess) {
-      console.log("Data: " + JSON.stringify(uploadResponse, null, 2))
+      console.log("Data: " + JSON.stringify(uploadResponse, null, 2));
 
       onChange(uploadResponse?.result);
     }
