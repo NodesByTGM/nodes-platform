@@ -1,14 +1,18 @@
 export const planPrices = {
-  pro:"₦89,800",
+  pro: "₦89,800",
+  proMonthly: "₦7,900",
   business: "₦214,800",
-
-}
+  businessMonthly: "₦19,800",
+};
 
 export const pricing = {
   standard: {
+    name: 'free',
+    monthlyName: 'free',
     title: "Standard",
     description: "Lorem Ipsum dolor sit amet",
     payment: "Free",
+    monthlyPayment: "Free",
     duration: "",
     tenor: "Free forever",
     incentives: [
@@ -19,13 +23,18 @@ export const pricing = {
     buttonText: "Continue for free",
     logo: "/img/pricing-free.svg",
     radius: "lg:rounded-l-[8px]",
-    buttonLink: '/dashboard'
+    buttonLink: "/dashboard",
+    buttonLink2: "/dashboard",
   },
   pro: {
+    name: 'pro',
+    monthlyName: 'pro-monthly',
     title: "Pro",
     description: "Lorem Ipsum dolor sit amet",
     payment: planPrices.pro,
-    duration: "/month",
+    monthlyPayment: planPrices.proMonthly,
+    monthlyDuration: "/month",
+    yearlyDuration: "/year",
     tenor: "Get one month free if you subscribe now",
     incentives: [
       "Enhanced Visibility",
@@ -38,13 +47,18 @@ export const pricing = {
     logo: "/img/pricing-pro.svg",
 
     radius: "!rounded-[0]",
-    buttonLink: '/subscription/pro'
+    buttonLink: "/subscription/pro",
+    buttonLink2: "/subscription/pro-monthly",
   },
   business: {
+    name: 'business',
+    monthlyName: 'business-monthly',
     title: "Business",
     description: "Lorem Ipsum dolor sit amet",
     payment: planPrices.business,
-    duration: "/month",
+    monthlyPayment: planPrices.businessMonthly,
+    monthlyDuration: "/month",
+    yearlyDuration: "/year",
     tenor: "For the next 3 months and 7900",
     incentives: [
       "Premium Talent Pool Access",
@@ -57,7 +71,8 @@ export const pricing = {
     logo: "/img/pricing-business.svg",
 
     radius: "lg:rounded-r-[8px]",
-    buttonLink: '/subscription/business'
+    buttonLink: "/subscription/business",
+    buttonLink2: "/subscription/business-monthly",
   },
 };
 
@@ -84,7 +99,13 @@ export const plans = [
       "Networking Opportunities",
       "Stay Informed on Creative Trends",
     ],
+    pricing: {
+      ...pricing.standard,
+    },
     action: (navigate) => {
+      navigate("/subscription/free");
+    },
+    monthlyAction: (navigate) => {
       navigate("/subscription/free");
     },
   },
@@ -101,10 +122,17 @@ export const plans = [
       "Advanced Analytics and Insights",
       "Access to GridTools Discovery Pack (Free)",
     ],
+    pricing: {
+      ...pricing.pro,
+    },
     action: (navigate) => {
       navigate("/subscription/pro");
     },
+    monthlyAction: (navigate) => {
+      navigate("/subscription/pro-monthly");
+    },
   },
+  
   {
     type: "Business",
     subPlan: null,
@@ -118,8 +146,14 @@ export const plans = [
       "Access to GridTools Discovery Pack (Free)",
       "Promotion and Marketing Opportunities",
     ],
+    pricing: {
+      ...pricing.business,
+    },
     action: (navigate) => {
       navigate("/subscription/business");
+    },
+    monthlyAction: (navigate) => {
+      navigate("/subscription/business-monthly");
     },
   },
 ];

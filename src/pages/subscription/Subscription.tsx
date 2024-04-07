@@ -5,10 +5,12 @@ import { CheckedIcon } from "../../components/dashboard/SubscriptionAndBilling";
 import { useNavigate } from "react-router-dom";
 import { plans } from "../../utilities/constants";
 export const SubSection = ({
+  paymentPlan,
   plan,
   light,
   viewOthers,
 }: {
+  paymentPlan?: any;
   plan: any;
   light?: boolean;
   viewOthers?: boolean;
@@ -21,7 +23,7 @@ export const SubSection = ({
           <div className="flex flex-col gap-4">
             <div className="flex items-center">
               <span className="font-medium text-base text-[#00100B] mr-[7px]">
-                <span className="">{plan?.type}</span>
+                <span className="capitalize">{plan?.pricing?.name}</span>
               </span>
 
               {plan?.subPlan && (
@@ -37,16 +39,39 @@ export const SubSection = ({
           </div>
 
           <div className="text-primary font-medium text-[20px]  ml-6 ">
-            <span className="flex items-end gap-px">
-              {plan?.amount}{" "}
-              <span className="text-base font-normal text-[#646464]">
-                {plan?.tenor}
-              </span>{" "}
-            </span>
+            {!paymentPlan ? (
+              <span className="flex items-end gap-px">
+                {plan?.pricing?.monthlyPayment}{" "}
+                <span className="text-base font-normal text-[#646464]">
+                  {plan?.pricing?.monthlyDuration}
+                </span>{" "}
+              </span>
+            ) : (
+              <span className="flex items-end gap-px">
+                {/* {paymentPlan}
+                {JSON.stringify(
+                  { isMonthly: paymentPlan?.includes("monthly") },
+                  null,
+                  2
+                )} */}
+                {/* {plan} */}
+                {paymentPlan?.includes("monthly")
+                  ? plan?.pricing?.monthlyPayment
+                  : plan?.pricing?.payment}{" "}
+                <span className="text-base font-normal text-[#646464]">
+                  {paymentPlan?.includes("monthly")
+                    ? plan?.pricing?.monthlyDuration
+                    : plan?.pricing?.yearlyDuration}
+                </span>{" "}
+              </span>
+            )}
           </div>
         </div>
         {!viewOthers ? (
-          <div onClick={() => plan.action(navigate)} className="mt-[53px]">
+          <div
+            onClick={() => plan.monthlyAction(navigate)}
+            className="mt-[53px]"
+          >
             {plan?.type?.toLowerCase() == "free" ? (
               <button className="flex items-center justify-center text-primary font-medium text-sm rounded h-[48px] w-full bg-[#EFEFEF]">
                 {" "}
@@ -80,6 +105,13 @@ export const SubSection = ({
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="hidden w-[400px] max-w-[400px] col-span-1 text-wrap">
+        {" "}
+        <pre className={"flex max-w-[40px] text-wrap"}>
+          {JSON.stringify(plan?.pricing)}
+        </pre>
       </div>
     </div>
   );

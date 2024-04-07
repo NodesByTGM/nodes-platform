@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "../../components";
 import { useNavigate } from "react-router-dom";
-import {pricing} from '../../utilities/constants'
+import { pricing } from "../../utilities/constants";
 const CloseIcon = ({ close }) => {
   return (
     <div onClick={() => close()} className="max-w-max">
@@ -137,7 +137,7 @@ const SubSection = ({ plan }) => {
   );
 };
 export default function SubscriptionAndBilling({ closeModal }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const plans = [
     {
       type: "Free",
@@ -150,15 +150,18 @@ export default function SubscriptionAndBilling({ closeModal }) {
         "Networking Opportunities",
         "Stay Informed on Creative Trends",
       ],
+      pricing: {
+        ...pricing.standard,
+      },
       action: () => {
-        navigate('/subscription/free')
-        closeModal()
+        navigate("/subscription/free");
+        closeModal();
       },
     },
     {
       type: "Pro",
       subPlan: "Recommended plan",
-      amount: pricing.pro.payment,
+      amount: pricing.pro.monthlyPayment,
       tenor: "/month",
       supportingText: "One sentence supporting text",
       features: [
@@ -168,9 +171,12 @@ export default function SubscriptionAndBilling({ closeModal }) {
         "Advanced Analytics and Insights",
         "Access to GridTools Discovery Pack (Free)",
       ],
+      pricing: {
+        ...pricing.pro,
+      },
       action: () => {
-        navigate('/subscription/pro')
-        closeModal()
+        navigate("/subscription/pro");
+        closeModal();
       },
     },
     {
@@ -186,9 +192,12 @@ export default function SubscriptionAndBilling({ closeModal }) {
         "Access to GridTools Discovery Pack (Free)",
         "Promotion and Marketing Opportunities",
       ],
+      pricing: {
+        ...pricing.business,
+      },
       action: () => {
-        navigate('/subscription/business')
-        closeModal()
+        navigate("/subscription/business");
+        closeModal();
       },
     },
   ];

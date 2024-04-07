@@ -1,7 +1,9 @@
-import { ReactNode, createContext, useMemo, useState } from "react";
+import { ReactNode, createContext, useMemo, useState , useCallback, useEffect} from "react";
 import { IDashboardContext } from "../interfaces/dashboard";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { AccountTypesObj,  } from "../utilities";
+
 
 const initialState = {
   pageName: "Dashboard",
@@ -19,7 +21,7 @@ const DashboardProvider = ({
 }) => {
   const user = useSelector((state: RootState) => state.user.user);
   const [pageName] = useState("Dashboard");
-  const [accountType, setAccountType] = useState("business");
+  const [accountType, setAccountType] = useState("");
   const dashboardContextValue = useMemo(
     () => ({
       pageName,
@@ -30,6 +32,23 @@ const DashboardProvider = ({
 
     [pageName, user, accountType, setAccountType]
   );
+
+  const handleAccountType = useCallback(() => {
+    const type = user?.type;
+    if (type == AccountTypesObj.individual) {
+      setAccountType("individual");
+    }
+    if (type == AccountTypesObj.talent) {
+      setAccountType("talent");
+    }
+    if (type == AccountTypesObj.business) {
+      setAccountType("business");
+    }
+  }, [user]);
+
+  useEffect(() => {
+    handleAccountType();
+  }, [user, handleAccountType]);
 
   return (
     <DashboardContext.Provider value={dashboardContextValue}>

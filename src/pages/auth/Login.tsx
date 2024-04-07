@@ -52,7 +52,7 @@ function Login() {
             localStorage.setItem("bearerToken", accessToken);
 
             if (localStorage.getItem("bearerToken") == accessToken) {
-              navigate("/profile");
+              navigate("/dashboard");
             } else {
               toast.error("Something went wrong");
             }

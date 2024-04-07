@@ -19,7 +19,7 @@ const checkAuth = (WrappedComponent: FC) => {
                 try {
                     if (!user) {
                         const response = await mainClient.get(AppConfig.API_ENDPOINTS.Auth.ProfileURL, {
-                            headers: { Authorization: 'Token ' + localStorage.getItem("nodesToken") }
+                            headers: { Authorization: 'Token ' + localStorage.getItem("bearerToken") }
                         });
                         if (response.status === 200) {
                             setUser(response?.data?.result?.user);
