@@ -51,10 +51,10 @@ export default function ProfileImgUploader({ value, onChange }) {
     if (uploadFileSuccess) {
       console.log("Data: " + JSON.stringify(uploadResponse, null, 2))
 
-      onChange(uploadResponse?.data?.result?.url);
+      onChange(uploadResponse?.result?.url);
     }
    
-  }, [uploadFileSuccess, uploadResponse?.data?.result?.url]);
+  }, [uploadFileSuccess, uploadResponse?.result?.url]);
 
   useEffect(() => {
     if (isUploadError) {
