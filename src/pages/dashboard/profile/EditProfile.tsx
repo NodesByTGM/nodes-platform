@@ -358,7 +358,7 @@ export default function EditIndividual() {
               errors,
               // userData: profileData?.result
             }}
-            className="mt-4 "
+            className="mt-4 hidden"
           />
         </div>
         <div className="flex-1 flex flex-col gap-8 ">

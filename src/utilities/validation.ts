@@ -50,13 +50,17 @@ export type AdminSignupValidationType = {
   password: string;
   confirmPassword: string;
   otp: string;
- 
 };
 export const profileSchema = object({
   firstName: string().required("first name is a required field"),
   lastName: string().required("Last name is a required field"),
   username: string().required("Username is a required field"),
-  avatar: string().nullable(),
+  avatar: object()
+    .shape({
+      id: string(),
+      url: string(),
+    })
+    .nullable(),
   location: string(),
   height: string(),
   age: string(),
@@ -84,7 +88,10 @@ export type profileValidationType = {
   firstName: string;
   lastName: string;
   username: string;
-  avatar: string;
+  avatar: {
+    id: string;
+    url: string;
+  };
   location: string;
   height: string;
   age: string;
