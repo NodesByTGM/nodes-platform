@@ -4,13 +4,16 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { useVerifyTransactionQuery } from "../../api";
 import { PayStackIcon } from "../../components";
-
+import { loginUser } from "../../api/reducers/userSlice";
+import { useDispatch } from "react-redux";
 const PaystackComponent = ({ user, ref }) => {
   const { plan } = useParams();
+  const dispatch = useDispatch();
+
   const [reference, setReference] = useState(null);
 
   const {
-    // data: verificationData,
+    data: verificationData,
     refetch: verificationRefetch,
     // isSuccess: verificationIsSuccess,
     // isFetching: verificationLoading,
@@ -27,6 +30,10 @@ const PaystackComponent = ({ user, ref }) => {
       plan.toLowerCase() == "pro"
         ? PRO_PLAN
         : plan.toLowerCase() == "business"
+        ? BUSINESS_PLAN
+        : plan.toLowerCase() == "pro-monthly"
+        ? PRO_PLAN
+        : plan.toLowerCase() == "business-monthly"
         ? BUSINESS_PLAN
         : "",
     metadata: {
@@ -53,6 +60,18 @@ const PaystackComponent = ({ user, ref }) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reference]);
+
+  useEffect(() => {
+    if (verificationData) {
+      // console.log('VData: ' + JSON.stringify(verificationData.result, null, 2))
+      dispatch(loginUser(verificationData.result));
+
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [verificationData]);
+
+
 
   return (
     <div className="">
