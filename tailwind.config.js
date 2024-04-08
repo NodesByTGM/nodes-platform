@@ -5,9 +5,9 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#085A55",
-          hover: "#07514D",
-          active: "#064844",
+          DEFAULT: "#212121",
+          hover: "#212121",
+          active: "#212121",
           darker: "#031F1E",
           light: {
             DEFAULT: "#E6EFEE",
@@ -32,19 +32,15 @@ export default {
           dark: "#D6D6D6",
           footer: "#F9F9F9",
         },
-        adminprimary:{
-          DEFAULT: '#212121'
-
+        adminprimary: {
+          DEFAULT: "#212121",
         },
-        customprimary:{
-          DEFAULT: '#085A55'
-
+        customprimary: {
+          DEFAULT: "#085A55",
         },
-        customsecondary:{
-          DEFAULT: '#212121'
-
-        }
-        
+        customsecondary: {
+          DEFAULT: "#212121",
+        },
       },
       boxShadow: {
         normal: "0px 6px 20px 0px #0000000A",

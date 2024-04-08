@@ -99,6 +99,4 @@ export {default as  AdminPageHeader} from './admin/AdminPageHeader'
 export {default as  AdminPageNav} from './admin/AdminPageNav'
 export {default as  AdminPeriodFilter} from './admin/AdminPeriodFilter'
 export {default as  AdminStat} from './admin/AdminStat'
-
-
-
+export {default as AuthOnboardingLogo} from './AuthOnboardingLogo'

@@ -3,8 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BackIcon } from "../../assets/svg";
-import { Button, Input } from "../../components";
-import { Title } from "../../components/Typography";
+import { Button, Input, AuthOnboardingLogo } from "../../components";
 import { mainClient } from "../../utilities/client";
 import { handleAxiosError } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
@@ -77,6 +76,14 @@ function Register() {
 
   return (
     <div className="px-5">
+      <AuthOnboardingLogo
+        link={{
+          text1: "Sign Up",
+          text2: "New to Nodes?",
+          url: AppConfig.PATHS.Auth.Register,
+        }}
+      />
+
       <div
         onClick={() => navigate(-1)}
         className="flex items-center mb-10 gap-2 cursor-pointer"
@@ -88,11 +95,12 @@ function Register() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 justify-center w-full"
       >
-        <div className="flex flex-col gap-2">
-          <Title>Reset your password</Title>
+        <div className="flex flex-col gap-4">
+          <h3 className="text-[#000000] !font-medium !text-[24px]">
+            Reset your password
+          </h3>
           <p className="font-normal text-[18px] text-[#000000]">
-            Forgot your password? Simply enter the email address associated with
-            your Nodes account.
+          Forgot your password? Simply enter the email address associated with your Nodes account.
           </p>
         </div>
 
