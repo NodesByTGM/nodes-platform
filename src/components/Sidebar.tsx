@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Briefcase,
@@ -11,9 +12,12 @@ import {
 import { NavLink } from "react-router-dom";
 import AppConfig from "../utilities/config";
 import { SearchComponent } from "../components";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 function Sidebar() {
-  const paths = [
+  const user = useSelector((state: RootState) => state.user.user);
+  // console.log(JSON.stringify(user.subscription, null, 2));
+  const initialPaths = [
     { name: "Dashboard", icon: <Home />, path: AppConfig.PATHS.Dashboard.Base },
     {
       name: "Profile",
@@ -38,17 +42,35 @@ function Sidebar() {
       icon: <Circle />,
       path: AppConfig.PATHS.GridTools,
     },
-    {
-      name: "Trending",
-      icon: <Star />,
-      path: AppConfig.PATHS.Trending.Base,
-    },
   ];
+
+  const trendPath = {
+    name: "Trending",
+    icon: <Star />,
+    path: AppConfig.PATHS.Trending.Base,
+  };
+  const [paths, setPaths] = useState(initialPaths);
+
+  useEffect(() => {
+    if (
+      user.subscription?.plan.includes("Pro") ||
+      user.subscription?.plan.includes("pro") ||
+      user.subscription?.plan.includes("business") ||
+          user.subscription?.plan.includes("Business")
+    ) {
+      // alert(user.subscription?.plan.includes("Business"));
+
+      setPaths([...initialPaths, trendPath]);
+    } else {
+      setPaths([...initialPaths]);
+    }
+  }, [user]);
   return (
     <div className="w-full transition-all duration-300 h-full border-r border-gray-300 px-6">
       {/* <div className="mt-3 pb-4 border-b p-3 mb-4">
                 <Menu />
             </div> */}
+
       <div className="flex flex-col gap-8 pt-8 pb-6">
         <img
           src="/NodesLogoPrimary.png"

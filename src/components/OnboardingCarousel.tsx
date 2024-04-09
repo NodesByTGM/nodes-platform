@@ -4,7 +4,7 @@ import "swiper/less/effect-fade";
 import {carouselImages} from '../utilities/'
 import { Autoplay, EffectFade } from "swiper/modules";
 
-import "../onboardingSwiper.css";
+import "../onboardingSwiper.scss";
 export default function OnboardingCarousel({
   className,
 }: {
@@ -13,7 +13,7 @@ export default function OnboardingCarousel({
   
   return (
     <div
-      className={`${className} relative h-full min-h-screen w-1/2 bg-gray-400`}
+      className={`${className} onboardingSwiper relative h-full min-h-screen w-1/2 bg-gray-400`}
     >
       <Swiper
         autoplay={{

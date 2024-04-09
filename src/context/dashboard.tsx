@@ -1,9 +1,15 @@
-import { ReactNode, createContext, useMemo, useState , useCallback, useEffect} from "react";
+import {
+  ReactNode,
+  createContext,
+  useMemo,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import { IDashboardContext } from "../interfaces/dashboard";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { AccountTypesObj,  } from "../utilities";
-
+// import { AccountTypesObj,  } from "../utilities";
 
 const initialState = {
   pageName: "Dashboard",
@@ -34,14 +40,16 @@ const DashboardProvider = ({
   );
 
   const handleAccountType = useCallback(() => {
-    const type = user?.type;
-    if (type == AccountTypesObj.individual) {
+    // const type = user?.type;
+    const plan = user?.subscription?.plan.toLowerCase();
+    // alert(user?.subscription?.plan)
+    if (plan !== "pro" && plan !== "business") {
       setAccountType("individual");
     }
-    if (type == AccountTypesObj.talent) {
+    if (plan === "pro") {
       setAccountType("talent");
     }
-    if (type == AccountTypesObj.business) {
+    if (plan === "business") {
       setAccountType("business");
     }
   }, [user]);
@@ -53,6 +61,7 @@ const DashboardProvider = ({
   return (
     <DashboardContext.Provider value={dashboardContextValue}>
       <div className="">
+        <pre className="hidden">{JSON.stringify(user, null, 2)}</pre>
         <div className="flex gap-2 mb-10 hidden">
           <button
             onClick={() => setAccountType("individual")}

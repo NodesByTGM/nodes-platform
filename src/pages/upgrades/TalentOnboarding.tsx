@@ -314,7 +314,7 @@ function TalentOnboarding() {
                 backAction={previousStep}
                 btnAction={handleClickForm}
                 disabled={
-                  formData.onboardingPurpose == 0 ||
+                  formData.onboardingPurposes.length == 0 ||
                   (formData.onboardingPurpose == 5 && !formData.otherPurpose)
                 }
               />
