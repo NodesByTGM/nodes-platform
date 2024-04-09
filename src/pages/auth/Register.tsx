@@ -14,7 +14,7 @@ import {
   ReactDateSelect,
   OnboardingCarousel,
   AuthOnboardingLogo,
-  TalentCTA,
+  // TalentCTA,
   Tooltip,
 } from "../../components";
 import { Title } from "../../components/Typography";
