@@ -11,17 +11,21 @@ export default function Pricing() {
   ];
   const [selected, setSelected] = useState(paymentPlans[1]);
   return (
-    <div className="bg-customsecondary w-full min-h-[100vh] flex flex-col pb-[210px]">
+    <div className="auth-onboarding w-full min-h-[100vh] flex flex-col pb-[122px] relative">
       {/* <pre className="text-blue-500">{JSON.stringify(selected, null, 2)}</pre> */}
-      <div className="py-6 pricing-padding">
+      <div className="fixed top-[-140px] right-[-140px] rotate-[320deg]">
+        <img src="/bg-node-yellow.svg" alt="" className="" />
+      </div>
+
+      <div className="py-6 pricing-padding z-20">
         <img
           onClick={() => navigate("/")}
-          src="/logo-white-lg.png"
+          src="/nodes-logo-black.svg"
           alt="logo"
           className="cursor-pointer h-[32px] w-[123.49px]"
         />
       </div>
-      <div className="pricing-padding w-full mt-[32px] mb-[36px] text-white flex flex-col gap-4 justify-center items-start md:items-center">
+      <div className="z-20 pricing-padding w-full mt-[32px] mb-[36px] text-[#212121] flex flex-col gap-4 justify-center items-start md:items-center">
         <span className="font-medium text-base">PRICING</span>
         <span className="font-medium text-[32px]">
           Thank you for choosing Nodes!
@@ -32,8 +36,8 @@ export default function Pricing() {
         </span>
       </div>
 
-      <div className="flex flex-col xl:flex-row pricing-padding w-full justify-between ">
-        <div className="mb-8 text-white mr-6 flex flex-col gap-6">
+      <div className="z-20 flex flex-col xl:flex-row pricing-padding w-full justify-between ">
+        <div className="mb-8 text-[#212121] mr-6 flex flex-col gap-6">
           <span className="font-medium text-[24px] text-nowrap">
             Choose Plan
           </span>
@@ -48,11 +52,11 @@ export default function Pricing() {
                     <div
                       className={`${
                         selected.id == paymentPlan.id
-                          ? "border-[5px] border-white"
+                          ? "border-[5px] border-[#212121] bg-[#D6DE21]"
                           : "border-[#D6D6D6]"
                       } rounded-full border  h-4 w-4`}
                     ></div>
-                    <span className="text-white font-medium text-sm">
+                    <span className="text-[#212121] font-medium text-sm">
                       {paymentPlan.title}
                     </span>
                   </div>
@@ -68,6 +72,9 @@ export default function Pricing() {
         </div>
 
         <div className="hidden   xl:block w-[140px]"></div>
+      </div>
+      <div className="fixed bottom-[-0px] left-[-40px] rotate-[320deg]">
+        <img src="/bg-node-yellow.svg" alt="" className="" />
       </div>
     </div>
   );
