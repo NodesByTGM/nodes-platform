@@ -110,7 +110,7 @@ const ProfileProvider = ({
   );
 
   const handleAccountType = useCallback(() => {
-    const plan = user?.subscription?.plan.toLowerCase();
+    const plan = user?.subscription?.plan?.toLowerCase();
     if (plan !== "pro" && plan !== "business") {
       setProfileType("individual");
     }

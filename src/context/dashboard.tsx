@@ -41,7 +41,7 @@ const DashboardProvider = ({
 
   const handleAccountType = useCallback(() => {
     // const type = user?.type;
-    const plan = user?.subscription?.plan.toLowerCase();
+    const plan = user?.subscription?.plan?.toLowerCase();
     // alert(user?.subscription?.plan)
     if (plan !== "pro" && plan !== "business") {
       setAccountType("individual");
