@@ -9,13 +9,13 @@ import { useSubscriptionContext } from "../../context/hooks";
 export default function Subscription() {
   const { user } = useSubscriptionContext();
   const handleCurrentPlan = () => {
-    if (user.subscription.plan.toLowerCase() === "pro") {
+    if (user?.subscription?.plan?.toLowerCase() === "pro") {
       return plans.find((plan) => {
         return plan.type.toLowerCase() === "pro";
       });
     }
 
-    if (user.subscription.plan.toLowerCase() === "pro") {
+    if (user?.subscription?.plan?.toLowerCase() === "pro") {
       return plans.find((plan) => {
         return plan.type.toLowerCase() === "business";
       });
@@ -24,7 +24,7 @@ export default function Subscription() {
   return (
     <div className="flex flex-col gap-10">
       <pre className="text-blue-400">
-        {/* {JSON.stringify(user.subscription, null, 2)} */}
+        {/* {JSON.stringify(user?.subscription, null, 2)} */}
         {/* {  JSON.stringify(handleCurrentPlan(), null, 2)} */}
       </pre>
       <h3 className="font-medium text-[#212121] text-[20px]">
@@ -45,7 +45,11 @@ export default function Subscription() {
                 light={plan?.type?.toLowerCase() == "free" ? true : false}
               />
             ) : (
-              <SubSection plan={handleCurrentPlan()} light={true} isCurrentPlan />
+              <SubSection
+                plan={handleCurrentPlan()}
+                light={true}
+                isCurrentPlan
+              />
             )}
           </div>
         ))}
@@ -80,7 +84,9 @@ export const SubSection = ({
 
               {plan?.subPlan && (
                 <div className="bg-[#F1F7F5] rounded-[20px] p-2 font-normal text-xs">
-                  <span className="">{`${isCurrentPlan ? 'Current plan' : plan?.subPlan}`}</span>
+                  <span className="">{`${
+                    isCurrentPlan ? "Current plan" : plan?.subPlan
+                  }`}</span>
                 </div>
               )}
             </div>

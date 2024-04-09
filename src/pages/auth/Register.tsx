@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BackIcon, CautionCircleIcon } from "../../assets/svg";
+import moment from "moment";
 import {
   Button,
   Checkbox,
@@ -10,9 +11,10 @@ import {
   OTPInput,
   PasswordInput,
   // BasicSelect,
+  ReactDateSelect,
   OnboardingCarousel,
   AuthOnboardingLogo,
-  TalentCTA,
+  // TalentCTA,
   Tooltip,
 } from "../../components";
 import { Title } from "../../components/Typography";
@@ -119,6 +121,7 @@ function Register() {
   });
 
   const {
+    setFieldValue,
     handleChange,
     handleSubmit,
     errors,
@@ -237,12 +240,29 @@ function Register() {
                 onBlur={handleBlur}
               />
 
+              {/* <ReactDateSelect
+                id="dob"
+                label="Date of Birth"
+                // required
+                error={errors.dob}
+                value={values.dob}
+                touched={touched.dob}
+                onChange={(date: unknown) => {
+                  const myDOB = moment(new Date(date as string)).format("YYYY-MM-DD")
+                  // console.log();
+                  // handleChange("dob")
+                  setFieldValue('dob', myDOB)
+                  
+                }}
+                onBlur={handleBlur}
+              /> */}
+
               {/* DOB */}
               <div>
                 <div className="flex gap-2 items-center mb-1">
                   <div className="text-base font-medium ">Date of Birth*</div>
                   <Tooltip
-                    id="dob"
+                    id="dob-tip"
                     text={() => (
                       <div>
                         This will not be shown publicly, unless you change it in
@@ -260,14 +280,23 @@ function Register() {
                   </Tooltip>
                 </div>
                 <div className="w-full">
-                  <Input
-                    placeholder={"DD/MM/YY"}
+                  {/* {values.dob} */}
+                  <ReactDateSelect
                     id="dob"
-                    type="date"
+                    // label="Date of Birth"
+                    // required
+                    maxDate={moment().subtract(18, "years")}
                     error={errors.dob}
                     value={values.dob}
                     touched={touched.dob}
-                    onChange={handleChange("dob")}
+                    onChange={(date: unknown) => {
+                      const myDOB = moment(new Date(date as string)).format(
+                        "YYYY-MM-DD"
+                      );
+                      // console.log();
+                      // handleChange("dob")
+                      setFieldValue("dob", myDOB);
+                    }}
                     onBlur={handleBlur}
                   />
                 </div>
@@ -359,7 +388,7 @@ function Register() {
         className="hidden"
         form={{ values, errors, touched, isValid }}
       />
-      {currentIndex === 0 ? <OnboardingCarousel /> : <TalentCTA />}
+      {currentIndex !== 0 ? <OnboardingCarousel /> : <OnboardingCarousel />}
     </div>
   );
 }

@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 function Sidebar() {
   const user = useSelector((state: RootState) => state.user.user);
-  // console.log(JSON.stringify(user.subscription, null, 2));
+  // console.log(JSON.stringify(user?.subscription, null, 2));
   const initialPaths = [
     { name: "Dashboard", icon: <Home />, path: AppConfig.PATHS.Dashboard.Base },
     {
@@ -53,12 +53,12 @@ function Sidebar() {
 
   useEffect(() => {
     if (
-      user.subscription?.plan.includes("Pro") ||
-      user.subscription?.plan.includes("pro") ||
-      user.subscription?.plan.includes("business") ||
-          user.subscription?.plan.includes("Business")
+      user?.subscription?.plan?.includes("Pro") ||
+      user?.subscription?.plan?.includes("pro") ||
+      user?.subscription?.plan?.includes("business") ||
+      user?.subscription?.plan?.includes("Business")
     ) {
-      // alert(user.subscription?.plan.includes("Business"));
+      // alert(user?.subscription?.plan?.includes("Business"));
 
       setPaths([...initialPaths, trendPath]);
     } else {

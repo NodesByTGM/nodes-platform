@@ -6,11 +6,13 @@ export default function PricingCard({ info, paymentPlan }) {
 
   return (
     <div
-      className={`sm:min-w-[400px] max-w-[600px]  ${
-        info.title.toLowerCase() === "standard"
-          ? " xl:rounded-l-[8px]"
-          : " xl:rounded-r-[8px]"
-      } flex flex-col p-8 text-[#000000] gap-10 bg-white`}
+      className={`  ${
+        info.title.toLowerCase() === "standard" ? " 2xl:rounded-l-[8px]" : " "
+      } ${
+        info.title.toLowerCase() === "business" ? " 2xl:rounded-r-[8px]" : " "
+      }
+      sm:min-w-[400px]
+      flex flex-col p-8 text-[#000000] gap-10 bg-white`}
     >
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
@@ -41,7 +43,7 @@ export default function PricingCard({ info, paymentPlan }) {
 
       <div className="w-full h-px bg-[#D6D6D6]"></div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4">
         {info.incentives.map((incentive, index) => (
           <div key={index} className="flex items-center gap-2">
             <span className="">

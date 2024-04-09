@@ -246,7 +246,7 @@ function TalentOnboarding() {
         <div className="flex justify-between items-center mb-10">
           <Link to="/">
             <div>
-              <img src="/logo.svg" alt="" className="w-8" />
+              <img src="/nodes-logo-black.svg" alt="" className="w-8" />
             </div>
           </Link>
 
@@ -262,7 +262,9 @@ function TalentOnboarding() {
 
         <div className="mb-10">
           <p className="mb-4">Step {currentIndex + 1}/5</p>
-          <Title className="!text-2xl">{indexQuestion[currentIndex + 1]}</Title>
+          <Title className="!text-2xl !font-medium">
+            {indexQuestion[currentIndex + 1]}
+          </Title>
         </div>
 
         {currentIndex === 0 ? (
@@ -311,6 +313,7 @@ function TalentOnboarding() {
               )}
 
               <ButtonWithBack
+                className="mt-2"
                 backAction={previousStep}
                 btnAction={handleClickForm}
                 disabled={
@@ -417,7 +420,10 @@ function TalentOnboarding() {
           </div>
         ) : null}
       </div>
-      <div className="bg-customsecondary p-5 w-1/2 lg:block hidden">
+      <div className="auth-onboarding  p-5 w-1/2 lg:block hidden relative">
+        <div className="fixed top-[-140px] right-[-140px] rotate-[320deg]">
+          <img src="/bg-node-yellow.svg" alt="" className="" />
+        </div>
         {/* <FormDebug form={{ formData, preview, checked }} /> */}
         <TalentReviewCard
           name={user?.name}
@@ -426,6 +432,9 @@ function TalentOnboarding() {
           showDetails={currentIndex !== 0}
           {...formData}
         />
+        <div className="absolute bottom-[0px] left-[0px] ">
+          <img src="/bg-node-yellow2.svg" alt="" className="" />
+        </div>
       </div>
     </div>
   );

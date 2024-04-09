@@ -51,15 +51,19 @@
 }
 
 .auth-onboarding-bgImg {
-  background-image: url("/imgUi/calm-attractive-fashion-designers-work-cozy-office-darkskinned-lady-paint-shorthaired-woman-holds-coffee-cup.jpg");
+  background-image: url("/img/TalentOnboardingBg.png");
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   background-position: center;
+}
+
+.auth-onboarding {
+  background-color: #fbfce9;
 }
 
 /* .profile-forms-section {
