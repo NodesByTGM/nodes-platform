@@ -157,3 +157,70 @@ export const plans = [
     },
   },
 ];
+
+export const carouselImages = [
+  { id: 1, url: "/imgUi/I1.png" },
+  { id: 2, url: "/imgUi/black-boy-playing-guitar.jpg" },
+  {
+    id: 3,
+    url: "/imgUi/black-white-portrait-woman-with-clapperboard-old-hollywood-glamour-style.jpg",
+  },
+  {
+    id: 4,
+    url: "/imgUi/calm-attractive-fashion-designers-work-cozy-office-darkskinned-lady-paint-shorthaired-woman-holds-coffee-cup.jpg",
+  },
+  {
+    id: 5,
+    url: "/imgUi/cheerful-photographer-giving-instructions-studio.jpg",
+  },
+  {
+    id: 6,
+    url: "/imgUi/chef-cooking-kitchen-while-wearing-professional-attire.jpg",
+  },
+  {
+    id: 7,
+    url: "/imgUi/cropped-photo-serious-young-man-sitting-office-coworking.jpg",
+  },
+  {
+    id: 8,
+    url: "/imgUi/design-professional-showcases-elegant-fashion-collection-stage-generated-by-ai.jpg",
+  },
+  {
+    id: 9,
+    url: "/imgUi/front-view-handsome-male-musician-singing-home-with-microphone.jpg",
+  },
+  {
+    id: 10,
+    url: "/imgUi/front-view-male-musician-playing-guitar-bed.jpg",
+  },
+  { id: 11, url: "/imgUi/front-view-women-clothes-shopping.jpg" },
+  {
+    id: 12,
+    url: "/imgUi/graphic-designer-choosing-color-from-sampler.jpg",
+  },
+  { id: 13, url: "/imgUi/hands-with-movie-slate.jpg" },
+  {
+    id: 14,
+    url: "/imgUi/high-angle-brazilian-women-working-as-clothing-designers.jpg",
+  },
+  { id: 15, url: "/imgUi/man-wearing-apron-baking-kitchen.jpg" },
+  { id: 16, url: "/imgUi/medium-shot-women-clothes-shopping (1).jpg" },
+  { id: 17, url: "/imgUi/medium-shot-women-clothes-shopping.jpg" },
+  {
+    id: 18,
+    url: "/imgUi/medium-shot-women-working-as-photographer.jpg",
+  },
+  {
+    id: 19,
+    url: "/imgUi/portrait-attractive-african-american-female-with-beautiful-makeup-posing-with-her-eyes-closed.jpg",
+  },
+  {
+    id: 20,
+    url: "/imgUi/portrait-indigenous-person-integrated-into-modern-life.jpg",
+  },
+  { id: 21, url: "/imgUi/portrait-woman-with-cheerful-makeup.jpg" },
+  {
+    id: 22,
+    url: "/imgUi/woman-promoting-cloths-from-thrift-store.jpg",
+  },
+];

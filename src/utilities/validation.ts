@@ -5,10 +5,7 @@ export const signupSchema = object({
   name: string().required("Name is a required field"),
   email: string().email().required("Email is a required field"),
   username: string().required("Username is a required field"),
-  // dob: date().default(() => new Date()),
-  day: string().required(),
-  month: string().required(),
-  year: string().required(),
+  dob: string().required("DOB field is required"),
   password: string().required("Password is a required field"),
   confirmPassword: string()
     .required("Confirm Password is a required field")
@@ -20,11 +17,7 @@ export type SignupValidationType = {
   name: string;
   email: string;
   username: string;
-  // dob: number,
-  day: string;
-  month: string;
-  year: string;
-
+  dob: string;
   password: string;
   confirmPassword: string;
   otp: string;

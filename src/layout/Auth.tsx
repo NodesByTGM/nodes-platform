@@ -1,11 +1,18 @@
 import { Outlet } from "react-router-dom";
+import {OnboardingCarousel} from '../components'
 function Auth() {
   return (
-    <div className="flex min-h-[100vh] justify-center">
+    <div className="flex min-h-[100vh] max-h-[100vh]  w-full justify-center">
       <div className="bg-[#ffffff] px-20 pb-20 pt-[60px] lg:w-1/2">
         <Outlet />
       </div>
-      <div className="bg-light auth-onboarding-bgImg p-5 w-1/2 lg:block hidden">
+      <OnboardingCarousel />
+      {/* <div className="bg-light auth-onboarding-bgImg p-5 w-1/2 lg:block hidden">
+        <img
+          src="/imgUi/calm-attractive-fashion-designers-work-cozy-office-darkskinned-lady-paint-shorthaired-woman-holds-coffee-cup.jpg"
+          alt=""
+          className="h-full w-full hidden"
+        />
         <div className="flex flex-col justify-center  items-center h-full">
           <div className="bg-white p-8  rounded-[16px] max-w-[440px] flex w-full flex-col gap-6">
             <h3 className="!text-2xl !font-semibold  !text-primary">
@@ -27,7 +34,7 @@ function Auth() {
             </ol>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
