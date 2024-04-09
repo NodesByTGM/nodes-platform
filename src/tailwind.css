@@ -50,6 +50,18 @@
   @apply flex gap-4 items-center active:bg-[#212121] active:text-white hover:bg-[#212121] hover:text-white transition-all px-4 py-2 rounded;
 }
 
+.auth-onboarding-bgImg {
+  background-image: url("/imgUi/calm-attractive-fashion-designers-work-cozy-office-darkskinned-lady-paint-shorthaired-woman-holds-coffee-cup.jpg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
 /* .profile-forms-section {
   height: calc(100vh - 144px);
 } */

@@ -4,13 +4,16 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { useVerifyTransactionQuery } from "../../api";
 import { PayStackIcon } from "../../components";
-
+import { loginUser } from "../../api/reducers/userSlice";
+import { useDispatch } from "react-redux";
 const PaystackComponent = ({ user, ref }) => {
   const { plan } = useParams();
+  const dispatch = useDispatch();
+
   const [reference, setReference] = useState(null);
 
   const {
-    // data: verificationData,
+    data: verificationData,
     refetch: verificationRefetch,
     // isSuccess: verificationIsSuccess,
     // isFetching: verificationLoading,
@@ -19,14 +22,19 @@ const PaystackComponent = ({ user, ref }) => {
   const PRO_PLAN = "PLN_e11atwl7oyvnajq";
   const BUSINESS_PLAN = "PLN_baeodisxfma3vno";
   const PUBLIC_KEY = "pk_test_9cf75727b4e8fef2d46eabb02ce5033ca1df7771";
-
+  const PRO_ANNUAL_PLAN = "PLN_3f6iseacm5i9fum";
+  const BUSINESS_ANNUAL_PLAN = "PLN_68xympmt1h631xk";
   const componentProps = {
     email: user?.email,
 
     plan:
       plan.toLowerCase() == "pro"
-        ? PRO_PLAN
+        ? PRO_ANNUAL_PLAN
         : plan.toLowerCase() == "business"
+        ? BUSINESS_ANNUAL_PLAN
+        : plan.toLowerCase() == "pro-monthly"
+        ? PRO_PLAN
+        : plan.toLowerCase() == "business-monthly"
         ? BUSINESS_PLAN
         : "",
     metadata: {
@@ -53,6 +61,15 @@ const PaystackComponent = ({ user, ref }) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reference]);
+
+  useEffect(() => {
+    if (verificationData) {
+      // console.log('VData: ' + JSON.stringify(verificationData.result, null, 2))
+      dispatch(loginUser(verificationData.result));
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [verificationData]);
 
   return (
     <div className="">

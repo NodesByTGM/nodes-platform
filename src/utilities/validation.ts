@@ -5,10 +5,7 @@ export const signupSchema = object({
   name: string().required("Name is a required field"),
   email: string().email().required("Email is a required field"),
   username: string().required("Username is a required field"),
-  // dob: date().default(() => new Date()),
-  day: string().required(),
-  month: string().required(),
-  year: string().required(),
+  dob: string().required("DOB field is required"),
   password: string().required("Password is a required field"),
   confirmPassword: string()
     .required("Confirm Password is a required field")
@@ -20,11 +17,7 @@ export type SignupValidationType = {
   name: string;
   email: string;
   username: string;
-  // dob: number,
-  day: string;
-  month: string;
-  year: string;
-
+  dob: string;
   password: string;
   confirmPassword: string;
   otp: string;
@@ -50,13 +43,17 @@ export type AdminSignupValidationType = {
   password: string;
   confirmPassword: string;
   otp: string;
- 
 };
 export const profileSchema = object({
   firstName: string().required("first name is a required field"),
   lastName: string().required("Last name is a required field"),
   username: string().required("Username is a required field"),
-  avatar: string().nullable(),
+  avatar: object()
+    .shape({
+      id: string(),
+      url: string(),
+    })
+    .nullable(),
   location: string(),
   height: string(),
   age: string(),
@@ -84,7 +81,10 @@ export type profileValidationType = {
   firstName: string;
   lastName: string;
   username: string;
-  avatar: string;
+  avatar: {
+    id: string;
+    url: string;
+  };
   location: string;
   height: string;
   age: string;

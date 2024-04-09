@@ -1,7 +1,15 @@
-import { ReactNode, createContext, useMemo, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useMemo,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import { IDashboardContext } from "../interfaces/dashboard";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+// import { AccountTypesObj,  } from "../utilities";
 
 const initialState = {
   pageName: "Dashboard",
@@ -19,7 +27,7 @@ const DashboardProvider = ({
 }) => {
   const user = useSelector((state: RootState) => state.user.user);
   const [pageName] = useState("Dashboard");
-  const [accountType, setAccountType] = useState("business");
+  const [accountType, setAccountType] = useState("");
   const dashboardContextValue = useMemo(
     () => ({
       pageName,
@@ -31,9 +39,29 @@ const DashboardProvider = ({
     [pageName, user, accountType, setAccountType]
   );
 
+  const handleAccountType = useCallback(() => {
+    // const type = user?.type;
+    const plan = user?.subscription?.plan.toLowerCase();
+    // alert(user?.subscription?.plan)
+    if (plan !== "pro" && plan !== "business") {
+      setAccountType("individual");
+    }
+    if (plan === "pro") {
+      setAccountType("talent");
+    }
+    if (plan === "business") {
+      setAccountType("business");
+    }
+  }, [user]);
+
+  useEffect(() => {
+    handleAccountType();
+  }, [user, handleAccountType]);
+
   return (
     <DashboardContext.Provider value={dashboardContextValue}>
       <div className="">
+        <pre className="hidden">{JSON.stringify(user, null, 2)}</pre>
         <div className="flex gap-2 mb-10 hidden">
           <button
             onClick={() => setAccountType("individual")}

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,8 +9,9 @@ import {
   Input,
   OTPInput,
   PasswordInput,
-  Select,
   // BasicSelect,
+  OnboardingCarousel,
+  AuthOnboardingLogo,
   TalentCTA,
   Tooltip,
 } from "../../components";
@@ -25,7 +25,7 @@ import {
 } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
 import { useFormik } from "formik";
-// import FormDebug from "../../components/FormDebug";
+import FormDebug from "../../components/FormDebug";
 import { signupSchema, SignupValidationType } from "../../utilities/validation";
 import { loginUser } from "../../api/reducers/userSlice";
 import { useDispatch } from "react-redux";
@@ -47,7 +47,7 @@ function Register() {
       name: values.name,
       username: values.username,
       email: values.email,
-      dob: new Date(`${values.day}-${values.month}-${values.year}`),
+      dob: values.dob,
       otp: values.otp,
       password: values.password,
     };
@@ -108,9 +108,7 @@ function Register() {
       name: "",
       email: "",
       username: "",
-      day: "",
-      month: "",
-      year: "",
+      dob: "",
       password: "",
       confirmPassword: "",
       otp: "",
@@ -129,32 +127,6 @@ function Register() {
     isValid,
     handleBlur,
   } = formik;
-
-  const handleSelect = ({ id, value }: any) => {
-    console.log({ id, value });
-    if (id.toLowerCase() == "day") {
-      values.day = value;
-    }
-    if (id.toLowerCase() == "month") {
-      values.month = value;
-    }
-    if (id.toLowerCase() == "year") {
-      values.year = value;
-    }
-  };
-
-  // const handleBasicSelect = (type, selected) => {
-  //   if (type === "day") {
-  //     console.log({ type, selected: selected?.value });
-  //     values.day = selected?.value;
-  //   }
-  //   if (type === "month") {
-  //     values.month = selected?.value;
-  //   }
-  //   if (type === "year") {
-  //     values.month = selected?.value;
-  //   }
-  // };
 
   const previousStep = () => {
     if (currentIndex > 0) {
@@ -204,33 +176,25 @@ function Register() {
   }, [sent]);
 
   return (
-    <div className="flex min-h-[100vh] justify-center">
-      <div className="p-20 px-24 pt-10 lg:w-1/2">
+    <div className="flex min-h-[100vh] max-h-[100vh]  w-full">
+      <div className="bg-[#ffffff] px-20 pb-20 pt-[60px] lg:w-1/2 overflow-y-auto">
         {currentIndex === 0 ? (
-          <div>
-            <div className="flex justify-between items-center mb-10">
-              <Link to="/">
-                <div>
-                  <img src="/logo.svg" alt="" className="w-8" />
-                </div>
-              </Link>
-              <div className="text-sm">
-                <span>Already using Nodes? </span>
-                <Link
-                  to={AppConfig.PATHS.Auth.Login}
-                  className="text-primary cursor-pointer"
-                >
-                  Log in
-                </Link>
-              </div>
-            </div>
-            <div className="mb-4">
-              <Title>Welcome to Nodes!</Title>
+          <div className="overflow-y-auto">
+            <AuthOnboardingLogo
+              link={{
+                text1: "Log in",
+                text2: "Already using Nodes?",
+                url: AppConfig.PATHS.Auth.Login,
+              }}
+            />
+
+            <div className="mb-10 flex flex-col gap-4">
+              <h3 className="!text-[24px] !font-medium">Welcome to Nodes!</h3>
               <p>Where creativtity knows no limits.</p>
             </div>
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col gap-4 justify-center w-full"
+              className="flex flex-col gap-6 justify-center w-full"
             >
               <div className="flex lg:flex-row flex-col gap-5">
                 <div className="w-full">
@@ -275,8 +239,8 @@ function Register() {
 
               {/* DOB */}
               <div>
-                <div className="flex gap-2 items-center">
-                  <div className="text-sm font-medium ">Date of Birth*</div>
+                <div className="flex gap-2 items-center mb-1">
+                  <div className="text-base font-medium ">Date of Birth*</div>
                   <Tooltip
                     id="dob"
                     text={() => (
@@ -295,42 +259,16 @@ function Register() {
                     <CautionCircleIcon />{" "}
                   </Tooltip>
                 </div>
-                <div className="flex gap-2">
-                  {/* <BasicSelect
-                    inputLabel="Day"
-                    value={values.day}
-                    handleSelected={(selected) =>
-                      handleBasicSelect("day", selected)
-                    }
-                    options={AppConfig.DATE_OPTIONS.DAYS}
-                  /> */}
-                  <Select
-                    className="flex-1"
-                    placeholder={"Day"}
-                    id="day"
-                    options={AppConfig.DATE_OPTIONS.DAYS}
-                    onSelect={handleSelect}
-                    error={errors.day}
-                    //  touched={touched.day}
-                    handleBlur={handleBlur}
-                  />
-                  <Select
-                    className="flex-1"
-                    placeholder={"Month"}
-                    id="month"
-                    options={AppConfig.DATE_OPTIONS.MONTHS}
-                    onSelect={handleSelect}
-                    error={errors.month}
-                    //  touched={touched.month}
-                  />
-                  <Select
-                    className="flex-1"
-                    placeholder={"Year"}
-                    id="year"
-                    options={AppConfig.DATE_OPTIONS.YEARS}
-                    onSelect={handleSelect}
-                    error={errors.year}
-                    //  touched={touched.year}
+                <div className="w-full">
+                  <Input
+                    placeholder={"DD/MM/YY"}
+                    id="dob"
+                    type="date"
+                    error={errors.dob}
+                    value={values.dob}
+                    touched={touched.dob}
+                    onChange={handleChange("dob")}
+                    onBlur={handleBlur}
                   />
                 </div>
               </div>
@@ -417,33 +355,11 @@ function Register() {
           </div>
         ) : null}
       </div>
-      <div
-        className={clsx(
-          "bg-light p-5 w-1/2 lg:block hidden",
-          currentIndex === 0 ? "bg-light" : "bg-customsecondary"
-        )}
-      >
-        {currentIndex === 0 ? (
-          <div className="flex flex-col justify-center mt-20 items-center">
-            {/* <FormDebug form={{ values, touched, errors, isValid }} /> */}
-            <div className="">
-              <img src="/img/auth1.png" alt="" className="w-[350px]" />
-              <img
-                src="/img/auth2.png"
-                alt=""
-                className="w-[350px] relative -mt-20 ml-32"
-              />
-              <img
-                src="/img/auth3.png"
-                alt=""
-                className="w-[350px] relative -mt-20"
-              />
-            </div>
-          </div>
-        ) : (
-          <TalentCTA />
-        )}
-      </div>
+      <FormDebug
+        className="hidden"
+        form={{ values, errors, touched, isValid }}
+      />
+      {currentIndex === 0 ? <OnboardingCarousel /> : <TalentCTA />}
     </div>
   );
 }

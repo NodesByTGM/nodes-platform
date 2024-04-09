@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function PricingCard({ info }) {
+export default function PricingCard({ info, paymentPlan }) {
   const navigate = useNavigate();
 
   return (
@@ -24,9 +24,13 @@ export default function PricingCard({ info }) {
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-[2px]">
-          <h3 className="font-medium text-[48px]">{info.payment} </h3>
+          <h3 className="font-medium text-[48px]">
+            {paymentPlan === "monthly" ? info.monthlyPayment : info.payment}{" "}
+          </h3>
           <span className="text-[#757575] font-normal text-base">
-            {info.duration}
+            {paymentPlan === "monthly"
+              ? info.monthlyDuration
+              : info.yearlyDuration}
           </span>
         </div>
 
@@ -63,7 +67,11 @@ export default function PricingCard({ info }) {
       </div>
 
       <div
-        onClick={() => navigate(info.buttonLink)}
+        onClick={() =>
+          navigate(
+            paymentPlan === "monthly" ? info.buttonLink2 : info.buttonLink
+          )
+        }
         className="cursor-pointer bg-customsecondary rounded-[5px] p-4 mt-auto"
       >
         <span className="text-white font-normal text-base">

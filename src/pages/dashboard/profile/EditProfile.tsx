@@ -323,12 +323,12 @@ export default function EditIndividual() {
                     }}
                     key={nav.title}
                     className={`${
-                      selected.title.toLowerCase() == nav.title.toLowerCase()
+                      selected?.title?.toLowerCase() == nav?.title.toLowerCase()
                         ? "border-primary text-primary "
                         : "border-transparent text-[#000000] "
                     } flex cursor-pointer flex-col items-center justify-center text-nowrap border-b-[2px] py-2  font-medium  `}
                   >
-                    <span className="text-base font-medium ">{nav.title}</span>
+                    <span className="text-base font-medium ">{nav?.title}</span>
                   </div>
                 ))}
               </div>

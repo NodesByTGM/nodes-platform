@@ -5,13 +5,14 @@ import { pricing } from "../../utilities";
 export default function Pricing() {
   const navigate = useNavigate();
   const paymentPlans = [
-    { id: "yearly billing", title: "Yearly billing" },
+    { id: "yearly billing", title: "Yearly billing", type: "yearly" },
 
-    { id: "monthly billing", title: "Monthly billing" },
+    { id: "monthly billing", title: "Monthly billing", type: "monthly" },
   ];
   const [selected, setSelected] = useState(paymentPlans[1]);
   return (
     <div className="bg-customsecondary w-full min-h-[100vh] flex flex-col pb-[210px]">
+      {/* <pre className="text-blue-500">{JSON.stringify(selected, null, 2)}</pre> */}
       <div className="py-6 pricing-padding">
         <img
           onClick={() => navigate("/")}
@@ -61,9 +62,9 @@ export default function Pricing() {
           </div>
         </div>
         <div className="grid  grid-cols-1 xl:grid-cols-3 gap-[2px] xl:min-w-[806px]">
-          <PricingCard info={pricing.standard} />
-          <PricingCard info={pricing.pro} />
-          <PricingCard info={pricing.business} />
+          <PricingCard info={pricing.standard} paymentPlan={selected.type} />
+          <PricingCard info={pricing.pro} paymentPlan={selected.type} />
+          <PricingCard info={pricing.business} paymentPlan={selected.type} />
         </div>
 
         <div className="hidden   xl:block w-[140px]"></div>

@@ -8,7 +8,7 @@ import {
 } from "react";
 import { IProfileContext } from "../interfaces/profile";
 import { useGetUserProfileQuery } from "../api";
-import { AccountTypesObj, projectModalTypes } from "../utilities";
+import { projectModalTypes } from "../utilities";
 
 // import {
 //   // FormikHelpers,
@@ -53,7 +53,7 @@ const ProfileProvider = ({
   } = useGetUserProfileQuery();
 
   const user = useSelector((state: RootState) => state.user.user);
-  const [profileType, setProfileType] = useState("individual");
+  const [profileType, setProfileType] = useState("");
   const [hasProject, setHasProject] = useState(false);
   const [projectDetailsModal, setProjectDetailsModal] = useState(false);
   const [editProjectModal, setEditProjectModal] = useState(false);
@@ -110,14 +110,14 @@ const ProfileProvider = ({
   );
 
   const handleAccountType = useCallback(() => {
-    const type = user?.type;
-    if (type == AccountTypesObj.individual) {
+    const plan = user?.subscription?.plan.toLowerCase();
+    if (plan !== "pro" && plan !== "business") {
       setProfileType("individual");
     }
-    if (type == AccountTypesObj.talent) {
+    if (plan === "pro") {
       setProfileType("talent");
     }
-    if (type == AccountTypesObj.business) {
+    if (plan === "business") {
       setProfileType("business");
     }
   }, [user]);

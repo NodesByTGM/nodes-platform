@@ -34,7 +34,7 @@ function TalentOnboarding() {
   const [tags, setTags] = useState<any>([]);
   const [preview, setPreview] = useState("");
   const [selectedFile, setSelectedFile] = useState<any>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<any>({
     skills: [],
     location: "",
     avatar: "",
@@ -43,6 +43,7 @@ function TalentOnboarding() {
     twitter: "",
     otherPurpose: "",
     onboardingPurpose: 0,
+    onboardingPurposes: [],
     step: currentIndex + 1,
   });
 
@@ -211,6 +212,26 @@ function TalentOnboarding() {
     }));
   };
 
+  const handleMultipleCheck = (id: number) => {
+    // const value: number = id;
+    let newPurposes: any = [];
+    if (formData.onboardingPurposes.includes(id)) {
+      newPurposes = formData.onboardingPurposes.filter((item) => item !== id);
+
+      setFormData((prev) => ({
+        ...prev,
+        onboardingPurposes: newPurposes,
+      }));
+
+      return;
+    }
+    newPurposes = [...formData.onboardingPurposes, id];
+    setFormData((prev) => ({
+      ...prev,
+      onboardingPurposes: newPurposes,
+    }));
+  };
+
   const indexQuestion = {
     1: "What do you want to do on Nodes?",
     2: "What do you do?",
@@ -253,23 +274,23 @@ function TalentOnboarding() {
             <div className="flex flex-col gap-4 justify-center w-full">
               <WrappedCheckboxInput
                 label="Connect with fellow creatives"
-                checked={formData.onboardingPurpose == 1}
-                setChecked={() => handleChecked(1)}
+                checked={formData.onboardingPurposes.includes(1)}
+                setChecked={() => handleMultipleCheck(1)}
               />
               <WrappedCheckboxInput
                 label="Find exciting job opportunities and gigs."
-                checked={formData.onboardingPurpose == 2}
-                setChecked={() => handleChecked(2)}
+                checked={formData.onboardingPurposes.includes(2)}
+                setChecked={() => handleMultipleCheck(2)}
               />
               <WrappedCheckboxInput
                 label="Increase visibility and showcase my work."
-                checked={formData.onboardingPurpose == 3}
-                setChecked={() => handleChecked(3)}
+                checked={formData.onboardingPurposes.includes(3)}
+                setChecked={() => handleMultipleCheck(3)}
               />
               <WrappedCheckboxInput
                 label=" Explore and discover inspiring projects."
-                checked={formData.onboardingPurpose == 4}
-                setChecked={() => handleChecked(4)}
+                checked={formData.onboardingPurposes.includes(4)}
+                setChecked={() => handleMultipleCheck(4)}
               />
               <WrappedCheckboxInput
                 label="Something else"
@@ -293,7 +314,7 @@ function TalentOnboarding() {
                 backAction={previousStep}
                 btnAction={handleClickForm}
                 disabled={
-                  formData.onboardingPurpose == 0 ||
+                  formData.onboardingPurposes.length == 0 ||
                   (formData.onboardingPurpose == 5 && !formData.otherPurpose)
                 }
               />
