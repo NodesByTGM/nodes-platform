@@ -62,7 +62,7 @@ const DashboardProvider = ({
 
   const handleAccountType = useCallback(() => {
     // const type = user?.type;
-   
+
     // alert(user?.subscription?.plan)
     if (currentPlan !== "pro" && currentPlan !== "business") {
       setAccountType("individual");
@@ -70,11 +70,10 @@ const DashboardProvider = ({
     if (currentPlan === "pro" || currentPlan === "business") {
       setAccountType("talent");
     }
-    
-  }, [user]);
+  }, [ currentPlan]);
 
   const handleUserIsBusiness = useCallback(() => {
-    if (currentPlan === "pro" || currentPlan === "business") {
+    if (currentPlan === "business") {
       setUserIsBusiness(true);
       return;
     }
@@ -83,7 +82,7 @@ const DashboardProvider = ({
 
   useEffect(() => {
     handleAccountType();
-    handleUserIsBusiness()
+    handleUserIsBusiness();
   }, [user, handleAccountType, handleUserIsBusiness]);
 
   useEffect(() => {
@@ -97,6 +96,8 @@ const DashboardProvider = ({
   return (
     <DashboardContext.Provider value={dashboardContextValue}>
       <div className="">
+        <pre className="hidden">{JSON.stringify({ plan: currentPlan, accountType: accountType }, null, 2)}</pre>
+
         <pre className="hidden">{JSON.stringify(user, null, 2)}</pre>
         <div className="flex gap-2 mb-10 hidden">
           <button

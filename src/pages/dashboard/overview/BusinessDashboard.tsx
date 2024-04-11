@@ -19,6 +19,7 @@ import {
 } from "../../../api";
 import BusinessDashboardEmptyState from "./BusinessDashboardEmptyState.tsx";
 import { SubscriptionAndBilling } from "../../../components";
+import {capitalizeWords} from '../../../utilities/common.ts'
 import BusinessDashboardSectionEmptyStates from "./BusinessDashboardSectionEmptyStates";
 
 export default function BusinessDashboard() {
@@ -100,7 +101,7 @@ export default function BusinessDashboard() {
       ) : (
         <div className="">
           <HeaderAndDescription
-            title={`Welcome to ${user?.business?.name}'s business account!`}
+            title={`Welcome to ${capitalizeWords(user?.name)}'s business account!`}
           />
 
           <div className={` h-4 mb-10 border-b border-[#D6D6D6]`}></div>

@@ -13,18 +13,26 @@ export default function Subscription() {
   ];
   const [selected, setSelected] = useState(paymentPlans[1]);
   const handleCurrentPlan = () => {
-    if (user?.subscription?.plan?.toLowerCase() === "pro") {
+    const plan = user?.subscription?.plan?.toLowerCase();
+    const tenor = user?.subscription?.tenor?.toLowerCase();
+    if (plan === "pro") {
+      if (tenor === "monthly") {
+        return planObj.proMonthly;
+      }
       return planObj.pro;
     }
 
-    if (user?.subscription?.plan?.toLowerCase() === "business") {
+    if (plan === "business") {
+      if (tenor === "monthly") {
+        return planObj.businessMonthly;
+      }
       return planObj.business;
     }
   };
   return (
     <div className="flex flex-col gap-10">
       <pre className="text-blue-400 hidden">
-        {/* {JSON.stringify(user?.subscription, null, 2)} */}
+        {JSON.stringify(user?.subscription, null, 2)}
         {/* {  JSON.stringify(handleCurrentPlan(), null, 2)} */}
       </pre>
       <div className="flex flex-col gap-2 border-b border-[#D6D6D6] pb-[24px]">
@@ -74,4 +82,3 @@ export default function Subscription() {
     </div>
   );
 }
-

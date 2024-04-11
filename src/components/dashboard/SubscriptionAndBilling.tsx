@@ -100,13 +100,13 @@ export default function SubscriptionAndBilling({ closeModal }) {
         </span>
         <CloseIcon close={() => closeModal()} />
       </div>
-      <pre className="text-blue-400 ">{JSON.stringify(user, null, 2)}</pre>
+      <pre className="text-blue-400 hidden">{JSON.stringify(user, null, 2)}</pre>
       <ChoosePlan
         selected={selected}
         setSelected={setSelected}
         paymentPlans={paymentPlans}
       />
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 mt-8 ">
         {!user?.subscription ? (
           <SubSection
             plan={planObj.standard}
