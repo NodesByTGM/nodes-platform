@@ -37,7 +37,9 @@ export default function PricingCard({ info, paymentPlan }) {
         </div>
 
         <span className="text-[#757575] font-medium text-base">
-          {info.tenor}
+          {
+            info.title.toLowerCase() === 'standard' ? <span className="">{info.tenor}</span> : <span className="text-transparent">-</span>
+          }
         </span>
       </div>
 

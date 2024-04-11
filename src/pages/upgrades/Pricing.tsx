@@ -22,7 +22,7 @@ export default function Pricing() {
           onClick={() => navigate("/")}
           src="/nodes-logo-black.svg"
           alt="logo"
-          className="cursor-pointer h-[32px] w-[123.49px]"
+          className="cursor-pointer h-[32px] "
         />
       </div>
       {/* <div className="z-20 pricing-padding w-full mt-[32px] mb-[36px] text-[#212121] flex flex-col gap-4 justify-center items-start md:items-center">
