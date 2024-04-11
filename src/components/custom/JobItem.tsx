@@ -134,13 +134,13 @@ export default function JobItem({
 
   return (
     <div
-      className={`${className} bg-[#ffffff] text-[#000000] w-full p-6 rounded-lg border border-[#EFEFEF] flex flex-col gap-8`}
+      className={`${className} bg-[#ffffff] text-[#000000] w-full p-6 rounded-lg border border-[#EFEFEF] flex flex-col items-start gap-8`}
     >
       <pre className="text-gray-500 hidden ">
         {JSON.stringify(data, null, 2)}
       </pre>
 
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between w-full ">
         <div className="">
           <img src="/img/SmallCheck.png" alt="" className="size-[72px]" />
         </div>
@@ -161,7 +161,7 @@ export default function JobItem({
         )}
       </div>
 
-      <div className="flex flex-col gap-4 text-[#000000] text-base">
+      <div className="w-full flex flex-col gap-4 items-start text-[#000000] text-base">
         <span className="font-medium">
           {data?.description ? data.description : "Job description/title"}
         </span>
@@ -174,7 +174,7 @@ export default function JobItem({
         {data?.payRate ? data.payRate : "$10-1k/hr"}
       </span>
 
-      <div className="flex items-center justify-between">
+      <div className="w-full flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="">
             <CiCalendar />
@@ -196,12 +196,12 @@ export default function JobItem({
       {canViewJob ? (
         <div
           onClick={() => setViewjobOpen(true)}
-          className="flex justify-end text-primary font-medium text-sm cursor-pointer"
+          className="w-full flex justify-end text-primary font-medium text-sm cursor-pointer"
         >
           View job
         </div>
       ) : (
-        <div className="flex items-center justify-between">
+        <div className="w-full flex items-center justify-between">
           <div className="flex justify-end text-primary font-normal text-base cursor-pointer">
             {data?.applicants?.length > 0 ? data?.applicants?.length : 0}{" "}
             applicant{data?.applicants?.length !== 1 ? "s" : ""}
@@ -221,7 +221,11 @@ export default function JobItem({
         setOpen={setViewjobOpen}
       >
         <div className="">
-          <JobPost details={data} refetchJobs={refetchJobs} closeModal={() => setViewjobOpen(false)} />
+          <JobPost
+            details={data}
+            refetchJobs={refetchJobs}
+            closeModal={() => setViewjobOpen(false)}
+          />
         </div>
       </Modal>
 

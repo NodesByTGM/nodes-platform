@@ -103,3 +103,4 @@ export { default as AuthOnboardingLogo } from "./AuthOnboardingLogo";
 export { default as OnboardingCarousel } from "./OnboardingCarousel";
 export { default as ReactDateSelect } from "./general/ReactDateSelect.tsx";
 export { default as SubSection } from "./subscription/SubSection.tsx";
+export { default as ItemsCarousel } from "./general/ItemsCarousel.tsx";

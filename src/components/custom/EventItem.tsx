@@ -151,7 +151,7 @@ function EventItem({
             )}
           </div>
 
-          <div className="flex flex-col text-[#ffffff] font-medium text-base">
+          <div className="flex items-start flex-col text-[#ffffff] font-medium text-base">
             <span className="mb-4">{data?.name}</span>
             <span className="mb-6">{data?.dateTime}</span>
             <div className="flex items-center gap-2">

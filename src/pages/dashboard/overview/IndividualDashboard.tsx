@@ -3,27 +3,32 @@ import { useNavigate } from "react-router-dom";
 import AppConfig from "../../../utilities/config";
 import JobSection from "./sections/JobSection";
 import EventsSection from "./sections/EventsSection";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
 import {
   HeaderAndDescription,
-  CarouselSection,
+  ItemsCarousel,
   UpgradeCTA,
 } from "../../../components";
+import {capitalizeWords} from '../../../utilities'
+
 export default function IndividualDashboard() {
+  const user = useSelector((state: RootState) => state.user.user);
+
   const navigate = useNavigate();
   return (
     <div>
       <div className="flex flex-col gap-[64px]">
         <div className="pb-6 border-b border-[#D6D6D6]">
           <HeaderAndDescription
-            title={`Welcome to Nodes, Jane`}
+            title={`Welcome to Nodes, ${capitalizeWords(user?.name)}`}
             description={"Checkout the blah blah blah blah blah blah"}
           />
         </div>
         <EventsSection />
         <JobSection />
 
-        <CarouselSection
+        <ItemsCarousel
           title={`Top Movies`}
           movie
           viewAll
@@ -31,24 +36,24 @@ export default function IndividualDashboard() {
           navigateTo={() => navigate(`${AppConfig.PATHS.Dashboard.ViewAll}`)}
         />
         <UpgradeCTA />
-        <CarouselSection
+        <ItemsCarousel
           job
           title={`Trending jobs on Nodes`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         />
-        <CarouselSection title={`Hidden Gems`} event viewAll borderBottom />
-        <CarouselSection title={`Flashbacks`} event viewAll borderBottom />
-        <CarouselSection
+        <ItemsCarousel title={`Hidden Gems`} event viewAll borderBottom />
+        <ItemsCarousel title={`Flashbacks`} event viewAll borderBottom />
+        <ItemsCarousel
           title={`Spaces you might like`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`}
         />
-        <CarouselSection
+        <ItemsCarousel
           title={`Collaboration Spotlights`}
           event
           viewAll
           borderBottom
         />
-        <CarouselSection title={`Birthdays`} event viewAll borderBottom />
+        <ItemsCarousel title={`Birthdays`} event viewAll borderBottom />
       </div>
     </div>
   );
