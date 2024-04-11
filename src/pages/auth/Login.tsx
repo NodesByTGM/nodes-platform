@@ -157,7 +157,7 @@ function Login() {
             <span>
               <GoogleIcon />
             </span>
-            <span className=" text-base font-normal text-[#212121]">Sign up with Google</span>
+            <span className=" text-base font-normal text-[#212121]">Sign in with Google</span>
           </div>
         </ButtonOutline>
         <div className="mb-10 mt-10 relative w-full flex items-center">
