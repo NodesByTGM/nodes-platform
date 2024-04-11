@@ -26,7 +26,7 @@ export default function IndividualDashboard() {
           />
         </div>
         <EventsSection />
-        <JobSection />
+        <JobSection canViewJob={true}/>
 
         <ItemsCarousel
           title={`Top Movies`}
