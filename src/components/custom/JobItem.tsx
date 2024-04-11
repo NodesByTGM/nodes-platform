@@ -243,7 +243,7 @@ export default function JobItem({
           <span className="">
             <TfiLocationPin />
           </span>
-          <span className="font-normal text-base">
+          <span className="font-normal text-base text-start truncate">
             {data?.location ? data.location : "Lagos | Nigeria"}
           </span>
         </div>

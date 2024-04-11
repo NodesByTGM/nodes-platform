@@ -15,7 +15,9 @@ const PaystackComponent = ({ user }) => {
   const {
     data: verificationData,
     refetch: verificationRefetch,
-    // isSuccess: verificationIsSuccess,
+    isSuccess: verificationIsSuccess,
+    isError: verificationIsError,
+    error: verificationError,
     isFetching: verificationLoading,
   } = useVerifyTransactionQuery({ reference: reference }, { skip: !reference });
 
@@ -49,7 +51,7 @@ const PaystackComponent = ({ user }) => {
         setReference(res?.trxref);
         // alert(JSON.stringify(res?.trxref, null, 2));
 
-        toast.success("Payment successful");
+        // toast.success("Payment successful");
       }
     },
     onClose: () => {},
@@ -65,12 +67,32 @@ const PaystackComponent = ({ user }) => {
 
   useEffect(() => {
     if (verificationData) {
-      // console.log('VData: ' + JSON.stringify(verificationData.result, null, 2))
       dispatch(loginUser(verificationData.result));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [verificationData]);
+  useEffect(() => {
+    if (verificationIsSuccess) {
+      toast.success('Subscription successful')
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [verificationIsSuccess]);
+
+  useEffect(() => {
+    if (verificationIsSuccess) {
+      toast.success('Subscription successful')
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [verificationIsSuccess]);
+
+  useEffect(() => {
+    if (verificationIsError) {
+      toast.error(verificationError?.message?.message || "Something went wrong");
+    }
+  }, [verificationIsError, verificationError]);
 
   return (
     <div className="w-full">
