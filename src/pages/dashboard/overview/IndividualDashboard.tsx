@@ -36,23 +36,23 @@ export default function IndividualDashboard() {
           navigateTo={() => navigate(`${AppConfig.PATHS.Dashboard.ViewAll}`)}
         />
         <UpgradeCTA />
-        <ItemsCarousel
+        {/* <ItemsCarousel
           job
           title={`Trending jobs on Nodes`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
-        />
+        /> */}
         <ItemsCarousel title={`Hidden Gems`} event viewAll borderBottom />
-        <ItemsCarousel title={`Flashbacks`} event viewAll borderBottom />
-        <ItemsCarousel
+        {/* <ItemsCarousel title={`Flashbacks`} event viewAll borderBottom /> */}
+        {/* <ItemsCarousel
           title={`Spaces you might like`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`}
-        />
-        <ItemsCarousel
+        /> */}
+        {/* <ItemsCarousel
           title={`Collaboration Spotlights`}
           event
           viewAll
           borderBottom
-        />
+        /> */}
         <ItemsCarousel title={`Birthdays`} event viewAll borderBottom />
       </div>
     </div>
