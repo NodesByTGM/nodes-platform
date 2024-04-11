@@ -116,7 +116,9 @@ const PATHS = {
   },
   Business: {
     Base: "/business",
-    Dashboard: "",
+    Default: "",
+    Dashboard: "/business/dashboard",
+    Profile: '/business/profile'
   },
 
   Dashboard: {

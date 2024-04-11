@@ -5,7 +5,7 @@ import ProjectDetail from "./ProjectDetail";
 import ProjectForm from "./ProjectForm";
 import { useProfileContext } from "../../../context/hooks";
 import { projectModalTypes } from "../../../utilities";
-import { useGetUserProjectsQuery } from "../../../api";
+import { useGetMyProjectsQuery } from "../../../api";
 
 // type ProjectType = {
 //   id: string;
@@ -35,7 +35,7 @@ export default function Projects() {
     refetch: projectsRefetch,
     // isSuccess: projectIsSuccess,
     isFetching: projectsLoading,
-  } = useGetUserProjectsQuery();
+  } = useGetMyProjectsQuery();
 
   const addProject = () => {
     setProjectAction(projectModalTypes.add);

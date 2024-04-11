@@ -24,6 +24,7 @@ import {
   ViewDetail,
   SeeMoreJobs,
   BusinessDashboard,
+  BusinessProfile,
   Details,
   ForgotPassword,
   Home,
@@ -187,10 +188,10 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Dashboard.SeeMore,
         Component: getProfile(SeeMoreJobs),
       },
-      {
-        path: AppConfig.PATHS.Dashboard.Business,
-        Component: getProfile(BusinessDashboard),
-      },
+      // {
+      //   path: AppConfig.PATHS.Dashboard.Business,
+      //   Component: getProfile(BusinessDashboard),
+      // },
       {
         path: AppConfig.PATHS.Dashboard.Details,
         Component: getProfile(Details),
@@ -202,9 +203,19 @@ export const publicRoutes: RouteObject[] = [
     Component: getProfile(DashboardBase),
     children: [
       {
+        path: AppConfig.PATHS.Business.Default,
+        Component: getProfile(BusinessDashboard),
+      },
+      {
         path: AppConfig.PATHS.Business.Dashboard,
         Component: getProfile(BusinessDashboard),
       },
+      {
+        path: AppConfig.PATHS.Business.Profile,
+        Component: getProfile(BusinessProfile),
+      },
+
+      
     ],
   },
   {

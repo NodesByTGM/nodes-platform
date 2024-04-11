@@ -29,12 +29,12 @@ export const standardPaths = [
       {
         name: "Dashboard",
         icon: <Briefcase />,
-        path: AppConfig.PATHS.Business.Base,
+        path: AppConfig.PATHS.Business.Dashboard,
       },
       {
         name: "Profile",
         icon: <Briefcase />,
-        path: "/",
+        path: AppConfig.PATHS.Business.Profile,
       },
     ],
   },
@@ -69,12 +69,12 @@ export const proPaths = [
       {
         name: "Dashboard",
         icon: <Briefcase />,
-        path: AppConfig.PATHS.Business.Base,
+        path: AppConfig.PATHS.Business.Dashboard,
       },
       {
         name: "Profile",
         icon: <Briefcase />,
-        path: "/",
+        path: AppConfig.PATHS.Business.Profile,
       },
     ],
   },
@@ -114,12 +114,12 @@ export const businessPaths = [
       {
         name: "Dashboard",
         icon: <Briefcase />,
-        path: AppConfig.PATHS.Business.Base,
+        path: AppConfig.PATHS.Business.Dashboard,
       },
       {
         name: "Profile",
         icon: <Briefcase />,
-        path: "/",
+        path: AppConfig.PATHS.Business.Profile,
       },
     ],
   },
