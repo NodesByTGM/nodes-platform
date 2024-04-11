@@ -46,12 +46,12 @@ const DashboardProvider = ({
     if (plan !== "pro" && plan !== "business") {
       setAccountType("individual");
     }
-    if (plan === "pro") {
+    if (plan?.toLowerCase() === "pro" || plan?.toLowerCase() === "business") {
       setAccountType("talent");
     }
-    if (plan === "business") {
-      setAccountType("business");
-    }
+    // if (plan?.toLowerCase() === "business") {
+    //   setAccountType("business");
+    // }
   }, [user]);
 
   useEffect(() => {

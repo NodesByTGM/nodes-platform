@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Button, SectionNavs } from "../../components";
 import Account from "./Account";
 import Analytics from "./Analytics";
 import SettingsProvider from "../../context/settings";
 import BusinessAnalytics from "./BusinessAnalytics";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 function AccountSettingsBase() {
-  const [navs] = useState([
+  const user = useSelector((state: RootState) => state.user.user);
+  const allNavs = [
     { id: 1, label: "Account", count: null },
     {
       id: 2,
@@ -18,11 +20,28 @@ function AccountSettingsBase() {
       label: "Business Analytics",
       count: null,
     },
-  ]);
+  ]
 
-  // const triggerSave = (saveFn) => {
-  //   saveFn();
-  // };
+  const [navs, setNavs] = useState([allNavs[0]]);
+
+  const handleNavs = useCallback(() => {
+    const plan = user?.subscription?.plan?.toLowerCase();
+    if (plan !== "pro" && plan !== "business") {
+      setNavs([allNavs[0]]);
+    }
+    if (plan === "pro") {
+      setNavs(allNavs);
+    }
+    if (plan === "business") {
+      setNavs(allNavs);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    handleNavs();
+  }, [user, handleNavs]);
+
+
 
   const [selectedNav, setSelectedNav] = useState(navs[0]);
 

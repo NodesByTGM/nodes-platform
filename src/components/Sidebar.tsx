@@ -1,91 +1,43 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Briefcase,
-  Globe,
-  Home,
-  User,
-  Bookmark,
-  Circle,
-  Star,
-  ChevronDown,
-  ChevronUp,
-} from "react-feather";
+import { ChevronDown, ChevronUp } from "react-feather";
 import { NavLink, useLocation } from "react-router-dom";
-import AppConfig from "../utilities/config";
+// import AppConfig from "../utilities/config";
 import { SearchComponent } from "../components";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { standardPaths, proPaths, businessPaths } from "../utilities";
 function Sidebar() {
   const user = useSelector((state: RootState) => state.user.user);
   const [showBusinessChild, setShowBusinessChild] = useState(false);
   const location = useLocation();
 
   // console.log(JSON.stringify(user?.subscription, null, 2));
-  const initialPaths = [
-    { name: "Dashboard", icon: <Home />, path: AppConfig.PATHS.Dashboard.Base },
-    {
-      name: "Profile",
-      icon: <User />,
-      path: AppConfig.PATHS.Dashboard.Profile.Base,
-    },
-    { name: "Discover", icon: <Globe />, path: AppConfig.PATHS.Spaces.Base },
-    { name: "Saved", icon: <Bookmark />, path: AppConfig.PATHS.Saved.Base },
 
-    {
-      name: "For Business",
-      icon: <Briefcase />,
-      path: AppConfig.PATHS.Business.Base,
-      showChild: false,
-      children: [
-        {
-          name: "Dashboard",
-          icon: <Briefcase />,
-          path: AppConfig.PATHS.Business.Base,
-        },
-        {
-          name: "Profile",
-          icon: <Briefcase />,
-          path: "/",
-        },
-      ],
-    },
-
-    {
-      name: "Subscriptions",
-      icon: <Box />,
-      path: AppConfig.PATHS.Subscription.Base,
-    },
-    {
-      name: "Grid Tools",
-      icon: <Circle />,
-      path: AppConfig.PATHS.GridTools,
-    },
-  ];
-
-  const trendPath = {
-    name: "Trending",
-    icon: <Star />,
-    path: AppConfig.PATHS.Trending.Base,
-  };
-  const [paths, setPaths] = useState(initialPaths);
+  const [paths, setPaths] = useState(standardPaths);
 
   useEffect(() => {
     if (
       user?.subscription?.plan?.includes("Pro") ||
-      user?.subscription?.plan?.includes("pro") ||
+      user?.subscription?.plan?.includes("pro")
+    ) {
+      // alert(user?.subscription?.plan?.includes("Business"));
+
+      setPaths(proPaths);
+    } else if (
       user?.subscription?.plan?.includes("business") ||
       user?.subscription?.plan?.includes("Business")
     ) {
       // alert(user?.subscription?.plan?.includes("Business"));
 
-      setPaths([...initialPaths, trendPath]);
+      setPaths(businessPaths);
     } else {
-      setPaths([...initialPaths]);
+      // alert(user?.subscription?.plan?.includes("Business"));
+
+      setPaths(standardPaths);
     }
   }, [user]);
   return (
-    <div className="w-full transition-all duration-300 h-full border-r border-gray-300 px-6">
+    <div className="min-h-full overflow-y-auto w-full transition-all duration-300 h-full border-r border-gray-300 px-6">
       {/* <div className="mt-3 pb-4 border-b p-3 mb-4">
                 <Menu />
             </div> */}
@@ -100,7 +52,7 @@ function Sidebar() {
 
         <SearchComponent />
       </div>
-      <div className="flex flex-col gap-5 ">
+      <div className="flex flex-col gap-5 pb-10">
         {paths.map((r, i) => (
           <div className="w-full">
             {r?.children ? (

@@ -174,7 +174,7 @@ export default function JobItem({
         {data?.payRate ? data.payRate : "$10-1k/hr"}
       </span>
 
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full flex items-start justify-between gap-1">
         <div className="flex items-center gap-2">
           <span className="">
             <CiCalendar />

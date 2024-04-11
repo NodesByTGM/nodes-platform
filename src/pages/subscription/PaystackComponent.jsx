@@ -3,7 +3,7 @@ import { PaystackButton } from "react-paystack";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { useVerifyTransactionQuery } from "../../api";
-import { PayStackIcon } from "../../components";
+import { PayStackIcon, Modal, Loader } from "../../components";
 import { loginUser } from "../../api/reducers/userSlice";
 import { useDispatch } from "react-redux";
 const PaystackComponent = ({ user }) => {
@@ -16,7 +16,7 @@ const PaystackComponent = ({ user }) => {
     data: verificationData,
     refetch: verificationRefetch,
     // isSuccess: verificationIsSuccess,
-    // isFetching: verificationLoading,
+    isFetching: verificationLoading,
   } = useVerifyTransactionQuery({ reference: reference }, { skip: !reference });
 
   const PRO_PLAN = "PLN_e11atwl7oyvnajq";
@@ -89,6 +89,14 @@ const PaystackComponent = ({ user }) => {
           </div>
         </div>
       </div>
+
+      <Modal
+        sizeClass="sm:max-w-[506px]"
+        open={verificationLoading}
+        setOpen={() => {}}
+      >
+      <Loader />
+      </Modal>
     </div>
   );
 };
