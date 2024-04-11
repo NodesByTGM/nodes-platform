@@ -109,7 +109,7 @@ export default function TalentDashboard() {
         >
           <div className="grid grid-cols-3 gap-6">
             {WelcomeCardItems.map((item) => (
-              <div key={item.id} className="">
+              <div key={item.id} className="h-auto">
                 <WelcomeCard
                   text1={item.text1}
                   text2={item.text2}

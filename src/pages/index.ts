@@ -38,3 +38,4 @@ export { default as AccountSettingsBase } from "./settings/AccountSettingsBase.t
 export { default as TrendingBase } from "./trending/TrendingBase.tsx";
 export { default as Trending } from "./trending/Trending.tsx";
 export { default as IndividualDashboard } from "../pages/dashboard/overview/IndividualDashboard.tsx";
+export {default as BusinessProfile} from './dashboard/profile/BusinessProfile'

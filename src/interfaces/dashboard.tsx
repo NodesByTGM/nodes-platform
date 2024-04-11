@@ -4,5 +4,9 @@ export interface IDashboardContext {
   accountType: string;
   setAccountType: (e) => void;
   user: any;
+  currentPlan: string | null;
+  setCurrentPlan: (e) => void;
+  userIsBusiness: boolean;
+  setUserIsBusiness: (e) => void
  
 }

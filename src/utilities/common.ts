@@ -89,6 +89,14 @@ export const convertToBase64 = async (file: File) => {
 
 //     return keyValuePairs.join('&');
 // }
+
+export function returnMaxDate (){
+  const currentDate = new Date();
+  const maxDate = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
+    const formattedMaxDate = maxDate.toISOString().split('T')[0];
+
+    return formattedMaxDate
+}
 export function capitalizeWords(str) {
   return str.replace(/\b\w/g, function(char) {
     return char.toUpperCase();

@@ -20,7 +20,7 @@ export default {
             hover: "#042826",
           },
         },
-        secondary: "#D9E41E",
+        secondary: "#D6DE21",
         success: "#018E51",
         danger: "#D11F54",
         warning: "#F7B307",
@@ -41,6 +41,7 @@ export default {
         customsecondary: {
           DEFAULT: "#212121",
         },
+        
       },
       boxShadow: {
         normal: "0px 6px 20px 0px #0000000A",

@@ -269,10 +269,7 @@ function TalentOnboarding() {
 
         {currentIndex === 0 ? (
           <div className="">
-            {/* <div className="mb-10">
-              <p className="mb-4">Step 1/4</p>
-              <Title className="!text-2xl">What do you do?</Title>
-            </div> */}
+           
             <div className="flex flex-col gap-4 justify-center w-full">
               <WrappedCheckboxInput
                 label="Connect with fellow creatives"

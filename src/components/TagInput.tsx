@@ -141,7 +141,7 @@ const TagInput = ({
         </div>
 
         {isFocused ? (
-          <div className="mt-2 -ml-4 border border-primary rounded-[5px] relatve z-10 absolute w-full bg-white overflow-hidden">
+          <div className="max-h-[200px] overflow-y-auto mt-2 -ml-4 border border-primary rounded-[5px] relatve z-10 absolute w-full bg-white overflow-hidden">
             <ul>
               {suggestions
                 .filter((x: any) => !tags.includes(x))

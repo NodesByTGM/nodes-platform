@@ -13,6 +13,7 @@ export default function SubSection({
   light,
   viewOthers,
   user,
+  featureDivClass = ''
 }: {
   isCurrentPlan?: boolean;
   isCurrentPlanPayment?: boolean;
@@ -21,6 +22,7 @@ export default function SubSection({
   light?: boolean;
   viewOthers?: boolean;
   user?: any;
+  featureDivClass?: string
 }) {
   const navigate = useNavigate();
   const [deleteModal, setDeleteModal] = useState(false);
@@ -146,7 +148,7 @@ export default function SubSection({
             Features:
           </span>
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+          <div className={`${featureDivClass} grid grid-cols-2 gap-x-6 gap-y-4`}>
             {plan?.features?.map((feature, index) => (
               <div key={index} className="flex items-center gap-2">
                 <CheckedIcon light={light} />

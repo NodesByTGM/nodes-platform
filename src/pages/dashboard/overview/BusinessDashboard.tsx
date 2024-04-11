@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
 import { useDashboardContext } from "../../../context/hooks";
 import {
-  CarouselSection,
+  ItemsCarousel,
   HeaderAndDescription,
   WelcomeComponent,
   WelcomeCard,
@@ -22,9 +22,10 @@ import { SubscriptionAndBilling } from "../../../components";
 import BusinessDashboardSectionEmptyStates from "./BusinessDashboardSectionEmptyStates";
 
 export default function BusinessDashboard() {
-  const { user } = useDashboardContext();
+  const { user, userIsBusiness } = useDashboardContext();
   const [jobsData, setJobsData] = useState<any>([]);
   const [eventsData, setEventsData] = useState<any>([]);
+
 
   const [jobModal, setJobModal] = useState(false);
   const [eventModal, setEventModal] = useState(false);
@@ -85,11 +86,11 @@ export default function BusinessDashboard() {
   return (
     <div>
       <pre className="hidden text-blue-400 text-wrap max-w-[600px]">
-        {/* {JSON.stringify(jobsData, null, 2)} */}
-        {JSON.stringify(!user?.business?.id, null, 2)}
+        {JSON.stringify(userIsBusiness, null, 2)}
+        {/* {JSON.stringify(!user?.business?.id, null, 2)} */}
       </pre>
       {/* //remember to change back to !user?.business?.id */}
-      {!user?.business?.id ? (
+      {!userIsBusiness ? (
         <BusinessDashboardEmptyState
           user={user}
           addBusinessAccount={() => {
@@ -142,7 +143,7 @@ export default function BusinessDashboard() {
             ) : null}
 
             {jobsData?.length > 0 ? (
-              <CarouselSection
+              <ItemsCarousel
                 data={jobsData || []}
                 refetchJobs={jobsRefetch}
                 navigateTo={() => navigate("/dashboard/see-more/business-jobs")}
@@ -172,7 +173,7 @@ export default function BusinessDashboard() {
             ) : null}
 
             {eventsData?.length > 0 ? (
-              <CarouselSection
+              <ItemsCarousel
                 data={eventsData || []}
                 refetchEvents={eventsRefetch}
                 isBusiness

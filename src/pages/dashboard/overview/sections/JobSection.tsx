@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useGetJobsQuery } from "../../../../api";
 import { ItemsCarousel, Loader } from "../../../../components";
-export default function JobSection() {
+
+type IJobSection = {
+  canViewJob?: boolean
+}
+export default function JobSection({canViewJob}: IJobSection) {
   const [jobsData, setJobsData] = useState([]);
   const {
     data: allJobs,
@@ -33,6 +37,7 @@ export default function JobSection() {
         <ItemsCarousel
           data={jobsData || []}
           job
+          canViewJob={canViewJob}
           refetchJobs={allJobsRefetch}
           title={`Trending jobs on Nodes`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}

@@ -114,12 +114,12 @@ const ProfileProvider = ({
     if (plan !== "pro" && plan !== "business") {
       setProfileType("individual");
     }
-    if (plan === "pro") {
+    if (plan === "pro" || plan === 'business') {
       setProfileType("talent");
     }
-    if (plan === "business") {
-      setProfileType("business");
-    }
+    // if (plan === "business") {
+    //   setProfileType("business");
+    // }
   }, [user]);
 
   useEffect(() => {

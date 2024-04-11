@@ -54,6 +54,9 @@
 .navLink {
   @apply flex gap-4 items-center active:bg-customsecondary active:text-white hover:bg-customsecondary hover:text-white transition-all px-4 py-2 rounded;
 }
+.childNavLink {
+  @apply flex gap-4 items-center active:bg-secondary active:text-primary hover:bg-secondary hover:text-white transition-all px-4 py-2 rounded;
+}
 .authNavLink {
   @apply flex gap-4 items-center active:bg-[#212121] active:text-white hover:bg-[#212121] hover:text-white transition-all px-4 py-2 rounded;
 }

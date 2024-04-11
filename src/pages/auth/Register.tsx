@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BackIcon, CautionCircleIcon } from "../../assets/svg";
-import moment from "moment";
+// import moment from "moment";
 import {
   Button,
   Checkbox,
   Input,
   OTPInput,
   PasswordInput,
+  DateSelect,
   // BasicSelect,
-  ReactDateSelect,
+  // ReactDateSelect,
   OnboardingCarousel,
   AuthOnboardingLogo,
   // TalentCTA,
@@ -31,6 +32,7 @@ import FormDebug from "../../components/FormDebug";
 import { signupSchema, SignupValidationType } from "../../utilities/validation";
 import { loginUser } from "../../api/reducers/userSlice";
 import { useDispatch } from "react-redux";
+import {returnMaxDate} from '../../utilities'
 
 function Register() {
   const navigate = useNavigate();
@@ -43,6 +45,7 @@ function Register() {
   const [timeLeft, setTimeLeft] = useState(AppConfig.OTP_COUNTDOWN);
   const [sendOtpLoading, setSendOtpLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
+
 
   const prepareDetails = (values) => {
     const payload = {
@@ -121,7 +124,7 @@ function Register() {
   });
 
   const {
-    setFieldValue,
+    // setFieldValue,
     handleChange,
     handleSubmit,
     errors,
@@ -177,6 +180,21 @@ function Register() {
       return () => clearInterval(countdownInterval);
     }
   }, [sent]);
+
+  // useEffect(() => {
+  //   // Get the current date
+  //   const currentDate = new Date();
+    
+  //   // Calculate the date 18 years from now
+  //   const maxDate = new Date(currentDate.getFullYear() + 18, currentDate.getMonth(), currentDate.getDate());
+    
+  //   // Format the date as YYYY-MM-DD (required by the 'date' input type)
+  //   const formattedMaxDate = maxDate.toISOString().split('T')[0];
+    
+  //   // Set the max attribute of the input field
+  //   const dateInput = document.getElementById('date') as HTMLInputElement;
+  //   dateInput.max = formattedMaxDate;
+  // }, []);
 
   return (
     <div className="flex min-h-[100vh] max-h-[100vh]  w-full">
@@ -280,8 +298,20 @@ function Register() {
                   </Tooltip>
                 </div>
                 <div className="w-full">
+                  {/* {returnMaxDate()} */}
+                  <DateSelect
+                  max={returnMaxDate()}
+                    labelStyle="!text-base"
+                    required
+                    id="dob"
+                    error={errors.dob}
+                    value={values.dob}
+                    touched={touched.dob}
+                    onChange={handleChange("dob")}
+                    onBlur={handleBlur}
+                  />
                   {/* {values.dob} */}
-                  <ReactDateSelect
+                  {/* <ReactDateSelect
                     id="dob"
                     // label="Date of Birth"
                     // required
@@ -298,7 +328,7 @@ function Register() {
                       setFieldValue("dob", myDOB);
                     }}
                     onBlur={handleBlur}
-                  />
+                  /> */}
                 </div>
               </div>
               <PasswordInput

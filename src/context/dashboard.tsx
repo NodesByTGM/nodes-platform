@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ReactNode,
   createContext,
@@ -16,6 +17,10 @@ const initialState = {
   accountType: "individual",
   setAccountType: () => {},
   user: null,
+  currentPlan: null,
+  setCurrentPlan: () => {},
+  userIsBusiness: false,
+  setUserIsBusiness: () => {},
 };
 
 export const DashboardContext = createContext<IDashboardContext>(initialState);
@@ -28,35 +33,66 @@ const DashboardProvider = ({
   const user = useSelector((state: RootState) => state.user.user);
   const [pageName] = useState("Dashboard");
   const [accountType, setAccountType] = useState("");
+  const [currentPlan, setCurrentPlan] = useState<any>(null);
+  const [userIsBusiness, setUserIsBusiness] = useState<any>(null);
+
   const dashboardContextValue = useMemo(
     () => ({
       pageName,
       user,
       accountType,
       setAccountType,
+      currentPlan,
+      setCurrentPlan,
+      userIsBusiness,
+      setUserIsBusiness,
     }),
 
-    [pageName, user, accountType, setAccountType]
+    [
+      pageName,
+      user,
+      accountType,
+      setAccountType,
+      currentPlan,
+      setCurrentPlan,
+      userIsBusiness,
+      setUserIsBusiness,
+    ]
   );
 
   const handleAccountType = useCallback(() => {
     // const type = user?.type;
-    const plan = user?.subscription?.plan?.toLowerCase();
+   
     // alert(user?.subscription?.plan)
-    if (plan !== "pro" && plan !== "business") {
+    if (currentPlan !== "pro" && currentPlan !== "business") {
       setAccountType("individual");
     }
-    if (plan === "pro") {
+    if (currentPlan === "pro" || currentPlan === "business") {
       setAccountType("talent");
     }
-    if (plan === "business") {
-      setAccountType("business");
-    }
+    
   }, [user]);
+
+  const handleUserIsBusiness = useCallback(() => {
+    if (currentPlan === "pro" || currentPlan === "business") {
+      setUserIsBusiness(true);
+      return;
+    }
+    setUserIsBusiness(false);
+  }, [currentPlan]);
 
   useEffect(() => {
     handleAccountType();
-  }, [user, handleAccountType]);
+    handleUserIsBusiness()
+  }, [user, handleAccountType, handleUserIsBusiness]);
+
+  useEffect(() => {
+    const plan = user?.subscription?.plan?.toLowerCase();
+
+    if (plan) {
+      setCurrentPlan(plan);
+    }
+  }, [user]);
 
   return (
     <DashboardContext.Provider value={dashboardContextValue}>
