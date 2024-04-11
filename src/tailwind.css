@@ -18,8 +18,16 @@
   @apply bg-[#FDFDF7] py-[64px] pl-[40px] pr-[40px];
 }
 
+.main-bg-gray-container {
+  @apply bg-[#FBFBFB] pt-4 pb-[64px] pl-[40px] pr-[40px];
+}
+
 .main-bg {
   @apply bg-[#FDFDF7];
+}
+
+.main-bg-gray{
+@apply bg-[#FBFBFB]
 }
 
 .admin-main-plain-container {

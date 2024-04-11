@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useGetJobsQuery } from "../../../../api";
-import { CarouselSection, Loader } from "../../../../components";
+import { ItemsCarousel, Loader } from "../../../../components";
 export default function JobSection() {
   const [jobsData, setJobsData] = useState([]);
   const {
@@ -12,7 +12,6 @@ export default function JobSection() {
 
   useEffect(() => {
     if (allJobsIsSuccess && allJobs?.result?.items?.length > 0) {
-     
       setJobsData(allJobs?.result?.items);
     }
   }, [allJobs, allJobsIsSuccess]);
@@ -31,7 +30,7 @@ export default function JobSection() {
       ) : null}
 
       {!allJobsLoading && jobsData && jobsData?.length > 0 ? (
-        <CarouselSection
+        <ItemsCarousel
           data={jobsData || []}
           job
           refetchJobs={allJobsRefetch}

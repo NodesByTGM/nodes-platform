@@ -89,6 +89,18 @@ export const convertToBase64 = async (file: File) => {
 
 //     return keyValuePairs.join('&');
 // }
+export function capitalizeWords(str) {
+  return str.replace(/\b\w/g, function(char) {
+    return char.toUpperCase();
+  });
+}
+
+export const checkIfCurrentPlan = (user, plan) => {
+  if(user?.subscription?.plan?.tolowerCase() === plan?.type?.toLowerCase()){
+    return true
+  }
+  return false
+}
 
 export const formatDate = (date: string) => {
   return moment(date).calendar({

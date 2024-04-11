@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useGetEventsQuery } from "../../../../api";
-import { CarouselSection, Loader } from "../../../../components";
+import { ItemsCarousel, Loader } from "../../../../components";
 export default function EventsSection() {
   const [eventsData, setEventsData] = useState([]);
   const {
@@ -30,7 +30,7 @@ export default function EventsSection() {
       ) : null}
 
       {!allEventsLoading && eventsData && eventsData?.length > 0 ? (
-        <CarouselSection
+        <ItemsCarousel
           data={eventsData || []}
           event
           refetchEvents={allEventsRefetch}
