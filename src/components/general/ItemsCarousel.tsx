@@ -7,7 +7,6 @@ import {
   MovieItem,
   EventItem,
   JobItem,
-
 } from "../../components";
 import clsx from "clsx";
 
@@ -93,19 +92,12 @@ export default function ItemsCarousel({
             },
           }}
           spaceBetween={40}
-          slidesPerView={3}
+          slidesPerView={3.5}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}
         >
-          {/* <SwiperSlide>
-            <div className="h-80 w-full bg-red-200">Slide 1</div>
-          </SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide> */}
-
           {data.map((item, i) => (
-            <div className='w-full' key={i}>
+            <div className="w-full" key={i}>
               <SwiperSlide>
                 {trend || movie || event || job ? (
                   <div className="">

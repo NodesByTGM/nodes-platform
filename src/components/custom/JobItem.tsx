@@ -142,7 +142,7 @@ export default function JobItem({
 
       <div className="flex items-start justify-between w-full ">
         <div className="">
-          <img src="/img/SmallCheck.png" alt="" className="size-[72px]" />
+          <img src="/img/SmallCheck.png" alt="" className="!size-[72px]" />
         </div>
 
         {isBusiness ? (
@@ -161,7 +161,7 @@ export default function JobItem({
         )}
       </div>
 
-      <div className="w-full flex flex-col gap-4 items-start text-[#000000] text-base">
+      <div className="w-full flex flex-col gap-4 items-start text-start text-[#000000] text-base">
         <span className="font-medium">
           {data?.description ? data.description : "Job description/title"}
         </span>
