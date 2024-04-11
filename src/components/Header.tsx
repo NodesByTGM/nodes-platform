@@ -102,7 +102,7 @@ function Header() {
     };
   }, []);
   return (
-    <div className="z-[99] relative main-bg pt-8  px-10 w-full flex justify-end items-center  ">
+    <div className={`z-[99] relative main-bg-gray pt-8  px-10 w-full flex justify-end items-center `}>
       <div className=" gap-4 items-center hidden">
         <Menu className="w-[50px] cursor-pointer" />
         <div className="flex items-center gap-2">

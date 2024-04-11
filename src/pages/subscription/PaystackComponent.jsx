@@ -6,7 +6,7 @@ import { useVerifyTransactionQuery } from "../../api";
 import { PayStackIcon } from "../../components";
 import { loginUser } from "../../api/reducers/userSlice";
 import { useDispatch } from "react-redux";
-const PaystackComponent = ({ user, ref }) => {
+const PaystackComponent = ({ user }) => {
   const { plan } = useParams();
   const dispatch = useDispatch();
 
@@ -42,7 +42,8 @@ const PaystackComponent = ({ user, ref }) => {
       // phone,
     },
     publicKey: PUBLIC_KEY,
-    text: "Continue with Paystack",
+    text: "Pay with Paystack",
+    // icon: true,
     onSuccess: (res) => {
       if (res.status == "success") {
         setReference(res?.trxref);
@@ -72,18 +73,17 @@ const PaystackComponent = ({ user, ref }) => {
   }, [verificationData]);
 
   return (
-    <div className="">
+    <div className="w-full">
       <pre className="hidden">{JSON.stringify(user.email, null, 2)}</pre>
 
-      <div className="container">
+      <div className="">
         <div className="relative checkout-form">
           <PaystackButton
-            ref={ref}
             {...componentProps}
-            className="border border-[#000000] text-[#000000] font-norrmal text-sm w-full p-4 rounded-[5px]"
+            className="bg-primary text-[#ffffff] font-norrmal text-sm w-full px-4 h-[48px] rounded-[8px] "
           />
 
-          <div className="absolute left-[220px] inset-y-0 flex items-center">
+          <div className="hidden absolute left-[220px] inset-y-0 flex items-center">
             {" "}
             <PayStackIcon />
           </div>

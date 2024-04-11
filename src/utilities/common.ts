@@ -90,6 +90,13 @@ export const convertToBase64 = async (file: File) => {
 //     return keyValuePairs.join('&');
 // }
 
+export const checkIfCurrentPlan = (user, plan) => {
+  if(user?.subscription?.plan?.tolowerCase() === plan?.type?.toLowerCase()){
+    return true
+  }
+  return false
+}
+
 export const formatDate = (date: string) => {
   return moment(date).calendar({
     sameDay: "[Today]",
