@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
 import { useDashboardContext } from "../../../context/hooks";
 import {
-  CarouselSection,
+  ItemsCarousel,
   HeaderAndDescription,
   WelcomeComponent,
   WelcomeCard,
@@ -142,7 +142,7 @@ export default function BusinessDashboard() {
             ) : null}
 
             {jobsData?.length > 0 ? (
-              <CarouselSection
+              <ItemsCarousel
                 data={jobsData || []}
                 refetchJobs={jobsRefetch}
                 navigateTo={() => navigate("/dashboard/see-more/business-jobs")}
@@ -172,7 +172,7 @@ export default function BusinessDashboard() {
             ) : null}
 
             {eventsData?.length > 0 ? (
-              <CarouselSection
+              <ItemsCarousel
                 data={eventsData || []}
                 refetchEvents={eventsRefetch}
                 isBusiness
