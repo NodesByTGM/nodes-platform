@@ -1,3 +1,5 @@
+
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { filterOptions } from "../../utilities/constants";
@@ -11,7 +13,7 @@ import {
   Loader,
 } from "../../components";
 
-export default function General({ getCommunityPostsQuery }) {
+export default function CommunityTab({ getCommunityPostsQuery }) {
   const { setAddPostModal } = useCommunityContext();
   const [communityPostsData, setCommunityPostsData] = useState<any>([]);
   const {
@@ -100,3 +102,4 @@ export default function General({ getCommunityPostsQuery }) {
     </div>
   );
 }
+

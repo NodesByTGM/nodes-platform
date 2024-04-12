@@ -106,3 +106,7 @@ export { default as SubSection } from "./subscription/SubSection.tsx";
 export { default as ItemsCarousel } from "./general/ItemsCarousel.tsx";
 export { default as ChoosePlan } from "./subscription/ChoosePlan.tsx";
 export {default as DefaultAvatar} from './general/DefaultAvatar'
+export {default as CommunityBrandsCard} from './community/CommunityBrandsCard.tsx'
+export {default as CommunityPeopleCard} from './community/CommunityPeopleCard.tsx'
+export {default as CommunityFilter} from './community/CommunityFilter.tsx'
+

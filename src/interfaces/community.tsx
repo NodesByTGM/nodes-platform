@@ -4,4 +4,6 @@ export interface ICommunityContext {
   user: any;
   postModal: boolean;
   setAddPostModal: (e) => void;
+  peopleOrBrand: string;
+  setPeopleOrBrand: (e) => void;
 }

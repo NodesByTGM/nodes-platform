@@ -7,6 +7,8 @@ const initialState = {
   user: null,
   postModal: false,
   setAddPostModal: () => {},
+  peopleOrBrand: "people",
+  setPeopleOrBrand: () => {},
 };
 
 export const CommunityContext = createContext<ICommunityContext>(initialState);
@@ -18,6 +20,7 @@ const CommunityProvider = ({
 }) => {
   const user = useSelector((state: RootState) => state.user.user);
   const [postModal, setAddPostModal] = useState(false);
+  const [peopleOrBrand, setPeopleOrBrand] = useState("people");
 
   const [pageName] = useState("Dashboard");
   const communityContextValue = useMemo(
@@ -26,9 +29,18 @@ const CommunityProvider = ({
       user,
       postModal,
       setAddPostModal,
+      peopleOrBrand,
+      setPeopleOrBrand,
     }),
 
-    [pageName, user, postModal, setAddPostModal]
+    [
+      pageName,
+      user,
+      postModal,
+      setAddPostModal,
+      peopleOrBrand,
+      setPeopleOrBrand,
+    ]
   );
 
   return (
