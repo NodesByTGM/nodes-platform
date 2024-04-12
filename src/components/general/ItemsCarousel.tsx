@@ -20,6 +20,7 @@ import { ChevronLeft, ChevronRight } from "react-feather";
 import "swiper/css";
 
 type IItemsCarousel = {
+  canViewMovieDetails?: boolean;
   canViewJob?: boolean;
   isBusiness?: boolean;
   trend?: boolean;
@@ -41,6 +42,7 @@ type IItemsCarousel = {
 
 export default function ItemsCarousel({
   data = [],
+  canViewMovieDetails = false,
   canViewJob = false,
   isBusiness = false,
   trend,
@@ -106,7 +108,14 @@ export default function ItemsCarousel({
                         <TrendingItem />
                       </div>
                     )}
-                    {movie && <MovieItem />}
+                    {movie && (
+                      <MovieItem
+                        data={item}
+                        canViewMovieDetails={canViewMovieDetails}
+                        
+                        // className={"!w-full h-full"}
+                      />
+                    )}
                     {event && (
                       <EventItem
                         refetchEvents={() => refetchEvents && refetchEvents()}

@@ -18,7 +18,7 @@ function Post() {
     }
   }, [id]);
   return (
-    <div>
+    <div className="px-10">
       <CommentBox setOpened={setOpened} opened={opened} />
       <div
         onClick={previousStep}

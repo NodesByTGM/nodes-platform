@@ -35,7 +35,28 @@ export const generalApi: any = createApi({
         };
       },
     }),
+
+    getMoviesAndShows: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Trending.Movies}`,
+          method: "get",
+          
+        };
+      },
+    }),
+    getTrending: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Trending.Events}`,
+          method: "get",
+          
+        };
+      },
+    }),
+
+
   }),
 });
 
-export const { useUploadFileMutation, useVerifyTransactionQuery } = generalApi;
+export const { useGetMoviesAndShowsQuery, useGetTrendingQuery, useUploadFileMutation, useVerifyTransactionQuery } = generalApi;

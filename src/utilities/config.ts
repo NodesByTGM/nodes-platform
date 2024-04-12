@@ -56,6 +56,10 @@ const API_ENDPOINTS = {
   Uploads: {
     UploadFile: `${BASE_API_ENDPOINT}/uploads/media`,
   },
+  Trending: {
+    Events:  `${BASE_API_ENDPOINT}/trending`,
+    Movies:  `${BASE_API_ENDPOINT}/movies-and-shows`,
+  }
 };
 
 const PATHS = {
