@@ -10,12 +10,13 @@ function MovieItem({
   data?: any;
   canViewMovieDetails?: boolean;
 }) {
+    // {console.log(data.backdrop_path)}
   return (
     <div
       className="h-full w-full rounded bg-cover bg-center text-white pt-[298px]"
       style={{ backgroundImage: `url('/img/movieImg.png')` }}
     >
-      {/* <pre className="hidden text-black flex flex-col text-wrap text-start">
+      {/* <pre className="  flex flex-col text-wrap text-start">
         {" "}
         {JSON.stringify(data, null, 2)}
       </pre> */}
@@ -46,7 +47,7 @@ function MovieItem({
           </span>
         </div>
         <p className="max-w-full text-ellipsis text-nowrap overflow-hidden font-medium h-[30px]">
-          {data?.original_name}
+          {data?.original_name ? data?.original_name : data?.original_title}
         </p>
         {canViewMovieDetails && (
           <div className="cursor-pointer flex gap-2 items-center text-md">

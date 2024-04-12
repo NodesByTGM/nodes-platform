@@ -19,7 +19,11 @@
 }
 
 .main-bg-gray-container {
-  @apply bg-[#FBFBFB] pt-4 pb-[64px] pl-[40px] pr-[40px];
+  @apply bg-[#FBFBFB] pt-4 pb-[64px] ;
+}
+
+.main-padding {
+  @apply pl-[40px] pr-[40px]
 }
 
 .main-bg {

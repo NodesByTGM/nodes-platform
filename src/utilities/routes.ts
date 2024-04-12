@@ -25,6 +25,7 @@ import {
   SeeMoreJobs,
   BusinessDashboard,
   BusinessProfile,
+  EditBusinessProfile,
   Details,
   ForgotPassword,
   Home,
@@ -214,6 +215,13 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Business.Profile,
         Component: getProfile(BusinessProfile),
       },
+      {
+        path: AppConfig.PATHS.Business.EditProfile,
+        Component: getProfile(EditBusinessProfile),
+      },
+
+
+      
 
       
     ],

@@ -8,7 +8,7 @@ export default function Details() {
   const { type } = useParams();
 
   return (
-    <div>
+    <div className='main-padding'>
       {type?.toLowerCase() == "business-jobs" ? (
         <JobDetails />
       ) : (

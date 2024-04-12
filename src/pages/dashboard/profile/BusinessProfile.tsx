@@ -13,10 +13,10 @@ export default function BusinessProfile() {
     { id: 2, label: "Projects", count: null },
     { id: 3, label: "Events", count: null },
   ]);
-  const [selectedNav, setSelectedNav] = useState(navs[1]);
+  const [selectedNav, setSelectedNav] = useState(navs[0]);
 
   return (
-    <div className="">
+    <div className="px-10">
       {" "}
       <div className="mb-10 flex flex-col gap-2 border-b border-[#D6D6D6] pb-[24px]">
         {" "}

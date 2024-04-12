@@ -122,7 +122,8 @@ const PATHS = {
     Base: "/business",
     Default: "",
     Dashboard: "/business/dashboard",
-    Profile: '/business/profile'
+    Profile: '/business/profile',
+    EditProfile: '/business/edit-profile'
   },
 
   Dashboard: {
