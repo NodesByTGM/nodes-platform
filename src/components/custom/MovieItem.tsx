@@ -3,7 +3,13 @@ import { ArrowRight } from "react-feather";
 import { Link } from "react-router-dom";
 import AppConfig from "../../utilities/config";
 
-function MovieItem({ data }: { data?: any }) {
+function MovieItem({
+  data,
+  canViewMovieDetails,
+}: {
+  data?: any;
+  canViewMovieDetails?: boolean;
+}) {
   return (
     <div
       className="h-full w-full rounded bg-cover bg-center text-white pt-[298px]"
@@ -42,12 +48,14 @@ function MovieItem({ data }: { data?: any }) {
         <p className="max-w-full text-ellipsis text-nowrap overflow-hidden font-medium h-[30px]">
           {data?.original_name}
         </p>
-        <div className="cursor-pointer flex gap-2 items-center text-md">
-          <Link to={`${AppConfig.PATHS.Dashboard.Posts.Base}/hbjhbjshbjd`}>
-            <span>Learn more</span>
-          </Link>
-          <ArrowRight className="w-4 mt-[2px]" />
-        </div>
+        {canViewMovieDetails && (
+          <div className="cursor-pointer flex gap-2 items-center text-md">
+            <Link to={`${AppConfig.PATHS.Dashboard.Posts.Base}/hbjhbjshbjd`}>
+              <span>Learn more</span>
+            </Link>
+            <ArrowRight className="w-4 mt-[2px]" />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -5,9 +5,9 @@ import { useGetMoviesAndShowsQuery } from "../../../../api";
 import { ItemsCarousel, Loader } from "../../../../components";
 
 type IMoviesAndShowsSection = {
-  canViewDetails?: boolean
+  canViewMovieDetails?: boolean
 }
-export default function MoviesAndShowsSection({canViewDetails}: IMoviesAndShowsSection) {
+export default function MoviesAndShowsSection({canViewMovieDetails}: IMoviesAndShowsSection) {
   const [moviesAndShowsData, setMoviesAndShowsData] = useState([]);
   const {
     data: moviesAndShows,
@@ -40,7 +40,7 @@ export default function MoviesAndShowsSection({canViewDetails}: IMoviesAndShowsS
         <ItemsCarousel
           data={moviesAndShowsData || []}
           movie
-          canViewDetails={canViewDetails}
+          canViewMovieDetails={canViewMovieDetails}
           title={`Trending Movies`}
         //   description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         />
