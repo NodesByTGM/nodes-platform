@@ -41,7 +41,9 @@ export default {
         customsecondary: {
           DEFAULT: "#212121",
         },
-        
+        paleyellow: {
+          DEFAULT: "#FBFCE9",
+        },
       },
       boxShadow: {
         normal: "0px 6px 20px 0px #0000000A",

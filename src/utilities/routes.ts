@@ -201,7 +201,7 @@ export const publicRoutes: RouteObject[] = [
   {
     path: AppConfig.PATHS.Business.Base,
     Component: getProfile(DashboardBase),
-    children: [
+    children: [ 
       {
         path: AppConfig.PATHS.Business.Default,
         Component: getProfile(BusinessDashboard),

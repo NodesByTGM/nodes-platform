@@ -31,11 +31,11 @@ export const standardPaths = [
         icon: <Briefcase />,
         path: AppConfig.PATHS.Business.Dashboard,
       },
-      {
-        name: "Profile",
-        icon: <Briefcase />,
-        path: AppConfig.PATHS.Business.Profile,
-      },
+      // {
+      //   name: "Profile",
+      //   icon: <Briefcase />,
+      //   path: AppConfig.PATHS.Business.Profile,
+      // },
     ],
   },
 

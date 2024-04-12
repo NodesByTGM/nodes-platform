@@ -145,7 +145,9 @@ function EventItem({
     if (isDeleteError) {
       toast.error(deleteError?.message?.message);
       setDeleteModal(false);
+     
       if (refetchEvents) {
+
         refetchEvents();
       }
     }

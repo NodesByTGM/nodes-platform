@@ -10,6 +10,10 @@ import {
 import { IDashboardContext } from "../interfaces/dashboard";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { useGetUserProfileQuery } from "../api";
+import { projectModalTypes } from "../utilities";
+
+
 // import { AccountTypesObj,  } from "../utilities";
 
 const initialState = {
@@ -21,6 +25,24 @@ const initialState = {
   setCurrentPlan: () => {},
   userIsBusiness: false,
   setUserIsBusiness: () => {},
+  profileData: null,
+  profileIsSuccess: false,
+  profileLoading: false,
+  profileRefetch: () => {},
+  jobModal: false,
+  setJobModal: () => {},
+  eventModal: false,
+  setEventModal: () => {},
+  projectModal: false,
+  setProjectModal: () => {},
+  projectDetails: null,
+  setProjectDetails: () => {},
+  projectDetailsModal: false,
+  setProjectDetailsModal: () => {},
+  editProjectModal: false,
+  setEditProjectModal: () => {},
+  projectAction: "add",
+  setProjectAction: () => {},
 };
 
 export const DashboardContext = createContext<IDashboardContext>(initialState);
@@ -35,6 +57,21 @@ const DashboardProvider = ({
   const [accountType, setAccountType] = useState("");
   const [currentPlan, setCurrentPlan] = useState<any>(null);
   const [userIsBusiness, setUserIsBusiness] = useState<any>(null);
+  const [jobModal, setJobModal] = useState(false);
+  const [eventModal, setEventModal] = useState(false);
+  const [projectDetails, setProjectDetails] = useState(null);
+  const [projectDetailsModal, setProjectDetailsModal] = useState(false);
+  const [editProjectModal, setEditProjectModal] = useState(false);
+  const [projectAction, setProjectAction] = useState(projectModalTypes.add);
+
+  const [projectModal, setProjectModal] = useState(false);
+
+  const {
+    data: profileData,
+    refetch: profileRefetch,
+    isSuccess: profileIsSuccess,
+    isFetching: profileLoading,
+  } = useGetUserProfileQuery();
 
   const dashboardContextValue = useMemo(
     () => ({
@@ -46,6 +83,24 @@ const DashboardProvider = ({
       setCurrentPlan,
       userIsBusiness,
       setUserIsBusiness,
+      profileData,
+      profileIsSuccess,
+      profileLoading,
+      profileRefetch,
+      jobModal,
+      setJobModal,
+      eventModal,
+      setEventModal,
+      projectModal,
+      setProjectModal,
+      projectDetails,
+      setProjectDetails,
+      projectDetailsModal,
+      setProjectDetailsModal,
+      editProjectModal,
+      setEditProjectModal,
+      projectAction,
+      setProjectAction,
     }),
 
     [
@@ -57,6 +112,24 @@ const DashboardProvider = ({
       setCurrentPlan,
       userIsBusiness,
       setUserIsBusiness,
+      profileData,
+      profileIsSuccess,
+      profileLoading,
+      profileRefetch,
+      jobModal,
+      setJobModal,
+      eventModal,
+      setEventModal,
+      projectModal,
+      setProjectModal,
+      projectDetails,
+      setProjectDetails,
+      projectDetailsModal,
+      setProjectDetailsModal,
+      editProjectModal,
+      setEditProjectModal,
+      projectAction,
+      setProjectAction,
     ]
   );
 
@@ -70,7 +143,7 @@ const DashboardProvider = ({
     if (currentPlan === "pro" || currentPlan === "business") {
       setAccountType("talent");
     }
-  }, [ currentPlan]);
+  }, [currentPlan]);
 
   const handleUserIsBusiness = useCallback(() => {
     if (currentPlan === "business") {
@@ -96,7 +169,13 @@ const DashboardProvider = ({
   return (
     <DashboardContext.Provider value={dashboardContextValue}>
       <div className="">
-        <pre className="hidden">{JSON.stringify({ plan: currentPlan, accountType: accountType }, null, 2)}</pre>
+        <pre className="hidden">
+          {JSON.stringify(
+            { plan: currentPlan, accountType: accountType },
+            null,
+            2
+          )}
+        </pre>
 
         <pre className="hidden">{JSON.stringify(user, null, 2)}</pre>
         <div className="flex gap-2 mb-10 hidden">
