@@ -7,6 +7,12 @@ export interface IDashboardContext {
   currentPlan: string | null;
   setCurrentPlan: (e) => void;
   userIsBusiness: boolean;
-  setUserIsBusiness: (e) => void
+  setUserIsBusiness: (e) => void;
+  profileData?: any;
+  profileIsSuccess?: boolean;
+  profileLoading?: boolean;
+  profileRefetch?: any;
+  jobModal: boolean;
+   setJobModal: (e) => void
  
 }

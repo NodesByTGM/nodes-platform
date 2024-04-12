@@ -43,7 +43,7 @@ export default function BusinessProfile() {
             />
           </div>
 
-          <div className="p-6 rounded-lg border border-[#EFEFEF]">
+          <div className="p-6 rounded-lg border border-[#EFEFEF] bg-[#ffffff]">
             {selectedNav?.label?.toLowerCase() == "jobs" && <Jobs />}
 
             {selectedNav?.label?.toLowerCase() == "projects" && <Projects />}
