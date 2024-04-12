@@ -127,6 +127,14 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+    getMyEvents: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/mine`,
+          method: "get",
+        };
+      },
+    }),
 
     getEventById: builder.query<any, any>({
       query: (id) => {
@@ -234,6 +242,7 @@ export const {
   useApplyToJobMutation,
   useDeleteJobMutation,
   useEditJobMutation,
+  useGetMyEventsQuery,
   useGetEventsQuery,
   useGetBusinessUserEventsQuery,
   useCreateEventMutation,

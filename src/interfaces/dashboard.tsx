@@ -13,6 +13,10 @@ export interface IDashboardContext {
   profileLoading?: boolean;
   profileRefetch?: any;
   jobModal: boolean;
-   setJobModal: (e) => void
+   setJobModal: (e) => void;
+   eventModal: boolean;
+   setEventModal: (e) => void;
+   projectModal: boolean;
+   setProjectModal: (e) => void;
  
 }

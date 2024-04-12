@@ -48,7 +48,7 @@ export default function Jobs() {
               Hi, {profileData?.result?.name}
             </h3>
             <span className="mt-8  text-center font-normal text-base text-[#212121]">
-              Nothing to see here yet, add a job post or event to get started.{" "}
+              Nothing to see here yet, add a job to get started.{" "}
             </span>
 
             <h3

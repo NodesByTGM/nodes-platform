@@ -29,6 +29,10 @@ const initialState = {
   profileRefetch: () => {},
   jobModal: false,
   setJobModal: () => {},
+  eventModal: false,
+  setEventModal: () => {},
+  projectModal: false,
+  setProjectModal: () => {},
 };
 
 export const DashboardContext = createContext<IDashboardContext>(initialState);
@@ -44,6 +48,10 @@ const DashboardProvider = ({
   const [currentPlan, setCurrentPlan] = useState<any>(null);
   const [userIsBusiness, setUserIsBusiness] = useState<any>(null);
   const [jobModal, setJobModal] = useState(false);
+  const [eventModal, setEventModal] = useState(false);
+
+  const [projectModal, setProjectModal] = useState(false);
+
   const {
     data: profileData,
     refetch: profileRefetch,
@@ -67,6 +75,10 @@ const DashboardProvider = ({
       profileRefetch,
       jobModal,
       setJobModal,
+      eventModal,
+      setEventModal,
+      projectModal,
+      setProjectModal,
     }),
 
     [
@@ -84,6 +96,10 @@ const DashboardProvider = ({
       profileRefetch,
       jobModal,
       setJobModal,
+      eventModal,
+      setEventModal,
+      projectModal,
+      setProjectModal,
     ]
   );
 
