@@ -18,5 +18,12 @@ export interface IDashboardContext {
    setEventModal: (e) => void;
    projectModal: boolean;
    setProjectModal: (e) => void;
+   projectDetails: any;
+  setProjectDetails: (e) => void;
+  projectDetailsModal: boolean;   setProjectDetailsModal: (e) => void;
+  editProjectModal: any;
+  setEditProjectModal: (e) => void;
+  projectAction?: any;
+  setProjectAction: (e) => void;
  
 }

@@ -13,7 +13,7 @@ export default function BusinessProfile() {
     { id: 2, label: "Projects", count: null },
     { id: 3, label: "Events", count: null },
   ]);
-  const [selectedNav, setSelectedNav] = useState(navs[0]);
+  const [selectedNav, setSelectedNav] = useState(navs[1]);
 
   return (
     <div className="">

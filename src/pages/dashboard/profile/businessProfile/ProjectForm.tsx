@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from "react";
-import { useProfileContext } from "../../../context/hooks";
+import { useDashboardContext } from "../../../../context/hooks";
 import { MdCancel } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
 
-import { projectModalTypes } from "../../../utilities";
+import { projectModalTypes } from "../../../../utilities";
 import {
   projectSchema,
   projectValidationType,
-} from "../../../utilities/validation";
-import { FormDebug } from "../../../components";
-import { useCreateUserProjectMutation } from "../../../api";
+} from "../../../../utilities/validation";
+import { FormDebug } from "../../../../components";
+import { useCreateUserProjectMutation } from "../../../../api";
 import {
   Button,
   Input,
@@ -20,8 +20,8 @@ import {
   ProjectFileUpload,
   CollaboratorInput,
   AddProjectsItem,
-} from "../../../components";
-import AppConfig from "../../../utilities/config";
+} from "../../../../components";
+import AppConfig from "../../../../utilities/config";
 import { useFormik, FormikProvider, FieldArray } from "formik";
 import { toast } from "react-toastify";
 
@@ -30,7 +30,7 @@ export default function ProjectForm({
   type = "add",
   refetchAllProjects = () => {},
 }) {
-  const { setEditProjectModal, projectAction } = useProfileContext();
+  const { setEditProjectModal, projectAction } = useDashboardContext();
   const initialCollaborator = {
     name: "",
     role: "",

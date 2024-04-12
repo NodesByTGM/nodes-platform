@@ -11,6 +11,8 @@ import { IDashboardContext } from "../interfaces/dashboard";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { useGetUserProfileQuery } from "../api";
+import { projectModalTypes } from "../utilities";
+
 
 // import { AccountTypesObj,  } from "../utilities";
 
@@ -33,6 +35,14 @@ const initialState = {
   setEventModal: () => {},
   projectModal: false,
   setProjectModal: () => {},
+  projectDetails: null,
+  setProjectDetails: () => {},
+  projectDetailsModal: false,
+  setProjectDetailsModal: () => {},
+  editProjectModal: false,
+  setEditProjectModal: () => {},
+  projectAction: "add",
+  setProjectAction: () => {},
 };
 
 export const DashboardContext = createContext<IDashboardContext>(initialState);
@@ -49,6 +59,10 @@ const DashboardProvider = ({
   const [userIsBusiness, setUserIsBusiness] = useState<any>(null);
   const [jobModal, setJobModal] = useState(false);
   const [eventModal, setEventModal] = useState(false);
+  const [projectDetails, setProjectDetails] = useState(null);
+  const [projectDetailsModal, setProjectDetailsModal] = useState(false);
+  const [editProjectModal, setEditProjectModal] = useState(false);
+  const [projectAction, setProjectAction] = useState(projectModalTypes.add);
 
   const [projectModal, setProjectModal] = useState(false);
 
@@ -79,6 +93,14 @@ const DashboardProvider = ({
       setEventModal,
       projectModal,
       setProjectModal,
+      projectDetails,
+      setProjectDetails,
+      projectDetailsModal,
+      setProjectDetailsModal,
+      editProjectModal,
+      setEditProjectModal,
+      projectAction,
+      setProjectAction,
     }),
 
     [
@@ -100,6 +122,14 @@ const DashboardProvider = ({
       setEventModal,
       projectModal,
       setProjectModal,
+      projectDetails,
+      setProjectDetails,
+      projectDetailsModal,
+      setProjectDetailsModal,
+      editProjectModal,
+      setEditProjectModal,
+      projectAction,
+      setProjectAction,
     ]
   );
 

@@ -7,13 +7,6 @@ import { useProfileContext } from "../../../context/hooks";
 import { projectModalTypes } from "../../../utilities";
 import { useGetMyProjectsQuery } from "../../../api";
 
-// type ProjectType = {
-//   id: string;
-//   img: string;
-//   title: string;
-//   description: string;
-// };
-
 export default function Projects() {
   const [projectsData, setProjectsData] = useState<any>([]);
 
@@ -97,43 +90,6 @@ export default function Projects() {
             </h3>
           </div>
         ) : null}
-
-        {/* {!projectsLoading ? (
-          <div className="">
-            {projectsData?.length > 0 ? (
-              <div className="grid grid-cols-2 gap-4">
-                {projectsData?.map((project) => (
-                  <div key={project.id} className="h-full ">
-                    <ProjectsCard
-                      project={project}
-                      setProjectDetailsModal={setProjectDetailsModal}
-                      setProjectDetails={setProjectDetails}
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="mx-auto max-w-[219px] flex flex-col justify-center items-center ">
-                <h3 className="text-center font-medium text-base text-[#212121]">
-                  Hi,{" "}
-                  {profileData?.result?.name
-                    ? profileData?.result?.name
-                    : user?.name}
-                </h3>
-                <span className="mt-8 text-center font-normal text-base text-[#212121]">
-                  Nothing to see here yet, add a project or two to get started.
-                </span>
-
-                <h3
-                  onClick={() => addProject()}
-                  className="cursor-pointer mt-10 text-primary font-medium text-base"
-                >
-                  Add Project
-                </h3>
-              </div>
-            )}
-          </div>
-        ) : null} */}
       </Card>
 
       {projectsData?.length == 0 ? (
