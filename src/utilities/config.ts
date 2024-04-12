@@ -17,6 +17,7 @@ const API_ENDPOINTS = {
     SendOTP: `${BASE_API_ENDPOINT}/auth/send-otp`,
     VerfiyEmail: `${BASE_API_ENDPOINT}/auth/verify-email`,
     ProfileURL: `${BASE_API_ENDPOINT}/users/profile`,
+    GoogleSocial: `${BASE_API_ENDPOINT}/socialauth/google/auth`
   },
   Community: {
     Post: `${BASE_API_ENDPOINT}/community/posts`,
@@ -57,9 +58,9 @@ const API_ENDPOINTS = {
     UploadFile: `${BASE_API_ENDPOINT}/uploads/media`,
   },
   Trending: {
-    Events:  `${BASE_API_ENDPOINT}/trending`,
-    Movies:  `${BASE_API_ENDPOINT}/movies-and-shows`,
-  }
+    Events: `${BASE_API_ENDPOINT}/trending`,
+    Movies: `${BASE_API_ENDPOINT}/movies-and-shows`,
+  },
 };
 
 const PATHS = {
@@ -102,6 +103,7 @@ const PATHS = {
     ForgotPassword: "/auth/forgot-password",
     ResetPassword: "/auth/reset-password/",
     ResetPasswordWithParams: "/auth/reset-password/:accountId/:token",
+    Google: "/socialauth/google",
   },
   Upgrades: {
     Talent: {
@@ -122,8 +124,8 @@ const PATHS = {
     Base: "/business",
     Default: "",
     Dashboard: "/business/dashboard",
-    Profile: '/business/profile',
-    EditProfile: '/business/edit-profile'
+    Profile: "/business/profile",
+    EditProfile: "/business/edit-profile",
   },
 
   Dashboard: {
@@ -387,7 +389,7 @@ const AppConfig = {
     "Choreographer",
     " Chef",
     "Interior Decorator",
-  ],    
+  ],
   PROFESSION_OPTIONS: ["Hiring manager", "Producer", "Director"],
   SUPPORTED_EXTENTIONS: {
     jpeg: "image",

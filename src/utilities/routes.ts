@@ -1,6 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import { checkAuth, getProfile } from "../components/hoc";
 import {
+  GoogleSocial,
   BusinessGetStarted,
   BusinessOnboarding,
   BusinessUpgrade,
@@ -146,6 +147,10 @@ export const adminMainRoutes: RouteObject[] = [
 
 export const authRoutes: RouteObject[] = [
   {
+    path: AppConfig.PATHS.Auth.Google,
+    Component: GoogleSocial
+  },
+  {
     path: AppConfig.PATHS.Auth.Login,
     Component: Login,
   },
@@ -168,6 +173,7 @@ export const publicRoutes: RouteObject[] = [
     path: "/",
     Component: Home,
   },
+
   {
     path: AppConfig.PATHS.Dashboard.Base,
     Component: getProfile(DashboardBase),
