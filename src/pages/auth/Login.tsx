@@ -19,6 +19,7 @@ import AppConfig from "../../utilities/config";
 import { initalizeFirebaseApp } from "../../utilities/firebase";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../api/reducers/userSlice";
+
 // import FormDebug from "../../components/FormDebug";
 
 import {
@@ -37,6 +38,8 @@ function Login() {
   const [socialLogin, setSocialLogin] = useState(true);
 
   const [submitLoading, setSubmitLoading] = useState(false);
+
+
 
   const handleFormSubmit = (e: any) => {
     setSubmitLoading(true);
@@ -120,7 +123,9 @@ function Login() {
       <div className="flex flex-col items-center ">
         <a
           className="w-full"
+         
           href="https://dev.api.nodesafrica.com/api/v1/socialauth/google/auth/"
+          // target='_blank'
         >
           <ButtonOutline className="!rounded-lg !w-full ">
             <div className="flex   items-center justify-center gap-2">
