@@ -5,14 +5,16 @@ import React, {
   useMemo,
   // useCallback,
 } from "react";
-import { FormDiv, Button, Back, Input, TextArea } from "../../../../components";
+import { FormDiv, Button, Back, Input, TextArea, ProfileImgUploader } from "../../../../components";
 import BusinessProfileProjectForm from "./BusinessProfileProjectForm";
 import BusinessProfileJobForm from './BusinessProfileJobForm'
 import AppConfig from "../../../../utilities/config";
 import BusinessProfileEventPostForm from './BusinessProfileEventPostForm'
+import { useDashboardContext } from "../../../../context/hooks";
 
 
 export default function EditBusinessProfile() {
+    const {profileData} = useDashboardContext()
   const businessInfo = useRef<HTMLDivElement>(null);
 
   const introduceBusiness = useRef<HTMLDivElement>(null);
@@ -80,6 +82,9 @@ export default function EditBusinessProfile() {
   return (
     <div className=" px-10">
       <div className="flex flex-col gap-10 pt-6">
+
+        <pre className="hidden
+        ">{JSON.stringify(profileData, null, 2)}</pre>
         <Back link="/business/profile" />
 
         <span className="font-medium text-[20px] text-primary mb-10">
@@ -134,7 +139,63 @@ export default function EditBusinessProfile() {
 
         <div className="flex-1 flex flex-col gap-8 ">
           <div ref={businessInfo} className="">
-            <FormDiv title="Business Information"></FormDiv>
+            <FormDiv title="Business Information">
+            <div className="">
+                  <div className="grid grid-col-1 gap-6">
+                    <ProfileImgUploader
+                      value={{
+                        id: '',
+                        url: ''
+                      }}
+                      onChange={(value) => {
+                        console.log(value)
+                        // setFieldValue("avatar", value);
+                      }}
+                    />
+                    <div className="w-full">
+                      <Input
+                        placeholder={'Enter business name'}
+                        id="name"
+                        label="Name of business"
+                        // error={errors.name}
+                        // value={values.name}
+                        // touched={touched.name}
+                        // onChange={handleChange("name")}
+                        // onBlur={handleBlur}
+                      />
+                    </div>
+                    
+             
+                    <div className="w-full">
+                      <Input
+                        placeholder={AppConfig.PLACEHOLDERS.Location}
+                        id="location"
+                        label="Location"
+                        // error={errors.location}
+                        // value={values.location}
+                        // touched={touched.location}
+                        // onChange={handleChange("location")}
+                        // onBlur={handleBlur}
+                      />
+                    </div>
+
+                    <div className="w-full">
+                      <Input
+                        placeholder={'Enter year of establishment'}
+                        id="yoe"
+                        label="Year of Establishment"
+                        // error={errors.location}
+                        // value={values.location}
+                        // touched={touched.location}
+                        // onChange={handleChange("location")}
+                        // onBlur={handleBlur}
+                      />
+                    </div>
+
+                   
+                  </div>
+                </div>
+            </FormDiv>
           </div>
           <div ref={introduceBusiness} className="">
             <FormDiv title="Introduce Business">
