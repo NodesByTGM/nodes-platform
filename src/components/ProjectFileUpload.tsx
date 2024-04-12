@@ -94,13 +94,14 @@ export default function ProjectFileUpload({
   const setBgImg = () => {
     return {
       backgroundRepeat: "no-repeat",
-      // -webkit-background-size: cover;
-      // -moz-background-size: cover;
-      // -o-background-size: cover;
+      '-webkit-background-size': 'cover',
+     ' -moz-background-size': 'cover',
+      '-o-background-size': 'cover',
       backgroundSize: "cover",
-      backgroundAttachment: "fixed",
-      backgroundPosition: "center",
+      // backgroundAttachment: "fixed",
+      // backgroundPosition: "center",
       backgroundImage: "url(" + value + ")",
+      "object-fit": "cover",
     };
   };
 
@@ -115,7 +116,7 @@ export default function ProjectFileUpload({
       <div
         onClick={() => inputRef.current?.click()}
         style={setBgImg()}
-        className="border-dash cursor-pointer flex flex-col gap-[10px] px-6 py-[53px] rounded-[5px] items-center justify-center"
+        className="border-dash bg-cover cursor-pointer flex flex-col gap-[10px] px-6 py-[53px] rounded-[5px] items-center justify-center"
       >
         {uploadFileLoading ? (
           <div className="">

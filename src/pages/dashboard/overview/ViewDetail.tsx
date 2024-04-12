@@ -12,7 +12,7 @@ export default function ViewDetail() {
   const [commentOpen, setCommentOpen] = useState(false);
 
   return (
-    <div className=''>
+    <div className='main-padding'>
       <Back className={`mb-[64px]`} link={"/dashboard"} />
       <div className="mb-[64px] flex items-start justify-between gap-6">
         <div className="flex gap-4 flex-col text-[#000000] max-w-[500px]">

@@ -25,13 +25,13 @@ export default function BusinessProfileCard() {
           </div>
         </div>
         <div className={`grid-cols-2 w-full grid  gap-6 `}>
-          <Link to={AppConfig.PATHS.Dashboard.Profile.Base} className="w-full">
+          <Link to={AppConfig.PATHS.Business.Profile} className="w-full">
             <Button className="bg-gradient-to-r from-[#D6DE21] to-[#0C5C56] border-none">Share Profile</Button>
           </Link>
 
           <Link
             className="w-full"
-            to={AppConfig.PATHS.Dashboard.Profile.EditProfile}
+            to={AppConfig.PATHS.Business.EditProfile}
           >
             <Button>
               <span className="text-base font-medium">Edit Your Profile</span>

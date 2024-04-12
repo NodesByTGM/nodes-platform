@@ -74,7 +74,7 @@ export default function SeeMoreJobs() {
   }, [allJobsResponse]);
 
   return (
-    <div>
+    <div className='main-padding'>
       <Back className={`mb-[64px]`} link={"/dashboard"} />
       
       <div className="flex items-start justify-between mb-10">

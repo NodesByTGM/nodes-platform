@@ -101,8 +101,7 @@ export default function ProfileImgUploader({ value, onChange }) {
           "Replace"
         )}
       </span>
-      {/* <span className="">{value}</span> */}
-      {/* <span className="">{value}</span> */}
+    
     </div>
   );
 }

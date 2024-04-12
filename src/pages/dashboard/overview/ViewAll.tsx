@@ -25,7 +25,7 @@ export default function ViewAll() {
   ]);
 
   return (
-    <div>
+    <div className="main-padding">
       <div className="mb-[48px]">
         <Breadcrumbs links={links} />
       </div>

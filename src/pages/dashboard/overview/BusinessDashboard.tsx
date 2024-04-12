@@ -85,7 +85,7 @@ export default function BusinessDashboard() {
   }, [jobsResponse]);
 
   return (
-    <div>
+    <div className='main-padding'>
       <pre className="hidden text-blue-400 text-wrap max-w-[600px]">
         {JSON.stringify(userIsBusiness, null, 2)}
         {/* {JSON.stringify(!user?.business?.id, null, 2)} */}

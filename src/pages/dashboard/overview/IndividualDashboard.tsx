@@ -1,6 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import AppConfig from "../../../utilities/config";
+// import { useNavigate } from "react-router-dom";
+// import AppConfig from "../../../utilities/config";
 import JobSection from "./sections/JobSection";
 import EventsSection from "./sections/EventsSection";
 import MoviesAndShowsSection from './sections/MoviesAndShowsSection'
@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import {
   HeaderAndDescription,
-  ItemsCarousel,
+  // ItemsCarousel,
   UpgradeCTA,
 } from "../../../components";
 import {capitalizeWords} from '../../../utilities'
@@ -16,7 +16,7 @@ import {capitalizeWords} from '../../../utilities'
 export default function IndividualDashboard() {
   const user = useSelector((state: RootState) => state.user.user);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <div>
       <div className="flex flex-col gap-[64px]">
@@ -27,24 +27,21 @@ export default function IndividualDashboard() {
             description={"Checkout the blah blah blah blah blah blah"}
           />
         </div>
-        <MoviesAndShowsSection />
         <EventsSection />
+
+        <MoviesAndShowsSection />
+
+
+     
+        <UpgradeCTA />
         <JobSection canViewJob={true}/>
 
-        <ItemsCarousel
-          title={`Top Movies`}
-          movie
-          viewAll
-          borderBottom
-          navigateTo={() => navigate(`${AppConfig.PATHS.Dashboard.ViewAll}`)}
-        />
-        <UpgradeCTA />
         {/* <ItemsCarousel
           job
           title={`Trending jobs on Nodes`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         /> */}
-        <ItemsCarousel title={`Hidden Gems`} event viewAll borderBottom />
+        {/* <ItemsCarousel title={`Hidden Gems`} event viewAll borderBottom /> */}
         {/* <ItemsCarousel title={`Flashbacks`} event viewAll borderBottom /> */}
         {/* <ItemsCarousel
           title={`Spaces you might like`}
@@ -56,7 +53,7 @@ export default function IndividualDashboard() {
           viewAll
           borderBottom
         /> */}
-        <ItemsCarousel title={`Birthdays`} event viewAll borderBottom />
+        {/* <ItemsCarousel title={`Birthdays`} event viewAll borderBottom /> */}
       </div>
     </div>
   );
