@@ -109,4 +109,4 @@ export {default as DefaultAvatar} from './general/DefaultAvatar'
 export {default as CommunityBrandsCard} from './community/CommunityBrandsCard.tsx'
 export {default as CommunityPeopleCard} from './community/CommunityPeopleCard.tsx'
 export {default as CommunityFilter} from './community/CommunityFilter.tsx'
-
+export {default as BusinessProfileCard} from './profile/BusinessProfileCard'
