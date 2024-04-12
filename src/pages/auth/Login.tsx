@@ -1,10 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+// import { getAuth,  } from "firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { GoogleIcon } from "../../assets/svg";
-import { Button, Input, PasswordInput, ButtonOutline, AuthOnboardingLogo } from "../../components";
+import {
+  Button,
+  Input,
+  PasswordInput,
+  ButtonOutline,
+  AuthOnboardingLogo,
+} from "../../components";
 import { Title } from "../../components/Typography";
 import { useAuth } from "../../context/hooks";
 import { mainClient } from "../../utilities/client";
@@ -23,7 +29,7 @@ import { loginSchema, LoginValidationType } from "../../utilities/validation";
 
 function Login() {
   initalizeFirebaseApp();
-  const auth = getAuth();
+  // const auth = getAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -92,54 +98,17 @@ function Login() {
     handleBlur,
   } = formik;
 
-  const handleGoogleSignUp = async (e: any) => {
-    e.preventDefault();
-
-    // Instantiate a GoogleAuthProvider object
-    const provider = new GoogleAuthProvider();
-    provider.addScope("https://www.googleapis.com/auth/user.birthday.read");
-
-    try {
-      // Sign in with a pop-up window
-      const result = await signInWithPopup(auth, provider);
-
-      // Pull signed-in user credential.
-      const user = result.user;
-      console.log(user.displayName);
-      // console.log(user)
-    } catch (err: any) {
-      // Handle errors here.
-      const { errorMessage, errorCode } = err;
-
-      switch (errorCode) {
-        case "auth/operation-not-allowed":
-          toast.error("Email/password accounts are not enabled.");
-          break;
-        case "auth/operation-not-supported-in-this-environment":
-          toast.error("HTTP protocol is not supported. Please use HTTPS.");
-          break;
-        case "auth/popup-blocked":
-          toast.error(
-            "Popup has been blocked by the browser. Please allow popups for this website."
-          );
-          break;
-        case "auth/popup-closed-by-user":
-          toast.error(
-            "Popup has been closed by the user before finalizing the operation. Please try again."
-          );
-          break;
-        default:
-          toast.error(errorMessage);
-          break;
-      }
-    }
-  };
-
   return (
     <div className="">
       {/* <FormDebug form={{ values, touched, errors, isValid }} /> */}
-  
-      <AuthOnboardingLogo link={{text1: 'Sign Up', text2: 'New to Nodes?', url: AppConfig.PATHS.Auth.Register}}/>
+
+      <AuthOnboardingLogo
+        link={{
+          text1: "Sign Up",
+          text2: "New to Nodes?",
+          url: AppConfig.PATHS.Auth.Register,
+        }}
+      />
       <div className="mb-10">
         <Title className="!text-[24px] !font-medium !text-[#000000]">
           Welcome Back!
@@ -149,17 +118,21 @@ function Login() {
         </p>
       </div>
       <div className="flex flex-col items-center ">
-        <ButtonOutline
-          className="!rounded-lg "
-          onClick={handleGoogleSignUp}
+        <a
+          className="w-full"
+          href="https://dev.api.nodesafrica.com/api/v1/socialauth/google/auth/"
         >
-          <div className="flex   items-center justify-center gap-2">
-            <span>
-              <GoogleIcon />
-            </span>
-            <span className=" text-base font-normal text-[#212121]">Sign in with Google</span>
-          </div>
-        </ButtonOutline>
+          <ButtonOutline className="!rounded-lg !w-full ">
+            <div className="flex   items-center justify-center gap-2">
+              <span>
+                <GoogleIcon />
+              </span>
+              <span className=" text-base font-normal text-[#212121]">
+                Sign in with Google
+              </span>
+            </div>
+          </ButtonOutline>
+        </a>
         <div className="mb-10 mt-10 relative w-full flex items-center">
           <div className="bg-[#D9D9D9] h-[1px] flex-1"></div>
 
