@@ -150,7 +150,7 @@ export default function AddPost({ closeModal, refetch }) {
             <TitleInput
               placeholder={AppConfig.PLACEHOLDERS.AddTitle}
               id="name"
-              className="!border-none p-0 !placeholder:text-[#757575] !placeholder:text-[24px] !placeholder:font-medium "
+              className="hidden !border-none p-0 !placeholder:text-[#757575] !placeholder:text-[24px] !placeholder:font-medium "
 
               // error={errors.name}
               // value={values.name}

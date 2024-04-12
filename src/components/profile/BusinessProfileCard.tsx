@@ -3,12 +3,12 @@ import AppConfig from "../../utilities/config";
 import BusinessId from "./BusinessId";
 
 import { Link } from "react-router-dom";
-import { Button, ButtonOutline } from "../index";
+import { Button,  } from "../index";
 
 export default function BusinessProfileCard() {
  
   return (
-    <div className="w-[400px] max-h-max flex text-[#212121]">
+    <div className="lg:w-[350px] xl:w-[400px] max-h-max flex text-[#212121]">
       <div className="w-full  p-6 pt-10 flex flex-col justify-center items-center bg-white rounded-lg border border-[#EFEFEF]">
         <BusinessId />
 

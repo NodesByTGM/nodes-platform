@@ -23,6 +23,14 @@ export const jobAndEventsApi: any = createApi({
         };
       },
     }),
+    getMyJobs: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/mine`,
+          method: "get",
+        };
+      },
+    }),
 
     getAppliedJobs: builder.query<any, any>({
       query: () => {
@@ -217,6 +225,7 @@ export const jobAndEventsApi: any = createApi({
 });
 
 export const {
+  useGetMyJobsQuery,
   useGetJobsQuery,
   useGetAppliedJobsQuery,
   useGetJobByIdQuery,

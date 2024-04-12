@@ -218,12 +218,17 @@ export default function JobItem({
       </div>
 
       <div className="w-full flex flex-col gap-4 items-start text-start text-[#000000] text-base">
-        <p className="font-medium ">
-          {data?.description ? data.description : "Job description/title"}
-        </p>
-        <span className="font-normal ">
-          {data?.name ? data.name : "Name of company"}
-        </span>
+        <div className="w-full max-h-[24px]">
+          <p className="font-medium  truncate">
+            {data?.description ? data.description : "Job description/title"}
+          </p>
+        </div>
+        <div className="w-full max-h-[24px]">
+          {" "}
+          <p className="font-normal truncate">
+            {data?.name ? data.name : "Name of company"}
+          </p>
+        </div>
       </div>
 
       <span className="font-medium text-[18px]">
@@ -231,26 +236,27 @@ export default function JobItem({
       </span>
 
       <div className="w-full flex items-start justify-between gap-1">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 max-h-[24px] max-w-[50%]">
           <span className="">
             <CiCalendar />
           </span>
-          <span className="fonnt-normal text-base">
+          <span className="fonnt-normal text-base truncate">
             {data?.workRate ? data.workRate : "20 hrs/wk"}
           </span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 max-h-[24px] max-w-[50%]">
           <span className="">
             <TfiLocationPin />
           </span>
-          <span className="font-normal text-base text-start truncate">
+
+          <p className="font-normal text-base text-start truncate">
             {data?.location ? data.location : "Lagos | Nigeria"}
-          </span>
+          </p>
         </div>
       </div>
 
       {userIsSubscribed ? (
-        <div className="">
+        <div className="w-full">
           {canViewJob ? (
             <div
               onClick={() => setViewjobOpen(true)}
@@ -259,10 +265,15 @@ export default function JobItem({
               View job
             </div>
           ) : (
-            <div className="w-full flex items-center justify-between">
-              <div className="flex justify-end text-primary font-normal text-base cursor-pointer">
-                {data?.applicants?.length > 0 ? data?.applicants?.length : 0}{" "}
-                applicant{data?.applicants?.length !== 1 ? "s" : ""}
+            <div className="w-full flex items-center justify-between gap-2">
+              <div className="flex  text-primary font-normal text-base cursor-pointer max-w-[50%]">
+                <p className="truncate">
+                  {" "}
+                  {data?.applicants?.length > 0
+                    ? data?.applicants?.length
+                    : 0}{" "}
+                  applicant{data?.applicants?.length !== 1 ? "s" : ""}{" "}
+                </p>
               </div>
               <div
                 onClick={() => navigateToJobDetails(data?.id)}
@@ -282,6 +293,7 @@ export default function JobItem({
       >
         <div className="">
           <JobPost
+          
             details={data}
             refetchJobs={refetchJobs}
             closeModal={() => setViewjobOpen(false)}

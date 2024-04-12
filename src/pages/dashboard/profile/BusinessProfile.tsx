@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDashboardContext } from "../../../context/hooks";
-import { BusinessProfileCard } from "../../../components";
+import { BusinessProfileCard, SectionNavs } from "../../../components";
+import Jobs from "./businessProfile/Jobs";
+import Projects from "./businessProfile/Projects";
+
+import Events from "./businessProfile/Events";
+
 export default function BusinessProfile() {
   const { user } = useDashboardContext();
+  const [navs] = useState([
+    { id: 1, label: "Jobs", count: null },
+    { id: 2, label: "Projects", count: null },
+    { id: 3, label: "Events", count: null },
+  ]);
+  const [selectedNav, setSelectedNav] = useState(navs[0]);
 
   return (
     <div className="">
@@ -21,6 +32,24 @@ export default function BusinessProfile() {
 
         <div className="max-h-max">
           <BusinessProfileCard />
+        </div>
+
+        <div className="flex flex-col gap-6 w-full">
+          <div className="w-full  border-b border-[#EFEFEF]">
+            <SectionNavs
+              navs={navs}
+              selectedNav={selectedNav}
+              setSelectedNav={setSelectedNav}
+            />
+          </div>
+
+          <div className="p-6 rounded-lg border border-[#EFEFEF]">
+            {selectedNav?.label?.toLowerCase() == "jobs" && <Jobs />}
+
+            {selectedNav?.label?.toLowerCase() == "projects" && <Projects />}
+
+            {selectedNav?.label?.toLowerCase() == "events" && <Events />}
+          </div>
         </div>
       </div>
     </div>
