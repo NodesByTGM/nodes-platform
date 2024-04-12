@@ -18,7 +18,7 @@ export const standardPaths = [
     icon: <User />,
     path: AppConfig.PATHS.Dashboard.Profile.Base,
   },
-  { name: "Discover", icon: <Globe />, path: AppConfig.PATHS.Spaces.Base },
+  { name: "Discover", icon: <Globe />, path: AppConfig.PATHS.Community.Base },
 
   {
     name: "For Business",
@@ -57,7 +57,7 @@ export const proPaths = [
     icon: <User />,
     path: AppConfig.PATHS.Dashboard.Profile.Base,
   },
-  { name: "Discover", icon: <Globe />, path: AppConfig.PATHS.Spaces.Base },
+  { name: "Discover", icon: <Globe />, path: AppConfig.PATHS.Community.Base },
   { name: "Saved", icon: <Bookmark />, path: AppConfig.PATHS.Saved.Base },
 
   {
@@ -102,7 +102,7 @@ export const businessPaths = [
     icon: <User />,
     path: AppConfig.PATHS.Dashboard.Profile.Base,
   },
-  { name: "Discover", icon: <Globe />, path: AppConfig.PATHS.Spaces.Base },
+  { name: "Discover", icon: <Globe />, path: AppConfig.PATHS.Community.Base },
   { name: "Saved", icon: <Bookmark />, path: AppConfig.PATHS.Saved.Base },
 
   {

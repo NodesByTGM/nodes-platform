@@ -5,26 +5,23 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Switchcomponent({ value, setValue }) {
-  // const [enabled, setEnabled] = useState(value);
-
-  // useEffect(() => {
-  //   setValue(enabled);
-  // }, [enabled, ]);
-
-  // useEffect(() => {
-  //   if (value !== enabled) {
-  //     setValue(value);
-  //   }
-  // }, [value, enabled]);
-
+export default function Switchcomponent({
+  value,
+  setValue,
+  color,
+}: {
+  value: boolean;
+  setValue: (e) => void;
+  color?: string;
+}) {
   return (
     <Switch
       checked={value}
       onChange={setValue}
       className={classNames(
         value ? "bg-customsecondary" : "bg-gray-300",
-        "relative inline-flex h-6 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none  focus:ring-0 focus:ring-offset-2"
+        "relative inline-flex h-6 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none  focus:ring-0 focus:ring-offset-2",
+        `${color}`
       )}
     >
       <span className="sr-only">Use setting</span>

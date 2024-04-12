@@ -5,63 +5,69 @@ import {
   SectionNavs,
   Modal,
   AddPost,
+  CommunityFilter,
 } from "../../components";
-import General from "./General";
-import Followed from "./Followed";
-import MyPosts from "./MyPosts";
+import DiscoverTab from "./DiscoverTab";
+import ConnectionsTab from "./ConnectionsTab";
+import CommunityTab from "./CommunityTab";
 import { Link } from "react-router-dom";
 import { useCommunityContext } from "../../context/hooks";
-import {useGetCommunityPostQuery} from '../../api'
+import { useGetCommunityPostQuery } from "../../api";
 
 function Community() {
   const { postModal, setAddPostModal } = useCommunityContext();
-  const {
-    
-   
-    refetch: communityPostsRefetch,
-  
-  } = useGetCommunityPostQuery();
+  const { refetch: communityPostsRefetch } = useGetCommunityPostQuery();
   const [navs] = useState([
-    { id: 1, label: "General", count: null },
-    { id: 2, label: "Followed", count: null },
-    { id: 3, label: "My posts", count: null },
+    { id: 1, label: "Discover", count: null },
+    { id: 2, label: "Connections", count: null },
+    { id: 3, label: "Community", count: null },
   ]);
   const [selectedNav, setSelectedNav] = useState(navs[0]);
 
   return (
     <div>
-      <div className="mb-4 flex items-start justify-between">
-        <div className="mb-6 flex flex-col gap-4 text-[20px] text-[#212121]">
-          <h3 className="font-medium ">Welcome to Nodes Community!</h3>
-          <span className="font-nnormal">
+      <div className="mb-6 flex items-start justify-between px-10">
+        <div className=" flex flex-col gap-4 text-[20px] text-[#212121]">
+          <h3 className="font-semibold ">Welcome to Nodes Community!</h3>
+          <span className="font-normal text-base">
             something something nice tagline about the community
           </span>
         </div>{" "}
-        <div className="flex gap-4">
+        <div className=" gap-4 hidden">
           <Link to={"/spaces"}>
             <Button className={`max-w-max`}>See Spaces</Button>
           </Link>
         </div>
       </div>
 
-      <div className="mb-10 flex justify-between items-center">
+      <div className="px-10 mb-10 flex justify-between items-center border-b border-[#D6D6D6]">
         <SectionNavs
           navs={navs}
           selectedNav={selectedNav}
           setSelectedNav={setSelectedNav}
         />
-        <div className="">
+        <div className="hidden">
           {" "}
           <SearchComponent placeholder="ex: acting" />
         </div>
       </div>
 
-      <div className="">
-        {selectedNav?.label?.toLowerCase() == "general" && <General getCommunityPostsQuery={useGetCommunityPostQuery}/>}
+      {selectedNav?.label?.toLowerCase() !== "community" ? (
+        <div className="px-10 mb-10">
+          <CommunityFilter />{" "}
+        </div>
+      ) : null}
 
-        {selectedNav?.label?.toLowerCase() == "followed" && <Followed />}
+      <div className="px-10">
+        {selectedNav?.label?.toLowerCase() == "discover" && <DiscoverTab />}
 
-        {selectedNav?.label?.toLowerCase() == "my posts" && <MyPosts />}
+        {selectedNav?.label?.toLowerCase() == "connections" && (
+          <ConnectionsTab />
+        )}
+
+        {selectedNav?.label?.toLowerCase() == "community" && (
+          <CommunityTab getCommunityPostsQuery={useGetCommunityPostQuery} />
+        )}
       </div>
 
       <Modal
@@ -69,7 +75,12 @@ function Community() {
         open={postModal}
         setOpen={setAddPostModal}
       >
-        <AddPost refetch={() => {communityPostsRefetch()}} closeModal={() => setAddPostModal(false)}/>{" "}
+        <AddPost
+          refetch={() => {
+            communityPostsRefetch();
+          }}
+          closeModal={() => setAddPostModal(false)}
+        />{" "}
       </Modal>
     </div>
   );
