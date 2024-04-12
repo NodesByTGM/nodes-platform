@@ -106,7 +106,13 @@ export default function ItemsCarousel({
                         <TrendingItem />
                       </div>
                     )}
-                    {movie && <MovieItem />}
+                    {movie && (
+                      <MovieItem
+                        data={item}
+                        
+                        // className={"!w-full h-full"}
+                      />
+                    )}
                     {event && (
                       <EventItem
                         refetchEvents={() => refetchEvents && refetchEvents()}
