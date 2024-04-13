@@ -4,6 +4,7 @@ import { ArrowRight } from "react-feather";
 import { Link } from "react-router-dom";
 import { TfiLocationPin } from "react-icons/tfi";
 import AppConfig from "../../utilities/config";
+import moment from 'moment'
 import { useNavigate } from "react-router-dom";
 import {
   BookMarkIcon,
@@ -198,7 +199,7 @@ function EventItem({
 
           <div className="flex items-start flex-col text-[#ffffff] font-medium text-base">
             <span className="mb-4 capitalize">{data?.name}</span>
-            <span className="mb-6">{data?.dateTime}</span>
+            <span className="mb-6">{moment(data?.dateTime).format('DD-MM-yyyy')}</span>
             <div className="flex items-center gap-2">
               <TfiLocationPin />
               <span className="">{data?.location}</span>

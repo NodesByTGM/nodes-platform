@@ -32,7 +32,9 @@ export default function IndividualDashboard() {
         <MoviesAndShowsSection />
         <EventsSection />
 
-        <UpgradeCTA />
+       {
+        !user?.subscription?.plan ?  <UpgradeCTA /> : null
+       }
         <JobSection canViewJob={true} />
 
         {/* <ItemsCarousel

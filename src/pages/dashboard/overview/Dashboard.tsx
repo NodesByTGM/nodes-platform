@@ -7,6 +7,7 @@ function Dashboard() {
   const { accountType } = useDashboardContext();
   return (
     <div className='main-padding'>
+      {/* {accountType} */}
       {accountType.toLowerCase() == "individual" && <IndividualDashboard />}
       {accountType.toLowerCase() == "talent" && <TalentDashboard />}
 

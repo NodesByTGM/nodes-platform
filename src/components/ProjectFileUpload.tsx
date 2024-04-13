@@ -94,12 +94,12 @@ export default function ProjectFileUpload({
   const setBgImg = () => {
     return {
       backgroundRepeat: "no-repeat",
-      '-webkit-background-size': 'cover',
-     ' -moz-background-size': 'cover',
-      '-o-background-size': 'cover',
+      "-webkit-background-size": "cover",
+      " -moz-background-size": "cover",
+      "-o-background-size": "cover",
       backgroundSize: "cover",
       // backgroundAttachment: "fixed",
-      // backgroundPosition: "center",
+      backgroundPosition: "center",
       backgroundImage: "url(" + value + ")",
       "object-fit": "cover",
     };
