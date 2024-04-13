@@ -3,7 +3,8 @@ import React from "react";
 // import AppConfig from "../../../utilities/config";
 import JobSection from "./sections/JobSection";
 import EventsSection from "./sections/EventsSection";
-import MoviesAndShowsSection from './sections/MoviesAndShowsSection'
+import MoviesAndShowsSection from "./sections/MoviesAndShowsSection";
+import TrendingNewsSection from "./sections/TrendingNewsSection";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import {
@@ -11,7 +12,7 @@ import {
   // ItemsCarousel,
   UpgradeCTA,
 } from "../../../components";
-import {capitalizeWords} from '../../../utilities'
+import { capitalizeWords } from "../../../utilities";
 
 export default function IndividualDashboard() {
   const user = useSelector((state: RootState) => state.user.user);
@@ -22,19 +23,17 @@ export default function IndividualDashboard() {
       <div className="flex flex-col gap-[64px]">
         <div className="pb-6 border-b border-[#D6D6D6]">
           <HeaderAndDescription
-          titleClass={'font-semibold'}
+            titleClass={"font-semibold"}
             title={`Welcome to Nodes, ${capitalizeWords(user?.name)}`}
             description={"Checkout the blah blah blah blah blah blah"}
           />
         </div>
+        <TrendingNewsSection />
+        <MoviesAndShowsSection />
         <EventsSection />
 
-        <MoviesAndShowsSection />
-
-
-     
         <UpgradeCTA />
-        <JobSection canViewJob={true}/>
+        <JobSection canViewJob={true} />
 
         {/* <ItemsCarousel
           job
