@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { Card, ProjectsCard, Modal, Loader } from "../../../components";
+import { Card, ProjectCard2, Modal, Loader } from "../../../components";
 import ProjectDetail from "./ProjectDetail";
 import ProjectForm from "./ProjectForm";
 import { useProfileContext } from "../../../context/hooks";
@@ -57,10 +57,10 @@ export default function Projects() {
         ) : null}
 
         {projectsData?.length > 0 ? (
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             {projectsData?.map((project) => (
               <div key={project.id} className="h-full ">
-                <ProjectsCard
+                <ProjectCard2
                   project={project}
                   setProjectDetailsModal={setProjectDetailsModal}
                   setProjectDetails={setProjectDetails}

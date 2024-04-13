@@ -35,7 +35,7 @@ export default function CommunityPost({
       <span className="mb-10 text-[#000000] text-base font-normal">
         {data?.body}
       </span>
-      <div className="flex mb-10">
+      <div className="flex mb-10 gap-3">
         {data?.attachments?.map((img) => (
           <img
             key={img?.id}

@@ -38,7 +38,7 @@ export default function TrendingNewsSection() {
           <ItemsCarousel
             data={trendingData || []}
             trend
-            title={`Trending`}
+            title={`Trending News`}
             //   description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
           />
         ) : null}
