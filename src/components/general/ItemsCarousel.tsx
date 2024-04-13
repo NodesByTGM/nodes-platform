@@ -104,15 +104,16 @@ export default function ItemsCarousel({
                 {trend || movie || event || job ? (
                   <div className="">
                     {trend && (
-                      <div className="w-[250px] md:w-[350px] ">
-                        <TrendingItem />
-                      </div>
+                        <TrendingItem
+                          data={item}
+                          className={"!w-full h-full"}
+                        />
                     )}
                     {movie && (
                       <MovieItem
                         data={item}
                         canViewMovieDetails={canViewMovieDetails}
-                        
+
                         // className={"!w-full h-full"}
                       />
                     )}

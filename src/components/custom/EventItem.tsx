@@ -166,7 +166,7 @@ function EventItem({
     <div className="">
       {data ? (
         <div
-          className={`${className} p-6 h-[320px] rounded-lg bg-cover bg-center text-white`}
+          className={`${className} p-6 min-h-[320px] rounded-lg bg-cover bg-center text-white`}
           style={{ backgroundImage: `url('/img/checkcards.png')` }}
         >
           <pre className="text-blue-400 hidden">
