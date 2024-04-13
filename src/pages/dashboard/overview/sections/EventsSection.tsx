@@ -34,7 +34,7 @@ export default function EventsSection() {
           data={eventsData || []}
           event
           refetchEvents={allEventsRefetch}
-          title={`Trending Events`}
+          title={`Events`}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         />
       ) : null}
