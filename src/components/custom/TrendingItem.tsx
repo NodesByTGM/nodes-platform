@@ -11,8 +11,9 @@ function TrendingItem({ className, data }: { className?: string; data?: any }) {
         className={`${className} p-6 !h-[320px] rounded-lg bg-cover bg-center text-white`}
         style={{ backgroundImage: `url('/img/checkcards.png')` }}
       >
-        <div className="w-full flex flex-col gap-4 items-start text-start text-[#ffffff] text-base">
-          <div className="w-full max-h-[24px]">
+        <div className="h-full  w-full flex flex-col gap-4 items-start text-start text-[#ffffff] text-base">
+          
+          <div className="mt-[60px] w-full max-h-[24px]">
             <p className="font-medium  truncate">{data?.source?.name} </p>
           </div>
           <div className="w-full ">

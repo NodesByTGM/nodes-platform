@@ -111,3 +111,6 @@ export {default as CommunityPeopleCard} from './community/CommunityPeopleCard.ts
 export {default as CommunityFilter} from './community/CommunityFilter.tsx'
 export {default as BusinessProfileCard} from './profile/BusinessProfileCard'
 export { default as ProjectCard2 } from "./profile/ProjectCard2.tsx";
+export {default as RateComponent} from './RateComponent'
+export {default as RatingStar} from './RatingStar'
+
