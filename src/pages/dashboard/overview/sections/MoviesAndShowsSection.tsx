@@ -41,7 +41,7 @@ export default function MoviesAndShowsSection({canViewMovieDetails}: IMoviesAndS
           data={moviesAndShowsData || []}
           movie
           canViewMovieDetails={canViewMovieDetails}
-          title={`Trending Movies`}
+          title={`Top Movies`}
         //   description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         />
       ) : null}
