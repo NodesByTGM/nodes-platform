@@ -34,26 +34,26 @@ export default function RateComponent({
           </span>
 
           <span className="grid grid-cols-5 gap-8">
-            <div onClick={() => setSelectedRate(1)} className="">
+            <div onClick={() => setSelectedRate(1)} className="cursor-pointer">
               <RatingStar active={selectedRate >= 1} />
             </div>
-            <div onClick={() => setSelectedRate(2)} className="">
+            <div onClick={() => setSelectedRate(2)} className="cursor-pointer">
               <RatingStar active={selectedRate >= 2} />
             </div>
-            <div onClick={() => setSelectedRate(3)} className="">
+            <div onClick={() => setSelectedRate(3)} className="cursor-pointer">
               <RatingStar active={selectedRate >= 3} />
             </div>
-            <div onClick={() => setSelectedRate(4)} className="">
+            <div onClick={() => setSelectedRate(4)} className="cursor-pointer">
               <RatingStar active={selectedRate >= 4} />
             </div>
-            <div onClick={() => setSelectedRate(5)} className="">
+            <div onClick={() => setSelectedRate(5)} className="cursor-pointer">
               <RatingStar active={selectedRate >= 5} />
             </div>
           </span>
         </div>
 
         <Button
-          className="max-w-max mx-auto px-6"
+          className="max-w-max mx-auto px-12"
           isLoading={isLoading}
           onClick={() => {
             handleSuccessfulRating();

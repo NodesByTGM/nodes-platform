@@ -57,7 +57,7 @@ function MovieItem({
             onClick={() => setRateModal(true)}
             className="cursor-pointer flex items-center justify-center"
           >
-            <CiStar className="size-[22px]" />
+            <CiStar className="size-[30px]" />
           </div>
         </div>
         <p className="max-w-full text-ellipsis text-nowrap overflow-hidden font-medium h-[30px]">
