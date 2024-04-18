@@ -361,7 +361,7 @@ export default function EditBusinessProfile() {
             <FormDiv title="Online profiles">
               <div className="">
                 <div className="grid grid-col-1 gap-6">
-                  <div className="w-full">
+                  <div className="w-full hidden">
                     <Input
                       placeholder={AppConfig.PLACEHOLDERS.PersomalWebsite}
                       id="website"
