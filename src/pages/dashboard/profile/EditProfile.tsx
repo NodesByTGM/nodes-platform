@@ -12,8 +12,8 @@ import {
   profileSchema,
   profileValidationType,
 } from "../../../utilities/validation";
-import {getAge} from '../../../utilities/common'
-import { returnMaxDate } from "../../../utilities";
+import { getAge } from "../../../utilities/common";
+import { returnMaxDate, isValidURL } from "../../../utilities";
 import moment from "moment";
 import Countries from "../../../utilities/countries.json";
 import { FormDebug, ProfileEventPostForm } from "../../../components";
@@ -61,6 +61,7 @@ export default function EditIndividual() {
     profileData,
     profileIsSuccess,
   } = useProfileContext();
+  // const [isValidWebsite, setIsValidWebsite] = useState(true)
   const [
     updateUserProfile,
     {
@@ -239,6 +240,7 @@ export default function EditIndividual() {
     console.log(JSON.stringify(profileData.user, null, 2));
   };
   const {
+    setFieldError,
     setValues,
     setFieldValue,
     handleChange,
@@ -307,6 +309,17 @@ export default function EditIndividual() {
     }
   }, [profileIsSuccess]);
 
+  useEffect(() => {
+    if (values?.website?.length > 0) {
+      
+      console.log('is Valid:'+ isValidURL(values.website))
+      // setFieldError(
+      //   'website',
+      //  "Url is invalid"
+      // );
+    }
+  }, [values.website, setFieldError]);
+
   return (
     <FormikProvider value={formik}>
       <form
@@ -359,10 +372,10 @@ export default function EditIndividual() {
 
           <FormDebug
             form={{
-              values,
+              // values,
               touched,
               errors,
-              userData: profileData?.result,
+              // userData: profileData?.result,
             }}
             className="mt-4 hidden"
           />
@@ -522,14 +535,12 @@ export default function EditIndividual() {
                           onChange={handleChange("age")}
                           onBlur={handleBlur}
                         /> */}
-                        <span className="font-medium text-base ">
-                          Age 
-                        </span>
+                        <span className="font-medium text-base ">Age</span>
 
                         <DateSelect
                           disabled={
                             profileData?.result?.subscription?.plan?.toLowerCase() !==
-                              "business" 
+                            "business"
                           }
                           max={returnMaxDate()}
                           labelStyle="!text-base"

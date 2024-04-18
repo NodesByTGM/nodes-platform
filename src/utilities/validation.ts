@@ -23,6 +23,38 @@ export type SignupValidationType = {
   otp: string;
 };
 
+export const businessProfileSchema = object({
+  name: string().required("Name is a required field"),
+  logo: object()
+    .shape({
+      id: string(),
+      url: string(),
+    })
+    .nullable(),
+  yoe: string(),
+  location: string(),
+  linkedIn: string().nullable(),
+  instagram: string(),
+  twitter: string(),
+  headline: string(),
+  bio: string(),
+});
+
+export type BusinessProfileValidationType = {
+  name: string;
+  logo: {
+    id: string;
+    url: string;
+  };
+  yoe: string;
+  location: string;
+  linkedIn: string;
+  instagram: string;
+  twitter: string;
+  headline: string;
+  bio: string;
+};
+
 export const adminSignupSchema = object({
   firstName: string().required("First name is a required field"),
   lastName: string().required("Last name is a required field"),
@@ -65,11 +97,11 @@ export const profileSchema = object({
     //   "Age must be a number",
     //   (val) => {
     //     if(String(val).length > 0){
-    //       return typeof val === "number" 
+    //       return typeof val === "number"
     //     } else {
     //       return true
     //     }
-    //   }   
+    //   }
     // )
     .nullable(),
   headline: string(),

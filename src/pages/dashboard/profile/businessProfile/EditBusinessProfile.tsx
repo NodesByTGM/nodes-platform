@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {
   useState,
   useRef,
@@ -5,17 +6,43 @@ import React, {
   useMemo,
   // useCallback,
 } from "react";
-import { FormDiv, Button, Back, Input, TextArea, ProfileImgUploader, LocationSelect } from "../../../../components";
+import {
+  FormDiv,
+  Button,
+  Back,
+  Input,
+  TextArea,
+  ProfileImgUploader,
+  LocationSelect,
+  DateSelect,
+  FormDebug,
+} from "../../../../components";
+import moment from "moment";
+
 import BusinessProfileProjectForm from "./BusinessProfileProjectForm";
-import BusinessProfileJobForm from './BusinessProfileJobForm'
+import BusinessProfileJobForm from "./BusinessProfileJobForm";
 import AppConfig from "../../../../utilities/config";
-import BusinessProfileEventPostForm from './BusinessProfileEventPostForm'
+import BusinessProfileEventPostForm from "./BusinessProfileEventPostForm";
 import { useDashboardContext } from "../../../../context/hooks";
 import Countries from "../../../../utilities/countries.json";
-
+import {
+  businessProfileSchema,
+  BusinessProfileValidationType,
+} from "../../../../utilities/validation";
+import { useFormik } from "formik";
+import { useUpdateBusinessProfileMutation } from "../../../../api";
 
 export default function EditBusinessProfile() {
-    const {profileData} = useDashboardContext()
+  const [
+    updateBuasinessProfile,
+    {
+      isLoading: updateProfileLoading,
+      // isSuccess: updateProfileSuccess,
+      // isError: updateProfileIsError,
+      // error: updateProfileError,
+    },
+  ] = useUpdateBusinessProfileMutation();
+  const { profileData } = useDashboardContext();
   const businessInfo = useRef<HTMLDivElement>(null);
 
   const introduceBusiness = useRef<HTMLDivElement>(null);
@@ -80,19 +107,99 @@ export default function EditBusinessProfile() {
     navRef?.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleClickForm = (values: any) => {
+    console.log(JSON.stringify(values, null, 2));
+    const data = {
+      name: `${values.name}`,
+
+      logo: values.logo,
+      yoe: values.yoe,
+      location: values.location,
+      linkedIn: values.linkedIn,
+      instagram: values.instagram,
+      twitter: values.twitter,
+      website: values.website,
+    };
+    console.log(JSON.stringify(data, null, 2));
+    updateBuasinessProfile(data);
+  };
+
+  const formik = useFormik<BusinessProfileValidationType>({
+    initialValues: {
+      name: profileData?.result?.name,
+      logo: profileData?.result?.avatar,
+      yoe: "",
+      location: '',
+      linkedIn: profileData?.result?.linkedIn,
+      instagram: profileData?.result?.instagram,
+      twitter: profileData?.result?.twitter,
+      headline: '',
+      bio: ''
+    },
+    validationSchema: businessProfileSchema,
+    validateOnBlur: true,
+    onSubmit: handleClickForm,
+  });
+
+  const {
+    setValues,
+    setFieldValue,
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+    values,
+    isValid,
+    handleBlur,
+  } = formik;
+
+  // const handleInputPrefill = useCallback(() => {
+  //   setValues({
+  //     firstName: profileData?.result?.name?.split(" ")[0],
+  //     lastName: profileData?.result?.name?.split(" ")[1],
+  //     username: profileData?.result?.username,
+  //     avatar: profileData?.result?.avatar,
+  //     location: profileData?.result?.location,
+  //     height: profileData?.result?.height,
+  //     age: profileData?.result?.dob,
+  //     headline: profileData?.result?.headline,
+  //     bio: profileData?.result?.bio,
+  //     website: profileData?.result?.website,
+  //     linkedIn: profileData?.result?.linkedIn,
+  //     instagram: profileData?.result?.instagram,
+  //     twitter: profileData?.result?.twitter,
+  //     projectName: profileData?.result?.projectName,
+  //     description: profileData?.result?.description,
+  //     projectUrl: profileData?.result?.projectUrl,
+  //     spaces: profileData?.result?.spaces,
+  //     comments: profileData?.result?.comments,
+  //     collaborators: [initialCollaborator],
+  //   });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [profileData, setValues]);
+
   return (
     <div className=" px-10">
       <div className="flex flex-col gap-10 pt-6">
-
-        <pre className="hidden
-        ">{JSON.stringify(profileData, null, 2)}</pre>
+        <pre
+          className="hidden
+        "
+        >
+          {JSON.stringify(profileData, null, 2)}
+        </pre>
         <Back link="/business/profile" />
 
         <span className="font-medium text-[20px] text-primary mb-10">
           Edit profile
         </span>
       </div>
-      <div className="flex gap-x-8">
+      <form
+        onSubmit={(e) => {
+          e?.preventDefault();
+          handleSubmit();
+        }}
+        className="flex gap-x-8"
+      >
         <div className="max-h-max w-[240px]">
           <div className="flex flex-col">
             <div className="rounded-lg border border-[#EFEFEF] p-6 bg-white flex flex-col gap-4">
@@ -119,191 +226,190 @@ export default function EditBusinessProfile() {
 
           <div className="w-full mt-8">
             <Button
-            //   isLoading={updateProfileLoading}
-            //   disabled={!isValid}
-            //   className={`${!isValid ? "opacity-50" : ""} `}
+              isLoading={updateProfileLoading}
+              disabled={!isValid}
+              className={`${!isValid ? "opacity-50" : ""} `}
             >
               Save and Continue
             </Button>
           </div>
 
-          {/* <FormDebug
+          <FormDebug
             form={{
               values,
               touched,
               errors,
               // userData: profileData?.result
             }}
-            className="mt-4 hidden"
-          /> */}
+            className="mt-4 "
+          />
         </div>
 
         <div className="flex-1 flex flex-col gap-8 ">
           <div ref={businessInfo} className="">
             <FormDiv title="Business Information">
-            <div className="">
-                  <div className="grid grid-col-1 gap-6">
-                    <ProfileImgUploader
-                      value={{
-                        id: '',
-                        url: ''
-                      }}
-                      onChange={(value) => {
-                        console.log(value)
-                        // setFieldValue("avatar", value);
-                      }}
+              <div className="">
+                <div className="grid grid-col-1 gap-6">
+                  <ProfileImgUploader
+                    value={values?.logo}
+                    onChange={(value) => {
+                      console.log(value);
+                      setFieldValue("logo", value);
+                    }}
+                  />
+                  <div className="w-full">
+                    <Input
+                      placeholder={"Enter business name"}
+                      id="name"
+                      label="Name of business"
+                      error={errors.name}
+                      value={values.name}
+                      touched={touched.name}
+                      onChange={handleChange("name")}
+                      onBlur={handleBlur}
                     />
-                    <div className="w-full">
-                      <Input
-                        placeholder={'Enter business name'}
-                        id="name"
-                        label="Name of business"
-                        // error={errors.name}
-                        // value={values.name}
-                        // touched={touched.name}
-                        // onChange={handleChange("name")}
-                        // onBlur={handleBlur}
-                      />
-                    </div>
-                    
-             
-                
-                    <div className="flex flex-col gap-1">
-                      <span className="font-medium text-base ">Location</span>
-                      <LocationSelect
-                        paddingy="py-[16px]"
-                        defaultValue={"values.location"}
-                        options={Countries}
-                        onChange={(value) =>
-                          // setFieldValue("location", value)
-                          console.log(value)
-                        }
-                      />
-                    </div>
+                  </div>
 
-                    <div className="w-full">
-                      <Input
-                        placeholder={'Enter year of establishment'}
-                        id="yoe"
-                        label="Year of Establishment"
-                        // error={errors.location}
-                        // value={values.location}
-                        // touched={touched.location}
-                        // onChange={handleChange("location")}
-                        // onBlur={handleBlur}
-                      />
-                    </div>
+                  <div className="flex flex-col gap-1">
+                    <span className="font-medium text-base ">Location</span>
+                    <LocationSelect
+                      paddingy="py-[16px]"
+                      defaultValue={"values.location"}
+                      options={Countries}
+                      onChange={
+                        (value) => setFieldValue("location", value)
+                        // console.log(value)
+                      }
+                    />
+                  </div>
 
-                   
+           
+                  <div className="w-full flex flex-col gap-1">
+                    <span className="font-medium text-base ">Year of Establishment</span>
+
+                    <DateSelect
+                      disabled={
+                        profileData?.result?.subscription?.plan?.toLowerCase() !==
+                        "business"
+                      }
+                      labelStyle="!text-base"
+                      required
+                      id="yoe"
+                      error={errors.yoe}
+                      value={moment(values.yoe).format("yyyy-MM-DD")}
+                      touched={touched.yoe}
+                      onChange={handleChange("yoe")}
+                      onBlur={handleBlur}
+                    />
                   </div>
                 </div>
+              </div>
             </FormDiv>
           </div>
           <div ref={introduceBusiness} className="">
             <FormDiv title="Introduce Business">
-            <div className="">
-                  <div className="grid grid-col-1 gap-6">
-                    <div className="w-full">
-                      <Input
-                        placeholder={AppConfig.PLACEHOLDERS.Headline}
-                        id="headline"
-                        label="Headline"
-                        // error={errors.headline}
-                        // value={values.headline}
-                        // touched={touched.headline}
-                        // onChange={handleChange("headline")}
-                        // onBlur={handleBlur}
-                      />
-                    </div>
-                    <div className="w-full">
-                  
-                      <TextArea
-                        id="bio"
-                        label="Bio"
-                        // error={errors.bio}
-                        // value={values.bio}
-                        // touched={touched.bio}
-                        // onChange={handleChange("bio")}
-                        // onBlur={handleBlur}
-                      />
-                    </div>
+              <div className="">
+                <div className="grid grid-col-1 gap-6">
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.Headline}
+                      id="headline"
+                      label="Headline"
+                      error={errors.headline}
+                      value={values.headline}
+                      touched={touched.headline}
+                      onChange={handleChange("headline")}
+                      onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <TextArea
+                      id="bio"
+                      label="Bio"
+                      error={errors.bio}
+                      value={values.bio}
+                      touched={touched.bio}
+                      onChange={handleChange("bio")}
+                      onBlur={handleBlur}
+                    />
                   </div>
                 </div>
+              </div>
             </FormDiv>
           </div>
           <div ref={addJob} className="">
             <FormDiv title="Create a Job Post">
-                <BusinessProfileJobForm />
+              <BusinessProfileJobForm />
             </FormDiv>
           </div>
           <div ref={createEvent} className="">
             <FormDiv title="Create an event">
-                <BusinessProfileEventPostForm />
+              <BusinessProfileEventPostForm />
             </FormDiv>
           </div>
           <div ref={addProject} className="">
             <FormDiv title="Add a project">
-                <BusinessProfileProjectForm />
+              <BusinessProfileProjectForm />
             </FormDiv>
           </div>
           <div ref={onlineProfiles} className="">
             <FormDiv title="Online profiles">
-            <div className="">
-                  <div className="grid grid-col-1 gap-6">
-                    <div className="w-full">
-                      <Input
-                        placeholder={AppConfig.PLACEHOLDERS.PersomalWebsite}
-                        id="website"
-                        label="Personal Website"
-                        // error={errors.website}
-                        // value={values.website}
-                        // touched={touched.website}
-                        // onChange={handleChange("website")}
-                        // onBlur={handleBlur}
-                      />
-                    </div>
-                    <div className="w-full">
-                      <Input
-                        placeholder={AppConfig.PLACEHOLDERS.LinkedIn}
-                        id="linkedIn"
-                        label="LinkedIn"
-                        // error={errors.linkedIn}
-                        // value={values.linkedIn}
-                        // touched={touched.linkedIn}
-                        // onChange={handleChange("linkedIn")}
-                        // onBlur={handleBlur}
-                      />
-                    </div>
-                    <div className="w-full">
-                      <Input
-                        placeholder={AppConfig.PLACEHOLDERS.Instagram}
-                        id="instagram"
-                        label="Instagram"
-                        // error={errors.instagram}
-                        // value={values.instagram}
-                        // touched={touched.instagram}
-                        // onChange={handleChange("instagram")}
-                        // onBlur={handleBlur}
-                      />
-                    </div>
-                    <div className="w-full">
-                      <Input
-                        placeholder={AppConfig.PLACEHOLDERS.X}
-                        id="twitter"
-                        label="x"
-                        // error={errors.twitter}
-                        // value={values.twitter}
-                        // touched={touched.twitter}
-                        // onChange={handleChange("twitter")}
-                        // onBlur={handleBlur}
-                      />
-                    </div>
+              <div className="">
+                <div className="grid grid-col-1 gap-6">
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.PersomalWebsite}
+                      id="website"
+                      label="Personal Website"
+                      // error={errors.website}
+                      // value={values.website}
+                      // touched={touched.website}
+                      // onChange={handleChange("website")}
+                      // onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.LinkedIn}
+                      id="linkedIn"
+                      label="LinkedIn"
+                      error={errors.linkedIn}
+                      value={values.linkedIn}
+                      touched={touched.linkedIn}
+                      onChange={handleChange("linkedIn")}
+                      onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.Instagram}
+                      id="instagram"
+                      label="Instagram"
+                      error={errors.instagram}
+                      value={values.instagram}
+                      touched={touched.instagram}
+                      onChange={handleChange("instagram")}
+                      onBlur={handleBlur}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <Input
+                      placeholder={AppConfig.PLACEHOLDERS.X}
+                      id="twitter"
+                      label="x"
+                      error={errors.twitter}
+                      value={values.twitter}
+                      touched={touched.twitter}
+                      onChange={handleChange("twitter")}
+                      onBlur={handleBlur}
+                    />
                   </div>
                 </div>
+              </div>
             </FormDiv>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

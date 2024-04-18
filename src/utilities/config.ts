@@ -25,6 +25,7 @@ const API_ENDPOINTS = {
   },
   Profile: {
     UserProfile: `${BASE_API_ENDPOINT}/users/profile`,
+    BusinessProfile:`${BASE_API_ENDPOINT}/users/business-profile`
   },
   Job: {
     JobUrl: `${BASE_API_ENDPOINT}/jobs`,
