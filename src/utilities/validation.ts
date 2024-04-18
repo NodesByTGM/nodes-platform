@@ -55,8 +55,23 @@ export const profileSchema = object({
     })
     .nullable(),
   location: string(),
-  height: string(),
-  age: string(),
+  height: number()
+    // .test("num", "Height must be a number", (val) => typeof val === "number")
+    .nullable(),
+  age: string()
+    // .min(18, "Minimum age is 18")
+    // .test(
+    //   "num",
+    //   "Age must be a number",
+    //   (val) => {
+    //     if(String(val).length > 0){
+    //       return typeof val === "number" 
+    //     } else {
+    //       return true
+    //     }
+    //   }   
+    // )
+    .nullable(),
   headline: string(),
   bio: string(),
   website: string(),
@@ -86,7 +101,7 @@ export type profileValidationType = {
     url: string;
   };
   location: string;
-  height: string;
+  height: number;
   age: string;
   headline: string;
   bio: string;

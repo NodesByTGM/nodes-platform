@@ -17,7 +17,8 @@ const API_ENDPOINTS = {
     SendOTP: `${BASE_API_ENDPOINT}/auth/send-otp`,
     VerfiyEmail: `${BASE_API_ENDPOINT}/auth/verify-email`,
     ProfileURL: `${BASE_API_ENDPOINT}/users/profile`,
-    GoogleSocial: `${BASE_API_ENDPOINT}/socialauth/google/auth`
+    GoogleSocial: `${BASE_API_ENDPOINT}/socialauth/google/auth`,
+    CheckEmail: `${BASE_API_ENDPOINT}/auth/check-email`
   },
   Community: {
     Post: `${BASE_API_ENDPOINT}/community/posts`,

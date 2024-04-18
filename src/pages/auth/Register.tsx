@@ -32,9 +32,19 @@ import FormDebug from "../../components/FormDebug";
 import { signupSchema, SignupValidationType } from "../../utilities/validation";
 import { loginUser } from "../../api/reducers/userSlice";
 import { useDispatch } from "react-redux";
-import {returnMaxDate} from '../../utilities'
+import { returnMaxDate } from "../../utilities";
+import { useCheckEmailMutation } from "../../api";
 
 function Register() {
+  const [
+    checkEmail,
+    {
+      isLoading: checkEmailLoading,
+      // isSuccess: checkEmailSuccess,
+      // isError: checkEmailIsError,
+      // error: checkEmailError,
+    },
+  ] = useCheckEmailMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { setUser } = useAuth();
@@ -45,7 +55,6 @@ function Register() {
   const [timeLeft, setTimeLeft] = useState(AppConfig.OTP_COUNTDOWN);
   const [sendOtpLoading, setSendOtpLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
-
 
   const prepareDetails = (values) => {
     const payload = {
@@ -180,17 +189,24 @@ function Register() {
       return () => clearInterval(countdownInterval);
     }
   }, [sent]);
+  useEffect(() => {
+    const email = values.email;
+    if (email.length > 0 && !errors.email) {
+      checkEmail({ email: values.email });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values.email]);
 
   // useEffect(() => {
   //   // Get the current date
   //   const currentDate = new Date();
-    
+
   //   // Calculate the date 18 years from now
   //   const maxDate = new Date(currentDate.getFullYear() + 18, currentDate.getMonth(), currentDate.getDate());
-    
+
   //   // Format the date as YYYY-MM-DD (required by the 'date' input type)
   //   const formattedMaxDate = maxDate.toISOString().split('T')[0];
-    
+
   //   // Set the max attribute of the input field
   //   const dateInput = document.getElementById('date') as HTMLInputElement;
   //   dateInput.max = formattedMaxDate;
@@ -245,18 +261,21 @@ function Register() {
                   />
                 </div>
               </div>
-              <Input
-                required
-                placeholder={AppConfig.PLACEHOLDERS.Email}
-                id="email"
-                type="email"
-                label="Email address"
-                error={errors.email}
-                value={values.email}
-                touched={touched.email}
-                onChange={handleChange("email")}
-                onBlur={handleBlur}
-              />
+              <div className="w-full">
+                <Input
+                  required
+                  placeholder={AppConfig.PLACEHOLDERS.Email}
+                  id="email"
+                  type="email"
+                  label="Email address"
+                  error={errors.email}
+                  value={values.email}
+                  touched={touched.email}
+                  onChange={handleChange("email")}
+                  onBlur={handleBlur}
+                />
+                {checkEmailLoading && <span className=""></span>}
+              </div>
 
               {/* <ReactDateSelect
                 id="dob"
@@ -300,7 +319,7 @@ function Register() {
                 <div className="w-full">
                   {/* {returnMaxDate()} */}
                   <DateSelect
-                  max={returnMaxDate()}
+                    max={returnMaxDate()}
                     labelStyle="!text-base"
                     required
                     id="dob"

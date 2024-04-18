@@ -101,7 +101,6 @@ export default function Signup() {
           />
           <PasswordInput
             isAdmin
-            
             placeholder={AppConfig.PLACEHOLDERS.Password}
             id="password"
             type="password"

@@ -27,17 +27,36 @@ export const checkFileSize = (file: File) => {
   return true;
 };
 
+export function isValidURL(url: string): boolean {
+  // Regular expression for validating URLs
+  const urlRegex: RegExp = /^(ftp|http|https):\/\/[^ "]+$/;
 
+  // Test the input URL against the regular expression
+  return urlRegex.test(url);
+}
+
+export const getAge = (DOB: any) => {
+  const birthDate: Date = new Date(DOB);
+  const currentDate: Date = new Date();
+  
+  // Calculate the difference in milliseconds between the current date and the birth date
+  const ageDiffMs: number = currentDate.getTime() - birthDate.getTime();
+  
+  // Convert milliseconds to years
+  const ageDate: Date = new Date(ageDiffMs);
+  const age: number = Math.abs(ageDate.getUTCFullYear() - 1970);
+  return age
+};
 
 export const getNameInitials = (name: string): string => {
   // Split the name into words
-  const words = name.split(' ');
+  const words = name.split(" ");
 
   // Initialize an empty string to store initials
-  let initials = '';
+  let initials = "";
 
   // Iterate over each word
-  words.forEach((word, ) => {
+  words.forEach((word) => {
     // If the initials are less than 2 and there's a character in the current word, add it to initials
     if (initials.length < 2 && word.length > 0) {
       // Add the first character of the word to initials
@@ -90,25 +109,29 @@ export const convertToBase64 = async (file: File) => {
 //     return keyValuePairs.join('&');
 // }
 
-export function returnMaxDate (){
+export function returnMaxDate() {
   const currentDate = new Date();
-  const maxDate = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
-    const formattedMaxDate = maxDate.toISOString().split('T')[0];
+  const maxDate = new Date(
+    currentDate.getFullYear() - 18,
+    currentDate.getMonth(),
+    currentDate.getDate()
+  );
+  const formattedMaxDate = maxDate.toISOString().split("T")[0];
 
-    return formattedMaxDate
+  return formattedMaxDate;
 }
 export function capitalizeWords(str) {
-  return str.replace(/\b\w/g, function(char) {
+  return str.replace(/\b\w/g, function (char) {
     return char.toUpperCase();
   });
 }
 
 export const checkIfCurrentPlan = (user, plan) => {
-  if(user?.subscription?.plan?.tolowerCase() === plan?.type?.toLowerCase()){
-    return true
+  if (user?.subscription?.plan?.tolowerCase() === plan?.type?.toLowerCase()) {
+    return true;
   }
-  return false
-}
+  return false;
+};
 
 export const formatDate = (date: string) => {
   return moment(date).calendar({

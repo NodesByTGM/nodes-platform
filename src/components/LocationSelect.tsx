@@ -36,23 +36,38 @@ export default function LocationSelect({
         String(option?.name)?.toLowerCase() ==
         String(defaultValue)?.toLowerCase()
     );
+    console.log("defaultValue: " + defaultValue);
+    console.log("defaultdata: " + defaultdata?.name);
+
     if (!defaultdata) {
       return "";
     }
 
-    return defaultdata.name;
+    return setSelected(defaultdata?.name);
   };
-  const [selected, setSelected] = useState(handlePrefill());
+  const [selected, setSelected] = useState<any>(null);
+
+
 
   useEffect(() => {
-    onChange(selected.name);
+    onChange(selected);
   }, [selected]);
+  useEffect(() => {
+    if(!selected && defaultValue){
+      handlePrefill()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, defaultValue]);
 
   return (
     <div className={`${width}`}>
-      <span onClick={() => handlePrefill()} className=""></span>
+      <span onClick={() => handlePrefill()} className="hidden"></span>
       <div className="w-full">
-        <Listbox value={selected} onChange={setSelected}>
+        <Listbox value={selected} onChange={(e) => {
+          setSelected(e?.name)
+          // console.log(JSON.stringify(e))
+
+        }}>
           {({ open }) => (
             <>
               <div className="flex gap-4 items-center w-full">
@@ -70,7 +85,7 @@ export default function LocationSelect({
                         {isSort ? "Sort by:" : ""}
                       </span>
 
-                      {selected.name}
+                      {selected}
                     </span>
                     <span className="">
                       <svg

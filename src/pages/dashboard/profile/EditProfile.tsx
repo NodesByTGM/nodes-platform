@@ -12,6 +12,9 @@ import {
   profileSchema,
   profileValidationType,
 } from "../../../utilities/validation";
+import {getAge} from '../../../utilities/common'
+import { returnMaxDate } from "../../../utilities";
+import moment from "moment";
 import Countries from "../../../utilities/countries.json";
 import { FormDebug, ProfileEventPostForm } from "../../../components";
 import { toast } from "react-toastify";
@@ -24,6 +27,7 @@ import {
   Switch,
   ProfileImgUploader,
   LocationSelect,
+  DateSelect,
 } from "../../../components";
 import ProfileProjectForm from "./ProfileProjectForm";
 
@@ -157,7 +161,7 @@ export default function EditIndividual() {
       skills: [],
       location: values.location,
       height: values.height,
-      age: values.age,
+      age: getAge(values.age),
       linkedIn: values.linkedIn,
       instagram: values.instagram,
       twitter: values.twitter,
@@ -182,7 +186,7 @@ export default function EditIndividual() {
       avatar: profileData?.result?.avatar,
       location: profileData?.result?.location,
       height: profileData?.result?.height,
-      age: profileData?.result?.age,
+      age: profileData?.result?.dob,
       headline: profileData?.result?.headline,
       bio: profileData?.result?.bio,
       website: profileData?.result?.website,
@@ -254,7 +258,7 @@ export default function EditIndividual() {
       avatar: profileData?.result?.avatar,
       location: profileData?.result?.location,
       height: profileData?.result?.height,
-      age: profileData?.result?.age,
+      age: profileData?.result?.dob,
       headline: profileData?.result?.headline,
       bio: profileData?.result?.bio,
       website: profileData?.result?.website,
@@ -358,7 +362,7 @@ export default function EditIndividual() {
               values,
               touched,
               errors,
-              // userData: profileData?.result
+              userData: profileData?.result,
             }}
             className="mt-4 hidden"
           />
@@ -477,27 +481,14 @@ export default function EditIndividual() {
                         onBlur={handleBlur}
                       />
                     </div>
+
                     <div className="flex flex-col gap-1">
-                      <span className="font-medium text-base ">Location</span>
+                      <span className="font-medium text-base ">Location </span>
                       <LocationSelect
                         paddingy="py-[16px]"
                         defaultValue={values.location}
                         options={Countries}
-                        onChange={(value) =>
-                          setFieldValue("location", value)
-                        }
-                      />
-                    </div>
-                    <div className="w-full hidden">
-                      <Input
-                        placeholder={AppConfig.PLACEHOLDERS.Location}
-                        id="location"
-                        label="Location"
-                        error={errors.location}
-                        value={values.location}
-                        touched={touched.location}
-                        onChange={handleChange("location")}
-                        onBlur={handleBlur}
+                        onChange={(value) => setFieldValue("location", value)}
                       />
                     </div>
 
@@ -505,6 +496,7 @@ export default function EditIndividual() {
                       <div className="w-full">
                         <Input
                           placeholder={AppConfig.PLACEHOLDERS.Height}
+                          type={"number"}
                           id="height"
                           label="Height(cm)"
                           error={errors.height}
@@ -514,13 +506,37 @@ export default function EditIndividual() {
                           onBlur={handleBlur}
                         />
                       </div>
-                      <div className="w-full">
-                        <Input
+                      <div className="w-full flex flex-col gap-1">
+                        {/* <Input
+                          disabled={
+                            profileData?.result?.subscription?.plan?.toLowerCase() !==
+                              "business" && values?.age > 18
+                          }
                           placeholder={AppConfig.PLACEHOLDERS.Age}
+                          type={"number"}
                           id="age"
                           label="Age"
                           error={errors.age}
                           value={values.age}
+                          touched={touched.age}
+                          onChange={handleChange("age")}
+                          onBlur={handleBlur}
+                        /> */}
+                        <span className="font-medium text-base ">
+                          Age 
+                        </span>
+
+                        <DateSelect
+                          disabled={
+                            profileData?.result?.subscription?.plan?.toLowerCase() !==
+                              "business" 
+                          }
+                          max={returnMaxDate()}
+                          labelStyle="!text-base"
+                          required
+                          id="age"
+                          error={errors.age}
+                          value={moment(values.age).format("yyyy-MM-DD")}
                           touched={touched.age}
                           onChange={handleChange("age")}
                           onBlur={handleBlur}
