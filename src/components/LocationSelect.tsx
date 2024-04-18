@@ -85,7 +85,7 @@ export default function LocationSelect({
                         {isSort ? "Sort by:" : ""}
                       </span>
 
-                      {selected}
+                      {selected ? selected : <span className="text-gray-400">Select Location</span> }
                     </span>
                     <span className="">
                       <svg

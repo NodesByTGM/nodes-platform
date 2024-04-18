@@ -190,7 +190,7 @@ export const projectSchema = object({
     ),
   description: string().test(
     "len",
-    "Projecgt details should have a maximum of 300 characters",
+    "Project details should have a maximum of 300 characters",
     (val) => String(val)?.length <= 300
   ),
   projectURL: string().matches(
@@ -209,9 +209,17 @@ export const projectSchema = object({
   ),
   collaborators: array().of(
     object().shape({
-      name: string(),
+      name: string().test(
+        "len",
+        "Collaborator's name should have a maximum of 30 characters",
+        (val) => String(val)?.length <= 30
+      ),
       role: string(),
-      collabName: string(),
+      collabName: string().test(
+        "len",
+        "Collaborator's name should have a maximum of 30 characters",
+        (val) => String(val)?.length <= 30
+      ),
     })
   ),
 });
