@@ -4,6 +4,8 @@ import React, {
   useRef,
   // useEffect,
   useMemo,
+  useCallback,
+  useEffect,
   // useCallback,
 } from "react";
 import {
@@ -18,7 +20,7 @@ import {
   FormDebug,
 } from "../../../../components";
 import moment from "moment";
-
+import { toast } from "react-toastify";
 import BusinessProfileProjectForm from "./BusinessProfileProjectForm";
 import BusinessProfileJobForm from "./BusinessProfileJobForm";
 import AppConfig from "../../../../utilities/config";
@@ -34,15 +36,15 @@ import { useUpdateBusinessProfileMutation } from "../../../../api";
 
 export default function EditBusinessProfile() {
   const [
-    updateBuasinessProfile,
+    updateBusinessProfile,
     {
-      isLoading: updateProfileLoading,
-      // isSuccess: updateProfileSuccess,
+      isLoading: updateBusinessProfileLoading,
+      isSuccess: updateBusinessProfileSuccess,
       // isError: updateProfileIsError,
       // error: updateProfileError,
     },
   ] = useUpdateBusinessProfileMutation();
-  const { profileData } = useDashboardContext();
+  const { profileData, profileRefetch } = useDashboardContext();
   const businessInfo = useRef<HTMLDivElement>(null);
 
   const introduceBusiness = useRef<HTMLDivElement>(null);
@@ -121,20 +123,20 @@ export default function EditBusinessProfile() {
       website: values.website,
     };
     console.log(JSON.stringify(data, null, 2));
-    updateBuasinessProfile(data);
+    updateBusinessProfile(data);
   };
 
   const formik = useFormik<BusinessProfileValidationType>({
     initialValues: {
-      name: profileData?.result?.name,
+      name: profileData?.result?.business?.name,
       logo: profileData?.result?.avatar,
       yoe: "",
-      location: '',
+      location: "",
       linkedIn: profileData?.result?.linkedIn,
       instagram: profileData?.result?.instagram,
       twitter: profileData?.result?.twitter,
-      headline: '',
-      bio: ''
+      headline: "",
+      bio: "",
     },
     validationSchema: businessProfileSchema,
     validateOnBlur: true,
@@ -153,30 +155,32 @@ export default function EditBusinessProfile() {
     handleBlur,
   } = formik;
 
-  // const handleInputPrefill = useCallback(() => {
-  //   setValues({
-  //     firstName: profileData?.result?.name?.split(" ")[0],
-  //     lastName: profileData?.result?.name?.split(" ")[1],
-  //     username: profileData?.result?.username,
-  //     avatar: profileData?.result?.avatar,
-  //     location: profileData?.result?.location,
-  //     height: profileData?.result?.height,
-  //     age: profileData?.result?.dob,
-  //     headline: profileData?.result?.headline,
-  //     bio: profileData?.result?.bio,
-  //     website: profileData?.result?.website,
-  //     linkedIn: profileData?.result?.linkedIn,
-  //     instagram: profileData?.result?.instagram,
-  //     twitter: profileData?.result?.twitter,
-  //     projectName: profileData?.result?.projectName,
-  //     description: profileData?.result?.description,
-  //     projectUrl: profileData?.result?.projectUrl,
-  //     spaces: profileData?.result?.spaces,
-  //     comments: profileData?.result?.comments,
-  //     collaborators: [initialCollaborator],
-  //   });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [profileData, setValues]);
+  const handleInputPrefill = useCallback(() => {
+    setValues({
+      name: profileData?.result?.business?.name,
+      logo: profileData?.result?.business?.logo,
+      yoe: profileData?.result?.business?.yoe,
+      location: profileData?.result?.business?.location,
+      linkedIn: profileData?.result?.bsiness?.linkedIn,
+      instagram: profileData?.result?.bsiness?.instagram,
+      twitter: profileData?.result?.bsiness?.twitter,
+      headline: "",
+      bio: "",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profileData, setValues]);
+  useEffect(() => {
+    if (profileData?.result) {
+      // setUserData(profileData?.result);
+      handleInputPrefill();
+    }
+  }, [profileData, handleInputPrefill]);
+  useEffect(() => {
+    if (updateBusinessProfileSuccess) {
+      toast.success("Successfully updated profile");
+      profileRefetch();
+    }
+  }, [updateBusinessProfileSuccess]);
 
   return (
     <div className=" px-10">
@@ -226,7 +230,7 @@ export default function EditBusinessProfile() {
 
           <div className="w-full mt-8">
             <Button
-              isLoading={updateProfileLoading}
+              isLoading={updateBusinessProfileLoading}
               disabled={!isValid}
               className={`${!isValid ? "opacity-50" : ""} `}
             >
@@ -241,7 +245,7 @@ export default function EditBusinessProfile() {
               errors,
               // userData: profileData?.result
             }}
-            className="mt-4 "
+            className="mt-4 hidden"
           />
         </div>
 
@@ -283,9 +287,10 @@ export default function EditBusinessProfile() {
                     />
                   </div>
 
-           
                   <div className="w-full flex flex-col gap-1">
-                    <span className="font-medium text-base ">Year of Establishment</span>
+                    <span className="font-medium text-base ">
+                      Year of Establishment
+                    </span>
 
                     <DateSelect
                       disabled={
