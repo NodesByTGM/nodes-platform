@@ -7,6 +7,7 @@ interface InputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: string;
   touched?: boolean;
   labelStyle?: string;
+  
 }
 export default function TextArea({
   className = "",
@@ -15,6 +16,8 @@ export default function TextArea({
   required,
   onChange,
   labelStyle,
+  touched = false,
+  error,
 
   ...props
 }: InputProps) {
@@ -34,6 +37,9 @@ export default function TextArea({
         className={`w-full p-4 placeholder:text-placeholder text-ellipsis text-black text-sm transition-all
         outline-none bg-transparent border border-grey-dark focus:border-primary rounded-[5px] ${className}`}
       />
+        {touched && error ? (
+        <div className="mt-1 mb-2 text-sm text-red-500">{error}</div>
+      ) : null}
     </div>
   );
 }
