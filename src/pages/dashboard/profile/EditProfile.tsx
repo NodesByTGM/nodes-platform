@@ -12,6 +12,10 @@ import {
   profileSchema,
   profileValidationType,
 } from "../../../utilities/validation";
+import { getAge } from "../../../utilities/common";
+import { returnMaxDate, isValidURL } from "../../../utilities";
+import moment from "moment";
+import Countries from "../../../utilities/countries.json";
 import { FormDebug, ProfileEventPostForm } from "../../../components";
 import { toast } from "react-toastify";
 import {
@@ -22,6 +26,8 @@ import {
   TextArea,
   Switch,
   ProfileImgUploader,
+  LocationSelect,
+  DateSelect,
 } from "../../../components";
 import ProfileProjectForm from "./ProfileProjectForm";
 
@@ -55,6 +61,7 @@ export default function EditIndividual() {
     profileData,
     profileIsSuccess,
   } = useProfileContext();
+  // const [isValidWebsite, setIsValidWebsite] = useState(true)
   const [
     updateUserProfile,
     {
@@ -155,7 +162,7 @@ export default function EditIndividual() {
       skills: [],
       location: values.location,
       height: values.height,
-      age: values.age,
+      age: getAge(values.age),
       linkedIn: values.linkedIn,
       instagram: values.instagram,
       twitter: values.twitter,
@@ -180,7 +187,7 @@ export default function EditIndividual() {
       avatar: profileData?.result?.avatar,
       location: profileData?.result?.location,
       height: profileData?.result?.height,
-      age: profileData?.result?.age,
+      age: profileData?.result?.dob,
       headline: profileData?.result?.headline,
       bio: profileData?.result?.bio,
       website: profileData?.result?.website,
@@ -233,6 +240,7 @@ export default function EditIndividual() {
     console.log(JSON.stringify(profileData.user, null, 2));
   };
   const {
+    setFieldError,
     setValues,
     setFieldValue,
     handleChange,
@@ -252,7 +260,7 @@ export default function EditIndividual() {
       avatar: profileData?.result?.avatar,
       location: profileData?.result?.location,
       height: profileData?.result?.height,
-      age: profileData?.result?.age,
+      age: profileData?.result?.dob,
       headline: profileData?.result?.headline,
       bio: profileData?.result?.bio,
       website: profileData?.result?.website,
@@ -300,6 +308,17 @@ export default function EditIndividual() {
       populateFormValues();
     }
   }, [profileIsSuccess]);
+
+  useEffect(() => {
+    if (values?.website?.length > 0) {
+      
+      console.log('is Valid:'+ isValidURL(values.website))
+      // setFieldError(
+      //   'website',
+      //  "Url is invalid"
+      // );
+    }
+  }, [values.website, setFieldError]);
 
   return (
     <FormikProvider value={formik}>
@@ -353,17 +372,17 @@ export default function EditIndividual() {
 
           <FormDebug
             form={{
-              values,
+              // values,
               touched,
               errors,
-              // userData: profileData?.result
+              // userData: profileData?.result,
             }}
             className="mt-4 hidden"
           />
         </div>
         <div className="flex-1 flex flex-col gap-8 ">
           {/* {hasProject ? "True" : "False"} */}
-          {profileType.toLowerCase() == "business" && (
+          {/* {profileType.toLowerCase() == "business" && (
             <div ref={businessInfo} className="">
               <FormDiv title="Business Information">
                 <div className="">
@@ -385,6 +404,17 @@ export default function EditIndividual() {
                         // touched={touched.name}
                         // onChange={handleChange("name")}
                         // onBlur={handleBlur}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="font-medium text-base ">Location</span>
+                      <LocationSelect
+                        paddingy="py-[16px]"
+                        defaultValue={values.location}
+                        options={Countries}
+                        onChange={(value) =>
+                          setFieldValue("location", value)
+                        }
                       />
                     </div>
                     <div className="w-full">
@@ -415,7 +445,7 @@ export default function EditIndividual() {
                 </div>
               </FormDiv>
             </div>
-          )}
+          )} */}
 
           {profileType.toLowerCase() !== "business" && (
             <div ref={personalInfo}>
@@ -464,16 +494,14 @@ export default function EditIndividual() {
                         onBlur={handleBlur}
                       />
                     </div>
-                    <div className="w-full">
-                      <Input
-                        placeholder={AppConfig.PLACEHOLDERS.Location}
-                        id="location"
-                        label="Location"
-                        error={errors.location}
-                        value={values.location}
-                        touched={touched.location}
-                        onChange={handleChange("location")}
-                        onBlur={handleBlur}
+
+                    <div className="flex flex-col gap-1">
+                      <span className="font-medium text-base ">Location </span>
+                      <LocationSelect
+                        paddingy="py-[16px]"
+                        defaultValue={values.location}
+                        options={Countries}
+                        onChange={(value) => setFieldValue("location", value)}
                       />
                     </div>
 
@@ -481,6 +509,7 @@ export default function EditIndividual() {
                       <div className="w-full">
                         <Input
                           placeholder={AppConfig.PLACEHOLDERS.Height}
+                          type={"number"}
                           id="height"
                           label="Height(cm)"
                           error={errors.height}
@@ -490,13 +519,35 @@ export default function EditIndividual() {
                           onBlur={handleBlur}
                         />
                       </div>
-                      <div className="w-full">
-                        <Input
+                      <div className="w-full flex flex-col gap-1">
+                        {/* <Input
+                          disabled={
+                            profileData?.result?.subscription?.plan?.toLowerCase() !==
+                              "business" && values?.age > 18
+                          }
                           placeholder={AppConfig.PLACEHOLDERS.Age}
+                          type={"number"}
                           id="age"
                           label="Age"
                           error={errors.age}
                           value={values.age}
+                          touched={touched.age}
+                          onChange={handleChange("age")}
+                          onBlur={handleBlur}
+                        /> */}
+                        <span className="font-medium text-base ">Age</span>
+
+                        <DateSelect
+                          disabled={
+                            profileData?.result?.subscription?.plan?.toLowerCase() !==
+                            "business"
+                          }
+                          max={returnMaxDate()}
+                          labelStyle="!text-base"
+                          required
+                          id="age"
+                          error={errors.age}
+                          value={moment(values.age).format("yyyy-MM-DD")}
                           touched={touched.age}
                           onChange={handleChange("age")}
                           onBlur={handleBlur}

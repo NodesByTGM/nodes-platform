@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { ChevronDown, ChevronUp } from "react-feather";
 import { NavLink, useLocation } from "react-router-dom";
 // import AppConfig from "../utilities/config";
@@ -6,6 +6,8 @@ import { SearchComponent } from "../components";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { standardPaths, proPaths, businessPaths } from "../utilities";
+import { Transition } from "@headlessui/react";
+
 function Sidebar() {
   const user = useSelector((state: RootState) => state.user.user);
   const [showBusinessChild, setShowBusinessChild] = useState(false);
@@ -101,27 +103,39 @@ function Sidebar() {
               </NavLink>
             )}
             {r.children ? (
-              <div className="">
-                {showBusinessChild ? (
-                  <div className="flex flex-col gap-4 py-4 pl-4">
-                    {r.children?.map((child) => (
-                      <NavLink
-                        key={child.name}
-                        to={String(child.path)}
-                        className={({ isActive, isPending }) =>
-                          isActive
-                            ? "bg-secondary text-primary childNavLink"
-                            : isPending
-                            ? "bg-none text-primary childNavLink"
-                            : "childNavLink"
-                        }
-                      >
-                        <div className="hidden lg:block">{child.name}</div>
-                      </NavLink>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
+              <Transition.Root show={showBusinessChild} as={Fragment}>
+                <div className="transition ease-in duration-700">
+                  {showBusinessChild ? (
+                    <div className="flex flex-col gap-4 py-4 pl-4">
+                      {r.children?.map((child) => (
+                        <Transition.Child
+                          as={Fragment}
+                          enter="transition ease-in-out duration-300 transform"
+                          enterFrom="-translate-y-full"
+                          enterTo="translate-y-0"
+                          leave="transition ease-in-out duration-300 transform"
+                          leaveFrom="translate-y-0"
+                          leaveTo="-translate-y-full"
+                        >
+                          <NavLink
+                            key={child.name}
+                            to={String(child.path)}
+                            className={({ isActive, isPending }) =>
+                              isActive
+                                ? "bg-secondary text-primary childNavLink"
+                                : isPending
+                                ? "bg-none text-primary childNavLink"
+                                : "childNavLink"
+                            }
+                          >
+                            <div className="hidden lg:block">{child.name}</div>
+                          </NavLink>
+                        </Transition.Child>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              </Transition.Root>
             ) : null}
           </div>
         ))}

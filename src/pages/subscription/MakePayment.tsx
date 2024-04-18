@@ -71,7 +71,13 @@ export default function MakePayment() {
           </div>
         </div>
 
-        <div className="">{paid ? <BillingHistory /> : null}</div>
+        <div className="">
+          {paid ? (
+            <div className="hidden">
+              <BillingHistory />{" "}
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );

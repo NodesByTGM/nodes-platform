@@ -55,6 +55,9 @@ export default {
       backgroundImage: {
         darkgradient: "linear-gradient(180deg, #00000000 0%, #000000b3 62.92%)",
       },
+      screens: {
+        '3xl': '1750px',
+      },
     },
   },
   // plugins: [],

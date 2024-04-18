@@ -29,7 +29,7 @@ function MovieItem({
       <div className="rounded text-start bg-darkgradient p-5 h-full  flex flex-col gap-10">
         <div className="flex gap-4">
           {" "}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 ">
             <div className="">
               {" "}
               <svg
@@ -49,7 +49,7 @@ function MovieItem({
                 />
               </svg>
             </div>
-            <span className="max-w-full text-ellipsis text-nowrap overflow-hidden text-xl font-medium h-[30px]">
+            <span className="max-w-full text-ellipsis text-nowrap overflow-hidden text-xl font-medium ">
               {data?.vote_average.toFixed(1)}
             </span>
           </div>

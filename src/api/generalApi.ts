@@ -15,6 +15,15 @@ export const generalApi: any = createApi({
     }
   },
   endpoints: (builder) => ({
+    checkEmail: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Auth.CheckEmail}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
   
     uploadFile: builder.mutation<any, any>({
       query: (data) => {
@@ -25,6 +34,8 @@ export const generalApi: any = createApi({
         };
       },
     }),
+
+    
 
     verifyTransaction: builder.query<any, any>({
       query: (params) => {
@@ -59,4 +70,4 @@ export const generalApi: any = createApi({
   }),
 });
 
-export const { useGetMoviesAndShowsQuery, useGetTrendingQuery, useUploadFileMutation, useVerifyTransactionQuery } = generalApi;
+export const { useCheckEmailMutation, useGetMoviesAndShowsQuery, useGetTrendingQuery, useUploadFileMutation, useVerifyTransactionQuery } = generalApi;

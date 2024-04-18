@@ -10,6 +10,8 @@ import {
   UploadInput,
   WrappedCheckboxInput,
   WrappedInput,
+  LocationSelect,
+
 } from "../../components";
 import { Title } from "../../components/Typography";
 import { useAuth } from "../../context/hooks";
@@ -21,11 +23,13 @@ import { handleAxiosError } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
 import { loginUser } from "../../api/reducers/userSlice";
 import { useUploadFileMutation } from "../../api";
+import Countries from "../../utilities/countries.json";
 
 import { useDispatch } from "react-redux";
 // import FormDebug from "../../components/FormDebug";
 
 function TalentOnboarding() {
+
   const dispatch = useDispatch();
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
@@ -345,13 +349,28 @@ function TalentOnboarding() {
         {currentIndex === 2 ? (
           <div className="">
             <div className="flex flex-col gap-4 justify-center w-full">
-              <TextArea
+              {/* <TextArea
                 required
                 placeholder={"Location"}
                 id="location"
                 value={formData.location}
                 onChange={handleChange}
-              />
+              /> */}
+               <div className="flex flex-col gap-1">
+                      <span className="font-medium text-base ">Location</span>
+                      <LocationSelect
+                        paddingy="py-[16px]"
+                        defaultValue={formData.location}
+                        options={Countries}
+                        onChange={(value) =>
+                          // setFieldValue("location", value.value)
+                          setFormData((prev) => ({
+                            ...prev,
+                            location: value,
+                          }))
+                        }
+                      />
+                    </div>
 
               <ButtonWithBack
                 backAction={previousStep}
