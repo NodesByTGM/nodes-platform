@@ -33,9 +33,18 @@ export const businessProfileSchema = object({
     .nullable(),
   yoe: string(),
   location: string(),
-  linkedIn: string().nullable(),
-  instagram: string(),
-  twitter: string(),
+  linkedIn: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    'Enter correct url!'
+).nullable(),
+  instagram: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    'Enter correct url!'
+),
+  twitter: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    'Enter correct url!'
+),
   headline: string(),
   bio: string(),
 });
@@ -106,10 +115,24 @@ export const profileSchema = object({
     .nullable(),
   headline: string(),
   bio: string(),
-  website: string(),
-  linkedIn: string(),
-  instagram: string(),
-  twitter: string(),
+  website: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
+
+  // .url('Invalid url'),
+  linkedIn: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
+  instagram: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
+  twitter: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
   projectName: string(),
   description: string(),
   projectUrl: string(),
@@ -383,10 +406,22 @@ export const PersonalIndividualInformationSchema = {
   location: string(),
   headline: string(),
   bio: string(),
-  website: string(),
-  linkedIn: string(),
-  instagram: string(),
-  x: string(),
+  website: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    'Enter correct url!'
+),
+  linkedIn: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    'Enter correct url!'
+),
+  instagram: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    'Enter correct url!'
+),
+  x: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    'Enter correct url!'
+),
   spaces: bool(),
   comments: bool(),
 };
