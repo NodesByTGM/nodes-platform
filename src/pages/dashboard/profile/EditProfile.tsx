@@ -12,6 +12,7 @@ import {
   profileSchema,
   profileValidationType,
 } from "../../../utilities/validation";
+import Countries from "../../../utilities/countries.json";
 import { FormDebug, ProfileEventPostForm } from "../../../components";
 import { toast } from "react-toastify";
 import {
@@ -22,6 +23,7 @@ import {
   TextArea,
   Switch,
   ProfileImgUploader,
+  LocationSelect,
 } from "../../../components";
 import ProfileProjectForm from "./ProfileProjectForm";
 
@@ -363,7 +365,7 @@ export default function EditIndividual() {
         </div>
         <div className="flex-1 flex flex-col gap-8 ">
           {/* {hasProject ? "True" : "False"} */}
-          {profileType.toLowerCase() == "business" && (
+          {/* {profileType.toLowerCase() == "business" && (
             <div ref={businessInfo} className="">
               <FormDiv title="Business Information">
                 <div className="">
@@ -385,6 +387,17 @@ export default function EditIndividual() {
                         // touched={touched.name}
                         // onChange={handleChange("name")}
                         // onBlur={handleBlur}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="font-medium text-base ">Location</span>
+                      <LocationSelect
+                        paddingy="py-[16px]"
+                        defaultValue={values.location}
+                        options={Countries}
+                        onChange={(value) =>
+                          setFieldValue("location", value)
+                        }
                       />
                     </div>
                     <div className="w-full">
@@ -415,7 +428,7 @@ export default function EditIndividual() {
                 </div>
               </FormDiv>
             </div>
-          )}
+          )} */}
 
           {profileType.toLowerCase() !== "business" && (
             <div ref={personalInfo}>
@@ -464,7 +477,18 @@ export default function EditIndividual() {
                         onBlur={handleBlur}
                       />
                     </div>
-                    <div className="w-full">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-medium text-base ">Location</span>
+                      <LocationSelect
+                        paddingy="py-[16px]"
+                        defaultValue={values.location}
+                        options={Countries}
+                        onChange={(value) =>
+                          setFieldValue("location", value)
+                        }
+                      />
+                    </div>
+                    <div className="w-full hidden">
                       <Input
                         placeholder={AppConfig.PLACEHOLDERS.Location}
                         id="location"

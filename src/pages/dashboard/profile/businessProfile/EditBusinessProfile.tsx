@@ -5,12 +5,13 @@ import React, {
   useMemo,
   // useCallback,
 } from "react";
-import { FormDiv, Button, Back, Input, TextArea, ProfileImgUploader } from "../../../../components";
+import { FormDiv, Button, Back, Input, TextArea, ProfileImgUploader, LocationSelect } from "../../../../components";
 import BusinessProfileProjectForm from "./BusinessProfileProjectForm";
 import BusinessProfileJobForm from './BusinessProfileJobForm'
 import AppConfig from "../../../../utilities/config";
 import BusinessProfileEventPostForm from './BusinessProfileEventPostForm'
 import { useDashboardContext } from "../../../../context/hooks";
+import Countries from "../../../../utilities/countries.json";
 
 
 export default function EditBusinessProfile() {
@@ -166,16 +167,17 @@ export default function EditBusinessProfile() {
                     </div>
                     
              
-                    <div className="w-full">
-                      <Input
-                        placeholder={AppConfig.PLACEHOLDERS.Location}
-                        id="location"
-                        label="Location"
-                        // error={errors.location}
-                        // value={values.location}
-                        // touched={touched.location}
-                        // onChange={handleChange("location")}
-                        // onBlur={handleBlur}
+                
+                    <div className="flex flex-col gap-1">
+                      <span className="font-medium text-base ">Location</span>
+                      <LocationSelect
+                        paddingy="py-[16px]"
+                        defaultValue={"values.location"}
+                        options={Countries}
+                        onChange={(value) =>
+                          // setFieldValue("location", value)
+                          console.log(value)
+                        }
                       />
                     </div>
 

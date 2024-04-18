@@ -61,6 +61,7 @@ export { default as CarouselSection } from "./custom/CarouselSection.tsx";
 export { default as UpgradeCTA } from "./dashboard/UpgradeCTA.tsx";
 export { default as Breadcrumbs } from "./Breadcrumbs.tsx";
 export { default as LabeledSelect } from "./LabeledSelect";
+export { default as LocationSelect } from "./LocationSelect";
 export { default as WelcomeComponent } from "./dashboard/WelcomeComponent.tsx";
 export { default as WelcomeCard } from "./dashboard/WelcomeCard.tsx";
 export { default as Back } from "./Back.tsx";
