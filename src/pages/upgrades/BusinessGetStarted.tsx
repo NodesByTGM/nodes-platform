@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -52,6 +53,7 @@ function BusinessGetStarted() {
 
   const sendOTP = () => {
     const { otp, ...data } = formData;
+    console.log(otp)
     mainClient.post(AppConfig.API_ENDPOINTS.Auth.SendOTP, data).then((r) => {
       if (r.status === 200) {
         toast.success(r.data.message);

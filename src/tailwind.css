@@ -81,6 +81,10 @@
   background-color: #fbfce9;
 }
 
+.landingPageMainDiv {
+  @apply max-w-[1220px] mx-auto
+}
+
 /* .profile-forms-section {
   height: calc(100vh - 144px);
 } */

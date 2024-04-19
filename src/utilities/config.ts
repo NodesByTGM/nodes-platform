@@ -18,14 +18,14 @@ const API_ENDPOINTS = {
     VerfiyEmail: `${BASE_API_ENDPOINT}/auth/verify-email`,
     ProfileURL: `${BASE_API_ENDPOINT}/users/profile`,
     GoogleSocial: `${BASE_API_ENDPOINT}/socialauth/google/auth`,
-    CheckEmail: `${BASE_API_ENDPOINT}/auth/check-email`
+    CheckEmail: `${BASE_API_ENDPOINT}/auth/check-email`,
   },
   Community: {
     Post: `${BASE_API_ENDPOINT}/community/posts`,
   },
   Profile: {
     UserProfile: `${BASE_API_ENDPOINT}/users/profile`,
-    BusinessProfile:`${BASE_API_ENDPOINT}/users/business-profile`
+    BusinessProfile: `${BASE_API_ENDPOINT}/users/business-profile`,
   },
   Job: {
     JobUrl: `${BASE_API_ENDPOINT}/jobs`,
@@ -66,6 +66,14 @@ const API_ENDPOINTS = {
 };
 
 const PATHS = {
+  LandingPage: {
+    Base: "/",
+    Default: '',
+    Business: '/business-page',
+    Talent: '/talent-page',
+    AboutUs: '/about-us'
+
+  },
   Admin: {
     Auth: {
       Base: "/admin",
