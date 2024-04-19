@@ -31,14 +31,14 @@ export default function FeaturesSection() {
   ];
   const [selected, setSelected] = useState(propositions[0]);
   return (
-    <div className="landingPageMainDiv py-[108px]">
+    <div className="landingPageMainDiv pt-[108px]">
       <div className="mx-auto text-center">
         <SectionTitles
           title="Something catchy about the features"
           description="Lorem ipsum dolor sit amet consectetur."
         />
       </div>
-      <div className="flex gap-20 pt-20">
+      <div className="flex gap-20 py-20">
         <div className="max-w-[450px]">
           <div className="flex flex-col text-[#212121]">
             {propositions.map((item) => (

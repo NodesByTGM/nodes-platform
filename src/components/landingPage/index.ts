@@ -10,6 +10,7 @@ export { default as FeaturesSection } from "./FeaturesSection.tsx";
 export { default as NodesCommunitySection } from "./NodesCommunitySection.tsx";
 export { default as CTASection } from "./CTASection.tsx";
 export { default as GetStartedSection } from "./GetStartedSection.tsx";
-
+export { default as BenefitsSection } from "./BenefitsSection.tsx";
+export { default as PaleSection } from "./PaleSection.tsx";
 
 

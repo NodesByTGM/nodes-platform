@@ -1,10 +1,11 @@
 import React from "react";
-import { SectionTitles } from "../../components/landingPage";
+import { SectionTitles, BenefitsSection } from "../../components/landingPage";
+
 
 export default function NodesCommunitySection() {
 
   return (
-    <div className="landingPageMainDiv py-[108px]">
+    <div className="landingPageMainDiv pt-[108px]">
       <div className="mx-auto text-center">
         <SectionTitles
          
@@ -12,6 +13,7 @@ export default function NodesCommunitySection() {
           description="Lorem ipsum dolor sit amet consectetur."
         />
       </div>
+      <BenefitsSection />
     
     </div>
   );
