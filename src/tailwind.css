@@ -85,6 +85,18 @@
   @apply max-w-[1220px] mx-auto
 }
 
+.aboutUsHeroSectionBg{
+  background-image: url("/landingPageImg/TeamMate1.svg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* /landingPageImg/AboutUsHeroSectionSvg.svg */
+}
+
 /* .profile-forms-section {
   height: calc(100vh - 144px);
 } */

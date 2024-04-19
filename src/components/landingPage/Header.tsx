@@ -19,10 +19,10 @@ export default function Header() {
     },
   ];
   return (
-    <div className="landingPageMainDiv">
-      <div className="flex justify-between w-full">
-        <div className="flex gap-10 items-center">
-          <NavLink to="/" className="cursor-pointer">
+    <div className=" landingPageMainDiv !z-[100000000]">
+      <div className="flex justify-between w-full ">
+        <div className="flex gap-10 items-center ">
+          <NavLink to="/" className=" cursor-pointer">
             <img src="/landing-page-logo.svg" alt="" className="h-8" />
           </NavLink>
           <div className="flex gap-8">
@@ -49,7 +49,7 @@ export default function Header() {
             <div className="flex items-center gap-2">
               {" "}
               <Smartphone className="w-4" />
-             <span className="font-medium text-base"> Download app</span>
+              <span className="font-medium text-base"> Download app</span>
             </div>
           </button>
 
