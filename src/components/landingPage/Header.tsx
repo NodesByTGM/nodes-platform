@@ -23,7 +23,7 @@ export default function Header() {
       <div className="flex justify-between w-full">
         <div className="flex gap-10 items-center">
           <NavLink to="/" className="cursor-pointer">
-            <img src="/NodesLogoPrimary.png" alt="" className="h-8" />
+            <img src="/landing-page-logo.svg" alt="" className="h-8" />
           </NavLink>
           <div className="flex gap-8">
             {navs.map((nav) => (
@@ -45,7 +45,7 @@ export default function Header() {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <button className="p-4 rounded-[5px] bg-white border-[#D6D6D6] border text-customprimary">
+          <button className="p-4 rounded-[8px] bg-white border-[#D6D6D6] border text-primary">
             <div className="flex items-center gap-2">
               {" "}
               <Smartphone className="w-4" />
@@ -54,7 +54,7 @@ export default function Header() {
           </button>
 
           <NavLink to={AppConfig.PATHS.Auth.Register}>
-            <Button className="!py-4 max-w-max !border-none !rounded !bg-customprimary">
+            <Button className="!py-4 max-w-max !border-none !rounded-lg !bg-primary">
               Sign Up
             </Button>
           </NavLink>

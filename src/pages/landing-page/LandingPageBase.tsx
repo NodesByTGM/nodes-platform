@@ -4,8 +4,8 @@ import { Header, Footer } from "../../components/landingPage";
 
 export default function LandingPageBase() {
   return (
-    <div className="min-h-[100vh]">
-      <div className="py-4 px-6">
+    <div className="min-h-[100vh] bg-[#ffffff]">
+      <div className="py-6 px-6">
         {" "}
         <Header />
       </div>
