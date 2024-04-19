@@ -249,7 +249,7 @@ export const planObj = {
       navigate("/subscription/pro" + `?isCurrentPlan=${isCurrentPlan}`);
     },
     monthlyAction: (navigate, isCurrentPlan = false) => {
-      navigate("/subscription/pro"+ `?isCurrentPlan=${isCurrentPlan}`);
+      navigate("/subscription/pro" + `?isCurrentPlan=${isCurrentPlan}`);
     },
     param: "pro",
   },
@@ -271,10 +271,10 @@ export const planObj = {
       ...pricing.business,
     },
     action: (navigate, isCurrentPlan = false) => {
-      navigate("/subscription/business"+ `?isCurrentPlan=${isCurrentPlan}`);
+      navigate("/subscription/business" + `?isCurrentPlan=${isCurrentPlan}`);
     },
     monthlyAction: (navigate, isCurrentPlan = false) => {
-      navigate("/subscription/business"+ `?isCurrentPlan=${isCurrentPlan}`);
+      navigate("/subscription/business" + `?isCurrentPlan=${isCurrentPlan}`);
     },
     param: "business",
   },
@@ -295,10 +295,10 @@ export const planObj = {
       ...pricing.pro,
     },
     action: (navigate, isCurrentPlan = false) => {
-      navigate("/subscription/pro-monthly"+ `?isCurrentPlan=${isCurrentPlan}`);
+      navigate("/subscription/pro-monthly" + `?isCurrentPlan=${isCurrentPlan}`);
     },
     monthlyAction: (navigate, isCurrentPlan = false) => {
-      navigate("/subscription/pro-monthly"+ `?isCurrentPlan=${isCurrentPlan}`);
+      navigate("/subscription/pro-monthly" + `?isCurrentPlan=${isCurrentPlan}`);
     },
     param: "pro-monthly",
   },
@@ -320,10 +320,14 @@ export const planObj = {
       ...pricing.business,
     },
     action: (navigate, isCurrentPlan = false) => {
-      navigate("/subscription/business-monthly"+ `?isCurrentPlan=${isCurrentPlan}`);
+      navigate(
+        "/subscription/business-monthly" + `?isCurrentPlan=${isCurrentPlan}`
+      );
     },
     monthlyAction: (navigate, isCurrentPlan = false) => {
-      navigate("/subscription/business-monthly"+ `?isCurrentPlan=${isCurrentPlan}`);
+      navigate(
+        "/subscription/business-monthly" + `?isCurrentPlan=${isCurrentPlan}`
+      );
     },
     param: "business-monthly",
   },
@@ -393,5 +397,188 @@ export const carouselImages = [
   {
     id: 22,
     url: "/imgUi/woman-promoting-cloths-from-thrift-store.jpg",
+  },
+];
+
+export const landingPageFooterLinks = [
+  {
+    id: 1,
+    linkTitle: "Column One",
+    linkItems: [
+      {
+        id: 1,
+        linkLabel: "Link  One",
+        linkUrl: "/",
+      },
+      {
+        id: 2,
+        linkLabel: "Link  One",
+        linkUrl: "/",
+      },
+      {
+        id: 3,
+        linkLabel: "Link  One",
+        linkUrl: "/",
+      },
+      {
+        id: 4,
+        linkLabel: "Link  One",
+        linkUrl: "/",
+      },
+      {
+        id: 5,
+        linkLabel: "Link  One",
+        linkUrl: "/",
+      },
+      {
+        id: 6,
+        linkLabel: "Link  One",
+        linkUrl: "/",
+      },
+    ],
+  },
+  {
+    id: 2,
+    linkTitle: "Column Two",
+    linkItems: [
+      {
+        id: 1,
+        linkLabel: "Link  Two",
+        linkUrl: "/",
+      },
+      {
+        id: 2,
+        linkLabel: "Link  Two",
+        linkUrl: "/",
+      },
+      {
+        id: 3,
+        linkLabel: "Link  Two",
+        linkUrl: "/",
+      },
+      {
+        id: 4,
+        linkLabel: "Link  Two",
+        linkUrl: "/",
+      },
+      {
+        id: 5,
+        linkLabel: "Link  Two",
+        linkUrl: "/",
+      },
+      {
+        id: 6,
+        linkLabel: "Link  Two",
+        linkUrl: "/",
+      },
+    ],
+  },
+  {
+    id: 3,
+    linkTitle: "Column Three",
+    linkItems: [
+      {
+        id: 1,
+        linkLabel: "Link  Three",
+        linkUrl: "/",
+      },
+      {
+        id: 2,
+        linkLabel: "Link  Three",
+        linkUrl: "/",
+      },
+      {
+        id: 3,
+        linkLabel: "Link  Three",
+        linkUrl: "/",
+      },
+      {
+        id: 4,
+        linkLabel: "Link  Three",
+        linkUrl: "/",
+      },
+      {
+        id: 5,
+        linkLabel: "Link  Three",
+        linkUrl: "/",
+      },
+      {
+        id: 6,
+        linkLabel: "Link  Three",
+        linkUrl: "/",
+      },
+    ],
+  },
+  {
+    id: 4,
+    linkTitle: "Column Four",
+    linkItems: [
+      {
+        id: 1,
+        linkLabel: "Link  Four",
+        linkUrl: "/",
+      },
+      {
+        id: 2,
+        linkLabel: "Link  Four",
+        linkUrl: "/",
+      },
+      {
+        id: 3,
+        linkLabel: "Link  Four",
+        linkUrl: "/",
+      },
+      {
+        id: 4,
+        linkLabel: "Link  Four",
+        linkUrl: "/",
+      },
+      {
+        id: 5,
+        linkLabel: "Link  Four",
+        linkUrl: "/",
+      },
+      {
+        id: 6,
+        linkLabel: "Link  Four",
+        linkUrl: "/",
+      },
+    ],
+  },
+  {
+    id: 5,
+    linkTitle: "Column Five",
+    linkItems: [
+      {
+        id: 1,
+        linkLabel: "Link  Five",
+        linkUrl: "/",
+      },
+      {
+        id: 2,
+        linkLabel: "Link  Five",
+        linkUrl: "/",
+      },
+      {
+        id: 3,
+        linkLabel: "Link  Five",
+        linkUrl: "/",
+      },
+      {
+        id: 4,
+        linkLabel: "Link  Five",
+        linkUrl: "/",
+      },
+      {
+        id: 5,
+        linkLabel: "Link  Five",
+        linkUrl: "/",
+      },
+      {
+        id: 6,
+        linkLabel: "Link  Five",
+        linkUrl: "/",
+      },
+    ],
   },
 ];

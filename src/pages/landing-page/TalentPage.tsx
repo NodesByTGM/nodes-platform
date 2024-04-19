@@ -1,19 +1,21 @@
 import React from "react";
 import { HeroSectionPlanCTA } from "../../components/landingPage";
-
+import {
+  NodesCommunitySection,
+  CTASection,
+  GetStartedSection,
+} from "../../components/landingPage";
 export default function TalentPage() {
   return (
-    <div className="min-h-[100vh]">
-      <div className="">
-        {" "}
-        <div className="pt-[79px]">
-          <HeroSectionPlanCTA
-            textColor="text-primary"
-            solidBtnColor="!bg-customprimary !text-white"
-            outlineBtnColor="border-customprimary text-customprimary"
-          />
-        </div>
-      </div>
+    <div className="min-h-[100vh] ">
+      <HeroSectionPlanCTA />
+
+      <NodesCommunitySection
+        title="Lorem ipsum dolor sit amet consectetur."
+        description="Lorem ipsum dolor sit amet consectetur."
+      />
+      <GetStartedSection />
+      <CTASection />
     </div>
   );
 }

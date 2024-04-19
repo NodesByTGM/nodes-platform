@@ -24,10 +24,16 @@ export default function CTASection() {
       description:
         "Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet accumsan libero ipsum facilisis nibh. ",
     },
+    {
+      id: 4,
+      title: "What is the pricing",
+      description:
+        "Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet accumsan libero ipsum facilisis nibh. ",
+    },
   ];
   const [selected, setSelected] = useState<any>(faq[0]);
   return (
-    <div className="landingPageMainDiv py-[108px]">
+    <div className="landingPageMainDiv pt-[80px] pb-[120px]">
       <PaleSection>
         <div className=" grid grid-cols-2 gap-[34px] ">
           <div className="flex flex-col max-w-[319px] font-medium text-primary">

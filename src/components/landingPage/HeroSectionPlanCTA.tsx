@@ -7,35 +7,38 @@ export default function HeroSectionPlanCTA({
   outlineBtnColor = "border-primary text-primary",
 }) {
   return (
-    <div className="landingPageMainDiv">
-      <div className="flex flex-col mx-auto max-w-[1096px] text-center">
-        <h1 className={`font-medium text-[56px] ${textColor}`}>
-          Lorem ipsum dolor sit amet consectetur.
-        </h1>
-        <span
-          className={`font-normal text-[20px] max-w-[725px] mx-auto mt-4 ${textColor}`}
-        >
-          Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet accumsan
-          libero ipsum facilisis nibh.{" "}
-        </span>
+    <div className="landingPageMainDiv pt-[80px] pb-[108px]">
+      <div className="flex gap-[64px]">
+        <div className="flex flex-col max-w-[578px]">
+          <h1 className={`font-medium text-[56px] ${textColor}`}>
+            Lorem ipsum dolor sit amet consectetur.
+          </h1>
+          <span className={`font-normal text-[20px]   mt-4 ${textColor}`}>
+            Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet
+            accumsan libero ipsum facilisis nibh.{" "}
+          </span>
 
-        <div className="flex mt-[48px] gap-4 mx-auto">
-          <NavLink to={"/"}>
-            <Button
-              className={`!py-4 !px-[48px] !text-base max-w-max !border-none !rounded ${solidBtnColor}`}
-            >
-              Get started now
-            </Button>
-          </NavLink>
-          <button className={`${outlineBtnColor} p-4 rounded-[4px]  border `}>
-            <div className="flex items-center gap-2">
-              {" "}
-              <span className="font-medium text-base">
+          <div className="flex mt-[48px] gap-4 ">
+            <NavLink to={"/"}>
+              <Button
+                className={`!py-4 !px-[48px] !text-base max-w-max !border-none !rounded ${solidBtnColor}`}
+              >
+                Get started now
+              </Button>
+            </NavLink>
+            <button className={`${outlineBtnColor} p-4 rounded-[4px]  border `}>
+              <div className="flex items-center gap-2">
                 {" "}
-                Learn more about us
-              </span>
-            </div>
-          </button>
+                <span className="font-medium text-base">
+                  {" "}
+                  Learn more about us
+                </span>
+              </div>
+            </button>
+          </div>
+        </div>
+        <div className="">
+          <img src="/landingPageImg/PlanHerosectionImg.png" alt="" className="" />
         </div>
       </div>
     </div>
