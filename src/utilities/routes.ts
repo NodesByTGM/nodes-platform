@@ -42,6 +42,11 @@ import {
   TalentUpgrade,
   Pricing,
   AccountSettingsBase,
+  LandingPageBase,
+  LandingPage,
+  AboutUsPage,
+  BusinessPage,
+  TalentPage,
 } from "../pages";
 import {
   AdminAuthBase,
@@ -90,6 +95,36 @@ export const adminAuthRoutes: RouteObject[] = [
     ],
   },
 ];
+export const landingPageRoutes: RouteObject[] = [
+  
+  
+  
+  
+  {
+    path: AppConfig.PATHS.LandingPage.Base,
+    Component: LandingPageBase,
+    children: [
+      {
+        path: AppConfig.PATHS.LandingPage.Default,
+        Component: LandingPage,
+      },
+      {
+        path: AppConfig.PATHS.LandingPage.Business,
+        Component: BusinessPage,
+      },
+      {
+        path: AppConfig.PATHS.LandingPage.Talent,
+        Component: TalentPage,
+      },
+      {
+        path: AppConfig.PATHS.LandingPage.AboutUs,
+        Component: AboutUsPage,
+      },
+   
+    ],
+  },
+];
+
 
 export const adminMainRoutes: RouteObject[] = [
   {

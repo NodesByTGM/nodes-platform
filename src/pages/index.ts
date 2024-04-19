@@ -41,3 +41,10 @@ export { default as IndividualDashboard } from "../pages/dashboard/overview/Indi
 export {default as BusinessProfile} from './dashboard/profile/BusinessProfile'
 export {default as EditBusinessProfile} from './dashboard/profile/businessProfile/EditBusinessProfile.tsx'
 export {default as GoogleSocial} from './auth/GoogleSocial.tsx'
+export {default as LandingPageBase} from './landing-page/LandingPageBase.tsx'
+export {default as LandingPage} from './landing-page/LandingPage.tsx'
+export {default as AboutUsPage} from './landing-page/AboutUsPage.tsx'
+export {default as BusinessPage} from './landing-page/BusinessPage.tsx'
+export {default as TalentPage} from './landing-page/TalentPage.tsx'
+
+

@@ -8,13 +8,13 @@ import "./App.css";
 import "./tailwind.css";
 import "./index.css";
 
-
 import AuthProvider from "./context/auth";
 import {
   AuthLayout,
   MainLayout,
   AdminAuthLayout,
   AdminMainLayout,
+  LandingPageLayout,
 } from "./layout";
 import { Register } from "./pages";
 import AppConfig from "./utilities/config"; // { BASE_API_ENDPOINT }
@@ -23,10 +23,26 @@ import {
   publicRoutes,
   upgradeRoutes,
   adminAuthRoutes,
-  adminMainRoutes
+  adminMainRoutes,
+  landingPageRoutes,
 } from "./utilities/routes";
 import AppWrapper from "./AppWrapper";
 const router = createBrowserRouter([
+  {
+    element: <LandingPageLayout />,
+    // child route components
+    children: [
+      ...landingPageRoutes.map((route) => ({
+        path: route.path,
+        Component: route.Component,
+        children:
+          route?.children?.map((childRoute) => ({
+            path: childRoute.path,
+            Component: childRoute.Component,
+          })) || [],
+      })),
+    ],
+  },
   {
     element: <AdminAuthLayout />,
     // child route components
