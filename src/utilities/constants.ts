@@ -582,3 +582,5 @@ export const landingPageFooterLinks = [
     ],
   },
 ];
+
+export const ScrollAnimationDelay = 70

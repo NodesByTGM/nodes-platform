@@ -5,17 +5,27 @@ import {
   CTASection,
   GetStartedSection,
 } from "../../components/landingPage";
+import ScrollAnimation from "react-animate-on-scroll";
+import { ScrollAnimationDelay } from "../../utilities/constants";
 export default function TalentPage() {
   return (
     <div className="min-h-[100vh] ">
       <HeroSectionPlanCTA />
 
-      <NodesCommunitySection
-        title="Lorem ipsum dolor sit amet consectetur."
-        description="Lorem ipsum dolor sit amet consectetur."
-      />
-      <GetStartedSection />
-      <CTASection />
+      <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
+        <NodesCommunitySection
+          title="Lorem ipsum dolor sit amet consectetur."
+          description="Lorem ipsum dolor sit amet consectetur."
+        />
+      </ScrollAnimation>
+
+      <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
+        <GetStartedSection />
+      </ScrollAnimation>
+
+      <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
+        <CTASection />
+      </ScrollAnimation>
     </div>
   );
 }

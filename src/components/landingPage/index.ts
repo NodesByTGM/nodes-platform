@@ -17,6 +17,7 @@ export { default as OurStorySection } from "./OurStorySection.tsx";
 export { default as OurvaluesSection } from "./OurvaluesSection.tsx";
 export { default as OurTeamSection } from "./OurTeamSection.tsx";
 export { default as FloatingHeader } from "./FloatingHeader.tsx";
+export { default as TransitionRoot } from "./TransitionRoot.tsx";
 
 
 
