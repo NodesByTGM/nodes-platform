@@ -38,7 +38,7 @@ const onboardingLinks = [
 // }
 
 export default function FloatingHeader() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleNav = (link) => {

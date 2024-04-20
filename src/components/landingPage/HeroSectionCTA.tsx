@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 export default function HeroSectionCTA() {
   return (
     <div>
-      <div className="flex gap-4 mx-auto">
+      <div className="flex flex-col md:flex-row gap-4 mx-auto">
         <NavLink to={"/"}>
           <button
             className={`border border-primary !py-4 !px-[48px] !text-base max-w-max !rounded-lg !bg-primary !text-white`}
@@ -14,7 +14,7 @@ export default function HeroSectionCTA() {
         </NavLink>
         <NavLink to={"/"}>
           <button
-            className={`border-primary text-primary p-4 rounded-[8px]  border `}
+            className={`border-primary text-primary p-4 rounded-[8px]  border w-full`}
           >
             <div className="flex items-center gap-2">
               {" "}

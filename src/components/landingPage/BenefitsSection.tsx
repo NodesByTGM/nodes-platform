@@ -20,14 +20,14 @@ export default function BenefitsSection() {
   ];
   return (
     <div className="pt-20 pb-[120px] flex gap-6">
-      <div className="">
+      <div className="hidden lg:block">
         <img src="/landingPageImg/BenefitsSectionImg.png" alt="" className="" />
       </div>
-      <div className="grid  gap-6">
+      <div className="grid  gap-6 mx-auto lg:mx-0">
         {benefits.map((item) => (
           <div
             key={item.title}
-            className="rounded-[16px] bg-[#D6DE211A] p-10 w-full flex flex-col gap-4"
+            className="rounded-[16px] bg-[#D6DE211A] p-6 sm:p-10 w-full flex flex-col gap-4"
           >
             <h3 className="text-primary text-[24px] font-medium">
               {item.title}
