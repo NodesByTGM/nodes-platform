@@ -4,9 +4,9 @@ import { PaleSection } from "../../components/landingPage";
 export default function OurStorySection() {
   return (
     <div className="landingPageMainDiv ">
-      <div className="py-[112px]">
-        <div className="flex gap-20 justify-between items-start text-[#000000]">
-          <div className="flex flex-col gap-4 max-w-[540px] min-w-[540px]">
+      <div className="py-[60px] md:py-[112px]">
+        <div className="flex flex-col md:flex-row gap-20 justify-between items-start text-[#000000]">
+          <div className="flex flex-col gap-4 max-w-[540px] md:min-w-[360px] lg:min-w-[540px]">
             <span className="font-medium text-[16px]">Our story</span>
             <span className="font-medium text-[40px]">
               Tell a story about the product
@@ -40,7 +40,7 @@ export default function OurStorySection() {
           <img src="/landingPageImg/OurStoryImg.png" alt="" className="" />
         </div>
       </div>
-      <div className="pt-20 pb-[120px]">
+      <div className="pt-20 pb-[60px] sm:pb-[120px]">
         <PaleSection>
           <div className="flex flex-col justify-center items-center gap-8 max-w-[768px] mx-auto">
             <p className="text-center font-medium text-[24px] italic">
@@ -48,9 +48,9 @@ export default function OurStorySection() {
               Nodes/the grid management. This will help to further express the
               vision and trust to the potential users”
             </p>
-            <div className="flex items-center gap-5">
+            <div className="flex flex-col sm:flex-row items-center gap-5">
               <EmptyAvatar />
-              <div className="flex flex-col  text-base text-primary pr-5 border-r border-primary">
+              <div className="text-center flex flex-col  text-base text-primary sm:pr-5 sm:border-r border-primary">
                 <span className="font-semibold ">Name Surname</span>
                 <span className="font-normal">Position, Company name</span>
               </div>

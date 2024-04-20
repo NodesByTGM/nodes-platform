@@ -52,11 +52,11 @@ export default function OurTeamSection() {
     },
   ];
   return (
-    <div className="landingPageMainDiv py-[112px] text-[#000000]">
+    <div className="landingPageMainDiv py-[60px] md:py-[112px] text-[#000000]">
       <div className="flex flex-col gap-20">
-        <div className="mx-auto flex flex-col  max-w-[768px] min-w-[768px] text-center">
-          <span className="font-semibold text-[16px] mb-4">Our values</span>
-          <span className="font-medium text-[40px] mb-6">
+        <div className="mx-auto flex flex-col  max-w-[768px] lg:min-w-[768px]  text-center">
+          <span className="font-semibold text-[16px] mb-4">Our team</span>
+          <span className="font-medium text-[30px] md:text-[40px] mb-6">
             Introduce the team
           </span>
           <span className="font-normal text-[18px]">
@@ -65,7 +65,7 @@ export default function OurTeamSection() {
             viverra ornare.
           </span>
         </div>
-        <div className="grid grid-cols-3 gap-y-[64px] gap-x-[48px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-[64px] gap-x-[48px]">
           {team.map((teamMate) => (
             <div
               key={teamMate.id}
@@ -74,13 +74,13 @@ export default function OurTeamSection() {
               <div className="mb-6">
                 <img src={teamMate.img} alt="" className="" />
               </div>
-              <span className="text-[20px] font-normal">
+              <span className="text-[18px] md:text-[20px] font-normal">
                 {teamMate.fullName}
               </span>
-              <span className="text-[18px] font-normal mb-4">
+              <span className="text-[16px] md:text-[18px] font-normal mb-4">
                 {teamMate.jobTitle}
               </span>
-              <span className="font-normal text-[16px] mb-6">
+              <span className="font-normal text-sm md:text-[16px] mb-6">
                 {teamMate.description}
               </span>
               <div className="grid grid-cols-2 gap-[14px]">

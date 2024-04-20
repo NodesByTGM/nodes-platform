@@ -6,7 +6,7 @@ export default function NodesCommunitySection({
   description = "Lorem ipsum dolor sit amet consectetur.",
 }) {
   return (
-    <div className="landingPageMainDiv pt-[108px]">
+    <div className="landingPageMainDiv pt-[60px] sm:pt-[108px]">
       <div className="mx-auto text-center">
         <SectionTitles
           title={title}

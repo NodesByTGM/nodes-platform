@@ -22,11 +22,11 @@ export default function OurvaluesSection() {
     },
   ];
   return (
-    <div className="landingPageMainDiv py-[112px] text-[#000000]">
+    <div className="landingPageMainDiv py-[60px] md:py-[112px] text-[#000000]">
       <div className="flex flex-col gap-20">
-        <div className="mx-auto flex flex-col  max-w-[768px] min-w-[768px] text-center">
+        <div className="mx-auto flex flex-col  max-w-[768px] lg:min-w-[768px] text-center">
           <span className="font-medium text-[16px] mb-4">Our values</span>
-          <span className="font-medium text-[40px] mb-6">
+          <span className="font-medium text-[30px] md:text-[40px] mb-6">
             Emphasize what's important to the brand
           </span>
           <span className="font-normal text-[18px]">
@@ -35,16 +35,16 @@ export default function OurvaluesSection() {
             viverra ornare.
           </span>
         </div>
-        <div className="grid grid-cols-3 gap-[48px]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-[48px]">
           {highLights.map((highlight) => (
             <div key={highlight.id} className="flex flex-col gap-6 text-[#000000] items-center text-center">
               <div className="">
                 <LightBulb />
               </div>
-              <span className="text-[24px] font-medium">
+              <span className="text-[18px] md:text-[24px] font-medium">
                 {highlight.title}
               </span>
-              <span className="font-normal text-[16px]">
+              <span className="font-normal text-sm md:text-[16px]">
                {highlight.description}
               </span>
             </div>

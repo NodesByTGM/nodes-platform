@@ -51,10 +51,10 @@ export default function Footer() {
               </h3>
               <ul className="font-normal text-sm">
                 {link.linkItems.map((item) => (
-                  <li className="py-2">
+                  <li  key={item.id} className="py-2">
                     {" "}
                     <NavLink
-                      key={item.id}
+                     
                       to={item.linkUrl}
                       className="py-2 w-full"
                     >
