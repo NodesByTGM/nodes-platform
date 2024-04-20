@@ -11,8 +11,8 @@ import {
 
 export default function Footer() {
   return (
-    <div className="landingPageMainDiv pt-[160px] pb-[80px]">
-      <div className="flex gap-8 justify-between mb-20">
+    <div className="landingPageMainDiv pt-[50px] lg:pt-[160px] pb-[80px]">
+      <div className="flex flex-col lg:flex-row gap-8 justify-between mb-20">
         <div className="flex flex-col gap-4">
           <h4 className="font-medium text-[18px] text-[#000000]">
             Join our newsletter
@@ -23,7 +23,7 @@ export default function Footer() {
         </div>
 
         <div className="">
-          <div className="flex gap-4 mb-4">
+          <div className="flex flex-col sm:flex-row gap-4 mb-4">
             <input
               type="text"
               placeholder="Enter your email"
@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-b border-[#D6DE2180] py-20">
-        <div className="w-full grid grid-cols-6 gap-x-10 gap-y-6">
+        <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-x-10 gap-y-6">
           {landingPageFooterLinks.map((link) => (
             <div key={link.id} className="flex flex-col gap-4">
               <h3 className="font-medium text-base text-[#000000]">
@@ -51,10 +51,10 @@ export default function Footer() {
               </h3>
               <ul className="font-normal text-sm">
                 {link.linkItems.map((item) => (
-                  <li className="py-2">
+                  <li  key={item.id} className="py-2">
                     {" "}
                     <NavLink
-                      key={item.id}
+                     
                       to={item.linkUrl}
                       className="py-2 w-full"
                     >
@@ -86,7 +86,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="flex justify-between items-center mt-8">
+      <div className="flex gap-4 justify-between items-center mt-8">
         <NavLink to="/" className="cursor-pointer">
           <img src="/landing-page-logo.svg" alt="" className="h-8" />
         </NavLink>

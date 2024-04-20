@@ -7,18 +7,18 @@ export default function HeroSectionPlanCTA({
   outlineBtnColor = "border-primary text-primary",
 }) {
   return (
-    <div className="landingPageMainDiv pt-[80px] pb-[108px]">
+    <div className="landingPageMainDiv pt-[80px] pb-[60px] sm:pb-[108px]">
       <div className="flex gap-[64px]">
-        <div className="flex flex-col max-w-[578px]">
-          <h1 className={`font-medium text-[56px] ${textColor}`}>
+        <div className="flex flex-col lg:max-w-[578px]">
+          <h1 className={`text-center lg:text-start font-medium text-[48px] md:text-[56px] ${textColor}`}>
             Lorem ipsum dolor sit amet consectetur.
           </h1>
-          <span className={`font-normal text-[20px]   mt-4 ${textColor}`}>
+          <span className={`text-center lg:text-start font-normal text-[20px]   mt-4 ${textColor}`}>
             Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet
             accumsan libero ipsum facilisis nibh.{" "}
           </span>
 
-          <div className="flex mt-[48px] gap-4 ">
+          <div className="mx-auto lg:mx-0 grid sm:flex mt-[48px] gap-4 ">
             <NavLink to={"/"}>
               <Button
                 className={`!py-4 !px-[48px] !text-base max-w-max !border-none !rounded ${solidBtnColor}`}
@@ -29,7 +29,7 @@ export default function HeroSectionPlanCTA({
             <button className={`${outlineBtnColor} p-4 rounded-[4px]  border `}>
               <div className="flex items-center gap-2">
                 {" "}
-                <span className="font-medium text-base">
+                <span className="font-medium text-base mx-auto">
                   {" "}
                   Learn more about us
                 </span>
@@ -37,7 +37,7 @@ export default function HeroSectionPlanCTA({
             </button>
           </div>
         </div>
-        <div className="">
+        <div className="hidden lg:block">
           <img src="/landingPageImg/PlanHerosectionImg.png" alt="" className="" />
         </div>
       </div>

@@ -16,7 +16,7 @@ export default function SkillsSection() {
     <div className="landingPageMainDiv py-[108px]">
       <div className="mx-auto text-center">
         <SectionTitles
-          titleClass="!text-[48px]"
+          titleClass="!md:text-[48px]"
           title="A catchy phrase about Nodes"
           description="Lorem ipsum dolor sit amet consectetur."
         />

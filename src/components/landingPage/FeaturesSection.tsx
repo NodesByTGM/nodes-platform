@@ -39,7 +39,7 @@ export default function FeaturesSection() {
         />
       </div>
       <div className="flex gap-20 py-20">
-        <div className="max-w-[450px]">
+        <div className="mx-auto lg:mx-0 max-w-[450px]">
           <div className="flex flex-col text-[#212121]">
             {propositions.map((item) => (
               <div
@@ -51,9 +51,9 @@ export default function FeaturesSection() {
                     : " border-[#D6DE21] pt-[61px]"
                 } flex flex-col gap-2 pl-6`}
               >
-                <span className="text-[24px] font-medium">{item.title}</span>
+                <span className="text-[18px] md:text-[24px] font-medium">{item.title}</span>
                 {selected.id === item.id ? (
-                  <span className="font-normal text-[20px]">
+                  <span className="font-normal text-[16px] md:text-[20px]">
                     {item.description}
                   </span>
                 ) : null}
@@ -62,7 +62,7 @@ export default function FeaturesSection() {
           </div>
         </div>
 
-        <div className="flex-1">
+        <div className="hidden lg:block flex-1">
             <img src="/landingPageImg/LandingPageFeaturesImg.png" alt="" className="" />
         </div>
       </div>

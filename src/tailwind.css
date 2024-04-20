@@ -82,7 +82,7 @@
 }
 
 .landingPageMainDiv {
-  @apply max-w-[1220px] mx-auto
+  @apply max-w-[1220px] mx-auto px-6 
 }
 
 .aboutUsHeroSectionBg{

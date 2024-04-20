@@ -35,7 +35,7 @@ export default function CTASection() {
   return (
     <div className="landingPageMainDiv pt-[80px] pb-[120px]">
       <PaleSection>
-        <div className=" grid grid-cols-2 gap-[34px] ">
+        <div className=" grid grid-cols-1 md:grid-cols-2 gap-x-[34px] gap-y-[60px] ">
           <div className="flex flex-col max-w-[319px] font-medium text-primary">
             <h3 className=" text-[35px] mb-4">Get to know us better </h3>
 
