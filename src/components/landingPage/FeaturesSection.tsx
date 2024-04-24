@@ -49,7 +49,7 @@ export default function FeaturesSection() {
                   selected.id === item.id
                     ? "border-[#212121] border-l-[4px] pb-[8px]"
                     : " border-[#D6DE21] pb-[61px]"
-                } flex flex-col gap-2 pl-6`}
+                } flex flex-col gap-2 pl-6 cursor-pointer`}
               >
                 <span className="text-[18px] md:text-[24px] font-medium">{item.title}</span>
                 {selected.id === item.id ? (
