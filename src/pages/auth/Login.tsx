@@ -124,7 +124,7 @@ function Login() {
         <a
           className="w-full"
          
-          href="https://dev.api.nodesafrica.com/api/v1/socialauth/google/auth/"
+          href="https://dev.api.nodesafrica.com/api/v1/socialauth/google/auth"
           // target='_blank'
         >
           <ButtonOutline className="!rounded-lg !w-full ">

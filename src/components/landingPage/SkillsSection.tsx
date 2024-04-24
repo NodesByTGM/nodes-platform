@@ -36,7 +36,7 @@ export default function SkillsSection() {
           </div>
         ))}
       </div> */}
-      <div className=" mt-[108px relative">
+      <div className=" mt-[108px] relative">
         <div className="absolute h-full w-20   z-[400] top-0 bottom-0 left-0 bg-gradient-to-r from-[#ffffff] to-transparent opacity-50"></div>
         <div className="absolute h-full w-20  z-[400] top-0 bottom-0 right-0 bg-gradient-to-l from-[#ffffff] to-transparent opacity-50"></div>
 
