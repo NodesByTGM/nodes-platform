@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 export default function GoogleSocial() {
   const navigate = useNavigate();
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
@@ -36,12 +36,12 @@ export default function GoogleSocial() {
 
   useEffect(() => {
     if (profileIsError && !profileLoading) {
-      setCount(count + 1)
-     if(count <= 3){
-      profileRefetch();
-     } else {
-      toast.error("Something went wrong");
-     }
+      setCount(count + 1);
+      if (count <= 3) {
+        profileRefetch();
+      } else {
+        toast.error("Something went wrong");
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profileIsError, profileLoading]);
@@ -51,6 +51,8 @@ export default function GoogleSocial() {
       const user = profileData?.result;
       setUserProfile(user);
       dispatch(loginUser({ ...user, refreshToken, accessToken }));
+      toast.error("Login successful");
+
       navigate("/dashboard");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
