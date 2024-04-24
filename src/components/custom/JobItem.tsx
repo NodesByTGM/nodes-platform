@@ -293,7 +293,6 @@ export default function JobItem({
       >
         <div className="">
           <JobPost
-          
             details={data}
             refetchJobs={refetchJobs}
             closeModal={() => setViewjobOpen(false)}

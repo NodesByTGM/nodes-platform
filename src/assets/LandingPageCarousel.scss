@@ -1,29 +1,33 @@
 .landingPageSwiper {
-    .swiper {
-      width: 100%;
-      height: 100%;
-    }
-  
-    .swiper-slide {
-  
-    margin-top: auto;
-      width: 100%;
-    }
-  
-    .swiper-slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  
-    .swiper-slide > div:first-child {
-      width: 100%;
-      padding-top: auto;
-    }
-  
-    .swiper-wrapper {
-      height: auto !important;
-    }
+  .swiper {
+    width: 100%;
+    height: 100%;
   }
-  
+
+  .swiper-slide {
+    margin-top: auto;
+    width: 100%;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper-slide > div:first-child {
+    width: 100%;
+    padding-top: auto;
+  }
+
+  .swiper-wrapper {
+    height: auto !important;
+  }
+
+  .swiper-wrapper {
+    -webkit-transition-timing-function: linear !important;
+    -o-transition-timing-function: linear !important;
+    transition-timing-function: linear !important;
+  }
+}
