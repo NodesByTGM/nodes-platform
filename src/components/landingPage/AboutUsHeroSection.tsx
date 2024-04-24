@@ -42,11 +42,13 @@ export default function AboutUsHeroSection() {
             </button>
           </div>
         </div>
-        <img
-          src="/landingPageImg/AboutUsHeroSectionSvg.svg"
-          alt=""
-          className="!z-[-1] h-auto"
-        />
+        <div className="bg-transparent sm:bg-primary min-h-[300px] md:min-h-[350px] lg:min-h-[450px] xl:min-h-[550px]  rounded-[16px]">
+          <img
+            src="/landingPageImg/AboutUsHeroSectionSvg.svg"
+            alt=""
+            className="!z-[-1] h-auto "
+          />
+        </div>
       </div>
     </div>
   );

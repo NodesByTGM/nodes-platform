@@ -47,8 +47,8 @@ export default function FeaturesSection() {
                 key={item.title}
                 className={`border-l ${
                   selected.id === item.id
-                    ? "border-[#212121] border-l-[4px]"
-                    : " border-[#D6DE21] pt-[61px]"
+                    ? "border-[#212121] border-l-[4px] pb-[8px]"
+                    : " border-[#D6DE21] pb-[61px]"
                 } flex flex-col gap-2 pl-6`}
               >
                 <span className="text-[18px] md:text-[24px] font-medium">{item.title}</span>
