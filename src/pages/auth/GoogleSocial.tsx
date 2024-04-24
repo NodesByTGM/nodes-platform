@@ -4,8 +4,9 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { useGetUserProfileQuery } from "../../api";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../api/reducers/userSlice";
+import { toast } from "react-toastify";
 export default function GoogleSocial() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
@@ -18,30 +19,33 @@ export default function GoogleSocial() {
     data: profileData,
     refetch: profileRefetch,
     isSuccess: profileIsSuccess,
-    // isFetching: profileLoading,
+    isFetching: profileLoading,
   } = useGetUserProfileQuery({}, { skip: !bearerToken });
+
   useEffect(() => {
     if (accessToken) {
+      // console.log("there is access");
       localStorage.setItem("bearerToken", accessToken);
+    } else {
+      toast.error("Something went wrong");
     }
-  }, [accessToken]);
+  }, []);
 
   useEffect(() => {
     if (bearerToken) {
       profileRefetch();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bearerToken]);
 
   useEffect(() => {
     if (profileIsSuccess) {
       const user = profileData?.result;
       setUserProfile(user);
-      dispatch(loginUser({...user, refreshToken, accessToken}));
+      dispatch(loginUser({ ...user, refreshToken, accessToken }));
       navigate("/dashboard");
-
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profileIsSuccess]);
 
   return (
@@ -53,7 +57,7 @@ export default function GoogleSocial() {
         <p className="text-primary animate-pulse test-[18px] font-semibold">
           We are logging you in...
         </p>
-        <Loader />
+        {profileLoading ? <Loader /> : null}
       </div>
     </div>
   );
