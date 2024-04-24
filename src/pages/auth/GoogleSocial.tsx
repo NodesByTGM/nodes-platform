@@ -5,38 +5,46 @@ import { useGetUserProfileQuery } from "../../api";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../api/reducers/userSlice";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+
 export default function GoogleSocial() {
   const navigate = useNavigate();
+  const [count, setCount] = useState(0)
 
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
 
   const accessToken = searchParams.get("accessToken");
   const refreshToken = searchParams.get("refreshToken");
-  const bearerToken = localStorage.getItem("bearerToken");
   const [userProfile, setUserProfile] = useState();
+
   const {
     data: profileData,
     refetch: profileRefetch,
     isSuccess: profileIsSuccess,
     isFetching: profileLoading,
-  } = useGetUserProfileQuery({}, { skip: !bearerToken });
+    isError: profileIsError,
+  } = useGetUserProfileQuery();
 
   useEffect(() => {
     if (accessToken) {
-      // console.log("there is access");
-      localStorage.setItem("bearerToken", accessToken);
+      localStorage.setItem("bearerToken", accessToken ? accessToken : "");
     } else {
       toast.error("Something went wrong");
     }
   }, []);
 
   useEffect(() => {
-    if (bearerToken) {
+    if (profileIsError && !profileLoading) {
+      setCount(count + 1)
+     if(count <= 3){
       profileRefetch();
+     } else {
+      toast.error("Something went wrong");
+     }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bearerToken]);
+  }, [profileIsError, profileLoading]);
 
   useEffect(() => {
     if (profileIsSuccess) {
@@ -50,6 +58,11 @@ export default function GoogleSocial() {
 
   return (
     <div>
+      <Link to="/">
+        <div>
+          <img src="/nodes-logo-black.svg" alt="" className="w-8" />
+        </div>
+      </Link>
       <pre className="hidden">
         {JSON.stringify({ accessToken, refreshToken, userProfile }, null, 2)}
       </pre>
@@ -57,7 +70,7 @@ export default function GoogleSocial() {
         <p className="text-primary animate-pulse test-[18px] font-semibold">
           We are logging you in...
         </p>
-        {profileLoading ? <Loader /> : null}
+        <Loader />
       </div>
     </div>
   );
