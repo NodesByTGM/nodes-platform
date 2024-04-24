@@ -34,6 +34,24 @@ export default function Carousel() {
         loop={true}
         freeMode={true}
         spaceBetween={5}
+        breakpoints={{
+          "@0.00": {
+            slidesPerView: 1.5,
+            // spaceBetween: 10,
+          },
+          "@0.75": {
+            slidesPerView: 2.5,
+            // spaceBetween: 20,
+          },
+          "@1.00": {
+            slidesPerView: 3.5,
+            // spaceBetween: 40,
+          },
+          "@1.50": {
+            slidesPerView: 4.5,
+            // spaceBetween: 50,
+          },
+        }}
         modules={[Autoplay, FreeMode]}
       >
         <div className="flex items-end">
