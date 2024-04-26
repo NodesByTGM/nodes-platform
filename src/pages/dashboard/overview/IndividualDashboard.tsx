@@ -25,7 +25,7 @@ export default function IndividualDashboard() {
           <HeaderAndDescription
             titleClass={"font-semibold"}
             title={`Welcome to Nodes, ${capitalizeWords(user?.name)}`}
-            description={"Checkout the blah blah blah blah blah blah"}
+            description={"Discover all the cool things waiting for you to tap into."}
           />
         </div>
         <TrendingNewsSection />

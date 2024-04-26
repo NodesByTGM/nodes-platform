@@ -39,6 +39,7 @@ export default function TrendingNewsSection() {
             data={trendingData || []}
             trend
             title={`Trending Events`}
+            description='Stay in the loop with what’s buzzing in the creative world'
             //   description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
           />
         ) : null}

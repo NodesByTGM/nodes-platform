@@ -40,7 +40,7 @@ export default function JobSection({canViewJob}: IJobSection) {
           canViewJob={canViewJob}
           refetchJobs={allJobsRefetch}
           title={`Trending jobs on Nodes`}
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
+          description={`Local and international gigs for you`}
         />
       ) : null}
     </div>

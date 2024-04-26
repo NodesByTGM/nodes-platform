@@ -35,6 +35,7 @@ export default function EventsSection() {
           event
           refetchEvents={allEventsRefetch}
           title={`Events`}
+          canViewEventDetails={false}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         />
       ) : null}

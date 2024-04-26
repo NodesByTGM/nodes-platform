@@ -20,6 +20,9 @@ const API_ENDPOINTS = {
     GoogleSocial: `${BASE_API_ENDPOINT}/socialauth/google/auth`,
     CheckEmail: `${BASE_API_ENDPOINT}/auth/check-email`,
   },
+  Business: {
+    Verify: `${BASE_API_ENDPOINT}/onboarding/verify-business`,
+  },
   Community: {
     Post: `${BASE_API_ENDPOINT}/community/posts`,
   },
@@ -68,11 +71,10 @@ const API_ENDPOINTS = {
 const PATHS = {
   LandingPage: {
     Base: "/",
-    Default: '',
-    Business: '/business-page',
-    Talent: '/talent-page',
-    AboutUs: '/about-us'
-
+    Default: "",
+    Business: "/business-page",
+    Talent: "/talent-page",
+    AboutUs: "/about-us",
   },
   Admin: {
     Auth: {

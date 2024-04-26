@@ -41,7 +41,7 @@ export default function MoviesAndShowsSection({canViewMovieDetails}: IMoviesAndS
           data={moviesAndShowsData || []}
           movie
           canViewMovieDetails={canViewMovieDetails}
-          title={`Top Movies`}
+          title={`What did you think? Rate and share your review`}
         //   description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         />
       ) : null}

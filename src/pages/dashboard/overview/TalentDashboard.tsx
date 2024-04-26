@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import {
- 
   ItemsCarousel,
   HeaderAndDescription,
   WelcomeComponent,
@@ -93,6 +92,7 @@ export default function TalentDashboard() {
     <div>
       <HeaderAndDescription
         title={`Hi, ${user?.name}! Nice to have you here.`}
+        description="Enjoy exclusive access to gigs, cool events, the gridtools and more."
       />
 
       <div className={` h-4 mb-10 border-b border-[#D6D6D6]`}></div>
@@ -104,8 +104,7 @@ export default function TalentDashboard() {
       <div className="flex flex-col gap-[64px]">
         <WelcomeComponent
           title="Welcome to Nodes!"
-          description=" You now have access to a creative ecosystem, follow spaces, connect
-            with the community and access job opportunities"
+          description=" You now have access to a creative ecosystem, follow spaces, connect with the community and access job opportunities"
         >
           <div className="grid grid-cols-3 gap-6">
             {WelcomeCardItems.map((item) => (
@@ -142,7 +141,7 @@ export default function TalentDashboard() {
             canViewJob
             refetchJobs={appliedJobsRefetch}
             title={`Jobs you have applied to`}
-            description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
+            description={`See your applications at a glance.`}
           />
         ) : null}
 
@@ -171,7 +170,7 @@ export default function TalentDashboard() {
               appliedJobsRefetch();
             }}
             title={`Jobs for you`}
-            description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
+            description={`Exciting opportunities perfectly matched to your skills`}
           />
         ) : null}
 

@@ -24,7 +24,7 @@ export const generalApi: any = createApi({
         };
       },
     }),
-  
+
     uploadFile: builder.mutation<any, any>({
       query: (data) => {
         return {
@@ -35,14 +35,23 @@ export const generalApi: any = createApi({
       },
     }),
 
-    
-
     verifyTransaction: builder.query<any, any>({
       query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Transactions.VerifyURL}?${new URLSearchParams(cleanObject(params))}`,
+          url: `${
+            AppConfig.API_ENDPOINTS.Transactions.VerifyURL
+          }?${new URLSearchParams(cleanObject(params))}`,
           method: "get",
-          
+        };
+      },
+    }),
+
+    verifyBusiness: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Business.Verify}`,
+          method: "post",
+          body: data,
         };
       },
     }),
@@ -52,7 +61,6 @@ export const generalApi: any = createApi({
         return {
           url: `${AppConfig.API_ENDPOINTS.Trending.Movies}`,
           method: "get",
-          
         };
       },
     }),
@@ -61,13 +69,17 @@ export const generalApi: any = createApi({
         return {
           url: `${AppConfig.API_ENDPOINTS.Trending.Events}`,
           method: "get",
-          
         };
       },
     }),
-
-
   }),
 });
 
-export const { useCheckEmailMutation, useGetMoviesAndShowsQuery, useGetTrendingQuery, useUploadFileMutation, useVerifyTransactionQuery } = generalApi;
+export const {
+  useVerifyBusinessMutation,
+  useCheckEmailMutation,
+  useGetMoviesAndShowsQuery,
+  useGetTrendingQuery,
+  useUploadFileMutation,
+  useVerifyTransactionQuery,
+} = generalApi;

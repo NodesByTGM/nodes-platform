@@ -3,7 +3,6 @@ import { useDashboardContext } from "../../../context/hooks";
 import { BusinessProfileCard, SectionNavs } from "../../../components";
 import Jobs from "./businessProfile/Jobs";
 import Projects from "./businessProfile/Projects";
-
 import Events from "./businessProfile/Events";
 
 export default function BusinessProfile() {
@@ -17,9 +16,9 @@ export default function BusinessProfile() {
 
   return (
     <div className="px-10">
-      {" "}
+
       <div className="mb-10 flex flex-col gap-2 border-b border-[#D6D6D6] pb-[24px]">
-        {" "}
+  
         <h3 className="font-semibold text-[#212121] text-[20px]">
           Business Profile{" "}
         </h3>
