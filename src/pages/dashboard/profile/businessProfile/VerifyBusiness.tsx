@@ -23,10 +23,18 @@ import AppConfig from "../../../../utilities/config";
 import { useFormik, FormikProvider } from "formik";
 import { toast } from "react-toastify";
 import moment from "moment";
+import { loginUser } from "../../../../api/reducers/userSlice";
+import { useDispatch } from "react-redux";
 export default function VerifyBusiness({ setVerifyModal }) {
+  const dispatch = useDispatch();
   const [
     verifyBusiness,
-    { isLoading: verifyBusinessLoading, isSuccess: isVerifyBusinessSuccessful, isError: isVerifyError },
+    {
+      data: businessVerificationData,
+      isLoading: verifyBusinessLoading,
+      isSuccess: isVerifyBusinessSuccessful,
+      isError: isVerifyError,
+    },
   ] = useVerifyBusinessMutation();
   const { user } = useDashboardContext();
 
@@ -71,19 +79,29 @@ export default function VerifyBusiness({ setVerifyModal }) {
   } = formik;
 
   useEffect(() => {
-    if (isVerifyBusinessSuccessful) {
-      toast.success("Successfully Verified Business");
+    if (businessVerificationData?.result) {
+      dispatch(loginUser(businessVerificationData.result));
       setVerifyModal(false);
     }
-  }, [isVerifyBusinessSuccessful]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [businessVerificationData]);
+
+  useEffect(() => {
+    if (isVerifyBusinessSuccessful) {
+      // alert(JSON.stringify(businessVerificationData?.result, null, 2))
+
+      toast.success("Successful submission");
+
+      setVerifyModal(false);
+    }
+  }, [isVerifyBusinessSuccessful, setVerifyModal]);
 
   useEffect(() => {
     if (isVerifyError) {
       toast.error("Failed to verify");
       setVerifyModal(false);
     }
-  }, [isVerifyError]);
-  
+  }, [isVerifyError, setVerifyModal]);
 
   return (
     <div>
