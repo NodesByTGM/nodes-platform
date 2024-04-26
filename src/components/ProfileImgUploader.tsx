@@ -65,13 +65,13 @@ export default function ProfileImgUploader({ value, onChange }) {
   return (
     <div className="flex items-center gap-4">
       <div
-        className={`${uploadFileLoading ? "animate-pulse" : ""} size-[100px]`}
+        className={`${uploadFileLoading ? "animate-pulse" : ""} size-[100px] `}
       >
         {value && value?.url?.length > 0 ? (
-          <img className=" h-full w-full" src={value?.url} alt="" />
+          <img className=" h-full w-full rounded-full" src={value?.url} alt="" />
         ) : (
           <img
-            className=" h-full w-full"
+            className=" h-full w-full rounded-full"
             src="/img/ProfilePlaceholder.png"
             alt=""
           />

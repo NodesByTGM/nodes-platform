@@ -468,3 +468,42 @@ export type AccountSettingsValidationType = {
   year: string;
   visibility: string;
 };
+
+export const verifyBusinessSchema = object({
+  logo: object()
+    .shape({
+      id: string(),
+      url: string(),
+    })
+    .nullable(),
+  name: string().required("Name is a required field"),
+  location: string().nullable(),
+  yoe: string(),
+  linkedIn: string()
+    .matches(
+      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+      "Enter correct url!"
+    )
+    .nullable(),
+  CAC: object()
+    .shape({
+      id: string(),
+      url: string(),
+    })
+    .nullable(),
+});
+
+export type VerifyBusinessValidationType = {
+  logo: {
+    id: string;
+    url: string;
+  };
+  name: string;
+  location: string;
+  yoe: string;
+  linkedIn: string;
+  CAC: {
+    id: string;
+    url: string;
+  };
+};

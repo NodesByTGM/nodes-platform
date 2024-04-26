@@ -21,6 +21,7 @@ import "swiper/css";
 
 type IItemsCarousel = {
   canViewMovieDetails?: boolean;
+  canViewEventDetails?: boolean;
   canViewJob?: boolean;
   isBusiness?: boolean;
   trend?: boolean;
@@ -43,6 +44,7 @@ type IItemsCarousel = {
 export default function ItemsCarousel({
   data = [],
   canViewMovieDetails = false,
+  canViewEventDetails = true,
   canViewJob = false,
   isBusiness = false,
   trend,
@@ -122,6 +124,7 @@ export default function ItemsCarousel({
                         refetchEvents={() => refetchEvents && refetchEvents()}
                         data={item}
                         isBusiness={isBusiness}
+                        canViewEventDetails={canViewEventDetails}
                         className={"!w-full h-full"}
                       />
                     )}

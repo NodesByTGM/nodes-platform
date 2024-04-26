@@ -22,11 +22,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
 function EventItem({
+  canViewEventDetails = true,
   className,
   data,
   isBusiness,
   refetchEvents,
 }: {
+  canViewEventDetails?: boolean,
   className?: string;
   data?: any;
   isBusiness?: boolean;
@@ -204,7 +206,7 @@ function EventItem({
               <TfiLocationPin />
               <span className="">{data?.location}</span>
             </div>
-            {userIsSubscribed ? (
+            {userIsSubscribed && canViewEventDetails ? (
               <div className="mt-10 flex justify-between">
                 <div className=""></div>
                 <span
