@@ -25,6 +25,7 @@ const API_ENDPOINTS = {
   },
   Community: {
     Post: `${BASE_API_ENDPOINT}/community/posts`,
+    DiscoverUsers: `${BASE_API_ENDPOINT}/users/discover`,
   },
   Profile: {
     UserProfile: `${BASE_API_ENDPOINT}/users/profile`,

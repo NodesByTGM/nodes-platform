@@ -32,6 +32,24 @@ export const communityApi: any = createApi({
         };
       },
     }),
+    getDiscoverUsers: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Community.DiscoverUsers}`,
+          method: "get",
+        };
+      },
+    }),
+    getDiscoverBrands: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Community.DiscoverUsers}`,
+          method: "get",
+        };
+      },
+    }),
+
+    
     likeCommunityPost: builder.mutation<any, any>({
         query: (data) => {
           return {
@@ -61,5 +79,5 @@ export const communityApi: any = createApi({
   }),
 });
 
-export const { useGetCommunityPostQuery, useCommunityPostMutation, useLikeCommunityPostMutation, useUnlikeCommunityPostMutation } =
+export const { useGetDiscoverBrandsQuery, useGetDiscoverUsersQuery, useGetCommunityPostQuery, useCommunityPostMutation, useLikeCommunityPostMutation, useUnlikeCommunityPostMutation } =
   communityApi;

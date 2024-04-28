@@ -584,3 +584,5 @@ export const landingPageFooterLinks = [
 ];
 
 export const ScrollAnimationDelay = 70
+
+export const subscriptionType = ['Standard', 'Pro', 'Business']
