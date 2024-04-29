@@ -35,7 +35,7 @@ function Login() {
   const dispatch = useDispatch();
 
   const { setUser } = useAuth();
-  const [socialLogin, setSocialLogin] = useState(true);
+  const [socialLogin, setSocialLogin] = useState(false);
 
   const [submitLoading, setSubmitLoading] = useState(false);
 
@@ -120,7 +120,7 @@ function Login() {
           Sign in to your creative space!
         </p>
       </div>
-      <div className="flex flex-col items-center ">
+      <div className="flex flex-col items-center !hidden">
         <a
           className="w-full"
          
