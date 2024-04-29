@@ -47,7 +47,8 @@ import {
   AboutUsPage,
   BusinessPage,
   TalentPage,
-  ViewMoreIndex
+  ViewMoreIndex,
+  ViewMoreEventsIndex
 } from "../pages";
 import {
   AdminAuthBase,
@@ -235,6 +236,12 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Dashboard.ViewMore,
         Component: getProfile(ViewMoreIndex),
       },
+      {
+        path: AppConfig.PATHS.Dashboard.ViewMoreEvents,
+        Component: getProfile(ViewMoreEventsIndex),
+      },
+
+      
 
 
       

@@ -24,7 +24,7 @@ import {
 const selectOptions = [
   { id: 1, name: "Option 1" },
   { id: 2, name: "Option 2" },
-  { id: 3, name: "Option 2" },
+  { id: 3, name: "Option 3" },
 ];
 export default function SeeMoreJobs() {
   const [jobsData, setJobsData] = useState<any>([]);
