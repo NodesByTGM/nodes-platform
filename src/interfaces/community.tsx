@@ -6,4 +6,6 @@ export interface ICommunityContext {
   setAddPostModal: (e) => void;
   peopleOrBrand: string;
   setPeopleOrBrand: (e) => void;
+  filterModal: boolean;
+   setFilterModal: (e) => void;
 }

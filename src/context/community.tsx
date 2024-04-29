@@ -7,6 +7,8 @@ const initialState = {
   user: null,
   postModal: false,
   setAddPostModal: () => {},
+  filterModal: false,
+  setFilterModal: () => {},
   peopleOrBrand: "people",
   setPeopleOrBrand: () => {},
 };
@@ -20,6 +22,8 @@ const CommunityProvider = ({
 }) => {
   const user = useSelector((state: RootState) => state.user.user);
   const [postModal, setAddPostModal] = useState(false);
+  const [filterModal, setFilterModal] = useState(true);
+
   const [peopleOrBrand, setPeopleOrBrand] = useState("people");
 
   const [pageName] = useState("Dashboard");
@@ -31,6 +35,8 @@ const CommunityProvider = ({
       setAddPostModal,
       peopleOrBrand,
       setPeopleOrBrand,
+      filterModal,
+      setFilterModal,
     }),
 
     [
@@ -40,6 +46,8 @@ const CommunityProvider = ({
       setAddPostModal,
       peopleOrBrand,
       setPeopleOrBrand,
+      filterModal,
+      setFilterModal,
     ]
   );
 

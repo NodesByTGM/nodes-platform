@@ -17,7 +17,7 @@ export default function PricingCard({ info, paymentPlan }) {
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
           <span className="font-medium text-[20px]">{info.title}</span>
-          <span className="text-base font-normal">{info.description}</span>
+          <span className="text-base font-normal flex-wrap max-w-[233px]">{info.description}</span>
         </div>
 
         <div className="ml-2">

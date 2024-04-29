@@ -49,22 +49,22 @@ export default function Pricing() {
           <div className="z-20  w-full mt-[32px] mb-[36px] text-[#212121] flex flex-col gap-4 justify-center items-start md:items-center">
             <span className="font-medium text-base">PRICING</span>
             <span className="font-medium text-[32px]">
-              Thank you for choosing Nodes!
+              Unlock your Nodes experience!
             </span>
 
             <span className="font-normal text-base">
-              Pricing plans for every budget
+              Choose a plan that suits you best.{" "}
             </span>
           </div>
 
           <div className="block xl:hidden">
-          {" "}
-          <ChoosePlan
-            selected={selected}
-            setSelected={setSelected}
-            paymentPlans={paymentPlans}
-          />
-        </div>
+            {" "}
+            <ChoosePlan
+              selected={selected}
+              setSelected={setSelected}
+              paymentPlans={paymentPlans}
+            />
+          </div>
           <div className="grid  grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-[4px] sm:min-w-max">
             <PricingCard info={pricing.standard} paymentPlan={selected.type} />
             <PricingCard info={pricing.pro} paymentPlan={selected.type} />

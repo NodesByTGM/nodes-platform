@@ -14,7 +14,18 @@ export default function CommunityPeopleCard({
 }: ICommunityPeopleCard) {
   return (
     <div className="p-6 w-full h-full flex flex-col gap-6 border border-[#EFEFEF] rounded-lg      ">
-      <div className="h-[192px] bg-secondary rounded"></div>
+      {data?.avatar?.url ? (
+        <div className="h-[192px] bg-secondary/20 rounded">
+          {" "}
+          <img
+            src={data?.avatar?.url}
+            alt=""
+            className="size-full imgCss rounded"
+          />
+        </div>
+      ) : (
+        <div className="h-[192px] bg-secondary/20 rounded imgCss"></div>
+      )}
       <div className="flex gap-2 items-center text-primary">
         <span className=" font-medium text-base">{data?.name}</span>
         <div className="size-1 bg-[#085A55] rounded-full"></div>

@@ -10,7 +10,7 @@ export const pricing = {
     name: "free",
     monthlyName: "free",
     title: "Standard",
-    description: "Lorem Ipsum dolor sit amet",
+    description: "Explore Nodes with our basic features.",
     payment: "Free",
     monthlyPayment: "Free",
     duration: "",
@@ -30,18 +30,19 @@ export const pricing = {
     name: "pro",
     monthlyName: "pro-monthly",
     title: "Pro",
-    description: "Lorem Ipsum dolor sit amet",
+    description: "Elevate your profile and access additional features.",
     payment: planPrices.pro,
     monthlyPayment: planPrices.proMonthly,
     monthlyDuration: "/month",
     yearlyDuration: "/year",
     tenor: "Get one month free if you subscribe now",
     incentives: [
+      "Everything in standard",
       "Enhanced Visibility",
       "Access to Premium Jobs",
       "Expanded Project Showcase",
       "Advanced Analytics and Insights",
-      "Advanced Analytics and Insights",
+      "Access to GridTools Discovery Pack (Free)",
     ],
     buttonText: "Subscribe now",
     logo: "/img/pricing-pro.svg",
@@ -54,7 +55,7 @@ export const pricing = {
     name: "business",
     monthlyName: "business-monthly",
     title: "Business",
-    description: "Lorem Ipsum dolor sit amet",
+    description: "Access all features for talent and businesses",
     payment: planPrices.business,
     monthlyPayment: planPrices.businessMonthly,
     monthlyDuration: "/month",
@@ -132,6 +133,11 @@ export const projectModalTypes = {
 export const filterOptions = {
   postsSort: [
     { id: 1, name: "Most recent", value: 0, returnValue: "Most recent" },
+  ],
+  discoverType: [
+    { id: 1, name: "People", value: 'People', returnValue: "People" },
+    { id: 2, name: "Brand", value: 'Brand', returnValue: "Brand" },
+
   ],
 };
 
