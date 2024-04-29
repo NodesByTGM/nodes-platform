@@ -33,7 +33,7 @@ export default function TrendingEventsSection() {
       {eventsData?.length > 0 ? (
         <ItemsCarousel
           data={eventsData || []}
-          navigateTo={() => navigate("/dashboard/see-more/talent")}
+          navigateTo={() => navigate("/dashboard/view-more-events/all-events")}
           seeMore
           event
           refetchEvents={eventsRefetch}

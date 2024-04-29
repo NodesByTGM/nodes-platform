@@ -46,5 +46,5 @@ export {default as LandingPage} from './landing-page/LandingPage.tsx'
 export {default as AboutUsPage} from './landing-page/AboutUsPage.tsx'
 export {default as BusinessPage} from './landing-page/BusinessPage.tsx'
 export {default as TalentPage} from './landing-page/TalentPage.tsx'
-
-
+export {default as ViewMoreIndex} from './viewMore/ViewMoreIndex.tsx'
+export {default as ViewMoreEventsIndex} from './viewMoreEvents/ViewMoreEventsIndex.tsx'

@@ -207,8 +207,8 @@ function EventItem({
               <span className="">{data?.location}</span>
             </div>
             {userIsSubscribed && canViewEventDetails ? (
-              <div className="mt-10 flex justify-between">
-                <div className=""></div>
+              <div className="mt-10 flex justify-end w-full">
+          
                 <span
                   onClick={() =>
                     navigate(`/dashboard/see-more/business-events/${data?.id}`)
