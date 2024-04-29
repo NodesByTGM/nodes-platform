@@ -11,11 +11,10 @@ import {
   WrappedCheckboxInput,
   WrappedInput,
   LocationSelect,
-
 } from "../../components";
 import { Title } from "../../components/Typography";
-import { useAuth } from "../../context/hooks";
-import { IUser } from "../../interfaces/auth";
+// import { useAuth } from "../../context/hooks";
+// import { IUser } from "../../interfaces/auth";
 import { mainClient } from "../../utilities/client";
 import { convertToBase64 } from "../../utilities/common";
 
@@ -26,12 +25,14 @@ import { useUploadFileMutation } from "../../api";
 import Countries from "../../utilities/countries.json";
 
 import { useDispatch } from "react-redux";
-// import FormDebug from "../../components/FormDebug";
+import FormDebug from "../../components/FormDebug";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 function TalentOnboarding() {
-
+  const user = useSelector((state: RootState) => state?.user?.user);
   const dispatch = useDispatch();
-  const { user, setUser } = useAuth();
+  // const { user, setUser } = useAuth();
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -123,11 +124,11 @@ function TalentOnboarding() {
           setSubmitLoading(false);
           if (r.status === 200) {
             toast.success(r.data.message);
-            const newUser = {
-              ...user,
-              type: AppConfig.ACCOUNT_TYPES.TALENT,
-            } as IUser;
-            setUser(newUser);
+            // const newUser = {
+            //   ...user,
+            //   type: AppConfig.ACCOUNT_TYPES.TALENT,
+            // } as IUser;
+            // setUser(newUser);
             if (r?.data?.user) {
               dispatch(loginUser(r?.data?.user));
             }
@@ -152,10 +153,8 @@ function TalentOnboarding() {
     if (selectedFile) {
       const res = await convertToBase64(selectedFile);
       let binary = "";
-      // console.log(res, null, 2);
       if (res) {
         binary = String(res);
-        // const binaryBlob = atob(binary);
         upload({ file: binary });
       }
     }
@@ -167,9 +166,10 @@ function TalentOnboarding() {
 
   useEffect(() => {
     if (uploadFileSuccess) {
-      setFormData({ ...formData, avatar: uploadResponse?.data?.result.url });
+      // console.log('FileUrl:' + JSON.stringify(uploadResponse?.result.url, null, 2));
+      setFormData({ ...formData, avatar: uploadResponse?.result.url });
     }
-  }, [uploadFileSuccess, uploadResponse?.data?.result?.url]);
+  }, [uploadFileSuccess, uploadResponse?.result?.url]);
 
   useEffect(() => {
     if (isUploadError) {
@@ -273,7 +273,6 @@ function TalentOnboarding() {
 
         {currentIndex === 0 ? (
           <div className="">
-           
             <div className="flex flex-col gap-4 justify-center w-full">
               <WrappedCheckboxInput
                 label="Connect with fellow creatives"
@@ -356,21 +355,21 @@ function TalentOnboarding() {
                 value={formData.location}
                 onChange={handleChange}
               /> */}
-               <div className="flex flex-col gap-1">
-                      <span className="font-medium text-base ">Location</span>
-                      <LocationSelect
-                        paddingy="py-[16px]"
-                        defaultValue={formData.location}
-                        options={Countries}
-                        onChange={(value) =>
-                          // setFieldValue("location", value.value)
-                          setFormData((prev) => ({
-                            ...prev,
-                            location: value,
-                          }))
-                        }
-                      />
-                    </div>
+              <div className="flex flex-col gap-1">
+                <span className="font-medium text-base ">Location</span>
+                <LocationSelect
+                  paddingy="py-[16px]"
+                  defaultValue={formData.location}
+                  options={Countries}
+                  onChange={(value) =>
+                    // setFieldValue("location", value.value)
+                    setFormData((prev) => ({
+                      ...prev,
+                      location: value,
+                    }))
+                  }
+                />
+              </div>
 
               <ButtonWithBack
                 backAction={previousStep}
@@ -440,7 +439,7 @@ function TalentOnboarding() {
         <div className="fixed top-[-140px] right-[-140px] rotate-[320deg]">
           <img src="/bg-node-yellow.svg" alt="" className="" />
         </div>
-        {/* <FormDebug form={{ formData, preview, checked }} /> */}
+        <FormDebug className='hidden' form={{ formData, preview }} />
         <TalentReviewCard
           name={user?.name}
           email={user?.email}

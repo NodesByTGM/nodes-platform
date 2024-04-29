@@ -145,6 +145,7 @@ function Register() {
 
   const previousStep = () => {
     if (currentIndex > 0) {
+      setSent(false)
       setCurrentIndex(currentIndex - 1);
     }
   };
@@ -277,24 +278,6 @@ function Register() {
                 {checkEmailLoading && <span className=""></span>}
               </div>
 
-              {/* <ReactDateSelect
-                id="dob"
-                label="Date of Birth"
-                // required
-                error={errors.dob}
-                value={values.dob}
-                touched={touched.dob}
-                onChange={(date: unknown) => {
-                  const myDOB = moment(new Date(date as string)).format("YYYY-MM-DD")
-                  // console.log();
-                  // handleChange("dob")
-                  setFieldValue('dob', myDOB)
-                  
-                }}
-                onBlur={handleBlur}
-              /> */}
-
-              {/* DOB */}
               <div>
                 <div className="flex gap-2 items-center mb-1">
                   <div className="text-base font-medium ">Date of Birth*</div>
@@ -329,25 +312,6 @@ function Register() {
                     onChange={handleChange("dob")}
                     onBlur={handleBlur}
                   />
-                  {/* {values.dob} */}
-                  {/* <ReactDateSelect
-                    id="dob"
-                    // label="Date of Birth"
-                    // required
-                    maxDate={moment().subtract(18, "years")}
-                    error={errors.dob}
-                    value={values.dob}
-                    touched={touched.dob}
-                    onChange={(date: unknown) => {
-                      const myDOB = moment(new Date(date as string)).format(
-                        "YYYY-MM-DD"
-                      );
-                      // console.log();
-                      // handleChange("dob")
-                      setFieldValue("dob", myDOB);
-                    }}
-                    onBlur={handleBlur}
-                  /> */}
                 </div>
               </div>
               <PasswordInput

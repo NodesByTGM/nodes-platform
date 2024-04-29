@@ -52,6 +52,7 @@ const TagInput = ({
     if (tags.length < max && !tags.includes(item)) {
       setTags([...tags, item]);
       setIsFocused(false);
+      setInputValue('')
     }
   };
 
@@ -101,7 +102,7 @@ const TagInput = ({
   }, []);
 
   useEffect(() => {
-    setSuggestions(options.filter((x: string) => x.includes(inputValue)));
+    setSuggestions(options.filter((x: string) => x.includes(inputValue) || x.toLowerCase().includes(inputValue)));
   }, [inputValue]);
 
   useEffect(() => {
