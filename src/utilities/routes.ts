@@ -240,6 +240,12 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Dashboard.ViewEventDetails,
         Component: getProfile(Details),
       },
+      {
+        path: AppConfig.PATHS.Dashboard.ViewJobDetails,
+        Component: getProfile(Details),
+      },
+
+      
 
       // {
       //   path: AppConfig.PATHS.Dashboard.Business,

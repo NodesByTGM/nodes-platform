@@ -23,9 +23,17 @@ import BusinessDashboardEmptyState from "./BusinessDashboardEmptyState.tsx";
 import { SubscriptionAndBilling } from "../../../components";
 import { capitalizeWords } from "../../../utilities/common.ts";
 import BusinessDashboardSectionEmptyStates from "./BusinessDashboardSectionEmptyStates";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { setVerifyBusinessLater } from "../../../api/reducers/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function BusinessDashboard() {
   const { user, userIsBusiness } = useDashboardContext();
+  const dispatch = useDispatch();
+  const verifyBusinessLater = useSelector(
+    (state: RootState) => state?.user?.verifyBusinessLater
+  );
   const [jobsData, setJobsData] = useState<any>([]);
   const [eventsData, setEventsData] = useState<any>([]);
   const [verifyModal, setVerifyModal] = useState(false);
@@ -77,10 +85,10 @@ export default function BusinessDashboard() {
   }, [eventsResponse]);
 
   useEffect(() => {
-    if(user?.business && !user?.business?.verified){
-      setVerifyModal(true)
+    if (user?.business && !user?.business?.verified && !verifyBusinessLater) {
+      setVerifyModal(true);
     }
-  },[user] )
+  }, [user]);
 
   useEffect(() => {
     if (jobsResponse?.result?.items?.length > 0) {
@@ -90,6 +98,8 @@ export default function BusinessDashboard() {
 
   return (
     <div className="main-padding">
+      {/* {JSON.stringify(`${verifyBusinessLater ? "true" : "false"}`, null, 2)} */}
+      {/* <button onClick={() => dispatch(setVerifyBusinessLater(!verifyBusinessLater))} className="">Click me</button> */}
       <pre className=" text-blue-400 text-wrap max-w-[600px] hidden">
         {JSON.stringify(
           { userIsBusiness, verified: user?.business?.verified },
@@ -157,7 +167,7 @@ export default function BusinessDashboard() {
               <ItemsCarousel
                 data={jobsData || []}
                 refetchJobs={jobsRefetch}
-                navigateTo={() => navigate("/dashboard/see-more/business-jobs")}
+                navigateTo={() => navigate("/dashboard/view-more/jobs-by-you")}
                 seeMore
                 isBusiness
                 canViewJob
@@ -189,8 +199,9 @@ export default function BusinessDashboard() {
                 refetchEvents={eventsRefetch}
                 isBusiness
                 navigateTo={() =>
-                  navigate("/dashboard/see-more/business-events")
+                  navigate("/dashboard/view-more-events/my-events")
                 }
+                canViewAndEditEventDetails
                 seeMore
                 event
                 title={`Exclusive events`}
@@ -232,7 +243,10 @@ export default function BusinessDashboard() {
         open={verifyModal}
         setOpen={setVerifyModal}
       >
-        <VerifyBusiness setVerifyModal={setVerifyModal} />
+        <VerifyBusiness
+          setVerifyModal={setVerifyModal}
+          verifyLater={() => dispatch(setVerifyBusinessLater(true))}
+        />
       </Modal>
     </div>
   );

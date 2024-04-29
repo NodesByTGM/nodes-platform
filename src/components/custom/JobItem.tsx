@@ -44,7 +44,7 @@ export default function JobItem({
   const navigate = useNavigate();
 
   const navigateToJobDetails = (id) => {
-    navigate(`/dashboard/see-more/business-jobs/${id}`);
+    navigate(`/dashboard/view-job/business-jobs/${id}`);
   };
 
   const handleUserCanSave = useCallback(() => {

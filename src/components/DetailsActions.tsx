@@ -7,7 +7,7 @@ import {
   JobPostForm,
   EventPostForm,
   BookMarkIcon,
-  Button
+  Button,
 } from "../components";
 import { useDeleteJobMutation, useDeleteEventMutation } from "../api";
 import { toast } from "react-toastify";
@@ -57,7 +57,7 @@ export default function DetailsActions({
     if (type == "business-jobs") {
       deleteRequest(details?.id);
     }
-    if (type == "business-events") {
+    if (type == "my-events") {
       deleteEventRequest(details?.id);
     }
   };
@@ -81,7 +81,7 @@ export default function DetailsActions({
         jobsRefetch && jobsRefetch();
       }
 
-      navigate(`/dashboard/see-more/${type}`);
+      navigate(`/dashboard/view-more/jobs-by-you`);
     }
   }, [isDeleteSuccess]);
 
@@ -98,10 +98,10 @@ export default function DetailsActions({
       toast.success("Successfully deleted event");
       setDeleteModal(false);
 
-      if (type == "business-events") {
+      if (type == "my-events") {
         eventsRefetch && eventsRefetch();
       }
-      navigate(`/dashboard/see-more/${type}`);
+      navigate(`/dashboard/view-more-events/my-events`);
     }
   }, [isDeleteEventSuccess]);
 
@@ -110,7 +110,7 @@ export default function DetailsActions({
       setEditJobOpen(true);
     }
 
-    if (type == "business-events") {
+    if (type == "my-events") {
       setEditEventOpen(true);
     }
   };
@@ -190,7 +190,9 @@ export default function DetailsActions({
                 <BookMarkIcon saved={details?.saved} />
               </div>
 
-              <Button className='max-w-max !bg-customprimary !border-none'>Register for event</Button>
+              <Button className="max-w-max !bg-customprimary !border-none">
+                Register for event
+              </Button>
             </div>
           </div>
         )}

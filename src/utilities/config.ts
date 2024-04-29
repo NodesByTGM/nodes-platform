@@ -152,6 +152,7 @@ const PATHS = {
     ViewMore: "/dashboard/view-more/:type",
     ViewMoreEvents: "/dashboard/view-more-events/:type",
     ViewEventDetails: "/dashboard/view-event/:type/:id",
+    ViewJobDetails: "/dashboard/view-job/:type/:id",
     Details: "/dashboard/see-more/:type/:id",
     Categories: {
       Base: "/dashboard/categories",
