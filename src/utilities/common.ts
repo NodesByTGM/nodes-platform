@@ -7,6 +7,21 @@ import moment from "moment";
 
 declare const PaystackPop: any;
 
+export const handleCheckList = (
+  item: string,
+  selectedItems: Array<string>,
+  setSelectedItems: (e) => void
+) => {
+  const index = selectedItems.indexOf(item);
+  if (index === -1) {
+    setSelectedItems([...selectedItems, item]);
+  } else {
+    const updatedCategories = [...selectedItems];
+    updatedCategories.splice(index, 1);
+    setSelectedItems(updatedCategories);
+  }
+};
+
 export const handleAxiosError = (e: AxiosError<AxiosData>) => {
   console.log(e.response?.status, e.response?.data);
   const message = e?.response?.data.message;
@@ -38,14 +53,14 @@ export function isValidURL(url: string): boolean {
 export const getAge = (DOB: any) => {
   const birthDate: Date = new Date(DOB);
   const currentDate: Date = new Date();
-  
+
   // Calculate the difference in milliseconds between the current date and the birth date
   const ageDiffMs: number = currentDate.getTime() - birthDate.getTime();
-  
+
   // Convert milliseconds to years
   const ageDate: Date = new Date(ageDiffMs);
   const age: number = Math.abs(ageDate.getUTCFullYear() - 1970);
-  return age
+  return age;
 };
 
 export const getNameInitials = (name: string): string => {

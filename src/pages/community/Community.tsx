@@ -13,9 +13,11 @@ import CommunityTab from "./CommunityTab";
 import { Link } from "react-router-dom";
 import { useCommunityContext } from "../../context/hooks";
 import { useGetCommunityPostQuery } from "../../api";
+import DiscoverSectionFilter from "./DiscoverSectionFilter";
 
 function Community() {
-  const { postModal, setAddPostModal } = useCommunityContext();
+  const { postModal, setAddPostModal, filterModal, setFilterModal } =
+    useCommunityContext();
   const { refetch: communityPostsRefetch } = useGetCommunityPostQuery();
   const [navs] = useState([
     { id: 1, label: "Discover", count: null },
@@ -54,7 +56,9 @@ function Community() {
 
       {selectedNav?.label?.toLowerCase() !== "community" ? (
         <div className="px-10 mb-10">
-          <CommunityFilter />{" "}
+          <div className="">
+            <CommunityFilter setFilterModal={setFilterModal} />
+          </div>{" "}
         </div>
       ) : null}
 
@@ -81,6 +85,14 @@ function Community() {
           }}
           closeModal={() => setAddPostModal(false)}
         />{" "}
+      </Modal>
+
+      <Modal
+        sizeClass="sm:max-w-[522px]"
+        open={filterModal}
+        setOpen={setFilterModal}
+      >
+        <DiscoverSectionFilter closeModal={() => setFilterModal(false)} />
       </Modal>
     </div>
   );

@@ -3,7 +3,7 @@ import { SearchComponent, Button, Switch } from "../../components";
 import { useCommunityContext } from "../../context/hooks";
 import { Filter } from "react-feather";
 
-export default function CommunityFilter() {
+export default function CommunityFilter({ setFilterModal = (e) => {e} }) {
   const { peopleOrBrand, setPeopleOrBrand } = useCommunityContext();
 
   return (
@@ -16,7 +16,12 @@ export default function CommunityFilter() {
           </div>
           <Button className="!py-0 h-[48px] max-w-max">Search</Button>
           <Button className="!py-0 h-[48px] text-base !text-primary font-medium max-w-max !border !border-[#EFEFEF] !bg-[#ffffff]">
-            <div className="flex items-center">
+            <div
+              onClick={() => {
+                setFilterModal(true);
+              }}
+              className="flex items-center"
+            >
               {" "}
               <Filter className="size-[13px]" />
               <span className="ml-2">Filter view</span>
@@ -25,9 +30,14 @@ export default function CommunityFilter() {
         </div>
 
         <div className="flex gap-4 h-[48px] items-center px-4 rounded-lg text-base !text-primary font-medium max-w-max !border !border-[#EFEFEF] !bg-[#ffffff]">
-          <span onClick={() => setPeopleOrBrand("people")} className="cursor-pointer text-primary text-base font-medium">People</span>
+          <span
+            onClick={() => setPeopleOrBrand("people")}
+            className="cursor-pointer text-primary text-base font-medium"
+          >
+            People
+          </span>
           <Switch
-          color={'bg-secondary'}
+            color={"bg-secondary"}
             value={peopleOrBrand.toLowerCase() === "brand" ? true : false}
             setValue={(value) => {
               value === true
@@ -35,7 +45,12 @@ export default function CommunityFilter() {
                 : setPeopleOrBrand("people");
             }}
           />
-          <span onClick={() => setPeopleOrBrand("brand")} className="cursor-pointer text-primary text-base font-medium">Brand</span>
+          <span
+            onClick={() => setPeopleOrBrand("brand")}
+            className="cursor-pointer text-primary text-base font-medium"
+          >
+            Brand
+          </span>
         </div>
       </div>
     </div>

@@ -32,34 +32,66 @@ export const communityApi: any = createApi({
         };
       },
     }),
+    getDiscoverUsers: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Community.DiscoverUsers}`,
+          method: "get",
+        };
+      },
+    }),
+    getConnectionsMine: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Community.ConnectionsMine}`,
+          method: "get",
+        };
+      },
+    }),
+    getDiscoverBrands: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Community.DiscoverUsers}`,
+          method: "get",
+        };
+      },
+    }),
+
     likeCommunityPost: builder.mutation<any, any>({
-        query: (data) => {
-          return {
-            url: `${AppConfig.API_ENDPOINTS.Community.Post}/like/${data.id}`,
-            method: "post",
-            body: data,
-          };
-        },
-      }),
-      unlikeCommunityPost: builder.mutation<any, any>({
-        query: (data) => {
-          return {
-            url: `${AppConfig.API_ENDPOINTS.Community.Post}/unlike/${data.id}`,
-            method: "post",
-            body: data,
-          };
-        },
-      }),
-      getSpaces: builder.query<any, any>({
-        query: () => {
-          return {
-            url: `${AppConfig.API_ENDPOINTS.Community.Post}`,
-            method: "get",
-          };
-        },
-      }),
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Community.Post}/like/${data.id}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
+    unlikeCommunityPost: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Community.Post}/unlike/${data.id}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
+    getSpaces: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Community.Post}`,
+          method: "get",
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetCommunityPostQuery, useCommunityPostMutation, useLikeCommunityPostMutation, useUnlikeCommunityPostMutation } =
-  communityApi;
+export const {
+  useGetConnectionsMineQuery,
+  useGetDiscoverBrandsQuery,
+  useGetDiscoverUsersQuery,
+  useGetCommunityPostQuery,
+  useCommunityPostMutation,
+  useLikeCommunityPostMutation,
+  useUnlikeCommunityPostMutation,
+} = communityApi;

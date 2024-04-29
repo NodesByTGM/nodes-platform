@@ -1,19 +1,20 @@
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { CommunityPeopleCard, Loader } from "../../components";
 type IPeopleGrid = {
   isConnected?: boolean;
 };
-import { useGetDiscoverUsersQuery } from "../../api";
+import { useGetConnectionsMineQuery } from "../../api";
 
-export default function PeopleGrid({ isConnected = false }: IPeopleGrid) {
+export default function ConnectedPeoplesGrid({ isConnected = false }: IPeopleGrid) {
   const [usersList, setUsersList] = useState<any>([]);
   const {
     data: discoverUsersData,
     // refetch: discoverUsersRefetch,
     isSuccess: discoverUsersIsSuccess,
     isFetching: discoverUsersLoading,
-  } = useGetDiscoverUsersQuery();
+  } = useGetConnectionsMineQuery();
 
   useEffect(() => {
     if (
@@ -52,3 +53,4 @@ export default function PeopleGrid({ isConnected = false }: IPeopleGrid) {
     </div>
   );
 }
+

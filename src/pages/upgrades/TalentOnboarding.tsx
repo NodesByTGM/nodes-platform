@@ -238,9 +238,9 @@ function TalentOnboarding() {
 
   const indexQuestion = {
     1: "What do you want to do on Nodes?",
-    2: "What do you do?",
-    3: "Where are you located?",
-    4: "Let’s see what you look like",
+    2: "What’s your creative superpower?",
+    3: "Tell us where you are",
+    4: "Don’t be shy, show the community what you look like.",
     5: "Social media",
   };
 

@@ -100,3 +100,7 @@
 /* .profile-forms-section {
   height: calc(100vh - 144px);
 } */
+.imgCss{
+  /* object-fit: cover; */
+  object-fit: fill;
+}
