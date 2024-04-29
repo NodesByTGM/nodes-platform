@@ -35,7 +35,7 @@ export default function AppliedJobsSection({useGetAppliedJobsQuery}) {
       {appliedJobsData?.length > 0 ? (
         <ItemsCarousel
           data={appliedJobsData || []}
-          navigateTo={() => navigate("/dashboard/see-more/talent")}
+          navigateTo={() => navigate("/dashboard/view-more/applied-jobs")}
           seeMore
           job
           canViewJob
