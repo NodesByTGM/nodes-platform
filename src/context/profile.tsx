@@ -52,7 +52,7 @@ const ProfileProvider = ({
     isFetching: profileLoading,
   } = useGetUserProfileQuery();
 
-  const user = useSelector((state: RootState) => state.user.user);
+  const user = useSelector((state: RootState) => state?.user?.user);
   const [profileType, setProfileType] = useState("");
   const [hasProject, setHasProject] = useState(false);
   const [projectDetailsModal, setProjectDetailsModal] = useState(false);

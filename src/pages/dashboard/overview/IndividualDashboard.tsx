@@ -2,7 +2,7 @@ import React from "react";
 // import { useNavigate } from "react-router-dom";
 // import AppConfig from "../../../utilities/config";
 import JobSection from "./sections/JobSection";
-import EventsSection from "./sections/EventsSection";
+// import EventsSection from "./sections/EventsSection";
 import MoviesAndShowsSection from "./sections/MoviesAndShowsSection";
 import TrendingNewsSection from "./sections/TrendingNewsSection";
 import { useSelector } from "react-redux";
@@ -25,36 +25,17 @@ export default function IndividualDashboard() {
           <HeaderAndDescription
             titleClass={"font-semibold"}
             title={`Welcome to Nodes, ${capitalizeWords(user?.name)}`}
-            description={"Discover all the cool things waiting for you to tap into."}
+            description={
+              "Discover all the cool things waiting for you to tap into."
+            }
           />
         </div>
         <TrendingNewsSection />
         <MoviesAndShowsSection />
-        <EventsSection />
+        {/* <EventsSection /> */}
 
-       {
-        !user?.subscription?.plan ?  <UpgradeCTA /> : null
-       }
+        {!user?.subscription?.plan ? <UpgradeCTA username={user?.name}/> : null}
         <JobSection canViewJob={true} />
-
-        {/* <ItemsCarousel
-          job
-          title={`Trending jobs on Nodes`}
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
-        /> */}
-        {/* <ItemsCarousel title={`Hidden Gems`} event viewAll borderBottom /> */}
-        {/* <ItemsCarousel title={`Flashbacks`} event viewAll borderBottom /> */}
-        {/* <ItemsCarousel
-          title={`Spaces you might like`}
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`}
-        /> */}
-        {/* <ItemsCarousel
-          title={`Collaboration Spotlights`}
-          event
-          viewAll
-          borderBottom
-        /> */}
-        {/* <ItemsCarousel title={`Birthdays`} event viewAll borderBottom /> */}
       </div>
     </div>
   );
