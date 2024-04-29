@@ -29,15 +29,16 @@ export default function EventDetails() {
       label: "Saves",
       count: null,
     },
-  
   ]);
   const [selectedNav, setSelectedNav] = useState(navs[0]);
 
   const [links, setLinks] = useState([
     {
       id: 1,
-      title: "Events by you",
-      url: "/dashboard/see-more/business-events",
+      title: `${
+        type?.toLowerCase() === "all-events" ? "Events" : "Events by you"
+      }`,
+      url: `/dashboard/view-more-events/${type?.toLowerCase()}`,
     },
     {
       id: 2,
@@ -71,21 +72,29 @@ export default function EventDetails() {
           </div>
 
           <pre className="hidden text-blue-400">
-            {JSON.stringify(eventsData?.result, null, 2)}
+            {/* {JSON.stringify({result: eventsData?.result, type}, null, 2)} */}
+            {JSON.stringify({ type }, null, 2)}
           </pre>
 
+          <div className="w-full h-[160px]">
+            <img src="/img/EventDetail.png" alt="" className="size-full" />
+          </div>
+
           <DetailsActions
+            canEdit={type?.toLowerCase() === "my-events" ? true : false}
             title={eventsData?.result?.name}
             type={type?.toLowerCase()}
             details={eventsData?.result}
             eventsRefetch={eventsRefetch}
           />
 
-          <SectionNavs
-            navs={navs}
-            selectedNav={selectedNav}
-            setSelectedNav={setSelectedNav}
-          />
+          {type?.toLowerCase() === "my-events" ? (
+            <SectionNavs
+              navs={navs}
+              selectedNav={selectedNav}
+              setSelectedNav={setSelectedNav}
+            />
+          ) : null}
 
           <div className="">
             {selectedNav?.label?.toLowerCase() == "details" && (
@@ -95,8 +104,6 @@ export default function EventDetails() {
             {selectedNav?.label?.toLowerCase() == "saves" && (
               <Saves details={eventsData?.result} />
             )}
-
-         
           </div>
         </div>
       )}

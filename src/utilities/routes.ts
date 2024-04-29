@@ -48,7 +48,8 @@ import {
   BusinessPage,
   TalentPage,
   ViewMoreIndex,
-  ViewMoreEventsIndex
+  ViewMoreEventsIndex,
+ 
 } from "../pages";
 import {
   AdminAuthBase,
@@ -98,10 +99,6 @@ export const adminAuthRoutes: RouteObject[] = [
   },
 ];
 export const landingPageRoutes: RouteObject[] = [
-  
-  
-  
-  
   {
     path: AppConfig.PATHS.LandingPage.Base,
     Component: LandingPageBase,
@@ -122,11 +119,9 @@ export const landingPageRoutes: RouteObject[] = [
         path: AppConfig.PATHS.LandingPage.AboutUs,
         Component: AboutUsPage,
       },
-   
     ],
   },
 ];
-
 
 export const adminMainRoutes: RouteObject[] = [
   {
@@ -185,7 +180,7 @@ export const adminMainRoutes: RouteObject[] = [
 export const authRoutes: RouteObject[] = [
   {
     path: AppConfig.PATHS.Auth.Google,
-    Component: GoogleSocial
+    Component: GoogleSocial,
   },
   {
     path: AppConfig.PATHS.Auth.Login,
@@ -241,10 +236,11 @@ export const publicRoutes: RouteObject[] = [
         Component: getProfile(ViewMoreEventsIndex),
       },
 
-      
+      {
+        path: AppConfig.PATHS.Dashboard.ViewEventDetails,
+        Component: getProfile(Details),
+      },
 
-
-      
       // {
       //   path: AppConfig.PATHS.Dashboard.Business,
       //   Component: getProfile(BusinessDashboard),
@@ -258,7 +254,7 @@ export const publicRoutes: RouteObject[] = [
   {
     path: AppConfig.PATHS.Business.Base,
     Component: getProfile(DashboardBase),
-    children: [ 
+    children: [
       {
         path: AppConfig.PATHS.Business.Default,
         Component: getProfile(BusinessDashboard),
@@ -275,11 +271,6 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Business.EditProfile,
         Component: getProfile(EditBusinessProfile),
       },
-
-
-      
-
-      
     ],
   },
   {

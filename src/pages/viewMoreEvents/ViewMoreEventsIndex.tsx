@@ -15,7 +15,7 @@ import {
   EventPostForm,
   Modal,
 } from "../../components";
-// import { useDashboardContext } from "../../context/hooks";
+import { useDashboardContext } from "../../context/hooks";
 
 // import {
 //   useGetBusinessUserJobsQuery,
@@ -24,7 +24,7 @@ import {
 // } from "../../api";
 
 export default function ViewMoreIndex() {
-  // const { user } = useDashboardContext();
+  const { user } = useDashboardContext();
   // const navigate = useNavigate();
   const [jobModal, setJobModal] = useState(false);
   const [eventModal, setEventModal] = useState(false);
@@ -32,13 +32,7 @@ export default function ViewMoreIndex() {
   const { type } = useParams();
 
   const handleCreateModal = () => {
-    if (type?.toLowerCase() == "business-jobs") {
-      setJobModal(true);
-    }
-
-    if (type?.toLowerCase() == "business-events") {
-      setEventModal(true);
-    }
+    setEventModal(true);
   };
 
   return (
@@ -49,13 +43,14 @@ export default function ViewMoreIndex() {
         <h3 className="fonnt-medium text-[20px] text-[#212121]">
           <span className="">Manage your events</span>
         </h3>
-
-        <ButtonOutline
-          onClick={() => handleCreateModal()}
-          className="max-w-max"
-        >
-          Create a new event
-        </ButtonOutline>
+        {user?.subscription?.plan.toLowerCase() === "business" ? (
+          <ButtonOutline
+            onClick={() => handleCreateModal()}
+            className="max-w-max"
+          >
+            Create a new event
+          </ButtonOutline>
+        ) : null}
       </div>
       <div className="flex justify-between items-center mb-[64px]">
         <div className={`w-full max-w-[455px]`}>
