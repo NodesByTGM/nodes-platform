@@ -22,7 +22,7 @@ const CommunityProvider = ({
 }) => {
   const user = useSelector((state: RootState) => state.user.user);
   const [postModal, setAddPostModal] = useState(false);
-  const [filterModal, setFilterModal] = useState(true);
+  const [filterModal, setFilterModal] = useState(false);
 
   const [peopleOrBrand, setPeopleOrBrand] = useState("people");
 

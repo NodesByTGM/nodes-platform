@@ -27,6 +27,7 @@ const API_ENDPOINTS = {
     Post: `${BASE_API_ENDPOINT}/community/posts`,
     DiscoverUsers: `${BASE_API_ENDPOINT}/users/discover`,
     ConnectionsMine: `${BASE_API_ENDPOINT}/users/connections/mine`,
+    ConnectionRequests: `${BASE_API_ENDPOINT}/users/connections/request`
   },
   Profile: {
     UserProfile: `${BASE_API_ENDPOINT}/users/profile`,
@@ -152,6 +153,7 @@ const PATHS = {
     ViewMore: "/dashboard/view-more/:type",
     ViewMoreEvents: "/dashboard/view-more-events/:type",
     ViewEventDetails: "/dashboard/view-event/:type/:id",
+    ViewJobDetails: "/dashboard/view-job/:type/:id",
     Details: "/dashboard/see-more/:type/:id",
     Categories: {
       Base: "/dashboard/categories",

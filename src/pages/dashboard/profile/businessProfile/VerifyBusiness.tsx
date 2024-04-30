@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 import moment from "moment";
 import { loginUser } from "../../../../api/reducers/userSlice";
 import { useDispatch } from "react-redux";
-export default function VerifyBusiness({ setVerifyModal }) {
+export default function VerifyBusiness({ setVerifyModal, verifyLater }) {
   const dispatch = useDispatch();
   const [
     verifyBusiness,
@@ -206,7 +206,10 @@ export default function VerifyBusiness({ setVerifyModal }) {
 
               <div className="grid grid-cols-2 gap-8">
                 <ButtonOutline
-                  onClick={() => setVerifyModal(false)}
+                  onClick={() => {
+                    verifyLater();
+                    setVerifyModal(false);
+                  }}
                   className=""
                 >
                   Continue Later

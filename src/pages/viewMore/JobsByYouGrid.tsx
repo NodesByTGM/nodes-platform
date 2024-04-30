@@ -1,14 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { useGetJobsQuery } from "../../api";
+import { useGetBusinessUserJobsQuery } from "../../api";
 import { JobItem, Loader } from "../../components";
-export default function JobsForYouGrid() {
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+export default function JobsByYouGrid() {
+  const user = useSelector((state: RootState) => state?.user?.user);
   const [jobsData, setJobsData] = useState<any>([]);
   const {
     data: jobsResponse,
     refetch: jobsRefetch,
     isFetching: jobsLoading,
-  } = useGetJobsQuery();
+  } = useGetBusinessUserJobsQuery({ businessId: user?.business?.id });
 
   useEffect(() => {
     if (jobsResponse?.result?.items?.length > 0) {
@@ -17,6 +20,7 @@ export default function JobsForYouGrid() {
   }, [jobsResponse]);
   return (
     <div>
+      {/* {JSON.stringify(user?.business?.id)} */}
       {jobsLoading && jobsData.length === 0 ? (
         <div className="my-40">
           <Loader />
@@ -33,7 +37,7 @@ export default function JobsForYouGrid() {
             <div key={job?.id} className="">
               <JobItem
                 data={job}
-                canViewJob
+                isBusiness
                 //    isBusiness={type?.toLowerCase() == "business-jobs"}
                 refetchJobs={jobsRefetch}
               />

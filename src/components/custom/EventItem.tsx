@@ -215,7 +215,7 @@ function EventItem({
                   <span
                     onClick={() =>
                       navigate(
-                        `/dashboard/see-more/business-events/${data?.id}`
+                        `/dashboard/view-event/my-events/${data?.id}`
                       )
                     }
                     className="cursor-pointer text-sm"

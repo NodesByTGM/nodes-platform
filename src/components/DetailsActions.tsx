@@ -4,10 +4,11 @@ import {
   ActionIcon,
   Modal,
   DeleteComponent,
+  ConfirmComponent,
   JobPostForm,
   EventPostForm,
   BookMarkIcon,
-  Button
+  Button,
 } from "../components";
 import { useDeleteJobMutation, useDeleteEventMutation } from "../api";
 import { toast } from "react-toastify";
@@ -57,14 +58,14 @@ export default function DetailsActions({
     if (type == "business-jobs") {
       deleteRequest(details?.id);
     }
-    if (type == "business-events") {
+    if (type == "my-events") {
       deleteEventRequest(details?.id);
     }
   };
   const [deleteModal, setDeleteModal] = useState(false);
   const [editJobOpen, setEditJobOpen] = useState(false);
   const [editEventOpen, setEditEventOpen] = useState(false);
-
+  const [registerEventModal, setRegisterEventModal] = useState(false);
   //jobs
   useEffect(() => {
     if (isDeleteError) {
@@ -81,7 +82,7 @@ export default function DetailsActions({
         jobsRefetch && jobsRefetch();
       }
 
-      navigate(`/dashboard/see-more/${type}`);
+      navigate(`/dashboard/view-more/jobs-by-you`);
     }
   }, [isDeleteSuccess]);
 
@@ -98,19 +99,21 @@ export default function DetailsActions({
       toast.success("Successfully deleted event");
       setDeleteModal(false);
 
-      if (type == "business-events") {
+      if (type == "my-events") {
         eventsRefetch && eventsRefetch();
       }
-      navigate(`/dashboard/see-more/${type}`);
+      navigate(`/dashboard/view-more-events/my-events`);
     }
   }, [isDeleteEventSuccess]);
+
+ 
 
   const edit = () => {
     if (type == "business-jobs") {
       setEditJobOpen(true);
     }
 
-    if (type == "business-events") {
+    if (type == "my-events") {
       setEditEventOpen(true);
     }
   };
@@ -156,6 +159,11 @@ export default function DetailsActions({
       return;
     }
   };
+
+  const handleEventRegistration = () => {
+    toast.success("Successfully registered for event");
+    setRegisterEventModal(false)
+  };
   return (
     <div>
       <div className="flex justify-between items-center px-6 py-[25px] bg-[#ffffff] rounded-lg border border[#EFEFEF]">
@@ -190,7 +198,12 @@ export default function DetailsActions({
                 <BookMarkIcon saved={details?.saved} />
               </div>
 
-              <Button className='max-w-max !bg-customprimary !border-none'>Register for event</Button>
+              <Button
+                onClick={() => setRegisterEventModal(true)}
+                className="max-w-max !bg-customprimary !border-none"
+              >
+                Register for event
+              </Button>
             </div>
           </div>
         )}
@@ -232,6 +245,22 @@ export default function DetailsActions({
           details={details}
           refetchEvents={eventsRefetch}
           closeModal={() => setEditEventOpen(false)}
+        />
+      </Modal>
+
+      <Modal
+        sizeClass="sm:max-w-[506px]"
+        open={registerEventModal}
+        setOpen={setRegisterEventModal}
+      >
+        <ConfirmComponent
+          title={"Are you sure you want to register for this event?"}
+          text={`You are about to register. Do you want to proceed?`}
+          action={() => {
+            handleEventRegistration();
+          }}
+          isLoading={false}
+          closeModal={() => setRegisterEventModal(false)}
         />
       </Modal>
     </div>

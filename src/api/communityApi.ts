@@ -83,10 +83,20 @@ export const communityApi: any = createApi({
         };
       },
     }),
+    requestConnection: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Community.ConnectionRequests}/${data.id}`,
+          method: "post",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
 export const {
+  useRequestConnectionMutation,
   useGetConnectionsMineQuery,
   useGetDiscoverBrandsQuery,
   useGetDiscoverUsersQuery,

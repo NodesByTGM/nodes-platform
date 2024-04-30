@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface UserState {
   user: any | User | null | any;
+  verifyBusinessLater: boolean;
 }
 
 interface User {
@@ -33,6 +34,7 @@ interface User {
 
 const initialState: UserState = {
   user: null,
+  verifyBusinessLater: false,
 };
 
 const userSlice = createSlice({
@@ -42,9 +44,22 @@ const userSlice = createSlice({
     loginUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
+    setVerifyBusinessLater: (state, action: PayloadAction<boolean>) => {
+      console.log(
+        JSON.stringify(
+          {
+            state,
+            action,
+          },
+          null,
+          2
+        )
+      );
+      state.verifyBusinessLater = action.payload;
+    },
     logoutUser: () => initialState,
   },
 });
 
-export const { loginUser, logoutUser } = userSlice.actions;
+export const { loginUser, logoutUser, setVerifyBusinessLater } = userSlice.actions;
 export default userSlice.reducer;

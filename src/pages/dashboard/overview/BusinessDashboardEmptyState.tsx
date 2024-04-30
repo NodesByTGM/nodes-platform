@@ -42,7 +42,7 @@ export default function BusinessDashboardEmptyState({
         open={verifyModal}
         setOpen={setVerifyModal}
       >
-        <VerifyBusiness setVerifyModal={setVerifyModal} />
+        <VerifyBusiness verifyLater={()=> {}} setVerifyModal={setVerifyModal} />
       </Modal>
     </div>
   );

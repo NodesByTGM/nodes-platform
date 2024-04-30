@@ -76,6 +76,7 @@ export default function JobDetails() {
           </pre>
 
           <DetailsActions
+            canEdit
             title={jobsData?.result?.name}
             type={type?.toLowerCase()}
             details={jobsData?.result}

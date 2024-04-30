@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import JobsForYouGrid from "./JobsForYouGrid";
 import AppliedJobsGrid from "./AppliedJobsGrid";
-
+import JobsByYouGrid from "./JobsByYouGrid";
 import {
   Back,
   ButtonOutline,
@@ -37,7 +37,7 @@ export default function ViewMoreIndex() {
   const { type } = useParams();
 
   const handleCreateModal = () => {
-    if (type?.toLowerCase() == "business-jobs") {
+    if (type?.toLowerCase() == "jobs-by-you") {
       setJobModal(true);
     }
 
@@ -67,14 +67,14 @@ export default function ViewMoreIndex() {
           )}
         </h3>
 
-        {type?.toLowerCase() == "business-jobs" ||
+        {type?.toLowerCase() == "jobs-by-you" ||
         type?.toLowerCase() == "business-events" ? (
           <ButtonOutline
             onClick={() => handleCreateModal()}
             className="max-w-max"
           >
-            Create a new{" "}
-            {type?.toLowerCase() == "business-jobs" ? "job posting" : "event"}
+            Create a{" "}
+            {type?.toLowerCase() == "jobs-by-you" ? "job post" : "event"}
           </ButtonOutline>
         ) : (
           <ButtonOutline
@@ -88,7 +88,7 @@ export default function ViewMoreIndex() {
       <div className="flex justify-between items-center mb-[64px]">
         <div
           className={`${
-            type?.toLowerCase() == "business-jobs" ||
+            type?.toLowerCase() == "jobs-by-you" ||
             type?.toLowerCase() == "business-events"
               ? "w-full max-w-[455px]"
               : "max-w-[240px] w-full"
@@ -97,7 +97,7 @@ export default function ViewMoreIndex() {
           <SearchComponent padding="px-4 py-[13px]" />
         </div>
 
-        {type?.toLowerCase() !== "business-jobs" &&
+        {type?.toLowerCase() !== "jobs-by-you" &&
         type?.toLowerCase() !== "business-events" ? (
           <div className="flex justify-end gap-[32px]">
             <BorderlessSelect label="Role" options={selectOptions} />
@@ -119,6 +119,8 @@ export default function ViewMoreIndex() {
         <AppliedJobsGrid />
       ) : type?.toLowerCase() === "jobs-for-you" ? (
         <JobsForYouGrid />
+      ) : type?.toLowerCase() === "jobs-by-you" ? (
+        <JobsByYouGrid />
       ) : (
         <div className="w-full flex items-center justify-center py-20">
           <span>Nothing to see</span>
