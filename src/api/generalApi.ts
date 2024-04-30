@@ -72,6 +72,14 @@ export const generalApi: any = createApi({
         };
       },
     }),
+    getContent: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Content.Contents}`,
+          method: "get",
+        };
+      },
+    }),
   }),
 });
 
@@ -82,4 +90,5 @@ export const {
   useGetTrendingQuery,
   useUploadFileMutation,
   useVerifyTransactionQuery,
+  useGetContentQuery
 } = generalApi;

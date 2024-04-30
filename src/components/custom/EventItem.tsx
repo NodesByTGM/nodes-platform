@@ -155,6 +155,7 @@ function EventItem({
         refetchEvents();
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDeleteError, deleteError]);
   useEffect(() => {
     if (isDeleteSuccess) {
@@ -164,6 +165,7 @@ function EventItem({
       }
       setDeleteModal(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDeleteSuccess]);
 
   return (

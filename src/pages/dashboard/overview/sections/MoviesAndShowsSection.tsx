@@ -32,7 +32,7 @@ export default function MoviesAndShowsSection({canViewMovieDetails}: IMoviesAndS
 
       {!moviesAndShowsLoading && moviesAndShowsData?.length === 0 ? (
         <div className="text-base text-primary my-40  text-center">
-          Nothing to see.
+          No movies available yet.
         </div>
       ) : null}
 
