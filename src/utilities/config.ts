@@ -69,6 +69,9 @@ const API_ENDPOINTS = {
     Events: `${BASE_API_ENDPOINT}/trending`,
     Movies: `${BASE_API_ENDPOINT}/movies-and-shows`,
   },
+  Content: {
+    Contents: `${BASE_API_ENDPOINT}/cms/contents`,
+  }
 };
 
 const PATHS = {

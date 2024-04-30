@@ -30,7 +30,7 @@ export default function TrendingNewsSection() {
 
         {!trendingLoading && trendingData?.length === 0 ? (
           <div className="text-base text-primary my-40 text-center">
-            Nothing to see.
+            No trending events available yet.
           </div>
         ) : null}
 

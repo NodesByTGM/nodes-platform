@@ -7,6 +7,7 @@ import {
   MovieItem,
   EventItem,
   JobItem,
+  ContentItem,
 } from "../../components";
 import clsx from "clsx";
 
@@ -18,6 +19,7 @@ import { ChevronLeft, ChevronRight } from "react-feather";
 
 // Import Swiper styles
 import "swiper/css";
+// import '../../carouselSwiper.scss'
 
 type IItemsCarousel = {
   canViewMovieDetails?: boolean;
@@ -29,6 +31,7 @@ type IItemsCarousel = {
   movie?: boolean;
   event?: boolean;
   job?: boolean;
+  content?: boolean;
   children?: ReactNode | ReactNode[];
   borderBottom?: boolean;
   openCommunity?: boolean;
@@ -53,6 +56,7 @@ export default function ItemsCarousel({
   movie,
   event,
   job,
+  content,
   openCommunity,
   borderBottom,
   viewAll,
@@ -80,7 +84,7 @@ export default function ItemsCarousel({
       <div
         className={`${borderBottom ? " mb-10 border-b border-[#D6D6D6]" : ""} `}
       ></div>
-      <div className="itemsSwiper">
+      <div className="itemsSwiper ">
         <Swiper
           modules={[Navigation, Pagination]}
           navigation={{
@@ -105,13 +109,10 @@ export default function ItemsCarousel({
           {data.map((item, i) => (
             <div className="w-full" key={i}>
               <SwiperSlide>
-                {trend || movie || event || job ? (
+                {trend || movie || event || job || content ? (
                   <div className="">
                     {trend && (
-                        <TrendingItem
-                          data={item}
-                          className={"!w-full h-full"}
-                        />
+                      <TrendingItem data={item} className={"!w-full h-full"} />
                     )}
                     {movie && (
                       <MovieItem
@@ -140,6 +141,7 @@ export default function ItemsCarousel({
                         className={"!w-full h-full"}
                       />
                     )}
+                    {content && <ContentItem   data={item} className={"!w-full h-full"}/>}
                   </div>
                 ) : (
                   <EventItem className={"!w-[310px]"} />

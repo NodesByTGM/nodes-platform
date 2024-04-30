@@ -5,6 +5,7 @@ import JobSection from "./sections/JobSection";
 // import EventsSection from "./sections/EventsSection";
 import MoviesAndShowsSection from "./sections/MoviesAndShowsSection";
 import TrendingNewsSection from "./sections/TrendingNewsSection";
+import BirthdaysSection from './sections/BirthdaysSection.tsx'
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import {
@@ -36,6 +37,7 @@ export default function IndividualDashboard() {
 
         {!user?.subscription?.plan ? <UpgradeCTA username={user?.name}/> : null}
         <JobSection canViewJob={true} />
+        <BirthdaysSection />
       </div>
     </div>
   );
