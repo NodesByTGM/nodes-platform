@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import JobsForYouGrid from "./JobsForYouGrid";
+import MyEventsGrid from "./MyEventsGrid";
 import AllEventsGrid from "./AllEventsGrid";
 
 import {
@@ -64,7 +64,7 @@ export default function ViewMoreIndex() {
       {type?.toLowerCase() === "all-events" ? (
         <AllEventsGrid />
       ) : type?.toLowerCase() === "my-events" ? (
-        <JobsForYouGrid />
+        <MyEventsGrid />
       ) : (
         <div className="w-full flex items-center justify-center py-20">
           <span>Nothing to see</span>

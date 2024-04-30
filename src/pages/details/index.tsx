@@ -10,7 +10,8 @@ export default function Details() {
   return (
     <div className="main-padding">
       {type?.toLowerCase() == "business-jobs" ? <JobDetails /> : null}
-      {type?.toLowerCase() == "all-events" || type?.toLowerCase() == "my-events"? (
+      {type?.toLowerCase() == "all-events" ||
+      type?.toLowerCase() == "my-events" ? (
         <div>
           <EventDetails />
         </div>
