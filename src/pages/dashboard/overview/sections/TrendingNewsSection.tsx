@@ -19,7 +19,7 @@ export default function TrendingNewsSection() {
   }, [trending, trendingIsSuccess]);
   return (
     <div>
-      {/* <pre className="max-w-[400px] text-wrap ">{JSON.stringify(trending)}</pre> */}
+      {/* <pre className="max-w-[400px] text-wrap ">{JSON.stringify(trendingData[0])}</pre> */}
 
       <div>
         {trendingLoading && trendingData.length === 0 ? (
