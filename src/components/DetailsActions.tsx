@@ -4,6 +4,7 @@ import {
   ActionIcon,
   Modal,
   DeleteComponent,
+  ConfirmComponent,
   JobPostForm,
   EventPostForm,
   BookMarkIcon,
@@ -64,7 +65,7 @@ export default function DetailsActions({
   const [deleteModal, setDeleteModal] = useState(false);
   const [editJobOpen, setEditJobOpen] = useState(false);
   const [editEventOpen, setEditEventOpen] = useState(false);
-
+  const [registerEventModal, setRegisterEventModal] = useState(false);
   //jobs
   useEffect(() => {
     if (isDeleteError) {
@@ -104,6 +105,8 @@ export default function DetailsActions({
       navigate(`/dashboard/view-more-events/my-events`);
     }
   }, [isDeleteEventSuccess]);
+
+ 
 
   const edit = () => {
     if (type == "business-jobs") {
@@ -156,6 +159,11 @@ export default function DetailsActions({
       return;
     }
   };
+
+  const handleEventRegistration = () => {
+    toast.success("Successfully registered for event");
+    setRegisterEventModal(false)
+  };
   return (
     <div>
       <div className="flex justify-between items-center px-6 py-[25px] bg-[#ffffff] rounded-lg border border[#EFEFEF]">
@@ -190,7 +198,10 @@ export default function DetailsActions({
                 <BookMarkIcon saved={details?.saved} />
               </div>
 
-              <Button className="max-w-max !bg-customprimary !border-none">
+              <Button
+                onClick={() => setRegisterEventModal(true)}
+                className="max-w-max !bg-customprimary !border-none"
+              >
                 Register for event
               </Button>
             </div>
@@ -234,6 +245,22 @@ export default function DetailsActions({
           details={details}
           refetchEvents={eventsRefetch}
           closeModal={() => setEditEventOpen(false)}
+        />
+      </Modal>
+
+      <Modal
+        sizeClass="sm:max-w-[506px]"
+        open={registerEventModal}
+        setOpen={setRegisterEventModal}
+      >
+        <ConfirmComponent
+          title={"Are you sure you want to register for this event?"}
+          text={`You are about to register. Do you want to proceed?`}
+          action={() => {
+            handleEventRegistration();
+          }}
+          isLoading={false}
+          closeModal={() => setRegisterEventModal(false)}
         />
       </Modal>
     </div>

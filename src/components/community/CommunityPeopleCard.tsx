@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PeopleCardFieldPill from "./PeopleCardFieldPill";
 import CommunityCardDescription from "./CommunityCardDescription";
 import { subscriptionType } from "../../utilities/constants";
+import { Modal, ConfirmComponent } from "../../components";
+import { toast } from "react-toastify";
+import { useRequestConnectionMutation } from "../../api";
+
 // import { SkillsSection } from "../landingPage";
 type ICommunityPeopleCard = {
   isConnected?: boolean;
@@ -12,6 +16,37 @@ export default function CommunityPeopleCard({
   data,
   isConnected = false,
 }: ICommunityPeopleCard) {
+  const [connectModal, setConnectModal] = useState(false);
+  const [
+    deleteRequest,
+    {
+      isSuccess: isConnectionRequestSuccess,
+      isError: isConnectionRequestError,
+      error: connectionRequestError,
+      isLoading: connectionRequestLoading,
+    },
+  ] = useRequestConnectionMutation();
+
+  const handleConnect = () => {
+    deleteRequest({ id: data?.id });
+  };
+
+  useEffect(() => {
+    if (isConnectionRequestSuccess) {
+      toast.success("Request to connect sent!");
+      setConnectModal(false);
+
+      // jobsRefetch && jobsRefetch();
+    }
+  }, [isConnectionRequestSuccess]);
+
+  useEffect(() => {
+    if (isConnectionRequestError) {
+      toast.error(connectionRequestError?.message?.message);
+      setConnectModal(false);
+    }
+  }, [isConnectionRequestError, connectionRequestError]);
+
   return (
     <div className="p-6 w-full h-full flex flex-col gap-6 border border-[#EFEFEF] rounded-lg      ">
       {data?.avatar?.url ? (
@@ -63,9 +98,30 @@ export default function CommunityPeopleCard({
         {isConnected ? (
           <span className="">Message</span>
         ) : (
-          <span className="">Connect</span>
+          <span
+            onClick={() => setConnectModal(true)}
+            className="cursor-pointer"
+          >
+            Connect
+          </span>
         )}
       </div>
+
+      <Modal
+        sizeClass="sm:max-w-[506px]"
+        open={connectModal}
+        setOpen={setConnectModal}
+      >
+        <ConfirmComponent
+          title={"Are you sure you want to connect with this user?"}
+          text={`You are about to connect  to '${data?.name}'. Do you want to proceed?`}
+          action={() => {
+            handleConnect();
+          }}
+          isLoading={connectionRequestLoading}
+          closeModal={() => setConnectModal(false)}
+        />
+      </Modal>
     </div>
   );
 }

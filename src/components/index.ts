@@ -115,4 +115,4 @@ export { default as ProjectCard2 } from "./profile/ProjectCard2.tsx";
 export {default as RateComponent} from './RateComponent'
 export {default as RatingStar} from './RatingStar'
 export {default as RightFloater} from './RightFloater'
-
+export {default as ConfirmComponent} from './ConfirmComponent'
