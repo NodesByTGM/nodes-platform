@@ -39,7 +39,7 @@ function Sidebar() {
     }
   }, [user]);
   return (
-    <div className="min-h-full overflow-y-auto w-full transition-all duration-300 h-full border-r border-gray-300 px-6">
+    <div className="min-h-full overflow-y-auto w-full transition-all duration-300 h-full border-r border-gray-300 px-6 bg-[#ffffff]">
       {/* <div className="mt-3 pb-4 border-b p-3 mb-4">
                 <Menu />
             </div> */}

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "public/fonts/fontStyles.css";
+
+body {
+  font-family: "GeneralSans", sans-serif !important;
+}
+
 .border-dash {
   @apply border border-[#000000]  border-dashed border-spacing-[5px];
 }
@@ -19,19 +25,19 @@
 }
 
 .main-bg-gray-container {
-  @apply bg-[#FBFBFB] pt-4 pb-[64px] ;
+  @apply bg-[#FBFBFB] pt-4 pb-[64px];
 }
 
 .main-padding {
-  @apply pl-[40px] pr-[40px]
+  @apply pl-[40px] pr-[40px];
 }
 
 .main-bg {
   @apply bg-[#FDFDF7];
 }
 
-.main-bg-gray{
-@apply bg-[#FBFBFB]
+.main-bg-gray {
+  @apply bg-[#FBFBFB];
 }
 
 .admin-main-plain-container {
@@ -82,10 +88,10 @@
 }
 
 .landingPageMainDiv {
-  @apply max-w-[1220px] mx-auto px-6 
+  @apply max-w-[1220px] mx-auto px-6;
 }
 
-.aboutUsHeroSectionBg{
+.aboutUsHeroSectionBg {
   background-image: url("/landingPageImg/TeamMate1.svg");
   background-repeat: no-repeat;
   -webkit-background-size: cover;
@@ -100,7 +106,7 @@
 /* .profile-forms-section {
   height: calc(100vh - 144px);
 } */
-.imgCss{
+.imgCss {
   /* object-fit: cover; */
   object-fit: fill;
 }

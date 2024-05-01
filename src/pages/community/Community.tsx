@@ -37,7 +37,7 @@ function Community() {
         <div className=" flex flex-col gap-4 text-[20px] text-[#212121]">
           <h3 className="font-semibold ">Welcome to Nodes Community!</h3>
           <span className="font-normal text-base">
-            something something nice tagline about the community
+          Find your tribe, connect and start collaborating!
           </span>
         </div>{" "}
         <div className=" gap-4 hidden">
