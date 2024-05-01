@@ -21,11 +21,11 @@ const PaystackComponent = ({ user }) => {
     isFetching: verificationLoading,
   } = useVerifyTransactionQuery({ reference: reference }, { skip: !reference });
 
-  const PRO_PLAN = "PLN_e11atwl7oyvnajq";
-  const BUSINESS_PLAN = "PLN_baeodisxfma3vno";
-  const PUBLIC_KEY = "pk_test_9cf75727b4e8fef2d46eabb02ce5033ca1df7771";
-  const PRO_ANNUAL_PLAN = "PLN_3f6iseacm5i9fum";
-  const BUSINESS_ANNUAL_PLAN = "PLN_68xympmt1h631xk";
+  const PRO_PLAN = import.meta.env.VITE_PRO_PLAN;
+  const BUSINESS_PLAN = import.meta.env.VITE_BUSINESS_PLAN;
+  const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY ;
+  const PRO_ANNUAL_PLAN = import.meta.env.VITE_PRO_ANNUAL_PLAN ;
+  const BUSINESS_ANNUAL_PLAN = import.meta.env.VITE_BUSINESS_ANNUAL_PLAN ;
   const componentProps = {
     email: user?.email,
 

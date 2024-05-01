@@ -4,7 +4,7 @@ import { filterOptions } from "../../utilities/constants";
 import { handleCheckList } from "../../utilities/common";
 
 import { LabeledSelect, Button } from "../../components";
-export default function DiscoverSectionFilter({ closeModal }) {
+export default function DiscoverSectionFilter({ closeModal, handleFilter }) {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const categories = [
@@ -22,13 +22,14 @@ export default function DiscoverSectionFilter({ closeModal }) {
 
   const applyFilter = () => {
     closeModal();
+    handleFilter(selectedCategories);
   };
 
   const handleChange = (category: string) => {
     handleCheckList(category, selectedCategories, setSelectedCategories);
   };
   return (
-    <div className='my-4 bg-[#ffffff] p-6 rounded-lg w-full md:w-[400px] xl:w-[522px]'>
+    <div className="my-4 bg-[#ffffff] p-6 rounded-lg w-full md:w-[400px] xl:w-[522px]">
       <div className="flex items-center justify-between">
         <pre className="hidden">
           {JSON.stringify(selectedCategories, null, 2)}
@@ -77,8 +78,9 @@ export default function DiscoverSectionFilter({ closeModal }) {
 
         <div className="">
           <Button
+            disabled={selectedCategories.length < 1}
             onClick={() => applyFilter()}
-            className="max-w-max mt-4 ml-auto"
+            className={`${selectedCategories.length < 1 ? "opacity-50" : ""} max-w-max mt-4 ml-auto`}
           >
             Apply
           </Button>
