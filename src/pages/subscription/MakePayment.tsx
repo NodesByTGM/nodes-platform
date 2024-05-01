@@ -51,7 +51,7 @@ export default function MakePayment() {
 
       <div className="flex flex-col">
         <h3 className="mb-10 font-medium text-[#212121] text-[20px]">
-          Proceed with payment{" "}
+          Proceed with payment
         </h3>
 
         <div className="flex flex-col gap-6 mb-6">

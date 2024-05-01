@@ -27,6 +27,10 @@ function Community() {
   ]);
   const [selectedNav, setSelectedNav] = useState(navs[0]);
 
+  const handleFilter = (filterValues) => {
+    console.log(JSON.stringify(filterValues, null, 2))
+  }
+
   return (
     <div>
       <div className="mb-6 flex items-start justify-between px-10">
@@ -93,7 +97,7 @@ function Community() {
         open={filterModal}
         setOpen={setFilterModal}
       >
-        <DiscoverSectionFilter closeModal={() => setFilterModal(false)} />
+        <DiscoverSectionFilter handleFilter={handleFilter} closeModal={() => setFilterModal(false)} />
       </RightFloater>
     </div>
   );

@@ -3,7 +3,11 @@ import { SearchComponent, Button, Switch } from "../../components";
 import { useCommunityContext } from "../../context/hooks";
 import { Filter } from "react-feather";
 
-export default function CommunityFilter({ setFilterModal = (e) => {e} }) {
+export default function CommunityFilter({
+  setFilterModal = (e) => {
+    e;
+  },
+}) {
   const { peopleOrBrand, setPeopleOrBrand } = useCommunityContext();
 
   return (
@@ -15,13 +19,13 @@ export default function CommunityFilter({ setFilterModal = (e) => {e} }) {
             <SearchComponent placeholder="ex: acting" />
           </div>
           <Button className="!py-0 h-[48px] max-w-max">Search</Button>
-          <Button className="!py-0 h-[48px] text-base !text-primary font-medium max-w-max !border !border-[#EFEFEF] !bg-[#ffffff]">
-            <div
-              onClick={() => {
-                setFilterModal(true);
-              }}
-              className="flex items-center"
-            >
+          <Button
+            onClick={() => {
+              setFilterModal(true);
+            }}
+            className="!py-0 h-[48px] text-base !text-primary font-medium max-w-max !border !border-[#EFEFEF] !bg-[#ffffff]"
+          >
+            <div className="flex items-center">
               {" "}
               <Filter className="size-[13px]" />
               <span className="ml-2">Filter view</span>
