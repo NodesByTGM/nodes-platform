@@ -68,8 +68,15 @@ export default function ItemsCarousel({
   refetchJobs,
   refetchEvents,
 }: IItemsCarousel) {
+  //random value to make each class unique so multiple carousels won't scroll at once
+  const randomValue = String(Math.floor(Math.random() * 500));
+  const prevClass = "prev" + randomValue;
+  const nextClass = "next" + randomValue;
+  const customPaginator = "custom-swiper-pagination" + randomValue;
   return (
     <div className="flex flex-col">
+      {/* {prevClass}
+      {nextClass} */}
       <div className="mb-6">
         <HeaderAndDescription
           seeMore={seeMore}
@@ -88,11 +95,11 @@ export default function ItemsCarousel({
         <Swiper
           modules={[Navigation, Pagination]}
           navigation={{
-            prevEl: ".prev",
-            nextEl: ".next",
+            prevEl: `.${prevClass}`,
+            nextEl: `.${nextClass}`,
           }}
           pagination={{
-            el: ".custom-swiper-pagination",
+            el: `.${customPaginator}`,
             clickable: true,
             renderBullet: (_, className) => {
               return `<span class="${clsx(
@@ -141,7 +148,9 @@ export default function ItemsCarousel({
                         className={"!w-full h-full"}
                       />
                     )}
-                    {content && <ContentItem   data={item} className={"!w-full h-full"}/>}
+                    {content && (
+                      <ContentItem data={item} className={"!w-full h-full"} />
+                    )}
                   </div>
                 ) : (
                   <EventItem className={"!w-[310px]"} />
@@ -152,13 +161,17 @@ export default function ItemsCarousel({
         </Swiper>
 
         <div className=" w-full  bottom-0 left-0 flex justify-between items-center mt-10 ">
-          <div className="custom-swiper-pagination flex gap-2 items-center"></div>
+          <div className={`${customPaginator} flex gap-2 items-center`}></div>
 
           <div className="custom-swiper-navigation flex items-center gap-[10px]">
-            <div className="prev cursor-pointer rounded-full w-10 h-10 border flex items-center justify-center text-grey-dark">
+            <div
+              className={`${prevClass} cursor-pointer rounded-full w-10 h-10 border flex items-center justify-center text-grey-dark bg-[#ffffff]`}
+            >
               <ChevronLeft className="text-grey-dark text-2xl" />
             </div>
-            <div className="next cursor-pointer rounded-full w-10 h-10 border flex items-center justify-center text-grey-dark">
+            <div
+              className={`${nextClass} cursor-pointer rounded-full w-10 h-10 border flex items-center justify-center text-grey-dark bg-[#ffffff]`}
+            >
               <ChevronRight className=" text-grey-dark text-2xl" />
             </div>
           </div>
