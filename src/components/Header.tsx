@@ -11,9 +11,171 @@ import {
 } from "react-feather";
 import { Link } from "react-router-dom";
 import { Button, Searchbar } from ".";
-import { useAuth } from "../context/hooks";
+// import { useAuth } from "../context/hooks";
 import Avatar from "./Avatar";
-import { LogoutComponent } from "././../components";
+import {
+  LogoutComponent,
+  Modal,
+  NotificationsComponent,
+  MessagesComponent,
+} from "././../components";
+
+function Header() {
+  // const { user } = useAuth();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [menuOpened, setMenuOpened] = useState(false);
+  const [appOpened, setAppOpened] = useState(false);
+  const [notificationsModal, setNotificationsModal] = useState(false);
+  const [messagesModal, setMessagesModal] = useState(false);
+  
+
+  const wrapperRef = useRef<any>(null);
+  const handleClickOutside = (event: any) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setMenuOpened(false);
+      setAppOpened(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  return (
+    <div
+      className={`z-[99] relative main-bg-gray pt-8  px-10 w-full flex justify-end items-center `}
+    >
+      <div className=" gap-4 items-center hidden">
+        <Menu className="w-[50px] cursor-pointer" />
+        <div className="flex items-center gap-2">
+          <Link to={"/"}>
+            <div className="flex gap-2 text-2xl font-semibold cursor-pointer items-center">
+              <img src="/logo.svg" alt="" className="h-8 w-9" />
+              <span className="text-primary text-2xl font-semibold">Nodes</span>
+            </div>
+          </Link>
+          <Searchbar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            className="hidden md:block"
+          />
+        </div>
+      </div>
+
+      <div className="flex gap-4 items-center z-[99]">
+        <div className="md:block hidden border-r pr-4">
+          <Button
+            theme={"secondary"}
+            className="!border-grey-dark bg-white"
+            onClick={() => setAppOpened(!appOpened)}
+          >
+            <div className="flex items-center gap-3">
+              {" "}
+              <Smartphone className="w-4" />
+              <span>Get app</span>
+            </div>
+          </Button>
+        </div>
+
+        <div
+          onClick={() => setNotificationsModal(true)}
+          className="cursor-pointer"
+        >
+          <ActionIcon bell bgColor="bg-[#ffffff]" />
+        </div>
+        <div onClick={() => setMessagesModal(true)} className="cursor-pointer">
+          <ActionIcon mail bgColor="bg-[#ffffff]" />
+        </div>
+        {/* <Bell className="w-8 text-primary" />
+        <Mail className="w-8 text-primary" /> */}
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={() => setMenuOpened(!menuOpened)}
+        >
+          <Avatar src="/img/avatar.jpeg" />
+          <ChevronDown className="text-primary" />
+
+          {menuOpened ? (
+            <div className="shadow-normal border rounded-lg bg-white w-[200px] absolute right-4 top-14">
+              <Link to={"/settings"}>
+                <div className="flex items-center gap-2 p-2 hover:bg-customsecondary-light opacity-70 hover:opacity-100 transition-all ">
+                  <Settings /> <span>Settings</span>
+                </div>
+              </Link>
+              <div className="flex items-center gap-2 p-2 hover:bg-customsecondary-light opacity-70 hover:opacity-100 transition-all ">
+                <Flag /> <span>Report Issue</span>
+              </div>
+              <LogoutComponent>
+                <div className="flex items-center gap-2 p-2 hover:bg-customsecondary-light opacity-70 hover:opacity-100 transition-all ">
+                  <LogOut /> <span>Sign Out</span>
+                </div>
+              </LogoutComponent>
+            </div>
+          ) : null}
+
+          {appOpened ? (
+            <div className="p-4 z-50 flex gap-4 absolute top-16 rounded right-40 border shadow-normal bg-white w-[600px]">
+              <div>
+                <QRCode />
+              </div>
+              <div className="flex flex-col justify-between">
+                <h2 className="text-3xl">Scan to get Nodes on your phone</h2>
+                <p>or find us on the App Store and Play store</p>
+                <div className="flex gap-2">
+                  <Button>
+                    <Playstore />
+                    <span>Google play</span>
+                  </Button>
+                  <Button>
+                    <span>
+                      <svg
+                        width="19"
+                        height="18"
+                        viewBox="0 0 19 18"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M14.5177 9.54618C14.5422 12.1899 16.8372 13.0698 16.8625 13.0811C16.8431 13.1429 16.4959 14.3349 15.6536 15.5658C14.9254 16.63 14.1695 17.6903 12.9792 17.7126C11.8094 17.7339 11.4333 17.0187 10.0958 17.0187C8.75872 17.0187 8.34092 17.6903 7.2335 17.7339C6.08432 17.7775 5.20921 16.5829 4.475 15.5227C2.97482 13.3537 1.8283 9.3936 3.36772 6.72046C4.13244 5.39296 5.49932 4.55244 6.98277 4.53079C8.11114 4.50927 9.17624 5.28988 9.866 5.28988C10.5553 5.28988 11.8497 4.35107 13.2103 4.48888C13.78 4.51265 15.3789 4.71894 16.4056 6.22194C16.3231 6.27327 14.4979 7.33583 14.5177 9.54618ZM12.3193 3.05409C12.9294 2.31566 13.34 1.28741 13.2281 0.264648C12.3486 0.299945 11.2852 0.850633 10.6545 1.58877C10.0892 2.24226 9.59417 3.28851 9.72763 4.29102C10.7079 4.36696 11.7092 3.79293 12.3193 3.05409Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </span>
+                    <span>App store</span>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
+      <Modal
+        sizeClass="sm:max-w-[440px]"
+        open={notificationsModal}
+        setOpen={setNotificationsModal}
+        paddingX='px-0'
+      >
+        <NotificationsComponent
+          closeModal={() => setNotificationsModal(false)}
+        />
+      </Modal>
+
+      <Modal
+        sizeClass="sm:max-w-[960px]"
+        open={messagesModal}
+        setOpen={setMessagesModal}
+       
+      >
+        <MessagesComponent closeModal={() => setMessagesModal(false)} />
+      </Modal>
+     
+    </div>
+  );
+}
+
+export default Header;
 
 function QRCode() {
   return (
@@ -81,130 +243,6 @@ function Playstore() {
     </span>
   );
 }
-
-function Header() {
-  const { user } = useAuth();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [menuOpened, setMenuOpened] = useState(false);
-  const [appOpened, setAppOpened] = useState(false);
-  const wrapperRef = useRef<any>(null);
-  const handleClickOutside = (event: any) => {
-    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-      setMenuOpened(false);
-      setAppOpened(false);
-    }
-  };
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-  return (
-    <div className={`z-[99] relative main-bg-gray pt-8  px-10 w-full flex justify-end items-center `}>
-      <div className=" gap-4 items-center hidden">
-        <Menu className="w-[50px] cursor-pointer" />
-        <div className="flex items-center gap-2">
-          <Link to={"/"}>
-            <div className="flex gap-2 text-2xl font-semibold cursor-pointer items-center">
-              <img src="/logo.svg" alt="" className="h-8 w-9" />
-              <span className="text-primary text-2xl font-semibold">Nodes</span>
-            </div>
-          </Link>
-          <Searchbar
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            className="hidden md:block"
-          />
-        </div>
-      </div>
-
-      <div className="flex gap-4 items-center z-[99]">
-        <div className="md:block hidden">
-          <Button
-            theme={"secondary"}
-            className="!border-grey-dark bg-white"
-            onClick={() => setAppOpened(!appOpened)}
-          >
-            <div className="flex items-center gap-3">
-              {" "}
-              <Smartphone className="w-4" />
-              <span>Get app</span>
-            </div>
-          </Button>
-        </div>
-
-        <ActionIcon bell bgColor="bg-[#ffffff]" />
-        <ActionIcon mail bgColor="bg-[#ffffff]" />
-        {/* <Bell className="w-8 text-primary" />
-        <Mail className="w-8 text-primary" /> */}
-        <div
-          className="flex items-center cursor-pointer"
-          onClick={() => setMenuOpened(!menuOpened)}
-        >
-          <Avatar src="/img/avatar.jpeg" />
-          <ChevronDown className="text-primary" />
-
-          {menuOpened ? (
-            <div className="shadow-normal border rounded-lg bg-white w-[200px] absolute right-4 top-14">
-              <Link to={"/settings"}>
-                <div className="flex items-center gap-2 p-2 hover:bg-customsecondary-light opacity-70 hover:opacity-100 transition-all ">
-                  <Settings /> <span>Settings</span>
-                </div>
-              </Link>
-              <div className="flex items-center gap-2 p-2 hover:bg-customsecondary-light opacity-70 hover:opacity-100 transition-all ">
-                <Flag /> <span>Report Issue</span>
-              </div>
-              <LogoutComponent>
-                <div className="flex items-center gap-2 p-2 hover:bg-customsecondary-light opacity-70 hover:opacity-100 transition-all ">
-                  <LogOut /> <span>Sign Out</span>
-                </div>
-              </LogoutComponent>
-            </div>
-          ) : null}
-
-          {appOpened ? (
-            <div className="p-4 z-50 flex gap-4 absolute top-16 rounded right-40 border shadow-normal bg-white w-[600px]">
-              <div>
-                <QRCode />
-              </div>
-              <div className="flex flex-col justify-between">
-                <h2 className="text-3xl">Scan to get Nodes on your phone</h2>
-                <p>or find us on the App Store and Play store</p>
-                <div className="flex gap-2">
-                  <Button>
-                    <Playstore />
-                    <span>Google play</span>
-                  </Button>
-                  <Button>
-                    <span>
-                      <svg
-                        width="19"
-                        height="18"
-                        viewBox="0 0 19 18"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M14.5177 9.54618C14.5422 12.1899 16.8372 13.0698 16.8625 13.0811C16.8431 13.1429 16.4959 14.3349 15.6536 15.5658C14.9254 16.63 14.1695 17.6903 12.9792 17.7126C11.8094 17.7339 11.4333 17.0187 10.0958 17.0187C8.75872 17.0187 8.34092 17.6903 7.2335 17.7339C6.08432 17.7775 5.20921 16.5829 4.475 15.5227C2.97482 13.3537 1.8283 9.3936 3.36772 6.72046C4.13244 5.39296 5.49932 4.55244 6.98277 4.53079C8.11114 4.50927 9.17624 5.28988 9.866 5.28988C10.5553 5.28988 11.8497 4.35107 13.2103 4.48888C13.78 4.51265 15.3789 4.71894 16.4056 6.22194C16.3231 6.27327 14.4979 7.33583 14.5177 9.54618ZM12.3193 3.05409C12.9294 2.31566 13.34 1.28741 13.2281 0.264648C12.3486 0.299945 11.2852 0.850633 10.6545 1.58877C10.0892 2.24226 9.59417 3.28851 9.72763 4.29102C10.7079 4.36696 11.7092 3.79293 12.3193 3.05409Z"
-                          fill="white"
-                        />
-                      </svg>
-                    </span>
-                    <span>App store</span>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          ) : null}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default Header;
 
 {
   /* <div className="absolute bg-black bg-opacity-30 z-10 p-12 pr-5 top-2 right-0 group">

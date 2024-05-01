@@ -592,3 +592,9 @@ export const landingPageFooterLinks = [
 export const ScrollAnimationDelay = 70
 
 export const subscriptionType = ['Standard', 'Pro', 'Business']
+export const notificationTypes = {
+  JOB_APPLICATION: 'JOB_APPLICATION',
+  EVENT_REGISTRATION: 'EVENT_REGISTRATION',
+  BUSINESS_VERIFIED: 'BUSINESS_VERIFIED',
+  POST_ACTIVITY: 'POST_ACTIVITY'
+ }

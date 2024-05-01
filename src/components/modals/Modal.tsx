@@ -1,12 +1,12 @@
 import { Fragment, ReactNode } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-
 type ModalProps = {
   open: boolean;
   setOpen: (e) => void;
   children?: ReactNode | ReactNode[];
   sizeClass?: string;
+  paddingX?: string;
 };
 
 export default function Modal({
@@ -14,6 +14,7 @@ export default function Modal({
   setOpen,
   children,
   sizeClass,
+  paddingX = "px-4 sm:px-8",
 }: ModalProps) {
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -42,12 +43,10 @@ export default function Modal({
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel
-                className={` ${sizeClass} relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:p-8`}
+                className={` ${sizeClass} ${paddingX} relative transform overflow-hidden rounded-lg bg-white  pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:py-8`}
               >
                 <div>
-                  <div className="">
-                  {children}
-                  </div>
+                  <div className="">{children}</div>
                 </div>
                 {/* <div className="mt-5 sm:mt-6">
                   <button
