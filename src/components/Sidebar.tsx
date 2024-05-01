@@ -55,14 +55,13 @@ function Sidebar() {
         <SearchComponent />
       </div>
       <div className="flex flex-col gap-5 pb-10">
-        {paths.map((r, i) => (
-          <div className="w-full">
+        {paths.map((r) => (
+          <div key={r?.id} className="w-full">
             {r?.children ? (
               <div
                 onClick={() => {
                   setShowBusinessChild(!showBusinessChild);
                 }}
-                key={i}
                 className="cursor-pointer"
               >
                 <div
@@ -85,7 +84,7 @@ function Sidebar() {
               </div>
             ) : (
               <NavLink
-                key={i}
+                key={r?.id}
                 to={String(r.path)}
                 className={({ isActive, isPending }) =>
                   isActive
@@ -108,29 +107,33 @@ function Sidebar() {
                   {showBusinessChild ? (
                     <div className="flex flex-col gap-4 py-4 pl-4">
                       {r.children?.map((child) => (
-                        <Transition.Child
-                          as={Fragment}
-                          enter="transition ease-in-out duration-300 transform"
-                          enterFrom="-translate-y-full"
-                          enterTo="translate-y-0"
-                          leave="transition ease-in-out duration-300 transform"
-                          leaveFrom="translate-y-0"
-                          leaveTo="-translate-y-full"
-                        >
-                          <NavLink
-                            key={child.name}
-                            to={String(child.path)}
-                            className={({ isActive, isPending }) =>
-                              isActive
-                                ? "bg-secondary text-primary childNavLink"
-                                : isPending
-                                ? "bg-none text-primary childNavLink"
-                                : "childNavLink"
-                            }
+                        <div key={r?.id} className="">
+                          <Transition.Child
+                            as={Fragment}
+                            enter="transition ease-in-out duration-300 transform"
+                            enterFrom="-translate-y-full"
+                            enterTo="translate-y-0"
+                            leave="transition ease-in-out duration-300 transform"
+                            leaveFrom="translate-y-0"
+                            leaveTo="-translate-y-full"
                           >
-                            <div className="hidden lg:block">{child.name}</div>
-                          </NavLink>
-                        </Transition.Child>
+                            <NavLink
+                              key={child.name}
+                              to={String(child.path)}
+                              className={({ isActive, isPending }) =>
+                                isActive
+                                  ? "bg-secondary text-primary childNavLink"
+                                  : isPending
+                                  ? "bg-none text-primary childNavLink"
+                                  : "childNavLink"
+                              }
+                            >
+                              <div className="hidden lg:block">
+                                {child.name}
+                              </div>
+                            </NavLink>
+                          </Transition.Child>
+                        </div>
                       ))}
                     </div>
                   ) : null}

@@ -110,12 +110,12 @@ export default function ItemsCarousel({
           }}
           spaceBetween={40}
           slidesPerView={3.5}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => {}}
+          onSwiper={() => {}}
         >
           {data.map((item, i) => (
-            <div className="w-full" key={i}>
-              <SwiperSlide>
+            <div className="w-full" key={item?.id ? item?.id : i}>
+              <SwiperSlide key={item?.id}>
                 {trend || movie || event || job || content ? (
                   <div className="">
                     {trend && (
@@ -161,7 +161,9 @@ export default function ItemsCarousel({
         </Swiper>
 
         <div className=" w-full  bottom-0 left-0 flex justify-between items-center mt-10 ">
-          <div className={`${customPaginator} flex gap-2 items-center`}></div>
+          <div
+            className={`${customPaginator} flex gap-2 items-center cursor-pointer`}
+          ></div>
 
           <div className="custom-swiper-navigation flex items-center gap-[10px]">
             <div
