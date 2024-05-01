@@ -6,6 +6,7 @@ import {
   Modal,
   AddPost,
   CommunityFilter,
+  RightFloater
 } from "../../components";
 import DiscoverTab from "./DiscoverTab";
 import ConnectionsTab from "./ConnectionsTab";
@@ -87,13 +88,13 @@ function Community() {
         />{" "}
       </Modal>
 
-      <Modal
-        sizeClass="sm:max-w-[522px]"
+      <RightFloater
+       
         open={filterModal}
         setOpen={setFilterModal}
       >
         <DiscoverSectionFilter closeModal={() => setFilterModal(false)} />
-      </Modal>
+      </RightFloater>
     </div>
   );
 }

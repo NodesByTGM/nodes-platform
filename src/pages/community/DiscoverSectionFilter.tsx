@@ -28,7 +28,7 @@ export default function DiscoverSectionFilter({ closeModal }) {
     handleCheckList(category, selectedCategories, setSelectedCategories);
   };
   return (
-    <div>
+    <div className='my-4 bg-[#ffffff] p-6 rounded-lg w-full md:w-[400px] xl:w-[522px]'>
       <div className="flex items-center justify-between">
         <pre className="hidden">
           {JSON.stringify(selectedCategories, null, 2)}
