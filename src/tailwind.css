@@ -1,8 +1,7 @@
+@import "/fonts/fontStyles.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "public/fonts/fontStyles.css";
 
 body {
   font-family: "GeneralSans", sans-serif !important;
@@ -109,4 +108,8 @@ body {
 .imgCss {
   /* object-fit: cover; */
   object-fit: fill;
+}
+
+.messageMainPadding {
+  @apply px-8;
 }

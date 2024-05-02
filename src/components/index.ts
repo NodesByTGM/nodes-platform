@@ -117,4 +117,10 @@ export { default as RatingStar } from "./RatingStar";
 export { default as RightFloater } from "./RightFloater";
 export { default as ConfirmComponent } from "./ConfirmComponent";
 export { default as HandleLogout } from "./HandleLogout";
-export {default as ContentItem} from './custom/ContentItem.tsx'
+export { default as ContentItem } from "./custom/ContentItem.tsx";
+export { default as Pagination } from "./Pagination";
+export { default as NotificationsComponent } from "./notificationsAndMessages/NotificationsComponent";
+export { default as MessagesComponent } from "./notificationsAndMessages/MessagesComponent";
+
+
+
