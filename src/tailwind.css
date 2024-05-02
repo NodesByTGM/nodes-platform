@@ -113,3 +113,7 @@ body {
 .messageMainPadding {
   @apply px-8;
 }
+
+.discover-grid-cols {
+  @apply grid-cols-3
+}

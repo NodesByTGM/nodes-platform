@@ -50,7 +50,7 @@ export default function CommunityPeopleCard({
   return (
     <div className="p-6 w-full h-full flex flex-col gap-6 border border-[#EFEFEF] rounded-lg      ">
       {data?.avatar?.url ? (
-        <div className="h-[192px] bg-secondary/20 rounded">
+        <div className="h-[192px] bg-primary/20 rounded">
           {" "}
           <img
             src={data?.avatar?.url}
@@ -59,7 +59,7 @@ export default function CommunityPeopleCard({
           />
         </div>
       ) : (
-        <div className="h-[192px] bg-secondary/20 rounded imgCss"></div>
+        <div className="h-[192px] bg-primary/20 rounded imgCss"></div>
       )}
       <div className="flex gap-2 items-center text-primary">
         <span className=" font-medium text-base">{data?.name}</span>

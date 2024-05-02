@@ -20,6 +20,7 @@
     "clsx": "^2.1.0",
     "firebase": "^10.8.0",
     "formik": "^2.4.5",
+    "jsonwebtoken": "^9.0.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.3",
     "moment": "^2.30.1",

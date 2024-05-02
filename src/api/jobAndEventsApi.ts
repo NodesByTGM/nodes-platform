@@ -16,26 +16,26 @@ export const jobAndEventsApi: any = createApi({
   },
   endpoints: (builder) => ({
     getJobs: builder.query<any, any>({
-      query: () => {
+      query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}`,
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}?${new URLSearchParams(cleanObject(params))}`,
           method: "get",
         };
       },
     }),
     getMyJobs: builder.query<any, any>({
-      query: () => {
+      query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/mine`,
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/mine?${new URLSearchParams(cleanObject(params))}`,
           method: "get",
         };
       },
     }),
 
     getAppliedJobs: builder.query<any, any>({
-      query: () => {
+      query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/applied`,
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/applied?${new URLSearchParams(cleanObject(params))}`,
           method: "get",
         };
       },
@@ -53,9 +53,9 @@ export const jobAndEventsApi: any = createApi({
     // Use AppConfig.API_ENDPOINTS.Job.MyJobsUrl, no need for params,
     // also pagination has been added to all these
     getBusinessUserJobs: builder.query<any, any>({
-      query: () => {
+      query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Job.MyJobsUrl}`,
+          url: `${AppConfig.API_ENDPOINTS.Job.MyJobsUrl}?${new URLSearchParams(cleanObject(params))}`,
           method: "get",
         };
       },
@@ -120,17 +120,17 @@ export const jobAndEventsApi: any = createApi({
     }),
 
     getEvents: builder.query<any, any>({
-      query: () => {
+      query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}`,
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}?${new URLSearchParams(cleanObject(params))}`,
           method: "get",
         };
       },
     }),
     getMyEvents: builder.query<any, any>({
-      query: () => {
+      query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/mine`,
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/mine?${new URLSearchParams(cleanObject(params))}`,
           method: "get",
         };
       },
@@ -194,9 +194,9 @@ export const jobAndEventsApi: any = createApi({
     }),
 
     getSavedJobs: builder.query<any, any>({
-      query: () => {
+      query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/saved`,
+          url: `${AppConfig.API_ENDPOINTS.Job.JobUrl}/saved?${new URLSearchParams(cleanObject(params))}`,
           method: "get",
         };
       },
@@ -222,9 +222,9 @@ export const jobAndEventsApi: any = createApi({
     }),
 
     getSavedEvents: builder.query<any, any>({
-      query: () => {
+      query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/saved`,
+          url: `${AppConfig.API_ENDPOINTS.Events.BaseURL}/saved?${new URLSearchParams(cleanObject(params))}`,
           method: "get",
         };
       },

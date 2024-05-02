@@ -121,6 +121,4 @@ export { default as ContentItem } from "./custom/ContentItem.tsx";
 export { default as Pagination } from "./Pagination";
 export { default as NotificationsComponent } from "./notificationsAndMessages/NotificationsComponent";
 export { default as MessagesComponent } from "./notificationsAndMessages/MessagesComponent";
-
-
-
+export { default as DiscoverCardLoader } from "./loaders/DiscoverCardLoader.tsx";
