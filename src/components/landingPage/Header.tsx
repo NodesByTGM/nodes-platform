@@ -26,15 +26,10 @@ export default function Header() {
     <div className=" landingPageMainDiv !z-[100000000]">
       <div className="flex justify-between w-full ">
         <div className="flex gap-10 items-center ">
-          {!user?.id ? (
-            <NavLink to="/" className=" cursor-pointer">
-              <img src="/landing-page-logo.svg" alt="" className="h-8" />
-            </NavLink>
-          ) : (
-            <NavLink to="/dashboard" className=" cursor-pointer">
-              <img src="/landing-page-logo.svg" alt="" className="h-8" />
-            </NavLink>
-          )}
+          <NavLink to="/" className=" cursor-pointer">
+            <img src="/landing-page-logo.svg" alt="" className="h-8" />
+          </NavLink>
+
           <div className="flex gap-8">
             {navs.map((nav) => (
               <NavLink
@@ -75,7 +70,14 @@ export default function Header() {
                 <span className="">Log In</span>
               </NavLink>
             </div>
-          ) : null}
+          ) : (
+            <NavLink to={'/Dashboard'}>
+              {" "}
+              <Button className="!py-4 max-w-max !border-none !rounded-lg !bg-primary">
+                 Dashboard
+                </Button>
+            </NavLink>
+          )}
         </div>
       </div>
     </div>

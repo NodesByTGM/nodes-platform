@@ -7,7 +7,7 @@ import {
   SkillsSection,
   FeaturesSection,
   NodesCommunitySection,
-  CTASection,
+  // CTASection,
   GetStartedSection,
 } from "../../components/landingPage";
 export default function LandingPage() {
@@ -34,9 +34,9 @@ export default function LandingPage() {
           <GetStartedSection />
         </ScrollAnimation>
 
-        <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
+        {/* <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
           <CTASection />
-        </ScrollAnimation>
+        </ScrollAnimation> */}
       </div>
     </div>
   );

@@ -628,8 +628,7 @@ export const WebsiteCopyWrite = {
         {
           id: 3,
           title: "Find top talent",
-          description:
-            "Find top talent from a vast pool of skilled creatives.",
+          description: "Find top talent from a vast pool of skilled creatives.",
         },
         {
           id: 4,
@@ -643,35 +642,143 @@ export const WebsiteCopyWrite = {
       Header: "The Nodes Community",
       Description:
         "A platform that empowers creatives and businesses to connect, collaborate, and thrive.",
-      
     },
     BenefitsSection: {
       Benefits: [
         {
-          title: "Showcase your talent with a stunning profile and build your network.",
-          description:
-            "",
+          title:
+            "Showcase your talent with a stunning profile and build your network.",
+          description: "",
         },
         {
-          title: "Land your dream project by connecting with top brands and businesses.",
-          description:
-            "",
+          title:
+            "Land your dream project by connecting with top brands and businesses.",
+          description: "",
         },
         {
           title: "Find top talent from a vast pool of skilled creatives.",
+          description: "",
+        },
+        {
+          title:
+            "Build your brand reputation by partnering with talented individuals.",
+          description: "",
+        },
+      ],
+    },
+    GetStartedSection: {
+      Header: "Begin your journey with Nodes!",
+      Description:
+        "Unlock endless possibilities, dive into the vibrant world of Nodes and explore exciting opportunities today.",
+    },
+  },
+  BusinessPage: {
+    HeroSectionPlanCTA: {
+      Title: "Talents might be hard to find but not on Nodes.",
+      Description: "Get access to over a million creatives in one space. ",
+    },
+    TipsSection: {
+      Title: "Benefits of having a business account",
+      Description: "Description",
+      Tips: [
+        {
+          id: 1,
+          title: "A talented pool of creatives at your fingertips",
           description:
             "",
         },
         {
-          title: "Build your brand reputation by partnering with talented individuals.",
+          id: 2,
+          title: "Find the perfect match for your project",
+          description: "",
+        },
+        {
+          id: 3,
+          title: "Accelerate your business growth",
           description:
             "",
         },
-      ]
+      ],
+    },
+    NodesCommunitySection: {
+      Title:
+        "Stand out from the crowd, connect with top brands actively seeking talent.",
+      Description: "Land the projects you've been waiting for.",
+    },
+
+    GetStartedSection: {
+      Title: "Find top talent, faster. Get a Nodes Business Account.",
+      Description:
+        "Unlock endless possibilities, dive into the vibrant world of Nodes and explore exciting opportunities today.",
+    },
+  },
+  TalentPage: {
+    HeroSectionPlanCTA: {
+      Title: "Elevate Your Craft, Shine Bright on Nodes.",
+      Description: "Showcase your talent, land your dream project",
+    },
+    TipsSection: {
+      Title:
+        "Stand out from the crowd, connect with top brands actively seeking talent.",
+      Description: "Land the projects you've been waiting for.",
+      Tips: [
+        {
+          id: 1,
+          title: "Build a stunning profile.",
+          description:
+            "Craft a solid profile that highlights your talent and experience.",
+        },
+        {
+          id: 2,
+          title: "Showcase your work to industry professionals.",
+          description: "Stand out from the crowd, connect with top brands actively seeking talent.",
+        },
+        {
+          id: 3,
+          title: "Connect with other creatives and brands.",
+          description:
+            "Network with like-minded creatives, find your perfect team.",
+        },
+      ],
     },
     GetStartedSection: {
-      Header: 'Begin your journey with Nodes!',
-      Description: 'Unlock endless possibilities, dive into the vibrant world of Nodes and explore exciting opportunities today.'
-    }
+      Title: "Sign Up Now & Get Discovered!",
+      Description:
+        "Unlock endless possibilities, dive into the vibrant world of Nodes and explore exciting opportunities today.",
+    },
+  },
+  AboutUsPage: {
+    HeroSectionPlanCTA: {
+      Title: "What is Nodes?",
+      Description:
+        "Nodes is a dynamic platform empowering talents to showcase their work, connect with collaborators, and access valuable projects as well as resources.",
+    },
+    GetStartedSection: {
+      Title: "Find top talent, faster. Get a Nodes Business Account.",
+      Description:
+        "Unlock endless possibilities, dive into the vibrant world of Nodes and explore exciting opportunities today.",
+    },
+
+    CTASection: {
+      FAQ: [
+        {
+          id: 1,
+          title: "What is Nodes?",
+          description:
+            "We are a platform designed to bridge the gap between creative professionals and businesses in the entertainment industry.",
+        },
+        {
+          id: 2,
+          title: "What to do on Nodes",
+          description: "Connect, collaborate, and create.",
+        },
+        {
+          id: 3,
+          title: "Why nodes",
+          description:
+            "We foster a supportive community where individuals can showcase their talents, connect with like-minded peers, and access opportunities to advance their careers. We are dedicated to providing a space where creativity thrives and dreams are realised.",
+        },
+      ],
+    },
   },
 };

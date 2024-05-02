@@ -4,33 +4,8 @@ import { NavLink } from "react-router-dom";
 import { Plus, X } from "react-feather";
 
 import { PaleSection } from "../../components/landingPage";
-export default function CTASection() {
-  const faq = [
-    {
-      id: 1,
-      title: "What is Nodes?",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet accumsan libero ipsum facilisis nibh. ",
-    },
-    {
-      id: 2,
-      title: "What is are the benefits?",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet accumsan libero ipsum facilisis nibh. ",
-    },
-    {
-      id: 3,
-      title: "Who needs nodes",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet accumsan libero ipsum facilisis nibh. ",
-    },
-    {
-      id: 4,
-      title: "What is the pricing",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet accumsan libero ipsum facilisis nibh. ",
-    },
-  ];
+export default function CTASection({faq}) {
+
   const [selected, setSelected] = useState<any>(faq[0]);
   return (
     <div className="landingPageMainDiv pt-[80px] pb-[120px]">
