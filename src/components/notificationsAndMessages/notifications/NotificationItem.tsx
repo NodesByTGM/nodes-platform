@@ -9,7 +9,7 @@ export default function NotificationItem({
 }) {
   return (
     <div
-      className={`${
+      className={`cursor-pointer ${
         unread ? "bg-[#D6DE211A]" : "bg-[#ffffff]"
       }  flex items-center gap-3 pl-6 w-full  `}
     >

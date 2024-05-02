@@ -166,9 +166,10 @@ function Header() {
         sizeClass="sm:max-w-[960px]"
         open={messagesModal}
         setOpen={setMessagesModal}
+        paddingX='px-0'  paddingY='px-0'
        
       >
-        <MessagesComponent closeModal={() => setMessagesModal(false)} />
+        <MessagesComponent  />
       </Modal>
      
     </div>
