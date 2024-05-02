@@ -45,12 +45,15 @@ function Sidebar() {
             </div> */}
 
       <div className="flex flex-col gap-8 pt-8 pb-6">
-        <div className="flex items-center gap-2">
-          <img src="/nodes-logo-black.svg" alt="" className="h-[24px] " />
-          <span className="font-semibold text-[#212121] text-[18px]">
-            Nodes
-          </span>
-        </div>
+        <NavLink to="/" className="cursor-pointer">
+          <div className="flex items-center gap-2">
+            <img src="/nodes-logo-black.svg" alt="" className="h-[24px] " />
+
+            <span className="font-semibold text-[#212121] text-[18px]">
+              Nodes
+            </span>
+          </div>
+        </NavLink>
 
         <SearchComponent />
       </div>

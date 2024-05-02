@@ -135,9 +135,8 @@ export const filterOptions = {
     { id: 1, name: "Most recent", value: 0, returnValue: "Most recent" },
   ],
   discoverType: [
-    { id: 1, name: "People", value: 'People', returnValue: "People" },
-    { id: 2, name: "Brand", value: 'Brand', returnValue: "Brand" },
-
+    { id: 1, name: "People", value: "People", returnValue: "People" },
+    { id: 2, name: "Brand", value: "Brand", returnValue: "Brand" },
   ],
 };
 
@@ -340,7 +339,10 @@ export const planObj = {
 };
 
 export const carouselImages = [
-  { id: 1, url: "/carouselImg/beautiful-dark-skinned-curly-woman-white-blouse-smiles-looks-front-works-as-fashion-designer-with-her-friend-min.jpg" },
+  {
+    id: 1,
+    url: "/carouselImg/beautiful-dark-skinned-curly-woman-white-blouse-smiles-looks-front-works-as-fashion-designer-with-her-friend-min.jpg",
+  },
   { id: 2, url: "/carouselImg/black-boy-playing-guitar-min.jpg" },
   {
     id: 3,
@@ -589,12 +591,87 @@ export const landingPageFooterLinks = [
   },
 ];
 
-export const ScrollAnimationDelay = 70
+export const ScrollAnimationDelay = 70;
 
-export const subscriptionType = ['Standard', 'Pro', 'Business']
+export const subscriptionType = ["Standard", "Pro", "Business"];
 export const notificationTypes = {
-  JOB_APPLICATION: 'JOB_APPLICATION',
-  EVENT_REGISTRATION: 'EVENT_REGISTRATION',
-  BUSINESS_VERIFIED: 'BUSINESS_VERIFIED',
-  POST_ACTIVITY: 'POST_ACTIVITY'
- }
+  JOB_APPLICATION: "JOB_APPLICATION",
+  EVENT_REGISTRATION: "EVENT_REGISTRATION",
+  BUSINESS_VERIFIED: "BUSINESS_VERIFIED",
+  POST_ACTIVITY: "POST_ACTIVITY",
+};
+
+export const WebsiteCopyWrite = {
+  LandingPage: {
+    SkillsSection: {
+      Header: "Unleash creative potential, unlock business growth",
+      Description:
+        "Level up with our creative tools designed exclusively for Nodes",
+    },
+    FeaturesSection: {
+      Header: "Let's help you stand out",
+      Description: "Fuel your passion, empower your business",
+      Propositions: [
+        {
+          id: 1,
+          title: "Showcase your talent",
+          description:
+            "Build a stunning profile that shows all that you are capable of, then connect with other creatives and brands to land the projects you've been waiting for. ",
+        },
+        {
+          id: 2,
+          title: "Connect and collaborate",
+          description:
+            "Network with like-minded creatives, find your perfect team.",
+        },
+
+        {
+          id: 3,
+          title: "Find top talent",
+          description:
+            "Find top talent from a vast pool of skilled creatives.",
+        },
+        {
+          id: 4,
+          title: "Build your brand reputation",
+          description:
+            "Build your brand reputation by partnering with talented individuals.",
+        },
+      ],
+    },
+    NodesCommunitySection: {
+      Header: "The Nodes Community",
+      Description:
+        "A platform that empowers creatives and businesses to connect, collaborate, and thrive.",
+      
+    },
+    BenefitsSection: {
+      Benefits: [
+        {
+          title: "Showcase your talent with a stunning profile and build your network.",
+          description:
+            "",
+        },
+        {
+          title: "Land your dream project by connecting with top brands and businesses.",
+          description:
+            "",
+        },
+        {
+          title: "Find top talent from a vast pool of skilled creatives.",
+          description:
+            "",
+        },
+        {
+          title: "Build your brand reputation by partnering with talented individuals.",
+          description:
+            "",
+        },
+      ]
+    },
+    GetStartedSection: {
+      Header: 'Begin your journey with Nodes!',
+      Description: 'Unlock endless possibilities, dive into the vibrant world of Nodes and explore exciting opportunities today.'
+    }
+  },
+};
