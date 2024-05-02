@@ -27,7 +27,7 @@ const API_ENDPOINTS = {
     Post: `${BASE_API_ENDPOINT}/community/posts`,
     DiscoverUsers: `${BASE_API_ENDPOINT}/users/discover`,
     ConnectionsMine: `${BASE_API_ENDPOINT}/users/connections/mine`,
-    ConnectionRequests: `${BASE_API_ENDPOINT}/users/connections/request`
+    ConnectionRequests: `${BASE_API_ENDPOINT}/users/connections/request`,
   },
   Profile: {
     UserProfile: `${BASE_API_ENDPOINT}/users/profile`,
@@ -71,7 +71,12 @@ const API_ENDPOINTS = {
   },
   Content: {
     Contents: `${BASE_API_ENDPOINT}/cms/contents`,
-  }
+  },
+  Notification: {
+    BaseUrl: `${BASE_API_ENDPOINT}/notifications/mine`,
+    Interactions: `${BASE_API_ENDPOINT}/notifications/mine/interactions`,
+    Delete: `${BASE_API_ENDPOINT}/notifications/remove`,
+  },
 };
 
 const PATHS = {

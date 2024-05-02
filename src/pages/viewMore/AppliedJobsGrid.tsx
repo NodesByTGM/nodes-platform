@@ -2,19 +2,48 @@
 import React, { useEffect, useState } from "react";
 import { useGetAppliedJobsQuery } from "../../api";
 import { JobItem, Loader, Pagination } from "../../components";
-export default function AppliedJobsGrid() {
+export default function AppliedJobsGrid({ searchText = "" }) {
   const [appliedJobsData, setAppliedJobsData] = useState<any>([]);
+  const [query, setQuery] = useState<any>({
+    page: 1,
+    pageSize: 9,
+    search: "",
+  });
+  const setPageQuery = (page) => {
+    setQuery({ ...query, page });
+  };
+  const [pageNav, setPageNav] = useState({
+    currentPage: 1,
+    totalPages: 10,
+    totalItems: 0,
+  });
   const {
     data: appliedJobsResponse,
     refetch: appliedJobsRefetch,
     isFetching: appliedJobsLoading,
-  } = useGetAppliedJobsQuery();
+  } = useGetAppliedJobsQuery(query);
 
   useEffect(() => {
     if (appliedJobsResponse?.result?.items?.length > 0) {
-      setAppliedJobsData(appliedJobsResponse?.result.items);
+      const result = appliedJobsResponse?.result;
+      setAppliedJobsData(result?.items);
+      setPageNav({
+        currentPage: result.currentPage,
+
+        totalPages: result.totalPages,
+        totalItems: result.totalItems,
+      });
     }
   }, [appliedJobsResponse]);
+
+  useEffect(() => {
+    appliedJobsRefetch();
+  }, [query, appliedJobsRefetch]);
+
+  useEffect(() => {
+    setQuery({ ...query, search: searchText });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchText]);
   return (
     <div>
       {appliedJobsLoading && appliedJobsData.length === 0 ? (
@@ -43,7 +72,11 @@ export default function AppliedJobsGrid() {
             ))}
           </div>
           <div className="">
-            <Pagination className='mt-10'/>
+            <Pagination
+              pageNav={pageNav}
+              onPageChange={(page) => setPageQuery(page)}
+              className="mt-10"
+            />
           </div>
         </div>
       ) : null}

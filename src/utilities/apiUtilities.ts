@@ -1,6 +1,7 @@
 export function cleanObject(obj) {
     const cleaned = {};
-  
+  if(obj){
+
     Object.keys(obj).forEach((key) => {
       const value = obj[key];
   
@@ -8,6 +9,7 @@ export function cleanObject(obj) {
         cleaned[key] = value;
       }
     });
+  }
     return cleaned;
   }
   

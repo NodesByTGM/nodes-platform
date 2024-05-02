@@ -65,18 +65,42 @@ export const generalApi: any = createApi({
       },
     }),
     getTrending: builder.query<any, any>({
-      query: () => {
+      query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Trending.Events}`,
+          url: `${AppConfig.API_ENDPOINTS.Trending.Events}?${new URLSearchParams(cleanObject(params))}`,
           method: "get",
         };
       },
     }),
     getContent: builder.query<any, any>({
-      query: () => {
+      query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Content.Contents}`,
+          url: `${AppConfig.API_ENDPOINTS.Content.Contents}?${new URLSearchParams(cleanObject(params))}`,
           method: "get",
+        };
+      },
+    }),
+    getNotifications: builder.query<any, any>({
+      query: (params) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Notification.BaseUrl}?${new URLSearchParams(cleanObject(params))}`,
+          method: "get",
+        };
+      },
+    }),
+    getInteractions: builder.query<any, any>({
+      query: (params) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Notification.Interactions}?${new URLSearchParams(cleanObject(params))}`,
+          method: "get",
+        };
+      },
+    }),
+    deleteNotifications: builder.mutation<any, any>({
+      query: ({id}) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Notification.Delete}/${id}`,
+          method: "delete",
         };
       },
     }),
@@ -90,5 +114,9 @@ export const {
   useGetTrendingQuery,
   useUploadFileMutation,
   useVerifyTransactionQuery,
-  useGetContentQuery
+  useGetContentQuery,
+  useGetNotificationsQuery,
+  useGetInteractionsQuery,
+  useDeleteNotificationsMutation
+
 } = generalApi;
