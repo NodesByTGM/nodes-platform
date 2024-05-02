@@ -3,6 +3,7 @@ import { SectionTitles } from "../../components/landingPage";
 import "../../assets/SkillsCarousel.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, FreeMode } from "swiper/modules";
+import { WebsiteCopyWrite } from "../../utilities/constants";
 
 import "swiper/css";
 
@@ -19,11 +20,11 @@ export default function SkillsSection() {
   ];
   return (
     <div className="landingPageMainDiv py-[108px]">
-      <div className="mx-auto text-center">
+      <div className="mx-auto text-center max-w-[766px]">
         <SectionTitles
-          titleClass="!md:text-[48px]"
-          title="A catchy phrase about Nodes"
-          description="Lorem ipsum dolor sit amet consectetur."
+          titleClass="!md:text-[40px]"
+          title={WebsiteCopyWrite.LandingPage.SkillsSection.Header}
+          description={WebsiteCopyWrite.LandingPage.SkillsSection.Description}
         />
       </div>
       {/* <div className="flex flex-wrap gap-10 mt-[108px]">
