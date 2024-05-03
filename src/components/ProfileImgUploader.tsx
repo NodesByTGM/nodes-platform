@@ -49,10 +49,12 @@ export default function ProfileImgUploader({ value, onChange }) {
 
   useEffect(() => {
     if (uploadFileSuccess) {
-      onChange(uploadResponse?.data?.url);
+      console.log("Data: " + JSON.stringify(uploadResponse, null, 2))
+
+      onChange(uploadResponse?.result);
     }
    
-  }, [uploadFileSuccess, uploadResponse?.data?.url]);
+  }, [uploadFileSuccess, uploadResponse?.result?.url]);
 
   useEffect(() => {
     if (isUploadError) {
@@ -63,13 +65,13 @@ export default function ProfileImgUploader({ value, onChange }) {
   return (
     <div className="flex items-center gap-4">
       <div
-        className={`${uploadFileLoading ? "animate-pulse" : ""} size-[100px]`}
+        className={`${uploadFileLoading ? "animate-pulse" : ""} size-[100px] `}
       >
-        {value && value?.length > 0 ? (
-          <img className=" h-full w-full" src={value} alt="" />
+        {value && value?.url?.length > 0 ? (
+          <img className=" h-full w-full rounded-full" src={value?.url} alt="" />
         ) : (
           <img
-            className=" h-full w-full"
+            className=" h-full w-full rounded-full"
             src="/img/ProfilePlaceholder.png"
             alt=""
           />
@@ -99,8 +101,7 @@ export default function ProfileImgUploader({ value, onChange }) {
           "Replace"
         )}
       </span>
-      {/* <span className="">{value}</span> */}
-      {/* <span className="">{value}</span> */}
+    
     </div>
   );
 }

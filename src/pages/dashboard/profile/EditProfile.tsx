@@ -12,6 +12,10 @@ import {
   profileSchema,
   profileValidationType,
 } from "../../../utilities/validation";
+import { getAge } from "../../../utilities/common";
+import { returnMaxDate, isValidURL } from "../../../utilities";
+import moment from "moment";
+import Countries from "../../../utilities/countries.json";
 import { FormDebug, ProfileEventPostForm } from "../../../components";
 import { toast } from "react-toastify";
 import {
@@ -22,6 +26,8 @@ import {
   TextArea,
   Switch,
   ProfileImgUploader,
+  LocationSelect,
+  DateSelect,
 } from "../../../components";
 import ProfileProjectForm from "./ProfileProjectForm";
 
@@ -55,6 +61,7 @@ export default function EditIndividual() {
     profileData,
     profileIsSuccess,
   } = useProfileContext();
+  // const [isValidWebsite, setIsValidWebsite] = useState(true)
   const [
     updateUserProfile,
     {
@@ -64,6 +71,7 @@ export default function EditIndividual() {
       // error: updateProfileError,
     },
   ] = useUpdateUserProfileMutation();
+
   const initialCollaborator = {
     name: "",
     role: "",
@@ -142,7 +150,6 @@ export default function EditIndividual() {
       businessInfo,
     ]
   );
-
   const [navs, setNavs] = useState(navOptions);
   const [selected, setSelected] = useState(navs[0]);
 
@@ -155,7 +162,7 @@ export default function EditIndividual() {
       skills: [],
       location: values.location,
       height: values.height,
-      age: values.age,
+      age: getAge(values.age),
       linkedIn: values.linkedIn,
       instagram: values.instagram,
       twitter: values.twitter,
@@ -174,25 +181,24 @@ export default function EditIndividual() {
 
   const formik = useFormik<profileValidationType>({
     initialValues: {
-      firstName: profileData?.user?.name?.split(" ")[0],
-      lastName: profileData?.user?.name?.split(" ")[1],
-      username: profileData?.user?.username,
-      avatar: profileData?.user?.avatar,
-      location: profileData?.user?.location,
-      height: profileData?.user?.height,
-      age: profileData?.user?.age,
-
-      headline: profileData?.user?.headline,
-      bio: profileData?.user?.bio,
-      website: profileData?.user?.website,
-      linkedIn: profileData?.user?.linkedIn,
-      instagram: profileData?.user?.instagram,
-      twitter: profileData?.user?.twitter,
-      projectName: profileData?.user?.projectName,
-      description: profileData?.user?.description,
-      projectUrl: profileData?.user?.projectUrl,
-      spaces: profileData?.user?.spaces,
-      comments: profileData?.user?.comments,
+      firstName: profileData?.result?.name?.split(" ")[0],
+      lastName: profileData?.result?.name?.split(" ")[1],
+      username: profileData?.result?.username,
+      avatar: profileData?.result?.avatar,
+      location: profileData?.result?.location,
+      height: profileData?.result?.height,
+      age: profileData?.result?.dob,
+      headline: profileData?.result?.headline,
+      bio: profileData?.result?.bio,
+      website: profileData?.result?.website,
+      linkedIn: profileData?.result?.linkedIn,
+      instagram: profileData?.result?.instagram,
+      twitter: profileData?.result?.twitter,
+      projectName: profileData?.result?.projectName,
+      description: profileData?.result?.description,
+      projectUrl: profileData?.result?.projectUrl,
+      spaces: profileData?.result?.spaces,
+      comments: profileData?.result?.comments,
       collaborators: [initialCollaborator],
     },
     validationSchema: profileSchema,
@@ -233,6 +239,54 @@ export default function EditIndividual() {
   const populateFormValues = () => {
     console.log(JSON.stringify(profileData.user, null, 2));
   };
+  const {
+    setFieldError,
+    setValues,
+    setFieldValue,
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+    values,
+    isValid,
+    handleBlur,
+  } = formik;
+
+  const handleInputPrefill = useCallback(() => {
+    setValues({
+      firstName: profileData?.result?.name?.split(" ")[0],
+      lastName: profileData?.result?.name?.split(" ")[1],
+      username: profileData?.result?.username,
+      avatar: profileData?.result?.avatar,
+      location: profileData?.result?.location,
+      height: profileData?.result?.height,
+      age: profileData?.result?.dob,
+      headline: profileData?.result?.headline,
+      bio: profileData?.result?.bio,
+      website: profileData?.result?.website,
+      linkedIn: profileData?.result?.linkedIn,
+      instagram: profileData?.result?.instagram,
+      twitter: profileData?.result?.twitter,
+      projectName: profileData?.result?.projectName,
+      description: profileData?.result?.description,
+      projectUrl: profileData?.result?.projectUrl,
+      spaces: profileData?.result?.spaces,
+      comments: profileData?.result?.comments,
+      collaborators: [initialCollaborator],
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profileData, setValues]);
+
+  const handleSetSwitch = useCallback((field, value) => {
+    setFieldValue(field, value);
+  }, []);
+
+  useEffect(() => {
+    if (profileData?.result) {
+      // setUserData(profileData?.result);
+      handleInputPrefill();
+    }
+  }, [profileData, handleInputPrefill]);
 
   useEffect(() => {
     handleNavs();
@@ -255,16 +309,16 @@ export default function EditIndividual() {
     }
   }, [profileIsSuccess]);
 
-  const {
-    setFieldValue,
-    handleChange,
-    handleSubmit,
-    errors,
-    touched,
-    values,
-    isValid,
-    handleBlur,
-  } = formik;
+  useEffect(() => {
+    if (values?.website?.length > 0) {
+      
+      console.log('is Valid:'+ isValidURL(values.website))
+      // setFieldError(
+      //   'website',
+      //  "Url is invalid"
+      // );
+    }
+  }, [values.website, setFieldError]);
 
   return (
     <FormikProvider value={formik}>
@@ -288,12 +342,12 @@ export default function EditIndividual() {
                     }}
                     key={nav.title}
                     className={`${
-                      selected.title.toLowerCase() == nav.title.toLowerCase()
+                      selected?.title?.toLowerCase() == nav?.title.toLowerCase()
                         ? "border-primary text-primary "
                         : "border-transparent text-[#000000] "
                     } flex cursor-pointer flex-col items-center justify-center text-nowrap border-b-[2px] py-2  font-medium  `}
                   >
-                    <span className="text-base font-medium ">{nav.title}</span>
+                    <span className="text-base font-medium ">{nav?.title}</span>
                   </div>
                 ))}
               </div>
@@ -317,13 +371,18 @@ export default function EditIndividual() {
           </div>
 
           <FormDebug
-            form={{ values, touched, errors }}
+            form={{
+              // values,
+              touched,
+              errors,
+              // userData: profileData?.result,
+            }}
             className="mt-4 hidden"
           />
         </div>
         <div className="flex-1 flex flex-col gap-8 ">
           {/* {hasProject ? "True" : "False"} */}
-          {profileType.toLowerCase() == "business" && (
+          {/* {profileType.toLowerCase() == "business" && (
             <div ref={businessInfo} className="">
               <FormDiv title="Business Information">
                 <div className="">
@@ -345,6 +404,17 @@ export default function EditIndividual() {
                         // touched={touched.name}
                         // onChange={handleChange("name")}
                         // onBlur={handleBlur}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="font-medium text-base ">Location</span>
+                      <LocationSelect
+                        paddingy="py-[16px]"
+                        defaultValue={values.location}
+                        options={Countries}
+                        onChange={(value) =>
+                          setFieldValue("location", value)
+                        }
                       />
                     </div>
                     <div className="w-full">
@@ -375,7 +445,7 @@ export default function EditIndividual() {
                 </div>
               </FormDiv>
             </div>
-          )}
+          )} */}
 
           {profileType.toLowerCase() !== "business" && (
             <div ref={personalInfo}>
@@ -424,16 +494,14 @@ export default function EditIndividual() {
                         onBlur={handleBlur}
                       />
                     </div>
-                    <div className="w-full">
-                      <Input
-                        placeholder={AppConfig.PLACEHOLDERS.Location}
-                        id="location"
-                        label="Location"
-                        error={errors.location}
-                        value={values.location}
-                        touched={touched.location}
-                        onChange={handleChange("location")}
-                        onBlur={handleBlur}
+
+                    <div className="flex flex-col gap-1">
+                      <span className="font-medium text-base ">Location </span>
+                      <LocationSelect
+                        paddingy="py-[16px]"
+                        defaultValue={values.location}
+                        options={Countries}
+                        onChange={(value) => setFieldValue("location", value)}
                       />
                     </div>
 
@@ -441,6 +509,7 @@ export default function EditIndividual() {
                       <div className="w-full">
                         <Input
                           placeholder={AppConfig.PLACEHOLDERS.Height}
+                          type={"number"}
                           id="height"
                           label="Height(cm)"
                           error={errors.height}
@@ -450,13 +519,35 @@ export default function EditIndividual() {
                           onBlur={handleBlur}
                         />
                       </div>
-                      <div className="w-full">
-                        <Input
+                      <div className="w-full flex flex-col gap-1">
+                        {/* <Input
+                          disabled={
+                            profileData?.result?.subscription?.plan?.toLowerCase() !==
+                              "business" && values?.age > 18
+                          }
                           placeholder={AppConfig.PLACEHOLDERS.Age}
+                          type={"number"}
                           id="age"
                           label="Age"
                           error={errors.age}
                           value={values.age}
+                          touched={touched.age}
+                          onChange={handleChange("age")}
+                          onBlur={handleBlur}
+                        /> */}
+                        <span className="font-medium text-base ">Age</span>
+
+                        <DateSelect
+                          disabled={
+                            profileData?.result?.subscription?.plan?.toLowerCase() !==
+                            "business"
+                          }
+                          max={returnMaxDate()}
+                          labelStyle="!text-base"
+                          required
+                          id="age"
+                          error={errors.age}
+                          value={moment(values.age).format("yyyy-MM-DD")}
                           touched={touched.age}
                           onChange={handleChange("age")}
                           onBlur={handleBlur}
@@ -500,9 +591,9 @@ export default function EditIndividual() {
                       <TextArea
                         id="bio"
                         label="Bio"
-                        error={errors.bio}
+                        // error={errors.bio}
                         value={values.bio}
-                        touched={touched.bio}
+                        // touched={touched.bio}
                         onChange={handleChange("bio")}
                         onBlur={handleBlur}
                       />
@@ -573,10 +664,9 @@ export default function EditIndividual() {
           )}
           {hasProject && (
             <div className="bg-" ref={addAProject}>
-                <FormDiv title="Create a project ">
+              <FormDiv title="Create a project ">
                 <ProfileProjectForm />
               </FormDiv>
-              
             </div>
           )}
 
@@ -598,9 +688,7 @@ export default function EditIndividual() {
                 <div className="grid grid-col-1 gap-6">
                   <InteractionsSwitch
                     value={values.spaces}
-                    setValue={(value) => {
-                      setFieldValue("spaces", value);
-                    }}
+                    setValue={(value) => handleSetSwitch("spaces", value)}
                     label="Spaces"
                     description="Enabling this will allow all your acitivity in spaces show up on your profile"
                   />

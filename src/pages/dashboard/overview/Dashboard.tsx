@@ -6,7 +6,8 @@ import TalentDashboard from './TalentDashboard'
 function Dashboard() {
   const { accountType } = useDashboardContext();
   return (
-    <div>
+    <div className='main-padding'>
+      {/* {accountType} */}
       {accountType.toLowerCase() == "individual" && <IndividualDashboard />}
       {accountType.toLowerCase() == "talent" && <TalentDashboard />}
 

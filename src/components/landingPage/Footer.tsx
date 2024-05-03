@@ -1,0 +1,116 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Button } from "../../components";
+import { landingPageFooterLinks } from "../../utilities/constants";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+  FaLinkedin,
+} from "react-icons/fa";
+
+export default function Footer() {
+  return (
+    <div className="landingPageMainDiv pt-[50px] lg:pt-[160px] pb-[80px]">
+      <div className="flex lg:hidden">
+        <JoinNewsLetter />
+      </div>
+      <div className="border-b flex lg:hidden border-[#D6DE2180] mb-10"></div>
+      <div className=" border-b border-[#D6DE2180] pb-20">
+        <div className="w-full flex flex-col lg:flex-row lg:justify-between gap-x-10 gap-y-10">
+          {landingPageFooterLinks.map((link) => (
+            <div key={link.id} className="flex flex-col gap-4 sm:w-[195px]">
+              <h3 className="font-medium text-base text-[#000000]">
+                {link.linkTitle}
+              </h3>
+              <ul className="font-normal text-sm">
+                {link.linkItems.map((item) => (
+                  <li key={item.id} className="py-2">
+                    {" "}
+                    <NavLink to={item.linkUrl} className="py-2 w-full">
+                      {item.linkLabel}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          <div className="hidden lg:flex">
+            <JoinNewsLetter />
+          </div>
+
+          <div className="flex flex-col gap-4 text-[#000000] sm:w-[195px]">
+            <h3 className="font-medium text-[18px]">Get in touch</h3>
+            <div className="flex flex-col gap-4">
+              <span className="text-sm font-normal">+234 70 123 567 89</span>
+              <span className="text-sm font-normal">info@nodes.com</span>
+
+              <span className="text-sm font-normal">
+                234, Adeniyi street, Lekki, Lagos, Nigeria
+              </span>
+              <div className="grid grid-cols-4  gap-3 max-w-[132px]">
+                <div className="cursor-pointer max-w-max">
+                  <FaFacebookF />{" "}
+                </div>
+                <div className="cursor-pointer max-w-max">
+                  <FaInstagram />{" "}
+                </div>
+                <div className="cursor-pointer max-w-max">
+                  <FaTwitter />{" "}
+                </div>
+                <div className="cursor-pointer max-w-max">
+                  <FaLinkedin />{" "}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex gap-4 justify-between items-center mt-8">
+        <NavLink to="/" className="cursor-pointer">
+          <img src="/landing-page-logo.svg" alt="" className="h-8" />
+        </NavLink>
+        <span className="font-normal text-sm text-[#000000]">
+          © 2024 Nodes. All rights reserved.
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function JoinNewsLetter() {
+  return (
+    <div className="flex flex-col  gap-8 justify-between mb-20">
+      <div className="flex flex-col gap-4">
+        <h4 className="font-medium text-[18px] text-[#000000]">
+          Join our newsletter
+        </h4>
+        <span className="font-normal text-base text-[#000000]">
+          {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. */}
+        </span>
+      </div>
+
+      <div className="">
+        <div className="flex flex-col sm:flex-row gap-4 mb-4">
+          <input
+            type="text"
+            placeholder="Enter your email"
+            className="placeholder-[#505050] px-4 py-2 min-w-[283px] border border-[#D9D9D9] rounded"
+          />
+
+          <Button className="max-w-max !px-6">
+            <span className="mx-auto text-center text-base font-normal !rounded">
+              Subscribe
+            </span>
+          </Button>
+        </div>
+
+        <span className="text-[#000000] text-xs font-normal">
+          By subscribing you agree to with our Privacy Policy
+        </span>
+      </div>
+    </div>
+  );
+}

@@ -68,7 +68,7 @@ function OtpInputWithValidation({
   }, [otp]);
 
   return (
-    <div>
+    <div className=''>
       <div className="flex flex-col justify-center items-center mt-10">
         <div className="flex items-center gap-5 mb-10">
           {otp.map((digit, index) => (
@@ -80,7 +80,7 @@ function OtpInputWithValidation({
               onChange={(e) => handleChange(e.target.value, index)}
               onKeyUp={(e) => handleBackspaceAndEnter(e, index)}
               ref={(reference) => (otpBoxReference.current[index] = reference)}
-              className={`border w-16 h-16 text-center p-3 rounded-[5px] text-2xl outline-none
+              className={`border h-11 w-11 md:w-16 md:h-16 text-center p-3 rounded-[5px] text-2xl outline-none
                             focus:border-primary  placeholder:text-placeholder font-normal`}
             />
           ))}

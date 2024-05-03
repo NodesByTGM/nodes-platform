@@ -27,6 +27,7 @@ export { default as Details } from "../pages/details/index.tsx";
 export { default as CommunityBase } from "./community/CommunityBase.tsx";
 export { default as SpacesBase } from "./spaces/SpacesBase.tsx";
 export { default as Spaces } from "./spaces/Spaces.tsx";
+export { default as Space } from "./spaces/Space.tsx";
 export { default as SubscriptionBase } from "./subscription/SubscriptionBase.tsx";
 export { default as Subscription } from "./subscription/Subscription.tsx";
 export { default as MakePayment } from "./subscription/MakePayment.tsx";
@@ -34,3 +35,18 @@ export { default as SavedBase } from "./saved/SavedBase.tsx";
 export { default as Saved } from "./saved/Saved.tsx";
 export { default as GridTools } from "./grid-tools/GridTools.tsx";
 export { default as AccountSettingsBase } from "./settings/AccountSettingsBase.tsx";
+export { default as TrendingBase } from "./trending/TrendingBase.tsx";
+export { default as Trending } from "./trending/Trending.tsx";
+export { default as IndividualDashboard } from "../pages/dashboard/overview/IndividualDashboard.tsx";
+export {default as BusinessProfile} from './dashboard/profile/BusinessProfile'
+export {default as EditBusinessProfile} from './dashboard/profile/businessProfile/EditBusinessProfile.tsx'
+export {default as GoogleSocial} from './auth/GoogleSocial.tsx'
+export {default as LandingPageBase} from './landing-page/LandingPageBase.tsx'
+export {default as LandingPage} from './landing-page/LandingPage.tsx'
+export {default as AboutUsPage} from './landing-page/AboutUsPage.tsx'
+export {default as BusinessPage} from './landing-page/BusinessPage.tsx'
+export {default as TalentPage} from './landing-page/TalentPage.tsx'
+export {default as ViewMoreIndex} from './viewMore/ViewMoreIndex.tsx'
+export {default as ViewMoreEventsIndex} from './viewMoreEvents/ViewMoreEventsIndex.tsx'
+export {default as JobDetail} from './details/jobs/Details.tsx'
+

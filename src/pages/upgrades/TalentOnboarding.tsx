@@ -10,27 +10,36 @@ import {
   UploadInput,
   WrappedCheckboxInput,
   WrappedInput,
+  LocationSelect,
 } from "../../components";
 import { Title } from "../../components/Typography";
-import { useAuth } from "../../context/hooks";
-import { IUser } from "../../interfaces/auth";
+// import { useAuth } from "../../context/hooks";
+// import { IUser } from "../../interfaces/auth";
 import { mainClient } from "../../utilities/client";
+import { convertToBase64 } from "../../utilities/common";
+
 import { handleAxiosError } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
 import { loginUser } from "../../api/reducers/userSlice";
+import { useUploadFileMutation } from "../../api";
+import Countries from "../../utilities/countries.json";
+
 import { useDispatch } from "react-redux";
-// import FormDebug from "../../components/FormDebug";
+import FormDebug from "../../components/FormDebug";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 function TalentOnboarding() {
+  const user = useSelector((state: RootState) => state?.user?.user);
   const dispatch = useDispatch();
-  const { user, setUser } = useAuth();
+  // const { user, setUser } = useAuth();
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [tags, setTags] = useState<any>([]);
   const [preview, setPreview] = useState("");
   const [selectedFile, setSelectedFile] = useState<any>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<any>({
     skills: [],
     location: "",
     avatar: "",
@@ -39,8 +48,20 @@ function TalentOnboarding() {
     twitter: "",
     otherPurpose: "",
     onboardingPurpose: 0,
+    onboardingPurposes: [],
     step: currentIndex + 1,
   });
+
+  const [
+    upload,
+    {
+      data: uploadResponse,
+      // isLoading: uploadFileLoading,
+      isSuccess: uploadFileSuccess,
+      error: uploadFileError,
+      isError: isUploadError,
+    },
+  ] = useUploadFileMutation();
 
   const nextStep = () => {
     if (currentIndex + 1 < 5) {
@@ -97,17 +118,17 @@ function TalentOnboarding() {
           ...formData,
           skills: formData.skills.join(", "),
           //   avatar: `data:image/jpeg;base64,${binaryAvatar}`
-          avatar: preview,
+          // avatar: preview,
         })
         .then((r) => {
           setSubmitLoading(false);
           if (r.status === 200) {
             toast.success(r.data.message);
-            const newUser = {
-              ...user,
-              type: AppConfig.ACCOUNT_TYPES.TALENT,
-            } as IUser;
-            setUser(newUser);
+            // const newUser = {
+            //   ...user,
+            //   type: AppConfig.ACCOUNT_TYPES.TALENT,
+            // } as IUser;
+            // setUser(newUser);
             if (r?.data?.user) {
               dispatch(loginUser(r?.data?.user));
             }
@@ -128,6 +149,33 @@ function TalentOnboarding() {
     // handle avatar image
     setSelectedFile(e);
   };
+  const handleFileConversion = async () => {
+    if (selectedFile) {
+      const res = await convertToBase64(selectedFile);
+      let binary = "";
+      if (res) {
+        binary = String(res);
+        upload({ file: binary });
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleFileConversion();
+  }, [selectedFile]);
+
+  useEffect(() => {
+    if (uploadFileSuccess) {
+      // console.log('FileUrl:' + JSON.stringify(uploadResponse?.result.url, null, 2));
+      setFormData({ ...formData, avatar: uploadResponse?.result.url });
+    }
+  }, [uploadFileSuccess, uploadResponse?.result?.url]);
+
+  useEffect(() => {
+    if (isUploadError) {
+      toast.error(uploadFileError);
+    }
+  }, [uploadFileError, isUploadError]);
 
   const previousStep = () => {
     if (currentIndex > 0) {
@@ -168,28 +216,48 @@ function TalentOnboarding() {
     }));
   };
 
+  const handleMultipleCheck = (id: number) => {
+    // const value: number = id;
+    let newPurposes: any = [];
+    if (formData.onboardingPurposes.includes(id)) {
+      newPurposes = formData.onboardingPurposes.filter((item) => item !== id);
+
+      setFormData((prev) => ({
+        ...prev,
+        onboardingPurposes: newPurposes,
+      }));
+
+      return;
+    }
+    newPurposes = [...formData.onboardingPurposes, id];
+    setFormData((prev) => ({
+      ...prev,
+      onboardingPurposes: newPurposes,
+    }));
+  };
+
   const indexQuestion = {
     1: "What do you want to do on Nodes?",
-    2: "What do you do?",
-    3: "Where are you located?",
-    4: "Let’s see what you look like",
+    2: "What’s your creative superpower?",
+    3: "Tell us where you are",
+    4: "Don’t be shy, show the community what you look like.",
     5: "Social media",
   };
 
   return (
     <div className="flex min-h-[100vh] justify-center">
-      <div className="p-20 px-24 pt-10 lg:w-1/2">
+      <div className="pb-20 authFormDiv pt-10 w-full max-w-[500px] lg:max-w-full lg:w-1/2">
         <div className="flex justify-between items-center mb-10">
           <Link to="/">
             <div>
-              <img src="/logo.svg" alt="" className="w-8" />
+              <img src="/nodes-logo-black.svg" alt="" className="w-8" />
             </div>
           </Link>
 
           {currentIndex + 1 > 1 && currentIndex + 1 < 5 ? (
             <span
               onClick={() => nextStep()}
-              className="text-primary font-normal text-base cursor-pointer"
+              className="text-primary font-normal text-sm md:text-base cursor-pointer"
             >
               Skip
             </span>
@@ -198,43 +266,52 @@ function TalentOnboarding() {
 
         <div className="mb-10">
           <p className="mb-4">Step {currentIndex + 1}/5</p>
-          <Title className="!text-2xl">{indexQuestion[currentIndex + 1]}</Title>
+          <Title className="text-[18px] md:!text-2xl !font-medium">
+            {indexQuestion[currentIndex + 1]}
+          </Title>
         </div>
 
         {currentIndex === 0 ? (
           <div className="">
-            {/* <div className="mb-10">
-              <p className="mb-4">Step 1/4</p>
-              <Title className="!text-2xl">What do you do?</Title>
-            </div> */}
             <div className="flex flex-col gap-4 justify-center w-full">
               <WrappedCheckboxInput
-                label="Connect with fellow creatives"
-                checked={formData.onboardingPurpose == 1}
-                setChecked={() => handleChecked(1)}
+                label="Flaunt my cool projects"
+                checked={formData.onboardingPurposes.includes(1)}
+                setChecked={() => handleMultipleCheck(1)}
               />
               <WrappedCheckboxInput
-                label="Find exciting job opportunities and gigs."
-                checked={formData.onboardingPurpose == 2}
-                setChecked={() => handleChecked(2)}
+                label="FExpand my network"
+                checked={formData.onboardingPurposes.includes(2)}
+                setChecked={() => handleMultipleCheck(2)}
               />
               <WrappedCheckboxInput
-                label="Increase visibility and showcase my work."
-                checked={formData.onboardingPurpose == 3}
-                setChecked={() => handleChecked(3)}
+                label="Collaborate with diverse creatives"
+                checked={formData.onboardingPurposes.includes(3)}
+                setChecked={() => handleMultipleCheck(3)}
               />
               <WrappedCheckboxInput
-                label=" Explore and discover inspiring projects."
-                checked={formData.onboardingPurpose == 4}
-                setChecked={() => handleChecked(4)}
+                label="Find local and international gigs"
+                checked={formData.onboardingPurposes.includes(4)}
+                setChecked={() => handleMultipleCheck(4)}
               />
               <WrappedCheckboxInput
-                label="Something else"
-                checked={formData.onboardingPurpose == 5}
-                setChecked={() => handleChecked(5)}
+                label="Make money with my talent"
+                checked={formData.onboardingPurposes.includes(5)}
+                setChecked={() => handleMultipleCheck(5)}
+              />
+              <WrappedCheckboxInput
+                label="Be part of a bustling creative community"
+                checked={formData.onboardingPurposes.includes(6)}
+                setChecked={() => handleMultipleCheck(6)}
               />
 
-              {formData.onboardingPurpose == 5 && (
+              <WrappedCheckboxInput
+                label="Something else"
+                checked={formData.onboardingPurpose == 7}
+                setChecked={() => handleChecked(7)}
+              />
+
+              {formData.onboardingPurpose == 7 && (
                 <div className="">
                   <TextArea
                     required
@@ -247,11 +324,21 @@ function TalentOnboarding() {
               )}
 
               <ButtonWithBack
+                className={`${
+                  (formData.otherPurpose.length === 0 &&
+                    formData.onboardingPurpose == 7) ||
+                  (formData.onboardingPurpose !== 7 &&
+                    formData.onboardingPurposes.length == 0)
+                    ? "opacity-50"
+                    : ""
+                } mt-2`}
                 backAction={previousStep}
                 btnAction={handleClickForm}
                 disabled={
-                  formData.onboardingPurpose == 0 ||
-                  (formData.onboardingPurpose == 5 && !formData.otherPurpose)
+                  (formData.otherPurpose.length === 0 &&
+                    formData.onboardingPurpose == 7) ||
+                  (formData.onboardingPurpose !== 7 &&
+                    formData.onboardingPurposes.length == 0)
                 }
               />
             </div>
@@ -281,13 +368,30 @@ function TalentOnboarding() {
         {currentIndex === 2 ? (
           <div className="">
             <div className="flex flex-col gap-4 justify-center w-full">
-              <TextArea
+              {/* <TextArea
                 required
                 placeholder={"Location"}
                 id="location"
                 value={formData.location}
                 onChange={handleChange}
-              />
+              /> */}
+              <div className="flex flex-col gap-1">
+                <span className="font-medium text-sm md:text-base ">
+                  Location
+                </span>
+                <LocationSelect
+                  paddingy="py-[16px]"
+                  defaultValue={formData.location}
+                  options={Countries}
+                  onChange={(value) =>
+                    // setFieldValue("location", value.value)
+                    setFormData((prev) => ({
+                      ...prev,
+                      location: value,
+                    }))
+                  }
+                />
+              </div>
 
               <ButtonWithBack
                 backAction={previousStep}
@@ -353,8 +457,11 @@ function TalentOnboarding() {
           </div>
         ) : null}
       </div>
-      <div className="bg-primary p-5 w-1/2 lg:block hidden">
-        {/* <FormDebug form={{ formData, preview, checked }} /> */}
+      <div className="auth-onboarding  p-5 w-1/2 lg:block hidden relative">
+        <div className="fixed top-[-140px] right-[-140px] rotate-[320deg]">
+          <img src="/bg-node-yellow.svg" alt="" className="" />
+        </div>
+        <FormDebug className="hidden" form={{ formData, preview }} />
         <TalentReviewCard
           name={user?.name}
           email={user?.email}
@@ -362,6 +469,9 @@ function TalentOnboarding() {
           showDetails={currentIndex !== 0}
           {...formData}
         />
+        <div className="absolute bottom-[0px] left-[0px] ">
+          <img src="/bg-node-yellow2.svg" alt="" className="" />
+        </div>
       </div>
     </div>
   );

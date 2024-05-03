@@ -42,7 +42,16 @@ export const profileApi: any = createApi({
         };
       },
     }),
+    updateBusinessProfile: builder.mutation<any, any>({
+      query: (data) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Profile.BusinessProfile}`,
+          method: "put",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetTestQuery, useGetUserProfileQuery, useUpdateUserProfileMutation } = profileApi;
+export const { useUpdateBusinessProfileMutation, useGetTestQuery, useGetUserProfileQuery, useUpdateUserProfileMutation } = profileApi;

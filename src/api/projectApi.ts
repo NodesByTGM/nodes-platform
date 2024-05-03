@@ -2,7 +2,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { axiosBaseQuery } from "./axiosBaseQuery";
 import { REHYDRATE } from "redux-persist";
-// import { cleanObject } from "../utilities";
+import { cleanObject } from "../utilities";
 import AppConfig from "../utilities/config";
 
 export const projectApi: any = createApi({
@@ -15,13 +15,23 @@ export const projectApi: any = createApi({
     }
   },
   endpoints: (builder) => ({
-  
     getUserProjects: builder.query<any, any>({
-      query: () => {
+      query: (params) => {
         return {
-          url: `${AppConfig.API_ENDPOINTS.Project.Projects}`,
+          url: `${
+            AppConfig.API_ENDPOINTS.Project.Projects
+          }?${new URLSearchParams(cleanObject(params))}`,
           method: "get",
-          
+        };
+      },
+    }),
+    getMyProjects: builder.query<any, any>({
+      query: (params) => {
+        return {
+          url: `${
+            AppConfig.API_ENDPOINTS.Project.Projects
+          }/mine?${new URLSearchParams(cleanObject(params))}`,
+          method: "get",
         };
       },
     }),
@@ -37,4 +47,8 @@ export const projectApi: any = createApi({
   }),
 });
 
-export const { useGetUserProjectsQuery, useCreateUserProjectMutation } = projectApi;
+export const {
+  useGetMyProjectsQuery,
+  useGetUserProjectsQuery,
+  useCreateUserProjectMutation,
+} = projectApi;

@@ -48,14 +48,14 @@ export default function JobDetails() {
   ]);
 
   const setBreadcrumbList = () => {
-    setLinks([links[0], { ...links[1], title: jobsData?.job?.name }]);
+    setLinks([links[0], { ...links[1], title: jobsData?.result?.name }]);
   };
 
   useEffect(() => {
     setBreadcrumbList();
     setNavs([
       navs[0],
-      { ...navs[1], count: jobsData?.job?.applicants?.length },
+      { ...navs[1], count: jobsData?.result?.applicants?.length },
       navs[2],
     ]);
   }, [jobsData]);
@@ -72,13 +72,14 @@ export default function JobDetails() {
           </div>
 
           <pre className="hidden text-blue-400">
-            {JSON.stringify(jobsData?.job, null, 2)}
+            {JSON.stringify(jobsData?.result, null, 2)}
           </pre>
 
           <DetailsActions
-            title={jobsData?.job?.name}
+            canEdit
+            title={jobsData?.result?.name}
             type={type?.toLowerCase()}
-            details={jobsData?.job}
+            details={jobsData?.result}
             jobsRefetch={jobsRefetch}
           />
 
@@ -90,15 +91,15 @@ export default function JobDetails() {
 
           <div className="">
             {selectedNav?.label?.toLowerCase() == "details" && (
-              <Details details={jobsData?.job} />
+              <Details details={jobsData?.result} />
             )}
 
             {selectedNav?.label?.toLowerCase() == "applicants" && (
-              <Applicants details={jobsData?.job} />
+              <Applicants details={jobsData?.result} />
             )}
 
             {selectedNav?.label?.toLowerCase() == "analytics" && (
-              <Analytics details={jobsData?.job} />
+              <Analytics details={jobsData?.result} />
             )}
           </div>
         </div>

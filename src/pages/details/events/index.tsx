@@ -29,15 +29,16 @@ export default function EventDetails() {
       label: "Saves",
       count: null,
     },
-  
   ]);
   const [selectedNav, setSelectedNav] = useState(navs[0]);
 
   const [links, setLinks] = useState([
     {
       id: 1,
-      title: "Events by you",
-      url: "/dashboard/see-more/business-events",
+      title: `${
+        type?.toLowerCase() === "all-events" ? "Events" : "Events by you"
+      }`,
+      url: `/dashboard/view-more-events/${type?.toLowerCase()}`,
     },
     {
       id: 2,
@@ -47,14 +48,14 @@ export default function EventDetails() {
   ]);
 
   const setBreadcrumbList = () => {
-    setLinks([links[0], { ...links[1], title: eventsData?.event?.name }]);
+    setLinks([links[0], { ...links[1], title: eventsData?.result?.name }]);
   };
 
   useEffect(() => {
     setBreadcrumbList();
     setNavs([
       navs[0],
-      { ...navs[1], count: eventsData?.event?.saves?.length },
+      { ...navs[1], count: eventsData?.result?.saves?.length },
       navs[2],
     ]);
   }, [eventsData]);
@@ -71,32 +72,38 @@ export default function EventDetails() {
           </div>
 
           <pre className="hidden text-blue-400">
-            {JSON.stringify(eventsData?.event, null, 2)}
+            {/* {JSON.stringify({result: eventsData?.result, type}, null, 2)} */}
+            {JSON.stringify({ type }, null, 2)}
           </pre>
 
+          <div className="w-full h-[160px]">
+            <img src="/img/EventDetail.png" alt="" className="size-full" />
+          </div>
+
           <DetailsActions
-            title={eventsData?.event?.name}
+            canEdit={type?.toLowerCase() === "my-events" ? true : false}
+            title={eventsData?.result?.name}
             type={type?.toLowerCase()}
-            details={eventsData?.event}
+            details={eventsData?.result}
             eventsRefetch={eventsRefetch}
           />
 
-          <SectionNavs
-            navs={navs}
-            selectedNav={selectedNav}
-            setSelectedNav={setSelectedNav}
-          />
+          {type?.toLowerCase() === "my-events" ? (
+            <SectionNavs
+              navs={navs}
+              selectedNav={selectedNav}
+              setSelectedNav={setSelectedNav}
+            />
+          ) : null}
 
           <div className="">
             {selectedNav?.label?.toLowerCase() == "details" && (
-              <Details details={eventsData?.event} />
+              <Details details={eventsData?.result} />
             )}
 
             {selectedNav?.label?.toLowerCase() == "saves" && (
-              <Saves details={eventsData?.event} />
+              <Saves details={eventsData?.result} />
             )}
-
-         
           </div>
         </div>
       )}

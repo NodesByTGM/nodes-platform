@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
+import VerifyBusiness from "../profile/businessProfile/VerifyBusiness";
+
 import { useDashboardContext } from "../../../context/hooks";
 import {
-  CarouselSection,
+  ItemsCarousel,
   HeaderAndDescription,
   WelcomeComponent,
   WelcomeCard,
@@ -18,27 +21,36 @@ import {
 } from "../../../api";
 import BusinessDashboardEmptyState from "./BusinessDashboardEmptyState.tsx";
 import { SubscriptionAndBilling } from "../../../components";
+import { capitalizeWords } from "../../../utilities/common.ts";
 import BusinessDashboardSectionEmptyStates from "./BusinessDashboardSectionEmptyStates";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { setVerifyBusinessLater } from "../../../api/reducers/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function BusinessDashboard() {
-  const { user } = useDashboardContext();
+  const { user, userIsBusiness } = useDashboardContext();
+  const dispatch = useDispatch();
+  const verifyBusinessLater = useSelector(
+    (state: RootState) => state?.user?.verifyBusinessLater
+  );
+  const [jobsData, setJobsData] = useState<any>([]);
+  const [eventsData, setEventsData] = useState<any>([]);
+  const [verifyModal, setVerifyModal] = useState(false);
   const [jobModal, setJobModal] = useState(false);
   const [eventModal, setEventModal] = useState(false);
-
+  // const [isVerified] = useState(user?.business?.verified)
   const [subscriptionModal, setSubscriptionModal] = useState(false);
-
   const {
-    data: jobsData,
+    data: jobsResponse,
     refetch: jobsRefetch,
     isFetching: jobsLoading,
   } = useGetBusinessUserJobsQuery({ businessId: user?.business?.id });
-
   const {
-    data: eventsData,
+    data: eventsResponse,
     refetch: eventsRefetch,
     isFetching: eventsLoading,
   } = useGetBusinessUserEventsQuery({ businessId: user?.business?.id });
-
   const navigate = useNavigate();
   const addJobOrEvents = (type) => {
     if (type == "job") {
@@ -66,13 +78,38 @@ export default function BusinessDashboard() {
     },
   ]);
 
+  useEffect(() => {
+    if (eventsResponse?.result?.items?.length > 0) {
+      setEventsData(eventsResponse?.result.items);
+    }
+  }, [eventsResponse]);
+
+  useEffect(() => {
+    if (user?.business && !user?.business?.verified && !verifyBusinessLater) {
+      setVerifyModal(true);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (jobsResponse?.result?.items?.length > 0) {
+      setJobsData(jobsResponse?.result.items);
+    }
+  }, [jobsResponse]);
+
   return (
-    <div>
-      <pre className="hidden text-blue-400 text-wrap max-w-[600px]">
-        {JSON.stringify(jobsData?.jobs, null, 2)}
+    <div className="main-padding">
+      {/* {JSON.stringify(`${verifyBusinessLater ? "true" : "false"}`, null, 2)} */}
+      {/* <button onClick={() => dispatch(setVerifyBusinessLater(!verifyBusinessLater))} className="">Click me</button> */}
+      <pre className=" text-blue-400 text-wrap max-w-[600px] hidden">
+        {JSON.stringify(
+          { userIsBusiness, verified: user?.business?.verified },
+          null,
+          2
+        )}
+        {/* {JSON.stringify(!user?.business?.id, null, 2)} */}
       </pre>
       {/* //remember to change back to !user?.business?.id */}
-      {user?.business?.id ? (
+      {!userIsBusiness ? (
         <BusinessDashboardEmptyState
           user={user}
           addBusinessAccount={() => {
@@ -82,7 +119,9 @@ export default function BusinessDashboard() {
       ) : (
         <div className="">
           <HeaderAndDescription
-            title={`Welcome to ${user?.business?.name}'s business account!`}
+            title={`Welcome to ${capitalizeWords(
+              user?.name
+            )}'s business account!`}
           />
 
           <div className={` h-4 mb-10 border-b border-[#D6D6D6]`}></div>
@@ -108,14 +147,13 @@ export default function BusinessDashboard() {
               </div>
             </WelcomeComponent>
 
-            {jobsLoading && !jobsData ? (
+            {jobsLoading && jobsData.length === 0 ? (
               <div className="my-40">
                 <Loader />
               </div>
             ) : null}
 
-            {(!jobsLoading && jobsData?.jobs?.length === 0) ||
-            (!jobsLoading && !jobsData) ? (
+            {!jobsLoading && jobsData.length === 0 ? (
               <div>
                 <BusinessDashboardSectionEmptyStates
                   type="job"
@@ -125,11 +163,11 @@ export default function BusinessDashboard() {
               </div>
             ) : null}
 
-            {!jobsLoading && jobsData && jobsData?.jobs?.length > 0 ? (
-              <CarouselSection
-                data={jobsData?.jobs || []}
+            {jobsData?.length > 0 ? (
+              <ItemsCarousel
+                data={jobsData || []}
                 refetchJobs={jobsRefetch}
-                navigateTo={() => navigate("/dashboard/see-more/business-jobs")}
+                navigateTo={() => navigate("/dashboard/view-more/jobs-by-you")}
                 seeMore
                 isBusiness
                 canViewJob
@@ -139,14 +177,13 @@ export default function BusinessDashboard() {
               />
             ) : null}
 
-            {eventsLoading && !eventsData ? (
+            {eventsLoading && eventsData.length === 0 ? (
               <div className="my-40">
                 <Loader />
               </div>
             ) : null}
 
-            {(!eventsLoading && eventsData?.events?.length === 0) ||
-            (!eventsLoading && !eventsData) ? (
+            {!eventsLoading && eventsData.length === 0 ? (
               <div>
                 <BusinessDashboardSectionEmptyStates
                   type="events"
@@ -156,14 +193,15 @@ export default function BusinessDashboard() {
               </div>
             ) : null}
 
-            {!eventsLoading && eventsData && eventsData?.events?.length > 0 ? (
-              <CarouselSection
-                data={eventsData?.events || []}
+            {eventsData?.length > 0 ? (
+              <ItemsCarousel
+                data={eventsData || []}
                 refetchEvents={eventsRefetch}
                 isBusiness
                 navigateTo={() =>
-                  navigate("/dashboard/see-more/business-events")
+                  navigate("/dashboard/view-more-events/my-events")
                 }
+                canViewAndEditEventDetails
                 seeMore
                 event
                 title={`Exclusive events`}
@@ -197,6 +235,17 @@ export default function BusinessDashboard() {
         <EventPostForm
           refetchEvents={eventsRefetch}
           closeModal={() => setEventModal(false)}
+        />
+      </Modal>
+
+      <Modal
+        sizeClass="sm:max-w-[800px]"
+        open={verifyModal}
+        setOpen={setVerifyModal}
+      >
+        <VerifyBusiness
+          setVerifyModal={setVerifyModal}
+          verifyLater={() => dispatch(setVerifyBusinessLater(true))}
         />
       </Modal>
     </div>

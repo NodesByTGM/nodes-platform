@@ -1,18 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BackIcon, CautionCircleIcon } from "../../assets/svg";
+// import moment from "moment";
+
 import {
   Button,
   Checkbox,
   Input,
   OTPInput,
   PasswordInput,
-  Select,
+  DateSelect,
+  Back,
   // BasicSelect,
-  TalentCTA,
+  // ReactDateSelect,
+  OnboardingCarousel,
+  AuthOnboardingLogo,
+  // TalentCTA,
   Tooltip,
 } from "../../components";
 import { Title } from "../../components/Typography";
@@ -25,12 +30,23 @@ import {
 } from "../../utilities/common";
 import AppConfig from "../../utilities/config";
 import { useFormik } from "formik";
-// import FormDebug from "../../components/FormDebug";
+import FormDebug from "../../components/FormDebug";
 import { signupSchema, SignupValidationType } from "../../utilities/validation";
 import { loginUser } from "../../api/reducers/userSlice";
 import { useDispatch } from "react-redux";
+import { returnMaxDate } from "../../utilities";
+import { useCheckEmailMutation } from "../../api";
 
 function Register() {
+  const [
+    checkEmail,
+    {
+      isLoading: checkEmailLoading,
+      // isSuccess: checkEmailSuccess,
+      // isError: checkEmailIsError,
+      // error: checkEmailError,
+    },
+  ] = useCheckEmailMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { setUser } = useAuth();
@@ -47,7 +63,7 @@ function Register() {
       name: values.name,
       username: values.username,
       email: values.email,
-      dob: new Date(`${values.day}-${values.month}-${values.year}`),
+      dob: values.dob,
       otp: values.otp,
       password: values.password,
     };
@@ -76,14 +92,18 @@ function Register() {
     mainClient
       .post(AppConfig.API_ENDPOINTS.Auth.RegisterURL, data)
       .then((r) => {
-        if (r.status === 200) {
-          toast.success(r.data.message);
-          setUser(r.data.user);
-          dispatch(loginUser(r.data.user));
-          const accessToken = r.data?.user?.accessToken;
+        if (r?.data?.status === "success") {
+          // console.log(JSON.stringify(r, null, 2));
+          const result = r?.data?.result;
+          const user = result?.user;
+          const accessToken = result?.accessToken;
 
-          console.log(JSON.stringify(accessToken));
+          // console.log(JSON.stringify(accessToken));
           localStorage.setItem("bearerToken", accessToken);
+          toast.success(r.data.message);
+
+          setUser(user);
+          dispatch(loginUser(user));
 
           if (localStorage.getItem("bearerToken") == accessToken) {
             navigate(AppConfig.PATHS.Upgrades.Talent.Onboarding);
@@ -104,9 +124,7 @@ function Register() {
       name: "",
       email: "",
       username: "",
-      day: "",
-      month: "",
-      year: "",
+      dob: "",
       password: "",
       confirmPassword: "",
       otp: "",
@@ -117,6 +135,7 @@ function Register() {
   });
 
   const {
+    // setFieldValue,
     handleChange,
     handleSubmit,
     errors,
@@ -126,34 +145,9 @@ function Register() {
     handleBlur,
   } = formik;
 
-  const handleSelect = ({ id, value }: any) => {
-    console.log({ id, value });
-    if (id.toLowerCase() == "day") {
-      values.day = value;
-    }
-    if (id.toLowerCase() == "month") {
-      values.month = value;
-    }
-    if (id.toLowerCase() == "year") {
-      values.year = value;
-    }
-  };
-
-  // const handleBasicSelect = (type, selected) => {
-  //   if (type === "day") {
-  //     console.log({ type, selected: selected?.value });
-  //     values.day = selected?.value;
-  //   }
-  //   if (type === "month") {
-  //     values.month = selected?.value;
-  //   }
-  //   if (type === "year") {
-  //     values.month = selected?.value;
-  //   }
-  // };
-
   const previousStep = () => {
     if (currentIndex > 0) {
+      setSent(false);
       setCurrentIndex(currentIndex - 1);
     }
   };
@@ -163,6 +157,7 @@ function Register() {
     mainClient
       .post(AppConfig.API_ENDPOINTS.Auth.SendOTP, { email: values.email })
       .then((r) => {
+        console.log(JSON.stringify(r, null, 2));
         if (r.status === 200) {
           toast.success(r.data.message);
           setSent(true);
@@ -197,35 +192,57 @@ function Register() {
       return () => clearInterval(countdownInterval);
     }
   }, [sent]);
+  useEffect(() => {
+    const email = values.email;
+    if (email.length > 0 && !errors.email) {
+      checkEmail({ email: values.email });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values.email]);
+
+  // useEffect(() => {
+  //   // Get the current date
+  //   const currentDate = new Date();
+
+  //   // Calculate the date 18 years from now
+  //   const maxDate = new Date(currentDate.getFullYear() + 18, currentDate.getMonth(), currentDate.getDate());
+
+  //   // Format the date as YYYY-MM-DD (required by the 'date' input type)
+  //   const formattedMaxDate = maxDate.toISOString().split('T')[0];
+
+  //   // Set the max attribute of the input field
+  //   const dateInput = document.getElementById('date') as HTMLInputElement;
+  //   dateInput.max = formattedMaxDate;
+  // }, []);
 
   return (
-    <div className="flex min-h-[100vh] justify-center">
-      <div className="p-20 px-24 pt-10 lg:w-1/2">
+    <div className="flex min-h-[100vh] max-h-[100vh]  w-full">
+      <div className="bg-[#ffffff] authFormDiv pb-20 pt-[60px] w-full max-w-[480px] lg:max-w-full lg:w-1/2 lg:overflow-y-auto mx-auto lg:mx-0">
         {currentIndex === 0 ? (
-          <div>
-            <div className="flex justify-between items-center mb-10">
-              <Link to="/">
-                <div>
-                  <img src="/logo.svg" alt="" className="w-8" />
-                </div>
-              </Link>
-              <div className="text-sm">
-                <span>Already using Nodes? </span>
-                <Link
-                  to={AppConfig.PATHS.Auth.Login}
-                  className="text-primary cursor-pointer"
-                >
-                  Log in
-                </Link>
-              </div>
+          <div className="overflow-y-auto">
+            <AuthOnboardingLogo
+              link={{
+                text1: "Log in",
+                text2: "Already using Nodes?",
+                url: AppConfig.PATHS.Auth.Login,
+              }}
+            />
+
+            <div className="mb-10">
+              {" "}
+              <Back link={-1} />
             </div>
-            <div className="mb-4">
-              <Title>Welcome to Nodes!</Title>
-              <p>Where creativtity knows no limits.</p>
+
+            <div className="mb-10 flex flex-col gap-4">
+              <h3 className="!text-[18px] md:!text-[24px] !font-medium">
+                You’re one step away from a whole new dimension.
+              </h3>
+              {/* <p>Where creativtity knows no limits.</p> */}
             </div>
+
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col gap-4 justify-center w-full"
+              className="flex flex-col gap-6 justify-center w-full"
             >
               <div className="flex lg:flex-row flex-col gap-5">
                 <div className="w-full">
@@ -255,25 +272,29 @@ function Register() {
                   />
                 </div>
               </div>
-              <Input
-                required
-                placeholder={AppConfig.PLACEHOLDERS.Email}
-                id="email"
-                type="email"
-                label="Email address"
-                error={errors.email}
-                value={values.email}
-                touched={touched.email}
-                onChange={handleChange("email")}
-                onBlur={handleBlur}
-              />
+              <div className="w-full">
+                <Input
+                  required
+                  placeholder={AppConfig.PLACEHOLDERS.Email}
+                  id="email"
+                  type="email"
+                  label="Email address"
+                  error={errors.email}
+                  value={values.email}
+                  touched={touched.email}
+                  onChange={handleChange("email")}
+                  onBlur={handleBlur}
+                />
+                {checkEmailLoading && <span className=""></span>}
+              </div>
 
-              {/* DOB */}
               <div>
-                <div className="flex gap-2 items-center">
-                  <div className="text-sm font-medium ">Date of Birth*</div>
+                <div className="flex gap-2 items-center mb-1">
+                  <div className="text-sm md:text-base font-medium ">
+                    Date of Birth*
+                  </div>
                   <Tooltip
-                    id="dob"
+                    id="dob-tip"
                     text={() => (
                       <div>
                         This will not be shown publicly, unless you change it in
@@ -290,42 +311,18 @@ function Register() {
                     <CautionCircleIcon />{" "}
                   </Tooltip>
                 </div>
-                <div className="flex gap-2">
-                  {/* <BasicSelect
-                    inputLabel="Day"
-                    value={values.day}
-                    handleSelected={(selected) =>
-                      handleBasicSelect("day", selected)
-                    }
-                    options={AppConfig.DATE_OPTIONS.DAYS}
-                  /> */}
-                  <Select
-                    className="flex-1"
-                    placeholder={"Day"}
-                    id="day"
-                    options={AppConfig.DATE_OPTIONS.DAYS}
-                    onSelect={handleSelect}
-                    error={errors.day}
-                    //  touched={touched.day}
-                    handleBlur={handleBlur}
-                  />
-                  <Select
-                    className="flex-1"
-                    placeholder={"Month"}
-                    id="month"
-                    options={AppConfig.DATE_OPTIONS.MONTHS}
-                    onSelect={handleSelect}
-                    error={errors.month}
-                    //  touched={touched.month}
-                  />
-                  <Select
-                    className="flex-1"
-                    placeholder={"Year"}
-                    id="year"
-                    options={AppConfig.DATE_OPTIONS.YEARS}
-                    onSelect={handleSelect}
-                    error={errors.year}
-                    //  touched={touched.year}
+                <div className="w-full">
+                  {/* {returnMaxDate()} */}
+                  <DateSelect
+                    max={returnMaxDate()}
+                    labelStyle="!text-base"
+                    required
+                    id="dob"
+                    error={errors.dob}
+                    value={values.dob}
+                    touched={touched.dob}
+                    onChange={handleChange("dob")}
+                    onBlur={handleBlur}
                   />
                 </div>
               </div>
@@ -365,7 +362,7 @@ function Register() {
 
               <Button
                 isLoading={sendOtpLoading}
-                className={`${!checked || !isValid ? "opacity-50" : ""} mt-8`}
+                className={`${!checked || !isValid ? "opacity-50" : ""} mt-8 mb-20`}
                 disabled={!checked || !isValid}
                 type="submit"
               >
@@ -385,8 +382,10 @@ function Register() {
             </div>
 
             <div className="text-center">
-              <Title className="!text-2xl">We emailed you a code</Title>
-              <p className="mb-5">Enter the verification code sent to: </p>
+              <Title className="!text-2xl">Help us keep Nodes authentic.</Title>
+              <p className="mb-5">
+                Enter the verification code sent to your email{" "}
+              </p>
               <p className="text-primary">{values.email}</p>
             </div>
 
@@ -412,33 +411,11 @@ function Register() {
           </div>
         ) : null}
       </div>
-      <div
-        className={clsx(
-          "bg-light p-5 w-1/2 lg:block hidden",
-          currentIndex === 0 ? "bg-light" : "bg-primary"
-        )}
-      >
-        {currentIndex === 0 ? (
-          <div className="flex flex-col justify-center mt-20 items-center">
-            {/* <FormDebug form={{ values, touched, errors, isValid }} /> */}
-            <div className="">
-              <img src="/img/auth1.png" alt="" className="w-[350px]" />
-              <img
-                src="/img/auth2.png"
-                alt=""
-                className="w-[350px] relative -mt-20 ml-32"
-              />
-              <img
-                src="/img/auth3.png"
-                alt=""
-                className="w-[350px] relative -mt-20"
-              />
-            </div>
-          </div>
-        ) : (
-          <TalentCTA />
-        )}
-      </div>
+      <FormDebug
+        className="hidden"
+        form={{ values, errors, touched, isValid }}
+      />
+      {currentIndex !== 0 ? <OnboardingCarousel /> : <OnboardingCarousel />}
     </div>
   );
 }

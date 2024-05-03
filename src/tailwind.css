@@ -1,6 +1,12 @@
+@import "/fonts/fontStyles.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: "GeneralSans", sans-serif !important;
+  width: 100vw !important
+}
 
 .border-dash {
   @apply border border-[#000000]  border-dashed border-spacing-[5px];
@@ -18,8 +24,24 @@
   @apply bg-[#FDFDF7] py-[64px] pl-[40px] pr-[40px];
 }
 
+.main-bg-gray-container {
+  @apply bg-[#FBFBFB] pt-4 pb-[64px];
+}
+
+.main-padding {
+  @apply pl-[40px] pr-[40px];
+}
+
 .main-bg {
   @apply bg-[#FDFDF7];
+}
+
+.main-bg-gray {
+  @apply bg-[#FBFBFB];
+}
+
+.admin-main-plain-container {
+  @apply border border-[#F2F2F2] rounded-[16px] bg-[#ffffff] py-[64px] pl-[40px] pr-[40px];
 }
 
 .profile-card-shadow {
@@ -40,9 +62,68 @@
 }
 
 .navLink {
-  @apply flex gap-4 items-center active:bg-primary active:text-white hover:bg-primary hover:text-white transition-all px-4 py-2 rounded;
+  @apply flex gap-4 items-center active:bg-customsecondary active:text-white hover:bg-customsecondary hover:text-white transition-all px-4 py-2 rounded;
+}
+.childNavLink {
+  @apply flex gap-4 items-center active:bg-secondary active:text-primary hover:bg-secondary hover:text-white transition-all px-4 py-2 rounded;
+}
+.authNavLink {
+  @apply flex gap-4 items-center active:bg-[#212121] active:text-white hover:bg-[#212121] hover:text-white transition-all px-4 py-2 rounded;
+}
+
+.auth-onboarding-bgImg {
+  background-image: url("/img/TalentOnboardingBg.png");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background-attachment: fixed; */
+  background-position: center;
+}
+
+.auth-onboarding {
+  background-color: #fbfce9;
+}
+
+.landingPageMainDiv {
+  @apply max-w-[1220px] mx-auto px-6;
+}
+
+.aboutUsHeroSectionBg {
+  background-image: url("/landingPageImg/TeamMate1.svg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* /landingPageImg/AboutUsHeroSectionSvg.svg */
 }
 
 /* .profile-forms-section {
   height: calc(100vh - 144px);
 } */
+.imgCss {
+  /* object-fit: cover; */
+  object-fit: fill;
+}
+
+.messageMainPadding {
+  @apply px-8;
+}
+
+.discover-grid-cols {
+  @apply grid-cols-3
+}
+
+.aboutUsHeroSection{
+background-image: url('/landingPageImg/AboutUsBgImg.svg');
+}
+
+.authFormDiv{
+  @apply px-6 md:px-8 lg:px-20
+}
+

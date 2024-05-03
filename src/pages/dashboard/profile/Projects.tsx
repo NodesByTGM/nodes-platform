@@ -1,20 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { Card, ProjectsCard, Modal, Loader } from "../../../components";
+import { Card, ProjectCard2, Modal, Loader } from "../../../components";
 import ProjectDetail from "./ProjectDetail";
 import ProjectForm from "./ProjectForm";
 import { useProfileContext } from "../../../context/hooks";
 import { projectModalTypes } from "../../../utilities";
-import { useGetUserProjectsQuery } from "../../../api";
-
-// type ProjectType = {
-//   id: string;
-//   img: string;
-//   title: string;
-//   description: string;
-// };
+import { useGetMyProjectsQuery } from "../../../api";
 
 export default function Projects() {
+  const [projectsData, setProjectsData] = useState<any>([]);
+
   const {
     projectDetails,
     setProjectDetails,
@@ -29,82 +24,79 @@ export default function Projects() {
   } = useProfileContext();
 
   const {
-    data: projectsData,
-    refetch: projectRefetch,
+    data: projectsResponse,
+    refetch: projectsRefetch,
     // isSuccess: projectIsSuccess,
-    isFetching: projectLoading,
-  } = useGetUserProjectsQuery();
+    isFetching: projectsLoading,
+  } = useGetMyProjectsQuery();
 
-  const [projects, setProjects] = useState<any[]>([]);
   const addProject = () => {
     setProjectAction(projectModalTypes.add);
     setEditProjectModal(true);
   };
 
   useEffect(() => {
-    if (projectsData?.message) {
-      setProjects(projectsData?.projects);
+    if (projectsResponse?.result?.items?.length > 0) {
+      setProjectsData(projectsResponse?.result.items);
     }
-  }, [projectsData]);
+  }, [projectsResponse]);
   return (
     <div className="relative flex flex-col min-h-[400px]">
       <Card
         className=""
         title="Projects"
-        listCount={projects?.length}
+        listCount={projectsData?.length}
         editButton
         editFunction={() => addProject()}
       >
         {/* {JSON.stringify(projects, null, 2)} */}
-        {!projectLoading ? (
-          <div className="">
-            {projects?.length > 0 ? (
-              <div className="grid grid-cols-2 gap-4">
-                {projects?.map((project) => (
-                  <div key={project.id} className="h-full ">
-                    <ProjectsCard
-                      project={project}
-                      setProjectDetailsModal={setProjectDetailsModal}
-                      setProjectDetails={setProjectDetails}
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="mx-auto max-w-[219px] flex flex-col justify-center items-center ">
-                <h3 className="text-center font-medium text-base text-[#212121]">
-                  Hi,{" "}
-                  {profileData?.user?.name
-                    ? profileData?.user?.name
-                    : user?.name}
-                </h3>
-                <span className="mt-8 text-center font-normal text-base text-[#212121]">
-                  Nothing to see here yet, add a project or two to get started.
-                </span>
+        {projectsLoading && projectsData.length === 0 ? (
+          <div className="my-20">
+            <Loader />
+          </div>
+        ) : null}
 
-                <h3
-                  onClick={() => addProject()}
-                  className="cursor-pointer mt-10 text-primary font-medium text-base"
-                >
-                  Add Project
-                </h3>
+        {projectsData?.length > 0 ? (
+          <div className="grid grid-cols-1 gap-4">
+            {projectsData?.map((project) => (
+              <div key={project.id} className="h-full ">
+                <ProjectCard2
+                  project={project}
+                  setProjectDetailsModal={setProjectDetailsModal}
+                  setProjectDetails={setProjectDetails}
+                />
               </div>
-            )}
+            ))}
           </div>
-        ) : (
-          <div className="">
-          
-            <div className="my-20">
-              <Loader />
-            </div>
+        ) : null}
+
+        {!projectsLoading && projectsData.length === 0 ? (
+          <div className="mx-auto max-w-[219px] flex flex-col justify-center items-center ">
+            <h3 className="text-center font-medium text-base text-[#212121]">
+              Hi,{" "}
+              {profileData?.result?.name
+                ? profileData?.result?.name
+                : user?.name}
+            </h3>
+            <span className="mt-8 text-center font-normal text-base text-[#212121]">
+              Nothing to see here yet, add a project or two to get started.
+            </span>
+
+            <h3
+              onClick={() => addProject()}
+              className="cursor-pointer mt-10 text-primary font-medium text-base"
+            >
+              Add Project
+            </h3>
           </div>
-        )}
+        ) : null}
       </Card>
-      {projects?.length == 0 && (
+
+      {projectsData?.length == 0 ? (
         <div className=" w-full">
           <img src="/img/AddProjects.svg" alt="" className="w-full" />
         </div>
-      )}
+      ) : null}
       <Modal
         sizeClass="sm:max-w-[1020px]"
         open={projectDetailsModal}
@@ -118,7 +110,7 @@ export default function Projects() {
         setOpen={setEditProjectModal}
       >
         <ProjectForm
-          refetchAllProjects={projectRefetch}
+          refetchAllProjects={projectsRefetch}
           details={projectDetails}
           type={projectAction}
         />

@@ -1,6 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import { checkAuth, getProfile } from "../components/hoc";
 import {
+  GoogleSocial,
   BusinessGetStarted,
   BusinessOnboarding,
   BusinessUpgrade,
@@ -10,9 +11,12 @@ import {
   SavedBase,
   Subscription,
   SubscriptionBase,
+  Trending,
+  TrendingBase,
   MakePayment,
   Community,
   CommunityBase,
+  Space,
   Spaces,
   SpacesBase,
   DashboardBase,
@@ -21,6 +25,8 @@ import {
   ViewDetail,
   SeeMoreJobs,
   BusinessDashboard,
+  BusinessProfile,
+  EditBusinessProfile,
   Details,
   ForgotPassword,
   Home,
@@ -35,11 +41,147 @@ import {
   TalentOnboarding,
   TalentUpgrade,
   Pricing,
-  AccountSettingsBase
+  AccountSettingsBase,
+  LandingPageBase,
+  LandingPage,
+  AboutUsPage,
+  BusinessPage,
+  TalentPage,
+  ViewMoreIndex,
+  ViewMoreEventsIndex,
+ 
 } from "../pages";
+import {
+  AdminAuthBase,
+  AdminLogin,
+  AdminSignup,
+  AdminForgotPassword,
+  AdminResetPassword,
+  AdminContent,
+  AdminContentBase,
+  AdminUser,
+  AdminUserBase,
+  AdminSubscription,
+  AdminSubscriptionBase,
+  AdminUserDetails,
+  AdminUserDetailsBase,
+  AdminAnalytics,
+  AdminAnalyticsBase,
+} from "../pagesAdmin";
 import AppConfig from "./config";
 
+export const adminAuthRoutes: RouteObject[] = [
+  {
+    path: AppConfig.PATHS.Admin.Auth.Base,
+    Component: AdminAuthBase,
+    children: [
+      {
+        path: AppConfig.PATHS.Admin.Auth.Default,
+        Component: AdminLogin,
+      },
+      {
+        path: AppConfig.PATHS.Admin.Auth.Login,
+        Component: AdminLogin,
+      },
+      {
+        path: AppConfig.PATHS.Admin.Auth.Signup,
+        Component: AdminSignup,
+      },
+      {
+        path: AppConfig.PATHS.Admin.Auth.ForgotPassword,
+        Component: AdminForgotPassword,
+      },
+      {
+        path: AppConfig.PATHS.Admin.Auth.ResetPassword,
+        Component: AdminResetPassword,
+      },
+    ],
+  },
+];
+export const landingPageRoutes: RouteObject[] = [
+  {
+    path: AppConfig.PATHS.LandingPage.Base,
+    Component: LandingPageBase,
+    children: [
+      {
+        path: AppConfig.PATHS.LandingPage.Default,
+        Component: LandingPage,
+      },
+      {
+        path: AppConfig.PATHS.LandingPage.Business,
+        Component: BusinessPage,
+      },
+      {
+        path: AppConfig.PATHS.LandingPage.Talent,
+        Component: TalentPage,
+      },
+      {
+        path: AppConfig.PATHS.LandingPage.AboutUs,
+        Component: AboutUsPage,
+      },
+    ],
+  },
+];
+
+export const adminMainRoutes: RouteObject[] = [
+  {
+    path: AppConfig.PATHS.Admin.Content.Base,
+    Component: AdminContentBase,
+    children: [
+      {
+        path: AppConfig.PATHS.Admin.Content.Default,
+        Component: AdminContent,
+      },
+    ],
+  },
+  {
+    path: AppConfig.PATHS.Admin.User.Base,
+    Component: AdminUserBase,
+    children: [
+      {
+        path: AppConfig.PATHS.Admin.User.Default,
+        Component: AdminUser,
+      },
+    ],
+  },
+  {
+    path: AppConfig.PATHS.Admin.Subscription.Base,
+    Component: AdminSubscriptionBase,
+    children: [
+      {
+        path: AppConfig.PATHS.Admin.Subscription.Default,
+        Component: AdminSubscription,
+      },
+    ],
+  },
+  {
+    path: AppConfig.PATHS.Admin.UserDetails.Base,
+    Component: AdminUserDetailsBase,
+    children: [
+      {
+        path: AppConfig.PATHS.Admin.UserDetails.Default,
+        Component: AdminUserDetails,
+      },
+    ],
+  },
+
+  {
+    path: AppConfig.PATHS.Admin.Analytics.Base,
+    Component: AdminAnalyticsBase,
+    children: [
+      {
+        path: AppConfig.PATHS.Admin.Analytics.Default,
+        Component: AdminAnalytics,
+      },
+    ],
+  },
+];
+
 export const authRoutes: RouteObject[] = [
+  {
+    path: AppConfig.PATHS.Auth.Google,
+    Component: GoogleSocial,
+  },
   {
     path: AppConfig.PATHS.Auth.Login,
     Component: Login,
@@ -63,9 +205,10 @@ export const publicRoutes: RouteObject[] = [
     path: "/",
     Component: Home,
   },
+
   {
     path: AppConfig.PATHS.Dashboard.Base,
-    Component: getProfile(DashboardBase),
+    Component: DashboardBase,
     children: [
       {
         path: AppConfig.PATHS.Dashboard.Dashboard,
@@ -85,9 +228,29 @@ export const publicRoutes: RouteObject[] = [
         Component: getProfile(SeeMoreJobs),
       },
       {
-        path: AppConfig.PATHS.Dashboard.Business,
-        Component: getProfile(BusinessDashboard),
+        path: AppConfig.PATHS.Dashboard.ViewMore,
+        Component: getProfile(ViewMoreIndex),
       },
+      {
+        path: AppConfig.PATHS.Dashboard.ViewMoreEvents,
+        Component: getProfile(ViewMoreEventsIndex),
+      },
+
+      {
+        path: AppConfig.PATHS.Dashboard.ViewEventDetails,
+        Component: getProfile(Details),
+      },
+      {
+        path: AppConfig.PATHS.Dashboard.ViewJobDetails,
+        Component: getProfile(Details),
+      },
+
+      
+
+      // {
+      //   path: AppConfig.PATHS.Dashboard.Business,
+      //   Component: getProfile(BusinessDashboard),
+      // },
       {
         path: AppConfig.PATHS.Dashboard.Details,
         Component: getProfile(Details),
@@ -99,8 +262,20 @@ export const publicRoutes: RouteObject[] = [
     Component: getProfile(DashboardBase),
     children: [
       {
+        path: AppConfig.PATHS.Business.Default,
+        Component: getProfile(BusinessDashboard),
+      },
+      {
         path: AppConfig.PATHS.Business.Dashboard,
         Component: getProfile(BusinessDashboard),
+      },
+      {
+        path: AppConfig.PATHS.Business.Profile,
+        Component: getProfile(BusinessProfile),
+      },
+      {
+        path: AppConfig.PATHS.Business.EditProfile,
+        Component: getProfile(EditBusinessProfile),
       },
     ],
   },
@@ -130,6 +305,10 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Spaces.Overview,
         Component: getProfile(Spaces),
       },
+      {
+        path: AppConfig.PATHS.Spaces.Space,
+        Component: getProfile(Space),
+      },
     ],
   },
   {
@@ -157,6 +336,16 @@ export const publicRoutes: RouteObject[] = [
       {
         path: AppConfig.PATHS.Subscription.MakePayment,
         Component: getProfile(MakePayment),
+      },
+    ],
+  },
+  {
+    path: AppConfig.PATHS.Trending.Base,
+    Component: getProfile(TrendingBase),
+    children: [
+      {
+        path: AppConfig.PATHS.Trending.Overview,
+        Component: getProfile(Trending),
       },
     ],
   },

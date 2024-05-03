@@ -24,7 +24,6 @@
 //     const handleListView = () => setViewMode(AppConfig.VIEW_MODES.LIST);
 //     const handleColumnView = () => setViewMode(AppConfig.VIEW_MODES.COLUMN);
 
-
 //     const navigateToEvent = (id: string) => navigate(`${AppConfig.PATHS.Events.Base}/${id}`)
 //     const navigateToDashboardEvent = (id: string) => navigate(`${AppConfig.PATHS.Dashboard.Events.Edit}/${id}`)
 //     const navigateToCreateEvent = () => navigate(`${AppConfig.PATHS.Dashboard.Events.Create}`)
@@ -46,8 +45,6 @@
 //             })
 //             .catch(e => console.log(e))
 //     }
-
-
 
 //     useEffect(() => {
 //         const delayDebounceFn = setTimeout(() => {
@@ -74,14 +71,14 @@
 
 //                 <div className='flex items-center gap-3'>
 //                     <button onClick={handleListView} className='flex gap-5 items-center text-primary text-xl font-bold'>
-//                         <div className={`transition-all rounded-xl p-3 ${viewMode === AppConfig.VIEW_MODES.LIST ? 'bg-primary' : ''} `}>
+//                         <div className={`transition-all rounded-xl p-3 ${viewMode === AppConfig.VIEW_MODES.LIST ? 'bg-customsecondary' : ''} `}>
 //                             <List className={`transition-all ${viewMode === AppConfig.VIEW_MODES.LIST ?
 //                                 'fill-greyed stroke-greyed' : 'fill-primary stroke-primary'}`} />
 //                         </div>
 //                     </button>
 //                     <button
 //                         onClick={handleColumnView} className='flex gap-5 items-center text-primary text-xl font-bold'>
-//                         <div className={`transition-all rounded-xl p-3 ${viewMode === AppConfig.VIEW_MODES.COLUMN ? 'bg-primary' : ''}`}>
+//                         <div className={`transition-all rounded-xl p-3 ${viewMode === AppConfig.VIEW_MODES.COLUMN ? 'bg-customsecondary' : ''}`}>
 //                             <Tab className={`transition-all ${viewMode === AppConfig.VIEW_MODES.COLUMN ?
 //                                 'fill-greyed stroke-greyed' : 'fill-primary stroke-primary'}`} />
 //                         </div>
@@ -118,7 +115,6 @@
 
 //                     </div>
 //                 ) : null}
-
 
 //                 {viewMode === AppConfig.VIEW_MODES.COLUMN ? (
 //                     <div className={`flex flex-wrap ${events.length > 4 ? 'justify-center' : ''} items-center gap-6`}>

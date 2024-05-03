@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useGetEventsQuery } from "../../../../api";
-import { CarouselSection, Loader } from "../../../../components";
+import { ItemsCarousel, Loader } from "../../../../components";
 export default function EventsSection() {
   const [eventsData, setEventsData] = useState([]);
   const {
@@ -11,8 +11,8 @@ export default function EventsSection() {
   } = useGetEventsQuery();
 
   useEffect(() => {
-    if (allEventsIsSuccess) {
-      setEventsData(allEvents?.events);
+    if (allEventsIsSuccess && allEvents?.result?.items?.length > 0) {
+      setEventsData(allEvents?.result?.items);
     }
   }, [allEvents, allEventsIsSuccess]);
   return (
@@ -30,11 +30,12 @@ export default function EventsSection() {
       ) : null}
 
       {!allEventsLoading && eventsData && eventsData?.length > 0 ? (
-        <CarouselSection
+        <ItemsCarousel
           data={eventsData || []}
           event
           refetchEvents={allEventsRefetch}
-          title={`Trending`}
+          title={`Events`}
+          canViewEventDetails={false}
           description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
         />
       ) : null}

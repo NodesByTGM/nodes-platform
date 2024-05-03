@@ -7,6 +7,23 @@ import moment from "moment";
 
 declare const PaystackPop: any;
 
+
+
+export const handleCheckList = (
+  item: string,
+  selectedItems: Array<string>,
+  setSelectedItems: (e) => void
+) => {
+  const index = selectedItems.indexOf(item);
+  if (index === -1) {
+    setSelectedItems([...selectedItems, item]);
+  } else {
+    const updatedCategories = [...selectedItems];
+    updatedCategories.splice(index, 1);
+    setSelectedItems(updatedCategories);
+  }
+};
+
 export const handleAxiosError = (e: AxiosError<AxiosData>) => {
   console.log(e.response?.status, e.response?.data);
   const message = e?.response?.data.message;
@@ -25,6 +42,46 @@ export const checkFileSize = (file: File) => {
     return false;
   }
   return true;
+};
+
+export function isValidURL(url: string): boolean {
+  // Regular expression for validating URLs
+  const urlRegex: RegExp = /^(ftp|http|https):\/\/[^ "]+$/;
+
+  // Test the input URL against the regular expression
+  return urlRegex.test(url);
+}
+
+export const getAge = (DOB: any) => {
+  const birthDate: Date = new Date(DOB);
+  const currentDate: Date = new Date();
+
+  // Calculate the difference in milliseconds between the current date and the birth date
+  const ageDiffMs: number = currentDate.getTime() - birthDate.getTime();
+
+  // Convert milliseconds to years
+  const ageDate: Date = new Date(ageDiffMs);
+  const age: number = Math.abs(ageDate.getUTCFullYear() - 1970);
+  return age;
+};
+
+export const getNameInitials = (name: string): string => {
+  // Split the name into words
+  const words = name.split(" ");
+
+  // Initialize an empty string to store initials
+  let initials = "";
+
+  // Iterate over each word
+  words.forEach((word) => {
+    // If the initials are less than 2 and there's a character in the current word, add it to initials
+    if (initials.length < 2 && word.length > 0) {
+      // Add the first character of the word to initials
+      initials += word[0].toUpperCase();
+    }
+  });
+
+  return initials;
 };
 
 export const getExtension = (fileName: string) => {
@@ -68,6 +125,30 @@ export const convertToBase64 = async (file: File) => {
 
 //     return keyValuePairs.join('&');
 // }
+
+export function returnMaxDate() {
+  const currentDate = new Date();
+  const maxDate = new Date(
+    currentDate.getFullYear() - 18,
+    currentDate.getMonth(),
+    currentDate.getDate()
+  );
+  const formattedMaxDate = maxDate.toISOString().split("T")[0];
+
+  return formattedMaxDate;
+}
+export function capitalizeWords(str) {
+  return str?.replace(/\b\w/g, function (char) {
+    return char.toUpperCase();
+  });
+}
+
+export const checkIfCurrentPlan = (user, plan) => {
+  if (user?.subscription?.plan?.tolowerCase() === plan?.type?.toLowerCase()) {
+    return true;
+  }
+  return false;
+};
 
 export const formatDate = (date: string) => {
   return moment(date).calendar({
@@ -151,6 +232,7 @@ export const validateFormData = (formData: FormData) => {
 export const payWithPaystack = ({
   email,
   amount,
+  plan,
   onSuccess,
   onClose,
 }: IPayWithPaystack) => {
@@ -158,6 +240,7 @@ export const payWithPaystack = ({
     key: `${import.meta.env.VITE_APP_PAYSTACK_API_PUBLIC_KEY}`,
     email,
     amount: amount * 100,
+    plan,
     onSuccess,
     onClose,
   });

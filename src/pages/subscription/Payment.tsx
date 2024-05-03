@@ -1,14 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React  from "react";
 import { Button, Input, FormDebug, PayStackIcon } from "../../components";
 import AppConfig from "../../utilities/config";
 import { useFormik } from "formik";
+import { RootState } from "../../store";
+import { useSelector } from "react-redux";
+// import { useDashboardContext } from "../../context/hooks";
 import {
   paymentSchema,
   paymentValidationType,
 } from "../../utilities/validation";
+// import { PaystackButton } from "react-paystack";
+
+import PaystackComponent from "./PaystackComponent";
 
 export default function Payment() {
+  const user = useSelector((state: RootState) => state.user.user);
+
+  // const {user}
   const handleClickForm = (values?: any) => {
     const data = {
       name: values.name,
@@ -22,9 +31,9 @@ export default function Payment() {
   const formik = useFormik<paymentValidationType>({
     initialValues: {
       name: "",
-      cardNumber: '',
-      expDate: '',
-      cvc: '',
+      cardNumber: "",
+      expDate: "",
+      cvc: "",
     },
     validationSchema: paymentSchema,
     validateOnBlur: true,
@@ -41,9 +50,7 @@ export default function Payment() {
     handleBlur,
   } = formik;
 
-  const payStack = () => {
-    return;
-  };
+
 
   return (
     <form
@@ -121,14 +128,21 @@ export default function Payment() {
           Or choose another payment method
         </h3>
         <button
-          onClick={() => payStack()}
-          className="border border-[#000000] text-[#000000] font-norrmal text-sm w-full p-4 rounded-[5px]"
+          
+          className="hidden border border-[#000000] text-[#000000] font-norrmal text-sm w-full p-4 rounded-[5px]"
         >
           <div className="flex items-center justify-center gap-[10px] ">
             <PayStackIcon />
             <span className="">Continue with Paystack</span>
           </div>
         </button>
+
+        <PaystackComponent  user={user} />
+
+        {/* <PaystackButton  /> */}
+
+        <pre className="hidden">{JSON.stringify(user, null, 2)}</pre>
+
         <FormDebug
           form={{
             values,

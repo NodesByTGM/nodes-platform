@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useGetJobsQuery } from "../../../../api";
-import { CarouselSection, Loader } from "../../../../components";
-export default function JobSection() {
+import { ItemsCarousel, Loader } from "../../../../components";
+
+type IJobSection = {
+  canViewJob?: boolean
+}
+export default function JobSection({canViewJob}: IJobSection) {
   const [jobsData, setJobsData] = useState([]);
   const {
     data: allJobs,
@@ -11,9 +15,8 @@ export default function JobSection() {
   } = useGetJobsQuery();
 
   useEffect(() => {
-    if (allJobsIsSuccess) {
-     
-      setJobsData(allJobs?.jobs);
+    if (allJobsIsSuccess && allJobs?.result?.items?.length > 0) {
+      setJobsData(allJobs?.result?.items);
     }
   }, [allJobs, allJobsIsSuccess]);
   return (
@@ -26,17 +29,18 @@ export default function JobSection() {
 
       {!allJobsLoading && jobsData?.length === 0 ? (
         <div className="text-base text-primary my-40  text-center">
-          Nothing to see.
+         No trending jobs available yet.
         </div>
       ) : null}
 
       {!allJobsLoading && jobsData && jobsData?.length > 0 ? (
-        <CarouselSection
+        <ItemsCarousel
           data={jobsData || []}
           job
+          canViewJob={canViewJob}
           refetchJobs={allJobsRefetch}
           title={`Trending jobs on Nodes`}
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
+          description={`Local and international gigs for you`}
         />
       ) : null}
     </div>

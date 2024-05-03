@@ -8,12 +8,14 @@ export default function Details() {
   const { type } = useParams();
 
   return (
-    <div>
-      {type?.toLowerCase() == "business-jobs" ? (
-        <JobDetails />
-      ) : (
-        <div><EventDetails /></div>
-      )}
+    <div className="main-padding">
+      {type?.toLowerCase() == "business-jobs" ? <JobDetails /> : null}
+      {type?.toLowerCase() == "all-events" ||
+      type?.toLowerCase() == "my-events" ? (
+        <div>
+          <EventDetails />
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MutableRefObject, useEffect, useRef } from "react";
 import { GalleryIcon } from "../assets/svg"
 import { checkFileSize } from "../utilities/common";
@@ -56,7 +57,7 @@ function UploadInput({
         <div className="border border-grey-dark rounded-[5px] p-4 cursor-pointer" onClick={() => ref.current?.click()}>
             <div className={`flex ${centered ? 'justify-center' : ''} items-center gap-2`}>
                 <GalleryIcon />
-                <span className="text-md">{preview ? uploadText.replace("Upload a", "Change") : uploadText}</span>
+                <span className="text-sm md:text-base">{preview ? uploadText.replace("Upload a", "Change") : uploadText}</span>
             </div>
             <input
                 ref={ref}

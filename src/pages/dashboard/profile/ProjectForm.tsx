@@ -25,7 +25,7 @@ import AppConfig from "../../../utilities/config";
 import { useFormik, FormikProvider, FieldArray } from "formik";
 import { toast } from "react-toastify";
 
-export default function EditProject({
+export default function ProjectForm({
   details,
   type = "add",
   refetchAllProjects = () => {},
@@ -92,6 +92,7 @@ export default function EditProject({
     if (isCreateProjectSuccessful) {
       toast.success("Successfully Created Product");
       setEditProjectModal(false);
+      console.log("revetchProjects is called");
       refetchAllProjects();
     }
   }, [isCreateProjectSuccessful]);
@@ -197,46 +198,66 @@ export default function EditProject({
                         {values.collaborators.map((collaborator, index) => (
                           <div
                             key={collaborator?.name + String(index)}
-                            className="flex items-center gap-6"
+                            className="flex w-full gap-1 flex-col"
                           >
-                            <div className="rounded-full font-normal text-xs text-[#757575] h-6 w-6 border border-[#D6D6D6] flex items-center justify-center">
-                              {index + 1}
+                            <div className="flex items-center gap-6">
+                              <div className="rounded-full font-normal text-xs text-[#757575] h-6 w-6 border border-[#D6D6D6] flex items-center justify-center">
+                                {index + 1}
+                              </div>
+                              <div className="flex flex-1">
+                                <AddCollaboratorInputDiv>
+                                  <CollaboratorInput
+                                    id={`collaborators[${index}].collabName`}
+                                    name={`collaborators[${index}].collabName`}
+                                    value={
+                                      values.collaborators[index].collabName
+                                    }
+                                    onChange={handleChange}
+                                    placeholder="Name"
+                                    textSize="text-base"
+                                  />
+                                  <CollaboratorInput
+                                    id={`collaborators[${index}].role`}
+                                    name={`collaborators[${index}].role`}
+                                    value={values.collaborators[index].role}
+                                    onChange={handleChange}
+                                    placeholder="role"
+                                    textSize="text-xs"
+                                  />
+                                </AddCollaboratorInputDiv>
+                              </div>
+                              {values.collaborators?.length > 1 && (
+                                <span
+                                  onClick={() => arrayHelpers.remove(index)}
+                                  className="text-primary"
+                                >
+                                  <FaTimes />
+                                </span>
+                              )}
                             </div>
-                            <div className="flex flex-1">
-                              <AddCollaboratorInputDiv>
-                                <CollaboratorInput
-                                  id={`collaborators[${index}].collabName`}
-                                  name={`collaborators[${index}].collabName`}
-                                  value={values.collaborators[index].collabName}
-                                  onChange={handleChange}
-                                  placeholder="Name"
-                                  textSize="text-base"
-                                />
-                                <CollaboratorInput
-                                  id={`collaborators[${index}].role`}
-                                  name={`collaborators[${index}].role`}
-                                  value={values.collaborators[index].role}
-                                  onChange={handleChange}
-                                  placeholder="role"
-                                  textSize="text-xs"
-                                />
-                              </AddCollaboratorInputDiv>
-                            </div>
-                            {values.collaborators?.length > 1 && (
-                              <span
-                                onClick={() => arrayHelpers.remove(index)}
-                                className="text-primary"
-                              >
-                                <FaTimes />
-                              </span>
-                            )}
+                            {typeof errors?.collaborators?.length ===
+                              "number" &&
+                            errors?.collaborators?.length > 0 &&
+                            errors?.collaborators[index] ? (
+                              <div className="ml-12 text-sm text-red-500">
+                                {
+                                  JSON.parse(
+                                    JSON.stringify(
+                                      errors?.collaborators[index],
+                                      null,
+                                      2
+                                    )
+                                  )?.collabName
+                                }
+                              </div>
+                            ) : null}
                           </div>
                         ))}
                         <div
                           onClick={() => arrayHelpers.push(initialCollaborator)}
                           className="cursor-pointer flex items-center gap-6 mb-[16px]"
                         >
-                          <div className="rounded-full bg-primary font-normal text-xs text-white h-6 w-6   flex items-center justify-center">
+                          <div className="rounded-full bg-customsecondary font-normal text-xs text-white h-6 w-6   flex items-center justify-center">
                             <FaPlus />
                           </div>
                           <span className="text-primary font-normal text-base">

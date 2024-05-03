@@ -16,9 +16,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const themeKVP = {
   primary:
-    "bg-primary border-primary text-white hover:border-secondary focus:text-secondary disabled:bg-primary-light-active disabled:border-primary-light-active",
+    "bg-customsecondary border-primary text-white hover:border-secondary focus:text-secondary disabled:bg-customsecondary-light-active disabled:border-primary-light-active",
   secondary:
-    "bg-transparent border-primary text-primary hover:bg-primary hover:text-white hover:border-secondary focus:border-secondary disabled:border-primary-light-active disabled:text-primary-light-active",
+    "bg-transparent border-primary text-primary hover:bg-customsecondary hover:text-white hover:border-secondary focus:border-secondary disabled:border-primary-light-active disabled:text-primary-light-active",
   dark: "border-black bg-white text-black hover:bg-black hover:text-white ",
   nodes: "",
 };
@@ -45,7 +45,7 @@ export default function Button({
       disabled={disabled}
       {...props}
       className={clsx(
-        "whitespace-nowrap rounded-[5px]",
+        "whitespace-nowrap rounded-[8px]",
         "outline-none transition-all border w-full ${}",
         "flex items-center gap-2 justify-center",
         themeKVP[theme],

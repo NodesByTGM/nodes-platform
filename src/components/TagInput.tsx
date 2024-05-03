@@ -52,6 +52,7 @@ const TagInput = ({
     if (tags.length < max && !tags.includes(item)) {
       setTags([...tags, item]);
       setIsFocused(false);
+      setInputValue('')
     }
   };
 
@@ -101,7 +102,7 @@ const TagInput = ({
   }, []);
 
   useEffect(() => {
-    setSuggestions(options.filter((x: string) => x.includes(inputValue)));
+    setSuggestions(options.filter((x: string) => x.includes(inputValue) || x.toLowerCase().includes(inputValue)));
   }, [inputValue]);
 
   useEffect(() => {
@@ -141,7 +142,7 @@ const TagInput = ({
         </div>
 
         {isFocused ? (
-          <div className="mt-2 -ml-4 border border-primary rounded-[5px] relatve z-10 absolute w-full bg-white overflow-hidden">
+          <div className="max-h-[200px] overflow-y-auto mt-2 -ml-4 border border-primary rounded-[5px] relatve z-10 absolute w-full bg-white overflow-hidden">
             <ul>
               {suggestions
                 .filter((x: any) => !tags.includes(x))
@@ -149,7 +150,7 @@ const TagInput = ({
                   <li
                     key={i}
                     className={
-                      "p-3 hover:bg-primary-light-hover cursor-pointer transition-all"
+                      "p-3 hover:bg-customsecondary-light-hover cursor-pointer transition-all"
                     }
                     ref={(reference) => (optionsRef.current[i] = reference)}
                     onClick={() => handleSelect(v)}
@@ -158,7 +159,7 @@ const TagInput = ({
                   </li>
                 ))}
               {suggestions.length === 0 ? (
-                <li className="p-3 hover:bg-primary-light-hover cursor-pointer transition-all">
+                <li className="p-3 hover:bg-customsecondary-light-hover cursor-pointer transition-all">
                   No item matches your search.
                 </li>
               ) : null}
@@ -167,7 +168,7 @@ const TagInput = ({
         ) : null}
       </div>
 
-      {description ? <div className="my-2 text-sm">{description}</div> : null}
+      {description ? <div className="my-2 text-xs md:text-sm">{description}</div> : null}
     </div>
   );
 };
@@ -176,7 +177,7 @@ export default TagInput;
 
 {
   /* <li key={i}
-    className={`p-3 hover:bg-primary-light-hover cursor-pointer transition-all ${currentIndex === i ?  'bg-primary-light-hover':''}`}
+    className={`p-3 hover:bg-customsecondary-light-hover cursor-pointer transition-all ${currentIndex === i ?  'bg-customsecondary-light-hover':''}`}
     ref={(reference) => (optionsRef.current[i] = reference)}
     onClick={() => handleSelect(v)}>{v}</li> */
 }

@@ -1,7 +1,7 @@
 export const BASE_API_ENDPOINT =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:3001/api/v1"
-    : "https://nodes-server-v1.onrender.com/api/v1";
+    ? "https://dev.api.nodesafrica.com/api/v1"
+    : "https://dev.api.nodesafrica.com/api/v1";
 export const MAIN_APP_URL = "https://nodes.com";
 
 const API_ENDPOINTS = {
@@ -17,9 +17,21 @@ const API_ENDPOINTS = {
     SendOTP: `${BASE_API_ENDPOINT}/auth/send-otp`,
     VerfiyEmail: `${BASE_API_ENDPOINT}/auth/verify-email`,
     ProfileURL: `${BASE_API_ENDPOINT}/users/profile`,
+    GoogleSocial: `${BASE_API_ENDPOINT}/socialauth/google/auth`,
+    CheckEmail: `${BASE_API_ENDPOINT}/auth/check-email`,
+  },
+  Business: {
+    Verify: `${BASE_API_ENDPOINT}/onboarding/verify-business`,
+  },
+  Community: {
+    Post: `${BASE_API_ENDPOINT}/community/posts`,
+    DiscoverUsers: `${BASE_API_ENDPOINT}/users/discover`,
+    ConnectionsMine: `${BASE_API_ENDPOINT}/users/connections/mine`,
+    ConnectionRequests: `${BASE_API_ENDPOINT}/users/connections/request`,
   },
   Profile: {
     UserProfile: `${BASE_API_ENDPOINT}/users/profile`,
+    BusinessProfile: `${BASE_API_ENDPOINT}/users/business-profile`,
   },
   Job: {
     JobUrl: `${BASE_API_ENDPOINT}/jobs`,
@@ -48,20 +60,73 @@ const API_ENDPOINTS = {
     GuestsURL: `${BASE_API_ENDPOINT}/events/guests/`,
   },
   Transactions: {
-    VerifyURL: `${BASE_API_ENDPOINT}/transactions/verify`, // /:description/:reference
+    VerifyURL: `${BASE_API_ENDPOINT}/transactions/verify/internal`, // /:description/:reference
   },
   Uploads: {
     UploadFile: `${BASE_API_ENDPOINT}/uploads/media`,
   },
+  Trending: {
+    Events: `${BASE_API_ENDPOINT}/trending`,
+    Movies: `${BASE_API_ENDPOINT}/movies-and-shows`,
+  },
+  Content: {
+    Contents: `${BASE_API_ENDPOINT}/cms/contents`,
+  },
+  Notification: {
+    BaseUrl: `${BASE_API_ENDPOINT}/notifications/mine`,
+    Interactions: `${BASE_API_ENDPOINT}/notifications/mine/interactions`,
+    Delete: `${BASE_API_ENDPOINT}/notifications/remove`,
+  },
 };
 
 const PATHS = {
+  LandingPage: {
+    Base: "/",
+    Default: "",
+    Business: "/business-page",
+    Talent: "/talent-page",
+    AboutUs: "/about-us",
+  },
+  Admin: {
+    Auth: {
+      Base: "/admin",
+      Default: "",
+      Signup: "/admin/auth/signup",
+      Login: "/admin/auth/login",
+      Register: "/admin/auth/register",
+      ForgotPassword: "/admin/auth/forgot-password",
+      ResetPassword: "/admin/auth/reset-password/",
+      ResetPasswordWithParams: "/admin/auth/reset-password/:accountId/:token",
+    },
+    Content: {
+      Base: "/admin/content",
+      Default: "",
+    },
+    UserDetails: {
+      Base: "/admin/user/:id",
+      Default: "",
+    },
+    User: {
+      Base: "/admin/user",
+      Default: "",
+    },
+    Subscription: {
+      Base: "/admin/subscription",
+      Default: "",
+    },
+    Analytics: {
+      Base: "/admin/analytics",
+      Default: "",
+    },
+  },
+
   Auth: {
     Login: "/auth/login",
     Register: "/auth/register",
     ForgotPassword: "/auth/forgot-password",
     ResetPassword: "/auth/reset-password/",
     ResetPasswordWithParams: "/auth/reset-password/:accountId/:token",
+    Google: "/socialauth/google",
   },
   Upgrades: {
     Talent: {
@@ -80,7 +145,10 @@ const PATHS = {
   },
   Business: {
     Base: "/business",
-    Dashboard: "",
+    Default: "",
+    Dashboard: "/business/dashboard",
+    Profile: "/business/profile",
+    EditProfile: "/business/edit-profile",
   },
 
   Dashboard: {
@@ -90,6 +158,10 @@ const PATHS = {
     Business: "/dashboard/business",
     ViewDetail: "/dashboard/view-detail/:id",
     SeeMore: "/dashboard/see-more/:type",
+    ViewMore: "/dashboard/view-more/:type",
+    ViewMoreEvents: "/dashboard/view-more-events/:type",
+    ViewEventDetails: "/dashboard/view-event/:type/:id",
+    ViewJobDetails: "/dashboard/view-job/:type/:id",
     Details: "/dashboard/see-more/:type/:id",
     Categories: {
       Base: "/dashboard/categories",
@@ -125,6 +197,7 @@ const PATHS = {
   Spaces: {
     Base: "/spaces",
     Overview: "",
+    Space: "/spaces/:id",
   },
   Subscription: {
     Base: "/subscription",
@@ -133,12 +206,15 @@ const PATHS = {
   },
   AccountSettings: {
     Base: "/settings",
-   
   },
   Career: "/career",
   Blog: "/blog",
   Partner: "/partner",
   GridTools: "/grid-tools",
+  Trending: {
+    Base: "/trending",
+    Overview: "",
+  },
   Terms: "/terms-and-conditions",
   Privacy: "/privacy-policy",
 };
@@ -304,6 +380,8 @@ const AppConfig = {
     SpaceName: "Enter the name of the space here",
     SpaceDescription: "What is this space about?",
     CardNumber: "1234 1234 1234 1234",
+    AddTitle: "Add a title",
+    WritePost: "What is your post...",
   },
   OTP_LENGTH: 4,
   OTP_COUNTDOWN: 300,
@@ -318,12 +396,70 @@ const AppConfig = {
     YEARS: YEARS.map((x) => ({ value: x, label: `${x}` })),
   },
   SKILL_OPTIONS: [
-    "Production assistant",
-    "Producer",
-    "Production manager",
-    "Project manager",
-    "Modelling",
-    "Video Editing",
+    "Animator",
+    "Baker",
+    "Boom operator",
+    "Broadcast technician",
+    "Cake decorator/ Designer",
+    "Cartoonist",
+    "Cartoonist",
+    "Caterer",
+    "Chocolatier",
+    "Commercial photographer",
+    "Content strategist",
+    "Contract manager",
+    "Copy editor",
+    "Copywriter",
+    "Craft Teacher",
+    "Culinary specialist",
+    "Digital marketer",
+    "Director",
+    "Editor",
+    "Editorial assistant",
+    "Executive Chef",
+    "Food photographer",
+    "Food stylist",
+    "Food writer",
+    "Graphic Designer",
+    "Illustrator",
+    "Illustrator",
+    "Illustrator",
+    "Imaging producer",
+    "Investigative journalist",
+    "Jewellery Artist",
+    "Journalist",
+    "Literary agent",
+    "Live music producer",
+    "Media planner",
+    "Mobile App Developer",
+    "Motion Designer",
+    "Music programmer",
+    "News anchor",
+    "Newsreader",
+    "Nutritionist",
+    "Pastry Chef",
+    "Personal chef",
+    "Photo editor",
+    "Photographer",
+    "Photojournalist",
+    "Presenter",
+    "Product designer",
+    "Publicist",
+    "Publisher",
+    "Recipe developer",
+    "Sculptor",
+    "Social media manager",
+    "Sommelier",
+    "Station Manager",
+    "Studio manager",
+    "Tattoo Artist",
+    "Travel photographer",
+    "VFX Artist",
+    "Video editor",
+    "Video technician",
+    "Videographer",
+    "Voiceover artist",
+    "Web/UX Design",
   ],
   PROFESSION_OPTIONS: ["Hiring manager", "Producer", "Director"],
   SUPPORTED_EXTENTIONS: {

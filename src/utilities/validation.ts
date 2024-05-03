@@ -1,16 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { object, string, ref, bool, array, number } from "yup";
 
-
-
 export const signupSchema = object({
   name: string().required("Name is a required field"),
   email: string().email().required("Email is a required field"),
   username: string().required("Username is a required field"),
-  // dob: date().default(() => new Date()),
-  day: string().required(),
-  month: string().required(),
-  year: string().required(),
+  dob: string().required("DOB field is required"),
   password: string().required("Password is a required field"),
   confirmPassword: string()
     .required("Confirm Password is a required field")
@@ -22,10 +17,71 @@ export type SignupValidationType = {
   name: string;
   email: string;
   username: string;
-  // dob: number,
-  day: string;
-  month: string;
-  year: string;
+  dob: string;
+  password: string;
+  confirmPassword: string;
+  otp: string;
+};
+
+export const businessProfileSchema = object({
+  name: string().required("Name is a required field"),
+  logo: object()
+    .shape({
+      id: string(),
+      url: string(),
+    })
+    .nullable(),
+  yoe: string(),
+  location: string(),
+  linkedIn: string()
+    .matches(
+      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+      "Enter correct url!"
+    )
+    .nullable(),
+  instagram: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
+  twitter: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
+  headline: string(),
+  bio: string(),
+});
+
+export type BusinessProfileValidationType = {
+  name: string;
+  logo: {
+    id: string;
+    url: string;
+  };
+  yoe: string;
+  location: string;
+  linkedIn: string;
+  instagram: string;
+  twitter: string;
+  headline: string;
+  bio: string;
+};
+
+export const adminSignupSchema = object({
+  firstName: string().required("First name is a required field"),
+  lastName: string().required("Last name is a required field"),
+  email: string().email().required("Email is a required field"),
+
+  password: string().required("Password is a required field"),
+  confirmPassword: string()
+    .required("Confirm Password is a required field")
+    .oneOf([ref("password")], "Passwords must match"),
+  otp: string(),
+});
+
+export type AdminSignupValidationType = {
+  firstName: string;
+  lastName: string;
+  email: string;
 
   password: string;
   confirmPassword: string;
@@ -35,16 +91,50 @@ export const profileSchema = object({
   firstName: string().required("first name is a required field"),
   lastName: string().required("Last name is a required field"),
   username: string().required("Username is a required field"),
-  avatar: string().nullable(),
+  avatar: object()
+    .shape({
+      id: string(),
+      url: string(),
+    })
+    .nullable(),
   location: string(),
-  height: string(),
-  age: string(),
+  height: number()
+    // .test("num", "Height must be a number", (val) => typeof val === "number")
+    .nullable(),
+  age: string()
+    // .min(18, "Minimum age is 18")
+    // .test(
+    //   "num",
+    //   "Age must be a number",
+    //   (val) => {
+    //     if(String(val).length > 0){
+    //       return typeof val === "number"
+    //     } else {
+    //       return true
+    //     }
+    //   }
+    // )
+    .nullable(),
   headline: string(),
   bio: string(),
-  website: string(),
-  linkedIn: string(),
-  instagram: string(),
-  twitter: string(),
+  website: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
+
+  // .url('Invalid url'),
+  linkedIn: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
+  instagram: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
+  twitter: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
   projectName: string(),
   description: string(),
   projectUrl: string(),
@@ -63,9 +153,12 @@ export type profileValidationType = {
   firstName: string;
   lastName: string;
   username: string;
-  avatar: string;
+  avatar: {
+    id: string;
+    url: string;
+  };
   location: string;
-  height: string;
+  height: number;
   age: string;
   headline: string;
   bio: string;
@@ -88,9 +181,22 @@ export type profileValidationType = {
 };
 
 export const projectSchema = object({
-  name: string().required("Project name is a required field"),
-  description: string(),
-  projectURL: string(),
+  name: string()
+    .required("Project name is a required field")
+    .test(
+      "len",
+      "Project name should have a maximum of 50 characters",
+      (val) => String(val)?.length <= 50
+    ),
+  description: string().test(
+    "len",
+    "Project details should have a maximum of 300 characters",
+    (val) => String(val)?.length <= 300
+  ),
+  projectURL: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
   thumbnail: object().shape({
     id: string(),
     url: string(),
@@ -103,9 +209,17 @@ export const projectSchema = object({
   ),
   collaborators: array().of(
     object().shape({
-      name: string(),
+      name: string().test(
+        "len",
+        "Collaborator's name should have a maximum of 30 characters",
+        (val) => String(val)?.length <= 30
+      ),
       role: string(),
-      collabName: string(),
+      collabName: string().test(
+        "len",
+        "Collaborator's name should have a maximum of 30 characters",
+        (val) => String(val)?.length <= 30
+      ),
     })
   ),
 });
@@ -242,6 +356,30 @@ export type eventValidationType = {
   };
 };
 
+export const postSchema = object({
+  body: string(),
+  attachments: array().of(
+    object().shape({
+      id: string(),
+      url: string(),
+    })
+  ),
+  hashtags: array().of(string()),
+});
+
+export type postValidationType = {
+  body: string;
+  attachments:
+    | [
+        {
+          id: string;
+          url: string;
+        }
+      ]
+    | any;
+  hashtags: [string];
+};
+
 export const resetPasswordSchema = object({
   password: string().required("Password is a required field"),
   confirmPassword: string()
@@ -291,10 +429,22 @@ export const PersonalIndividualInformationSchema = {
   location: string(),
   headline: string(),
   bio: string(),
-  website: string(),
-  linkedIn: string(),
-  instagram: string(),
-  x: string(),
+  website: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
+  linkedIn: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
+  instagram: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
+  x: string().matches(
+    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    "Enter correct url!"
+  ),
   spaces: bool(),
   comments: bool(),
 };
@@ -311,10 +461,49 @@ export const accountSettingsSchema = object({
 
 export type AccountSettingsValidationType = {
   name: string;
-  username: string,
-  email: string,
-  day: string,
-  month: string,
-  year: string,
-  visibility: string,
+  username: string;
+  email: string;
+  day: string;
+  month: string;
+  year: string;
+  visibility: string;
+};
+
+export const verifyBusinessSchema = object({
+  logo: object()
+    .shape({
+      id: string(),
+      url: string(),
+    })
+    .nullable(),
+  name: string().required("Name is a required field"),
+  location: string().nullable(),
+  yoe: string(),
+  linkedIn: string()
+    .matches(
+      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+      "Enter correct url!"
+    )
+    .nullable(),
+  CAC: object()
+    .shape({
+      id: string(),
+      url: string(),
+    })
+    .nullable(),
+});
+
+export type VerifyBusinessValidationType = {
+  logo: {
+    id: string;
+    url: string;
+  };
+  name: string;
+  location: string;
+  yoe: string;
+  linkedIn: string;
+  CAC: {
+    id: string;
+    url: string;
+  };
 };

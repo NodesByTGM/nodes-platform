@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import MoreEvents from "./MoreEvents";
 import {
@@ -23,9 +24,12 @@ import {
 const selectOptions = [
   { id: 1, name: "Option 1" },
   { id: 2, name: "Option 2" },
-  { id: 3, name: "Option 2" },
+  { id: 3, name: "Option 3" },
 ];
 export default function SeeMoreJobs() {
+  const [jobsData, setJobsData] = useState<any>([]);
+
+  const [allJobsData, setAllJobsData] = useState<any>([]);
   const { user } = useDashboardContext();
   const navigate = useNavigate();
   const [jobModal, setJobModal] = useState(false);
@@ -47,19 +51,32 @@ export default function SeeMoreJobs() {
     businessId: user?.business?.id,
   });
   const {
-    data: allJobsData,
+    data: allJobsResponse,
     refetch: allJobsRefetch,
     isFetching: allJobsLoading,
   } = useGetJobsQuery();
   const {
-    data: jobsData,
+    data: jobsResponse,
     refetch: jobsRefetch,
     isFetching: jobsLoading,
   } = useGetBusinessUserJobsQuery({ businessId: user?.business?.id });
 
+  useEffect(() => {
+    if (jobsResponse?.result?.items?.length > 0) {
+      setJobsData(jobsResponse?.result.items);
+    }
+  }, [jobsResponse]);
+
+  useEffect(() => {
+    if (allJobsResponse?.result?.items?.length > 0) {
+      setAllJobsData(allJobsResponse?.result.items);
+    }
+  }, [allJobsResponse]);
+
   return (
-    <div>
+    <div className='main-padding'>
       <Back className={`mb-[64px]`} link={"/dashboard"} />
+      
       <div className="flex items-start justify-between mb-10">
         <h3 className="fonnt-medium text-[20px] text-[#212121]">
           {type?.toLowerCase() == "business-jobs" ||
@@ -95,7 +112,6 @@ export default function SeeMoreJobs() {
           </ButtonOutline>
         )}
       </div>
-
       <div className="flex justify-between items-center mb-[64px]">
         <div
           className={`${
@@ -122,25 +138,23 @@ export default function SeeMoreJobs() {
           </div>
         ) : null}
       </div>
-
       <pre className="hidden text-blue-400 text-wrap max-w-[600px]">
-        {JSON.stringify(jobsData?.jobs, null, 2)}
+        {JSON.stringify(jobsData, null, 2)}
       </pre>
-
       {type?.toLowerCase() == "business-jobs" ? (
         <div className="">
-          {jobsLoading && !jobsData ? (
+          {jobsLoading && jobsData.length === 0 ? (
             <div className="my-40">
               <Loader />
             </div>
           ) : null}
-          {!jobsLoading && jobsData?.jobs?.length === 0 ? (
+          {!jobsLoading && jobsData.length === 0 ? (
             <div className="text-base text-primary">Nothing to see.</div>
           ) : null}
 
-          {!jobsLoading && jobsData && jobsData?.jobs?.length > 0 ? (
+          {jobsData?.length > 0 ? (
             <div className="grid grid-cols-3 gap-6">
-              {jobsData?.jobs?.map((job) => (
+              {jobsData?.map((job) => (
                 <div key={job?.id} className="">
                   <JobItem
                     data={job}
@@ -153,28 +167,26 @@ export default function SeeMoreJobs() {
           ) : null}
         </div>
       ) : null}
-
       {type?.toLowerCase() == "business-events" ? (
         <div className="">
           <MoreEvents getRequest={useGetBusinessUserEventsQuery} />
         </div>
       ) : null}
-
       {type?.toLowerCase() !== "business-jobs" &&
       type?.toLowerCase() !== "business-events" ? (
         <div className="">
-          {allJobsLoading && !allJobsData ? (
+          {allJobsLoading && allJobsData.length === 0 ? (
             <div className="my-40">
               <Loader />
             </div>
           ) : null}
-          {!allJobsLoading && allJobsData?.jobs?.length === 0 ? (
+          {!allJobsLoading && allJobsData?.length === 0 ? (
             <div className="text-base text-primary">Nothing to see.</div>
           ) : null}
 
-          {!allJobsLoading && allJobsData && allJobsData?.jobs?.length > 0 ? (
+          {allJobsData?.length > 0 ? (
             <div className="grid grid-cols-3 gap-6">
-              {allJobsData?.jobs?.map((job) => (
+              {allJobsData?.map((job) => (
                 <div key={job?.id} className="">
                   <JobItem
                     data={job}
@@ -187,14 +199,12 @@ export default function SeeMoreJobs() {
           ) : null}
         </div>
       ) : null}
-
       <Modal sizeClass="sm:max-w-[800px]" open={jobModal} setOpen={setJobModal}>
         <JobPostForm
           refetchAllJobs={jobsRefetch}
           closeModal={() => setJobModal(false)}
         />
       </Modal>
-
       <Modal
         sizeClass="sm:max-w-[800px]"
         open={eventModal}
