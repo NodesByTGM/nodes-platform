@@ -11,14 +11,14 @@ export default function HeroSectionPlanCTA({
   return (
     <div className="landingPageMainDiv pt-[80px] pb-[60px] sm:pb-[108px]">
       <div className="flex gap-[64px]">
-        <div className="flex flex-col lg:max-w-[578px]">
+        <div className="flex flex-col w-full lg:max-w-[578px]">
           <h1
-            className={`text-center lg:text-start font-medium text-[48px]  ${textColor}`}
+            className={`text-center lg:text-start font-medium text-[32px] md:text-[48px]  ${textColor}`}
           >
             {title}
           </h1>
           <span
-            className={`text-center lg:text-start font-normal text-[20px]   mt-4 ${textColor}`}
+            className={`text-center lg:text-start font-normal text-base md:text-[20px]   mt-4 ${textColor}`}
           >
             {description}
           </span>

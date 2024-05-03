@@ -411,184 +411,27 @@ export const carouselImages = [
 export const landingPageFooterLinks = [
   {
     id: 1,
-    linkTitle: "Column One",
+    linkTitle: "Company",
     linkItems: [
       {
         id: 1,
-        linkLabel: "Link  One",
-        linkUrl: "/",
+        linkLabel: "About Us",
+        linkUrl: "/about-us",
       },
       {
         id: 2,
-        linkLabel: "Link  One",
-        linkUrl: "/",
+        linkLabel: "For Business",
+        linkUrl: "/business-page",
       },
       {
         id: 3,
-        linkLabel: "Link  One",
-        linkUrl: "/",
+        linkLabel: "For Talent",
+        linkUrl: "/talent-page",
       },
-      {
-        id: 4,
-        linkLabel: "Link  One",
-        linkUrl: "/",
-      },
-      {
-        id: 5,
-        linkLabel: "Link  One",
-        linkUrl: "/",
-      },
-      {
-        id: 6,
-        linkLabel: "Link  One",
-        linkUrl: "/",
-      },
+      
     ],
   },
-  {
-    id: 2,
-    linkTitle: "Column Two",
-    linkItems: [
-      {
-        id: 1,
-        linkLabel: "Link  Two",
-        linkUrl: "/",
-      },
-      {
-        id: 2,
-        linkLabel: "Link  Two",
-        linkUrl: "/",
-      },
-      {
-        id: 3,
-        linkLabel: "Link  Two",
-        linkUrl: "/",
-      },
-      {
-        id: 4,
-        linkLabel: "Link  Two",
-        linkUrl: "/",
-      },
-      {
-        id: 5,
-        linkLabel: "Link  Two",
-        linkUrl: "/",
-      },
-      {
-        id: 6,
-        linkLabel: "Link  Two",
-        linkUrl: "/",
-      },
-    ],
-  },
-  {
-    id: 3,
-    linkTitle: "Column Three",
-    linkItems: [
-      {
-        id: 1,
-        linkLabel: "Link  Three",
-        linkUrl: "/",
-      },
-      {
-        id: 2,
-        linkLabel: "Link  Three",
-        linkUrl: "/",
-      },
-      {
-        id: 3,
-        linkLabel: "Link  Three",
-        linkUrl: "/",
-      },
-      {
-        id: 4,
-        linkLabel: "Link  Three",
-        linkUrl: "/",
-      },
-      {
-        id: 5,
-        linkLabel: "Link  Three",
-        linkUrl: "/",
-      },
-      {
-        id: 6,
-        linkLabel: "Link  Three",
-        linkUrl: "/",
-      },
-    ],
-  },
-  {
-    id: 4,
-    linkTitle: "Column Four",
-    linkItems: [
-      {
-        id: 1,
-        linkLabel: "Link  Four",
-        linkUrl: "/",
-      },
-      {
-        id: 2,
-        linkLabel: "Link  Four",
-        linkUrl: "/",
-      },
-      {
-        id: 3,
-        linkLabel: "Link  Four",
-        linkUrl: "/",
-      },
-      {
-        id: 4,
-        linkLabel: "Link  Four",
-        linkUrl: "/",
-      },
-      {
-        id: 5,
-        linkLabel: "Link  Four",
-        linkUrl: "/",
-      },
-      {
-        id: 6,
-        linkLabel: "Link  Four",
-        linkUrl: "/",
-      },
-    ],
-  },
-  {
-    id: 5,
-    linkTitle: "Column Five",
-    linkItems: [
-      {
-        id: 1,
-        linkLabel: "Link  Five",
-        linkUrl: "/",
-      },
-      {
-        id: 2,
-        linkLabel: "Link  Five",
-        linkUrl: "/",
-      },
-      {
-        id: 3,
-        linkLabel: "Link  Five",
-        linkUrl: "/",
-      },
-      {
-        id: 4,
-        linkLabel: "Link  Five",
-        linkUrl: "/",
-      },
-      {
-        id: 5,
-        linkLabel: "Link  Five",
-        linkUrl: "/",
-      },
-      {
-        id: 6,
-        linkLabel: "Link  Five",
-        linkUrl: "/",
-      },
-    ],
-  },
+  
 ];
 
 export const ScrollAnimationDelay = 70;

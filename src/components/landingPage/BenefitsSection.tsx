@@ -14,7 +14,7 @@ export default function BenefitsSection() {
             key={item.title}
             className="rounded-[16px] bg-[#D6DE211A] p-6 sm:p-10 w-full flex flex-col "
           >
-            <h3 className="text-primary text-[24px] font-medium">
+            <h3 className="text-primary text-base md:text-[24px] font-medium">
               {item.title}
             </h3>
            

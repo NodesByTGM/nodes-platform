@@ -13,10 +13,10 @@ export default function GetStartedSection({
       <PaleSection>
         <div className=" flex flex-col lg:flex-row gap-[154px] items-center justify-between">
           <div className="flex flex-col max-w-[685px] font-medium text-primary">
-            <h3 className="text-center lg:text-start text-[40px] mb-4">
+            <h3 className="text-center lg:text-start text-[20px] md:text-[40px] mb-4">
               {header}
             </h3>
-            <span className={`${descriptionClass} text-center lg:text-start text-[20px] mb-10`}>
+            <span className={`${descriptionClass} text-center lg:text-start text-base md:text-[20px] mb-10`}>
               {description}
             </span>
             <Button className="px-[48px] max-w-max mx-auto lg:mx-0">

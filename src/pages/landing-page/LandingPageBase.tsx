@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import {
   Header,
   Footer,
   FloatingHeader,
   AboutUsHeroSection,
 } from "../../components/landingPage";
-import { useLocation } from "react-router-dom";
 function ScrollToTop({ children }) {
   const { pathname } = useLocation();
 
@@ -21,6 +20,8 @@ function ScrollToTop({ children }) {
   return <div className="">{children}</div>;
 }
 export default function LandingPageBase() {
+  const { pathname } = useLocation();
+
   return (
     <ScrollToTop>
       <div className="min-h-[100vh] bg-[#ffffff] relative">
@@ -32,7 +33,8 @@ export default function LandingPageBase() {
             <FloatingHeader />
           </div>
         </div>
-        <AboutUsHeroSection />
+        {pathname.toLowerCase() === "/about-us" && <AboutUsHeroSection />}
+
         <Outlet />
         <Footer />
       </div>

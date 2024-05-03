@@ -9,9 +9,11 @@ export default function AboutUsHeroSection() {
   return (
     <div className="">
       <div className=" relative !z-[1]">
-        <div className="z-[222] mb-10 sm:absolute top-0 bottom-0 left-0 right-0 max-w-[525px] max-h-max mx-auto sm:my-auto">
+       
+        <div className="  min-h-[300px] md:min-h-[450px] lg:min-h-[550px] xl:min-h-[748px]  ">
+        <div className="px-6 z-[222] mb-10 absolute top-0 bottom-0 left-0 right-0 max-w-[525px] max-h-max mx-auto mt-48 sm:my-auto">
           <div className="flex flex-col text-primary sm:text-[#ffffff] text-center">
-            <span className="text-primary font-medium text-[24px] sm:text-[48px] md:text-[64px] mb-4">
+            <span className="text-primary font-medium text-[32px] md:text-[64px] mb-4">
               {WebsiteCopyWrite.AboutUsPage.HeroSectionPlanCTA.Title}
             </span>
 
@@ -45,7 +47,6 @@ export default function AboutUsHeroSection() {
             </button>
           </div>
         </div>
-        <div className="  min-h-[300px] md:min-h-[450px] lg:min-h-[550px] xl:min-h-[748px]  ">
           <Swiper
             className="mySwiper landingPageSwiper"
             slidesPerView={1}
