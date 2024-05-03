@@ -411,184 +411,27 @@ export const carouselImages = [
 export const landingPageFooterLinks = [
   {
     id: 1,
-    linkTitle: "Column One",
+    linkTitle: "Company",
     linkItems: [
       {
         id: 1,
-        linkLabel: "Link  One",
-        linkUrl: "/",
+        linkLabel: "About Us",
+        linkUrl: "/about-us",
       },
       {
         id: 2,
-        linkLabel: "Link  One",
-        linkUrl: "/",
+        linkLabel: "For Business",
+        linkUrl: "/business-page",
       },
       {
         id: 3,
-        linkLabel: "Link  One",
-        linkUrl: "/",
+        linkLabel: "For Talent",
+        linkUrl: "/talent-page",
       },
-      {
-        id: 4,
-        linkLabel: "Link  One",
-        linkUrl: "/",
-      },
-      {
-        id: 5,
-        linkLabel: "Link  One",
-        linkUrl: "/",
-      },
-      {
-        id: 6,
-        linkLabel: "Link  One",
-        linkUrl: "/",
-      },
+      
     ],
   },
-  {
-    id: 2,
-    linkTitle: "Column Two",
-    linkItems: [
-      {
-        id: 1,
-        linkLabel: "Link  Two",
-        linkUrl: "/",
-      },
-      {
-        id: 2,
-        linkLabel: "Link  Two",
-        linkUrl: "/",
-      },
-      {
-        id: 3,
-        linkLabel: "Link  Two",
-        linkUrl: "/",
-      },
-      {
-        id: 4,
-        linkLabel: "Link  Two",
-        linkUrl: "/",
-      },
-      {
-        id: 5,
-        linkLabel: "Link  Two",
-        linkUrl: "/",
-      },
-      {
-        id: 6,
-        linkLabel: "Link  Two",
-        linkUrl: "/",
-      },
-    ],
-  },
-  {
-    id: 3,
-    linkTitle: "Column Three",
-    linkItems: [
-      {
-        id: 1,
-        linkLabel: "Link  Three",
-        linkUrl: "/",
-      },
-      {
-        id: 2,
-        linkLabel: "Link  Three",
-        linkUrl: "/",
-      },
-      {
-        id: 3,
-        linkLabel: "Link  Three",
-        linkUrl: "/",
-      },
-      {
-        id: 4,
-        linkLabel: "Link  Three",
-        linkUrl: "/",
-      },
-      {
-        id: 5,
-        linkLabel: "Link  Three",
-        linkUrl: "/",
-      },
-      {
-        id: 6,
-        linkLabel: "Link  Three",
-        linkUrl: "/",
-      },
-    ],
-  },
-  {
-    id: 4,
-    linkTitle: "Column Four",
-    linkItems: [
-      {
-        id: 1,
-        linkLabel: "Link  Four",
-        linkUrl: "/",
-      },
-      {
-        id: 2,
-        linkLabel: "Link  Four",
-        linkUrl: "/",
-      },
-      {
-        id: 3,
-        linkLabel: "Link  Four",
-        linkUrl: "/",
-      },
-      {
-        id: 4,
-        linkLabel: "Link  Four",
-        linkUrl: "/",
-      },
-      {
-        id: 5,
-        linkLabel: "Link  Four",
-        linkUrl: "/",
-      },
-      {
-        id: 6,
-        linkLabel: "Link  Four",
-        linkUrl: "/",
-      },
-    ],
-  },
-  {
-    id: 5,
-    linkTitle: "Column Five",
-    linkItems: [
-      {
-        id: 1,
-        linkLabel: "Link  Five",
-        linkUrl: "/",
-      },
-      {
-        id: 2,
-        linkLabel: "Link  Five",
-        linkUrl: "/",
-      },
-      {
-        id: 3,
-        linkLabel: "Link  Five",
-        linkUrl: "/",
-      },
-      {
-        id: 4,
-        linkLabel: "Link  Five",
-        linkUrl: "/",
-      },
-      {
-        id: 5,
-        linkLabel: "Link  Five",
-        linkUrl: "/",
-      },
-      {
-        id: 6,
-        linkLabel: "Link  Five",
-        linkUrl: "/",
-      },
-    ],
-  },
+  
 ];
 
 export const ScrollAnimationDelay = 70;
@@ -628,8 +471,7 @@ export const WebsiteCopyWrite = {
         {
           id: 3,
           title: "Find top talent",
-          description:
-            "Find top talent from a vast pool of skilled creatives.",
+          description: "Find top talent from a vast pool of skilled creatives.",
         },
         {
           id: 4,
@@ -643,35 +485,158 @@ export const WebsiteCopyWrite = {
       Header: "The Nodes Community",
       Description:
         "A platform that empowers creatives and businesses to connect, collaborate, and thrive.",
-      
     },
     BenefitsSection: {
       Benefits: [
         {
-          title: "Showcase your talent with a stunning profile and build your network.",
-          description:
-            "",
+          title:
+            "Showcase your talent with a stunning profile and build your network.",
+          description: "",
         },
         {
-          title: "Land your dream project by connecting with top brands and businesses.",
-          description:
-            "",
+          title:
+            "Land your dream project by connecting with top brands and businesses.",
+          description: "",
         },
         {
           title: "Find top talent from a vast pool of skilled creatives.",
-          description:
-            "",
+          description: "",
         },
         {
-          title: "Build your brand reputation by partnering with talented individuals.",
-          description:
-            "",
+          title:
+            "Build your brand reputation by partnering with talented individuals.",
+          description: "",
         },
-      ]
+      ],
     },
     GetStartedSection: {
-      Header: 'Begin your journey with Nodes!',
-      Description: 'Unlock endless possibilities, dive into the vibrant world of Nodes and explore exciting opportunities today.'
-    }
+      Header: "Begin your journey with Nodes!",
+      Description:
+        "Unlock endless possibilities, dive into the vibrant world of Nodes and explore exciting opportunities today.",
+    },
+  },
+  BusinessPage: {
+    HeroSectionPlanCTA: {
+      Title: "Talents might be hard to find but not on Nodes.",
+      Description: "Get access to over a million creatives in one space. ",
+    },
+    TipsSection: {
+      Title: "Benefits of having a business account",
+      Description: "",
+      Tips: [
+        {
+          id: 1,
+          title: "A talented pool of creatives at your fingertips",
+          description: "",
+        },
+        {
+          id: 2,
+          title: "Find the perfect match for your project",
+          description: "",
+        },
+        {
+          id: 3,
+          title: "Accelerate your business growth",
+          description: "",
+        },
+      ],
+    },
+    NodesCommunitySection: {
+      Title:
+        "Stand out from the crowd, connect with top brands actively seeking talent.",
+      Description: "Land the projects you've been waiting for.",
+    },
+
+    GetStartedSection: {
+      Title: "Find top talent, faster. Get a Nodes Business Account.",
+      Description:
+        "Unlock endless possibilities, dive into the vibrant world of Nodes and explore exciting opportunities today.",
+    },
+  },
+  TalentPage: {
+    HeroSectionPlanCTA: {
+      Title: "Elevate Your Craft, Shine Bright on Nodes.",
+      Description: "Showcase your talent, land your dream project",
+    },
+    TipsSection: {
+      Title:
+        "Stand out from the crowd, connect with top brands actively seeking talent.",
+      Description: "Land the projects you've been waiting for.",
+      Tips: [
+        {
+          id: 1,
+          title: "Build a stunning profile.",
+          description:
+            "Craft a solid profile that highlights your talent and experience.",
+        },
+        {
+          id: 2,
+          title: "Showcase your work to industry professionals.",
+          description:
+            "Stand out from the crowd, connect with top brands actively seeking talent.",
+        },
+        {
+          id: 3,
+          title: "Connect with other creatives and brands.",
+          description:
+            "Network with like-minded creatives, find your perfect team.",
+        },
+      ],
+    },
+    GetStartedSection: {
+      Title: "Sign Up Now & Get Discovered!",
+      Description:
+        "Unlock endless possibilities, dive into the vibrant world of Nodes and explore exciting opportunities today.",
+    },
+  },
+  AboutUsPage: {
+    HeroSectionPlanCTA: {
+      Title: "What is Nodes?",
+      Description:
+        "Nodes is a dynamic platform empowering talents to showcase their work, connect with collaborators, and access valuable projects as well as resources.",
+    },
+    OurStorySection: {
+      title1: "What We Do:",
+      description1: {
+        text1:
+          "We provide a centralised hub for creatives of all disciplines to showcase their work, connect with collaborators, and discover exciting career opportunities. ",
+        text2:
+          "We also cater to brands, businesses, and casting directors seeking top talent, streamlining the recruitment process and fostering a dynamic talent pool.",
+      },
+      title2: "The Team:",
+      description2: {
+        text1:
+          "Nodes is driven by a passionate team of individuals with extensive experience in the entertainment industry and a deep understanding of the challenges faced by both creatives and businesses. ",
+        text2:
+          "Our team members are dedicated to continuously developing and improving the platform, ensuring it remains the premier destination for creative collaboration and success.",
+      },
+    },
+    GetStartedSection: {
+      Title: "Find top talent, faster. Get a Nodes Business Account.",
+      Description:
+        "Unlock endless possibilities, dive into the vibrant world of Nodes and explore exciting opportunities today.",
+    },
+
+    CTASection: {
+      FAQ: [
+        {
+          id: 1,
+          title: "What is Nodes?",
+          description:
+            "We are a platform designed to bridge the gap between creative professionals and businesses in the entertainment industry.",
+        },
+        {
+          id: 2,
+          title: "What to do on Nodes",
+          description: "Connect, collaborate, and create.",
+        },
+        {
+          id: 3,
+          title: "Why nodes",
+          description:
+            "We foster a supportive community where individuals can showcase their talents, connect with like-minded peers, and access opportunities to advance their careers. We are dedicated to providing a space where creativity thrives and dreams are realised.",
+        },
+      ],
+    },
   },
 };

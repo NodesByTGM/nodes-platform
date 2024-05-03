@@ -4,40 +4,15 @@ import { NavLink } from "react-router-dom";
 import { Plus, X } from "react-feather";
 
 import { PaleSection } from "../../components/landingPage";
-export default function CTASection() {
-  const faq = [
-    {
-      id: 1,
-      title: "What is Nodes?",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet accumsan libero ipsum facilisis nibh. ",
-    },
-    {
-      id: 2,
-      title: "What is are the benefits?",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet accumsan libero ipsum facilisis nibh. ",
-    },
-    {
-      id: 3,
-      title: "Who needs nodes",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet accumsan libero ipsum facilisis nibh. ",
-    },
-    {
-      id: 4,
-      title: "What is the pricing",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Risus egestas aliquet accumsan libero ipsum facilisis nibh. ",
-    },
-  ];
+export default function CTASection({faq}) {
+
   const [selected, setSelected] = useState<any>(faq[0]);
   return (
     <div className="landingPageMainDiv pt-[80px] pb-[120px]">
       <PaleSection>
         <div className=" grid grid-cols-1 md:grid-cols-2 gap-x-[34px] gap-y-[60px] ">
           <div className="flex flex-col max-w-[319px] font-medium text-primary">
-            <h3 className=" text-[35px] mb-4">Get to know us better </h3>
+            <h3 className=" text-[24px] md:text-[35px] mb-4">Get to know us better </h3>
 
             <NavLink to={"/"}>
               <button
@@ -62,7 +37,7 @@ export default function CTASection() {
                 }    w-full flex flex-col gap-4 `}
               >
                 <div className={`${selected?.id !== item.id ? 'py-10' :  index === 0 ? '' : 'pt-10'} flex items-center justify-between`}>
-                  <h3 className="text-primary text-[24px] font-medium">
+                  <h3 className="text-primary text-base md:text-[24px] font-medium">
                     {item.title}
                   </h3>
 
@@ -81,7 +56,7 @@ export default function CTASection() {
                   </div>
                 </div>
                 {selected?.id === item.id ? (
-                  <span className="text-primary text-base font-normal">
+                  <span className="text-primary text-sm md:text-base font-normal">
                     {item.description}
                   </span>
                 ) : null}

@@ -121,7 +121,7 @@ export default function SkillsSection() {
             {skills.map((skill) => (
               <div key={skill} className="w-full">
                 <SwiperSlide>
-                  <div className="flex items-center justify-center text-primary bg-[#FBFCE9] font-normal text-nowrap text-base w-full px-10 py-4 rounded-full">
+                  <div className="flex items-center justify-center text-primary bg-[#FBFCE9] font-normal text-nowrap text-sm sm:text-base w-full px-10 py-4 rounded-full">
                     <span className="">{skill}</span>
                   </div>
                 </SwiperSlide>

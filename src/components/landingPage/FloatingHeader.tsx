@@ -129,8 +129,8 @@ export default function FloatingHeader() {
                                       isPending
                                         ? "pending"
                                         : isActive
-                                        ? `cursor-pointer font-medium text-base text-[#ffffff] bg-primary py-2 rounded-lg px-4`
-                                        : `cursor-pointer font-medium text-base text-[#212121] py-2 rounded-lg px-4`
+                                        ? `cursor-pointer font-medium text-sm md:text-base text-[#ffffff] bg-primary py-2 rounded-lg px-4`
+                                        : `cursor-pointer font-medium text-sm md:text-base text-[#212121] py-2 rounded-lg px-4`
                                     }
                                   >
                                     {item.label}
@@ -152,8 +152,8 @@ export default function FloatingHeader() {
                                       isPending
                                         ? "pending"
                                         : isActive
-                                        ? `cursor-pointer font-medium text-base text-[#ffffff] bg-primary py-2 rounded-lg px-4`
-                                        : `cursor-pointer font-medium text-base text-[#212121] py-2 rounded-lg px-4`
+                                        ? `cursor-pointer font-medium text-sm md:text-base text-[#ffffff] bg-primary py-2 rounded-lg px-4`
+                                        : `cursor-pointer font-medium text-sm md:text-base text-[#212121] py-2 rounded-lg px-4`
                                     }
                                   >
                                     {item.label}

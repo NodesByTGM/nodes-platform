@@ -117,3 +117,7 @@ body {
 .discover-grid-cols {
   @apply grid-cols-3
 }
+
+.aboutUsHeroSection{
+background-image: url('/landingPageImg/AboutUsBgImg.svg');
+}

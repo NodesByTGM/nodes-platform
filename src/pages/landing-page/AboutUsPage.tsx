@@ -2,37 +2,36 @@ import React from "react";
 import {
   CTASection,
   GetStartedSection,
-  AboutUsHeroSection,
   OurStorySection,
-  OurvaluesSection,
-  OurTeamSection,
 } from "../../components/landingPage";
 import ScrollAnimation from "react-animate-on-scroll";
 import { ScrollAnimationDelay } from "../../utilities/constants";
+import { WebsiteCopyWrite } from "../../utilities/constants";
+import { addBreakToString } from "../../utilities/constantReactItems";
 
 export default function AboutUsPage() {
+
   return (
     <div className="min-h-[100vh] ">
-      <AboutUsHeroSection />
-
       <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
         <OurStorySection />
       </ScrollAnimation>
 
       <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
-        <OurvaluesSection />
+        <CTASection faq={WebsiteCopyWrite.AboutUsPage.CTASection.FAQ} />
       </ScrollAnimation>
 
       <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
-        <OurTeamSection />
-      </ScrollAnimation>
-
-      <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
-        <CTASection />
-      </ScrollAnimation>
-
-      <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
-        <GetStartedSection />
+        <GetStartedSection
+          header={addBreakToString(
+            WebsiteCopyWrite.AboutUsPage.GetStartedSection.Title,
+            24
+          )}
+          description={
+            WebsiteCopyWrite.AboutUsPage.GetStartedSection.Description
+          }
+          descriptionClass="max-w-[505px]"
+        />
       </ScrollAnimation>
     </div>
   );

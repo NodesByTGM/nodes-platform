@@ -7,6 +7,8 @@ import moment from "moment";
 
 declare const PaystackPop: any;
 
+
+
 export const handleCheckList = (
   item: string,
   selectedItems: Array<string>,

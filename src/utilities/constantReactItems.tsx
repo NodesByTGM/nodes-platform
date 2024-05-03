@@ -199,3 +199,20 @@ export const businessPaths = [
     path: AppConfig.PATHS.Trending.Base,
   },
 ];
+
+export  function addBreakToString(str, breakPoint) {
+  if (str.length <= breakPoint) {
+    return str; // No need for a break
+  }
+
+  const firstPart = str.substring(0, breakPoint);
+  const secondPart = str.substring(breakPoint);
+
+  return (
+    <p>
+      {firstPart}
+      <br />
+      {secondPart}
+    </p>
+  );
+}
