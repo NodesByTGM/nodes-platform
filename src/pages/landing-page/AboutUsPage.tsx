@@ -2,20 +2,17 @@ import React from "react";
 import {
   CTASection,
   GetStartedSection,
-  // AboutUsHeroSection,
   OurStorySection,
-
-  // OurTeamSection,
 } from "../../components/landingPage";
 import ScrollAnimation from "react-animate-on-scroll";
 import { ScrollAnimationDelay } from "../../utilities/constants";
 import { WebsiteCopyWrite } from "../../utilities/constants";
+import { addBreakToString } from "../../utilities/constantReactItems";
 
 export default function AboutUsPage() {
+
   return (
     <div className="min-h-[100vh] ">
-      {/* <AboutUsHeroSection /> */}
-
       <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
         <OurStorySection />
       </ScrollAnimation>
@@ -26,7 +23,10 @@ export default function AboutUsPage() {
 
       <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
         <GetStartedSection
-          header={WebsiteCopyWrite.AboutUsPage.GetStartedSection.Title}
+          header={addBreakToString(
+            WebsiteCopyWrite.AboutUsPage.GetStartedSection.Title,
+            24
+          )}
           description={
             WebsiteCopyWrite.AboutUsPage.GetStartedSection.Description
           }

@@ -752,6 +752,22 @@ export const WebsiteCopyWrite = {
       Description:
         "Nodes is a dynamic platform empowering talents to showcase their work, connect with collaborators, and access valuable projects as well as resources.",
     },
+    OurStorySection: {
+      title1: "What We Do:",
+      description1: {
+        text1:
+          "We provide a centralised hub for creatives of all disciplines to showcase their work, connect with collaborators, and discover exciting career opportunities. ",
+        text2:
+          "We also cater to brands, businesses, and casting directors seeking top talent, streamlining the recruitment process and fostering a dynamic talent pool.",
+      },
+      title2: "The Team:",
+      description2: {
+        text1:
+          "Nodes is driven by a passionate team of individuals with extensive experience in the entertainment industry and a deep understanding of the challenges faced by both creatives and businesses. ",
+        text2:
+          "Our team members are dedicated to continuously developing and improving the platform, ensuring it remains the premier destination for creative collaboration and success.",
+      },
+    },
     GetStartedSection: {
       Title: "Find top talent, faster. Get a Nodes Business Account.",
       Description:
