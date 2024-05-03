@@ -679,13 +679,12 @@ export const WebsiteCopyWrite = {
     },
     TipsSection: {
       Title: "Benefits of having a business account",
-      Description: "Description",
+      Description: "",
       Tips: [
         {
           id: 1,
           title: "A talented pool of creatives at your fingertips",
-          description:
-            "",
+          description: "",
         },
         {
           id: 2,
@@ -695,8 +694,7 @@ export const WebsiteCopyWrite = {
         {
           id: 3,
           title: "Accelerate your business growth",
-          description:
-            "",
+          description: "",
         },
       ],
     },
@@ -731,7 +729,8 @@ export const WebsiteCopyWrite = {
         {
           id: 2,
           title: "Showcase your work to industry professionals.",
-          description: "Stand out from the crowd, connect with top brands actively seeking talent.",
+          description:
+            "Stand out from the crowd, connect with top brands actively seeking talent.",
         },
         {
           id: 3,

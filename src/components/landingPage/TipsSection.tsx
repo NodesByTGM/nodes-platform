@@ -13,22 +13,37 @@ export default function TipsSection({
   tips: Array<any>;
 }) {
   return (
-    <div className="landingPageMainDiv pt-[60px] sm:pt-[108px]">
-      <div className="mx-auto text-center">
+    <div className="landingPageMainDiv pt-[60px] sm:pt-[108px] pb-[70px] sm:pb-[120px]">
+      <div className="mx-auto text-center mb-[82px]">
         <SectionTitles
           title={title}
           description={description}
           descriptionClass="max-w-[580px] mx-auto"
+          titleClass='max-w-[1024px] mx-auto'
         />
       </div>
       <div className="grid grid-cols-3 gap-8">
         {tips.map((tip, index) => (
-          <div key={tip?.id} className="bg-[#D6DE211A] border border-[#D6DE21] rounded-[16px] flex flex-col gap-[138px]">
-           <span className="text-[24px] font-medium text-[#212121]">{tip.title}</span>  
+          <div
+            key={tip?.id}
+            className="p-10 bg-[#D6DE211A] border border-[#D6DE21] rounded-[16px] flex flex-col gap-[138px]"
+          >
+            <div className="flex flex-col gap-4">
+              <span className={` text-[24px] font-medium text-[#212121]`}>
+                {tip.title}
+              </span>
+              {description?.length > 0 ? (
+                <span className="text-base font-normal text-[#212121]">
+                  {tip.description}
+                </span>
+              ) : null}
+            </div>
 
-
-           <div className="flex justify-end w-full">
-            <span className="font-medium text-[96px] text-[#D6DE21]">0{index+1}</span></div> 
+            <div className="flex justify-end w-full">
+              <span className="font-medium text-[96px] text-[#D6DE21]">
+                0{index + 1}
+              </span>
+            </div>
           </div>
         ))}
       </div>

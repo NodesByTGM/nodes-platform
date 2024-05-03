@@ -2,7 +2,7 @@ import React from "react";
 import {
   CTASection,
   GetStartedSection,
-  AboutUsHeroSection,
+  // AboutUsHeroSection,
   OurStorySection,
 
   // OurTeamSection,
@@ -14,7 +14,7 @@ import { WebsiteCopyWrite } from "../../utilities/constants";
 export default function AboutUsPage() {
   return (
     <div className="min-h-[100vh] ">
-      <AboutUsHeroSection />
+      {/* <AboutUsHeroSection /> */}
 
       <ScrollAnimation animateIn="fadeIn" delay={ScrollAnimationDelay}>
         <OurStorySection />
