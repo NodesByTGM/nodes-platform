@@ -246,7 +246,7 @@ function TalentOnboarding() {
 
   return (
     <div className="flex min-h-[100vh] justify-center">
-      <div className="p-20 px-24 pt-10 lg:w-1/2">
+      <div className="pb-20 authFormDiv pt-10 w-full max-w-[500px] lg:max-w-full lg:w-1/2">
         <div className="flex justify-between items-center mb-10">
           <Link to="/">
             <div>
@@ -257,7 +257,7 @@ function TalentOnboarding() {
           {currentIndex + 1 > 1 && currentIndex + 1 < 5 ? (
             <span
               onClick={() => nextStep()}
-              className="text-primary font-normal text-base cursor-pointer"
+              className="text-primary font-normal text-sm md:text-base cursor-pointer"
             >
               Skip
             </span>
@@ -266,7 +266,7 @@ function TalentOnboarding() {
 
         <div className="mb-10">
           <p className="mb-4">Step {currentIndex + 1}/5</p>
-          <Title className="!text-2xl !font-medium">
+          <Title className="text-[18px] md:!text-2xl !font-medium">
             {indexQuestion[currentIndex + 1]}
           </Title>
         </div>
@@ -275,32 +275,43 @@ function TalentOnboarding() {
           <div className="">
             <div className="flex flex-col gap-4 justify-center w-full">
               <WrappedCheckboxInput
-                label="Connect with fellow creatives"
+                label="Flaunt my cool projects"
                 checked={formData.onboardingPurposes.includes(1)}
                 setChecked={() => handleMultipleCheck(1)}
               />
               <WrappedCheckboxInput
-                label="Find exciting job opportunities and gigs."
+                label="FExpand my network"
                 checked={formData.onboardingPurposes.includes(2)}
                 setChecked={() => handleMultipleCheck(2)}
               />
               <WrappedCheckboxInput
-                label="Increase visibility and showcase my work."
+                label="Collaborate with diverse creatives"
                 checked={formData.onboardingPurposes.includes(3)}
                 setChecked={() => handleMultipleCheck(3)}
               />
               <WrappedCheckboxInput
-                label=" Explore and discover inspiring projects."
+                label="Find local and international gigs"
                 checked={formData.onboardingPurposes.includes(4)}
                 setChecked={() => handleMultipleCheck(4)}
               />
               <WrappedCheckboxInput
-                label="Something else"
-                checked={formData.onboardingPurpose == 5}
-                setChecked={() => handleChecked(5)}
+                label="Make money with my talent"
+                checked={formData.onboardingPurposes.includes(5)}
+                setChecked={() => handleMultipleCheck(5)}
+              />
+              <WrappedCheckboxInput
+                label="Be part of a bustling creative community"
+                checked={formData.onboardingPurposes.includes(6)}
+                setChecked={() => handleMultipleCheck(6)}
               />
 
-              {formData.onboardingPurpose == 5 && (
+              <WrappedCheckboxInput
+                label="Something else"
+                checked={formData.onboardingPurpose == 7}
+                setChecked={() => handleChecked(7)}
+              />
+
+              {formData.onboardingPurpose == 7 && (
                 <div className="">
                   <TextArea
                     required
@@ -313,12 +324,21 @@ function TalentOnboarding() {
               )}
 
               <ButtonWithBack
-                className="mt-2"
+                className={`${
+                  (formData.otherPurpose.length === 0 &&
+                    formData.onboardingPurpose == 7) ||
+                  (formData.onboardingPurpose !== 7 &&
+                    formData.onboardingPurposes.length == 0)
+                    ? "opacity-50"
+                    : ""
+                } mt-2`}
                 backAction={previousStep}
                 btnAction={handleClickForm}
                 disabled={
-                  formData.onboardingPurposes.length == 0 ||
-                  (formData.onboardingPurpose == 5 && !formData.otherPurpose)
+                  (formData.otherPurpose.length === 0 &&
+                    formData.onboardingPurpose == 7) ||
+                  (formData.onboardingPurpose !== 7 &&
+                    formData.onboardingPurposes.length == 0)
                 }
               />
             </div>
@@ -356,7 +376,9 @@ function TalentOnboarding() {
                 onChange={handleChange}
               /> */}
               <div className="flex flex-col gap-1">
-                <span className="font-medium text-base ">Location</span>
+                <span className="font-medium text-sm md:text-base ">
+                  Location
+                </span>
                 <LocationSelect
                   paddingy="py-[16px]"
                   defaultValue={formData.location}
@@ -439,7 +461,7 @@ function TalentOnboarding() {
         <div className="fixed top-[-140px] right-[-140px] rotate-[320deg]">
           <img src="/bg-node-yellow.svg" alt="" className="" />
         </div>
-        <FormDebug className='hidden' form={{ formData, preview }} />
+        <FormDebug className="hidden" form={{ formData, preview }} />
         <TalentReviewCard
           name={user?.name}
           email={user?.email}

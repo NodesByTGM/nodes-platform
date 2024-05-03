@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BackIcon, CautionCircleIcon } from "../../assets/svg";
 // import moment from "moment";
+
 import {
   Button,
   Checkbox,
@@ -11,6 +12,7 @@ import {
   OTPInput,
   PasswordInput,
   DateSelect,
+  Back,
   // BasicSelect,
   // ReactDateSelect,
   OnboardingCarousel,
@@ -145,7 +147,7 @@ function Register() {
 
   const previousStep = () => {
     if (currentIndex > 0) {
-      setSent(false)
+      setSent(false);
       setCurrentIndex(currentIndex - 1);
     }
   };
@@ -215,7 +217,7 @@ function Register() {
 
   return (
     <div className="flex min-h-[100vh] max-h-[100vh]  w-full">
-      <div className="bg-[#ffffff] px-20 pb-20 pt-[60px] lg:w-1/2 overflow-y-auto">
+      <div className="bg-[#ffffff] authFormDiv pb-20 pt-[60px] w-full max-w-[480px] lg:max-w-full lg:w-1/2 lg:overflow-y-auto mx-auto lg:mx-0">
         {currentIndex === 0 ? (
           <div className="overflow-y-auto">
             <AuthOnboardingLogo
@@ -226,10 +228,18 @@ function Register() {
               }}
             />
 
-            <div className="mb-10 flex flex-col gap-4">
-              <h3 className="!text-[24px] !font-medium">Welcome to Nodes!</h3>
-              <p>Where creativtity knows no limits.</p>
+            <div className="mb-10">
+              {" "}
+              <Back link={-1} />
             </div>
+
+            <div className="mb-10 flex flex-col gap-4">
+              <h3 className="!text-[18px] md:!text-[24px] !font-medium">
+                You’re one step away from a whole new dimension.
+              </h3>
+              {/* <p>Where creativtity knows no limits.</p> */}
+            </div>
+
             <form
               onSubmit={handleSubmit}
               className="flex flex-col gap-6 justify-center w-full"
@@ -280,7 +290,9 @@ function Register() {
 
               <div>
                 <div className="flex gap-2 items-center mb-1">
-                  <div className="text-base font-medium ">Date of Birth*</div>
+                  <div className="text-sm md:text-base font-medium ">
+                    Date of Birth*
+                  </div>
                   <Tooltip
                     id="dob-tip"
                     text={() => (
@@ -350,7 +362,7 @@ function Register() {
 
               <Button
                 isLoading={sendOtpLoading}
-                className={`${!checked || !isValid ? "opacity-50" : ""} mt-8`}
+                className={`${!checked || !isValid ? "opacity-50" : ""} mt-8 mb-20`}
                 disabled={!checked || !isValid}
                 type="submit"
               >
@@ -370,8 +382,10 @@ function Register() {
             </div>
 
             <div className="text-center">
-              <Title className="!text-2xl">We emailed you a code</Title>
-              <p className="mb-5">Enter the verification code sent to: </p>
+              <Title className="!text-2xl">Help us keep Nodes authentic.</Title>
+              <p className="mb-5">
+                Enter the verification code sent to your email{" "}
+              </p>
               <p className="text-primary">{values.email}</p>
             </div>
 

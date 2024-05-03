@@ -7,13 +7,22 @@ export default function Back({
   text = "Go back",
 }: {
   className?: string;
-  link: string;
+  link?: string | number;
   text?: string;
 }) {
   const navigate = useNavigate();
+  const handleNavigation = () => {
+    if (typeof link === "number" || link === String(-1)) {
+      window.history.back();
+    } else {
+      navigate(link);
+    }
+  };
   return (
     <div
-      onClick={() => navigate(link)}
+      onClick={() => {
+        handleNavigation();
+      }}
       className={`${className} cursor-pointer  text-[#000000] flex gap-2 items-center `}
     >
       <svg

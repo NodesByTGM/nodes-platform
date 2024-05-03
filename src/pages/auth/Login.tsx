@@ -39,8 +39,6 @@ function Login() {
 
   const [submitLoading, setSubmitLoading] = useState(false);
 
-
-
   const handleFormSubmit = (e: any) => {
     setSubmitLoading(true);
 
@@ -113,17 +111,17 @@ function Login() {
         }}
       />
       <div className="mb-10">
-        <Title className="!text-[24px] !font-medium !text-[#000000]">
-          Welcome Back!
+        <Title className="!text-base md:!text-[24px] !font-medium !text-[#000000]">
+          Plug into Africa’s largest creative network
         </Title>
-        <p className="text-[18px] font-normal text-[#000000]">
-          Sign in to your creative space!
+        <p className="text-sm md:text-[18px] font-normal text-[#000000]">
+          Showcase your talent. Expand your opportunities. Network with
+          like-minds.
         </p>
       </div>
       <div className="flex flex-col items-center !hidden">
         <a
           className="w-full"
-         
           href="https://dev.api.nodesafrica.com/api/v1/socialauth/google/auth"
           // target='_blank'
         >
