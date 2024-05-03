@@ -18,7 +18,7 @@ export default function Individual() {
     img: null,
   };
   return (
-    <div className="w-[400px] max-h-max flex text-[#212121]">
+    <div className="w-full sm:w-[400px] max-h-max flex text-[#212121]">
       <div className="w-full profile-card-shadow p-6 pt-10 flex flex-col justify-center items-center bg-white rounded-lg">
         {profileType.toLowerCase() == "business" ? (
           <BusinessId />

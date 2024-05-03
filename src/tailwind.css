@@ -29,7 +29,11 @@ body {
 }
 
 .main-padding {
-  @apply pl-[40px] pr-[40px];
+  @apply px-6 md:px-[40px];
+}
+
+.main-max-w {
+  @apply max-w-[2000px];
 }
 
 .main-bg {

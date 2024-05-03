@@ -112,6 +112,36 @@ export default function ItemsCarousel({
           slidesPerView={3.5}
           onSlideChange={() => {}}
           onSwiper={() => {}}
+          breakpoints={{
+            "@0.00": {
+              slidesPerView: 1,
+              // spaceBetween: 10,
+            },
+            "@0.45": {
+              slidesPerView: 1.5,
+              // spaceBetween: 20,
+            },
+            "@0.75": {
+              slidesPerView: 2.5,
+              // spaceBetween: 20,
+            },
+            "@1.00": {
+              slidesPerView: 2.5,
+              // spaceBetween: 40,
+            },
+            "@1.50": {
+              slidesPerView: 3.5,
+              // spaceBetween: 50,
+            },
+            // "@1.75": {
+            //   slidesPerView: 4.5,
+            //   // spaceBetween: 50,
+            // },
+            // "@2.00": {
+            //   slidesPerView: 5.5,
+            //   // spaceBetween: 50,
+            // },
+          }}
         >
           {data.map((item, i) => (
             <div className="w-full" key={item?.id ? item?.id : i}>
