@@ -14,14 +14,14 @@ export default function ModalCancel() {
         <path
           d="M16 8L8 16"
           stroke="white"
-          stroke-width="2"
+          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M8 8L16 16"
           stroke="white"
-          stroke-width="2"
+          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />

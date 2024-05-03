@@ -3,6 +3,8 @@ import React, { useState, useRef, useEffect, MutableRefObject } from "react";
 import { useUploadFileMutation } from "../api";
 import { toast } from "react-toastify";
 import { Loader } from "../components";
+import { User } from "react-feather";
+import AppConfig from "../utilities/config";
 
 import { convertToBase64, checkFileSize } from "../utilities/common";
 
@@ -25,7 +27,9 @@ export default function ProfileImgUploader({ value, onChange }) {
     const files = e.target.files;
     const file = files[0];
     if (!checkFileSize(file)) {
-      toast.error("File size is too large");
+      toast.error(
+        `File selected exceeded file limit size of ${AppConfig.FILE_SIZE_LIMIT}mb`
+      );
       return;
     }
     setSelectedFile(file);
@@ -49,16 +53,17 @@ export default function ProfileImgUploader({ value, onChange }) {
 
   useEffect(() => {
     if (uploadFileSuccess) {
-      console.log("Data: " + JSON.stringify(uploadResponse, null, 2))
+      // console.log("Data: " + JSON.stringify(uploadResponse, null, 2))
 
       onChange(uploadResponse?.result);
     }
-   
   }, [uploadFileSuccess, uploadResponse?.result?.url]);
 
   useEffect(() => {
     if (isUploadError) {
-      toast.error(uploadFileError);
+      // toast.error(`File selected exceeded file limit size of ${AppConfig.FILE_SIZE_LIMIT}mb`);
+      // console.log(JSON.stringify(uploadFileError?.message, null, 2))
+      toast.error(uploadFileError?.message?.message);
     }
   }, [uploadFileError, isUploadError]);
 
@@ -68,13 +73,20 @@ export default function ProfileImgUploader({ value, onChange }) {
         className={`${uploadFileLoading ? "animate-pulse" : ""} size-[100px] `}
       >
         {value && value?.url?.length > 0 ? (
-          <img className=" h-full w-full rounded-full" src={value?.url} alt="" />
-        ) : (
           <img
             className=" h-full w-full rounded-full"
-            src="/img/ProfilePlaceholder.png"
+            src={value?.url}
             alt=""
           />
+        ) : (
+          // <img
+          //   className=" h-full w-full rounded-full"
+          //   src="/img/ProfilePlaceholder.png"
+          //   alt=""
+          // />
+          <div className="h-full w-full rounded-full bg-primary flex items-center justify-center">
+            <User className="text-secondary size-[50px]" />
+          </div>
         )}
 
         <input
@@ -95,13 +107,12 @@ export default function ProfileImgUploader({ value, onChange }) {
       >
         {uploadFileLoading ? (
           <div className="">
-            <Loader className="size-6"/>
+            <Loader className="size-6" />
           </div>
         ) : (
           "Replace"
         )}
       </span>
-    
     </div>
   );
 }
