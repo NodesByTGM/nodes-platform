@@ -48,11 +48,11 @@ export default function Pricing() {
         <div className="flex flex-col gap-2">
           <div className="z-20  w-full mt-[32px] mb-[36px] text-[#212121] flex flex-col gap-4 justify-center items-start md:items-center">
             <span className="font-medium text-base">PRICING</span>
-            <span className="font-medium text-[32px]">
+            <span className="font-medium text-[24px] md:text-[32px]">
               Unlock your Nodes experience!
             </span>
 
-            <span className="font-normal text-base">
+            <span className="font-normal text-sm md:text-base">
               Choose a plan that suits you best.{" "}
             </span>
           </div>
@@ -84,7 +84,7 @@ export default function Pricing() {
 function ChoosePlan({ selected, setSelected, paymentPlans }) {
   return (
     <div className="xl:mt-[204px] mb-8 text-[#212121] mr-6 flex flex-col gap-6">
-      <span className="font-medium text-[24px] text-nowrap">Choose Plan</span>
+      <span className="font-medium text-[16px] md:text-[24px] text-nowrap">Choose Plan</span>
       <div>
         <div className="space-y-4">
           {paymentPlans.map((paymentPlan) => (
