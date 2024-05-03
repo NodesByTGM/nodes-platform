@@ -406,7 +406,15 @@ export type postValidationType = {
 };
 
 export const resetPasswordSchema = object({
-  password: string().required("Password is a required field"),
+  password: string().required("Password is a required field").matches(
+    /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/,
+    "The password requires an uppercase, lowercase, number and special character"
+  )
+  .test(
+    "len",
+    "Password should have a minimum of 8 characters",
+    (val) => String(val)?.length >= 8
+  ),
   confirmPassword: string()
     .required()
     .oneOf([ref("password")], "Passwords must match"),
