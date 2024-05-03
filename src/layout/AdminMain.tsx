@@ -20,7 +20,7 @@ function AdminMain() {
       <div className="">
         <SEO />
 
-        <div className="flex max-h-screen h-full">
+        <div className="flex min-h-screen h-full">
           <div className="lg:w-[300px] fixed h-full">
             <AdminSidebar />
           </div>

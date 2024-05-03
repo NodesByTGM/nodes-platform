@@ -2,11 +2,9 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useNavigate, NavLink } from "react-router-dom";
 import AppConfig from "../../utilities/config";
-
-import {
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
   {
@@ -32,12 +30,24 @@ const onboardingLinks = [
     link: AppConfig.PATHS.Auth.Login,
   },
 ];
+const appLinks = [
+  {
+    label: "Dashboard",
+    link: AppConfig.PATHS.Dashboard.Base,
+  },
+  {
+    label: "Profile",
+    link: AppConfig.PATHS.Dashboard.Profile.Base,
+  },
+];
 
 // function classNames(...classes) {
 //   return classes.filter(Boolean).join(" ");
 // }
 
 export default function FloatingHeader() {
+  const user = useSelector((state: RootState) => state?.user?.user);
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -122,7 +132,11 @@ export default function FloatingHeader() {
                           <li>
                             <ul role="list" className="space-y-1">
                               {navigation.map((item) => (
-                                <li  onClick={() => setSidebarOpen(false)} className="py-2" key={item.label}>
+                                <li
+                                  onClick={() => setSidebarOpen(false)}
+                                  className="py-2"
+                                  key={item.label}
+                                >
                                   <NavLink
                                     to={item.link}
                                     className={({ isActive, isPending }) =>
@@ -139,12 +153,37 @@ export default function FloatingHeader() {
                               ))}
                             </ul>
                           </li>
-                          <li>
+                          {!user?.id ? (
+                            <li>
+                              <div className="text-xs font-semibold leading-6 text-[#757575]">
+                                Onboarding
+                              </div>
+                              <ul role="list" className=" mt-2 space-y-1">
+                                {onboardingLinks.map((item) => (
+                                  <li className="py-2" key={item.label}>
+                                    <NavLink
+                                      to={item.link}
+                                      className={({ isActive, isPending }) =>
+                                        isPending
+                                          ? "pending"
+                                          : isActive
+                                          ? `cursor-pointer font-medium text-sm md:text-base text-[#ffffff] bg-primary py-2 rounded-lg px-4`
+                                          : `cursor-pointer font-medium text-sm md:text-base text-[#212121] py-2 rounded-lg px-4`
+                                      }
+                                    >
+                                      {item.label}
+                                    </NavLink>
+                                  </li>
+                                ))}
+                              </ul>
+                            </li>
+                          ) : (
+                            <li>
                             <div className="text-xs font-semibold leading-6 text-[#757575]">
-                              Onboarding
+                              In App
                             </div>
                             <ul role="list" className=" mt-2 space-y-1">
-                              {onboardingLinks.map((item) => (
+                              {appLinks.map((item) => (
                                 <li className="py-2" key={item.label}>
                                   <NavLink
                                     to={item.link}
@@ -162,7 +201,7 @@ export default function FloatingHeader() {
                               ))}
                             </ul>
                           </li>
-                        
+                          )}
                         </ul>
                       </nav>
                     </div>

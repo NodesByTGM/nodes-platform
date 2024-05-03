@@ -34,19 +34,19 @@ export default function TalentDashboard() {
     },
     {
       id: 2,
-      text1: "Find your",
-      text2: "next job",
-      icon: "/img/FindJob.png",
-      buttonText: "Browse Jobs",
-      buttonLink: "/dashboard/see-more/talent-jobs",
-    },
-    {
-      id: 3,
       text1: "Connect",
       text2: "with others",
       icon: "/img/Connect.png",
       buttonText: "Discover",
       buttonLink: "/community",
+    },
+    {
+      id: 3,
+      text1: "Find your",
+      text2: "next job",
+      icon: "/img/FindJob.png",
+      buttonText: "Browse Jobs",
+      buttonLink: "/dashboard/see-more/talent-jobs",
     },
   ]);
 
@@ -64,9 +64,9 @@ export default function TalentDashboard() {
           title="Welcome to Nodes!"
           description=" You now have access to a creative ecosystem, follow spaces, connect with the community and access job opportunities"
         >
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {WelcomeCardItems.map((item) => (
-              <div key={item.id} className="h-auto">
+              <div key={item.id} className="h-auto w-[231px] md:w-full">
                 <WelcomeCard
                   text1={item.text1}
                   text2={item.text2}

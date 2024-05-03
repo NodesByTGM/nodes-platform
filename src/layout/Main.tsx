@@ -21,7 +21,7 @@ function Main() {
         <SEO />
 
         <div className="flex max-h-screen h-full">
-          <div className="lg:w-[300px] fixed h-full">
+          <div className="w-[300px] fixed h-full">
             <Sidebar />
           </div>
           <div className="flex-1 ml-[300px] h-fit">
@@ -29,6 +29,7 @@ function Main() {
               <Header />
             </div>
             <div className="">
+             {/* <div className="bg-red-200">sss</div> */}
               <Outlet />
             </div>
             <Footer />

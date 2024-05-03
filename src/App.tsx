@@ -124,7 +124,8 @@ const router = createBrowserRouter([
 function App() {
   useEffect(() => {}, []);
   return (
-    <div className="">
+    <div className="!min-w-[100vw]">
+     {/* <div className="bg-red-200">sss</div> */}
       <AppWrapper>
         <HelmetProvider>
           <AuthProvider>

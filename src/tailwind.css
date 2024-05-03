@@ -5,6 +5,7 @@
 
 body {
   font-family: "GeneralSans", sans-serif !important;
+  width: 100vw !important
 }
 
 .border-dash {

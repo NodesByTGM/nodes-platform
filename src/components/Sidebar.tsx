@@ -75,7 +75,8 @@ function Sidebar() {
                   }`}
                 >
                   <div>{r.icon}</div>
-                  <div className="hidden lg:flex justify-between items-center gap-2 w-full">
+                  <span className="text-white">asd</span>
+                  <div className="flex justify-between items-center gap-2 w-full">
                     <span className="">{r.name}</span>
                     {r?.children ? (
                       <div className="">
@@ -98,7 +99,7 @@ function Sidebar() {
                 }
               >
                 <div>{r.icon}</div>
-                <div className="hidden lg:flex justify-between items-center gap-2 w-full">
+                <div className="flex justify-between items-center gap-2 w-full">
                   <span className="">{r.name}</span>
                   {r?.children && <ChevronDown />}
                 </div>
@@ -131,7 +132,7 @@ function Sidebar() {
                                   : "childNavLink"
                               }
                             >
-                              <div className="hidden lg:block">
+                              <div className="block">
                                 {child.name}
                               </div>
                             </NavLink>
