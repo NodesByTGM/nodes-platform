@@ -1,12 +1,26 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { object, string, ref, bool, array, number } from "yup";
 
 export const signupSchema = object({
   name: string().required("Name is a required field"),
   email: string().email().required("Email is a required field"),
-  username: string().required("Username is a required field").trim().matches(/^\S*$/, 'Username must not contain spaces'),
+  username: string()
+    .required("Username is a required field")
+    .trim()
+    .matches(/^\S*$/, "Username must not contain spaces"),
   dob: string().required("DOB field is required"),
-  password: string().required("Password is a required field"),
+  password: string()
+    .required("Password is a required field")
+    .matches(
+      /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/,
+      "The password requires an uppercase, lowercase, number and special character"
+    )
+    .test(
+      "len",
+      "Password should have a minimum of 8 characters",
+      (val) => String(val)?.length >= 8
+    ),
   confirmPassword: string()
     .required("Confirm Password is a required field")
     .oneOf([ref("password")], "Passwords must match"),
@@ -71,7 +85,15 @@ export const adminSignupSchema = object({
   lastName: string().required("Last name is a required field"),
   email: string().email().required("Email is a required field"),
 
-  password: string().required("Password is a required field"),
+  password: string().required("Password is a required field").matches(
+    /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/,
+    "The password requires an uppercase, lowercase, number and special character"
+  )
+  .test(
+    "len",
+    "Password should have a minimum of 8 characters",
+    (val) => String(val)?.length >= 8
+  ),
   confirmPassword: string()
     .required("Confirm Password is a required field")
     .oneOf([ref("password")], "Passwords must match"),
@@ -90,7 +112,10 @@ export type AdminSignupValidationType = {
 export const profileSchema = object({
   firstName: string().required("first name is a required field"),
   lastName: string().required("Last name is a required field"),
-  username: string().required("Username is a required field").trim().matches(/^\S*$/, 'Username must not contain spaces'),
+  username: string()
+    .required("Username is a required field")
+    .trim()
+    .matches(/^\S*$/, "Username must not contain spaces"),
   avatar: object()
     .shape({
       id: string(),
@@ -451,7 +476,10 @@ export const PersonalIndividualInformationSchema = {
 
 export const accountSettingsSchema = object({
   name: string().required("Name is a required field"),
-  username: string().required("Username is a required field").trim().matches(/^\S*$/, 'Username must not contain spaces'),
+  username: string()
+    .required("Username is a required field")
+    .trim()
+    .matches(/^\S*$/, "Username must not contain spaces"),
   email: string().email().required("Email is a required field"),
   day: string().required(),
   month: string().required(),
