@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect, MutableRefObject } from "react";
 import { useUploadFileMutation } from "../api";
 import { toast } from "react-toastify";
-import { Loader } from "../components";
+import { Loader,  DefaultAvatar } from "../components";
 import { User } from "react-feather";
 import AppConfig from "../utilities/config";
 
@@ -84,9 +84,7 @@ export default function ProfileImgUploader({ value, onChange }) {
           //   src="/img/ProfilePlaceholder.png"
           //   alt=""
           // />
-          <div className="h-full w-full rounded-full bg-primary flex items-center justify-center">
-            <User className="text-secondary size-[50px]" />
-          </div>
+          <DefaultAvatar />
         )}
 
         <input

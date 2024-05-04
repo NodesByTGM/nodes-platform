@@ -139,3 +139,11 @@ body {
       rgba(251, 251, 251, 0) 100%
     );
 }
+
+.inputLabel {
+  @apply !text-sm md:text-base
+}
+
+.profileLeftCard {
+  @apply w-full sm:w-[400px]
+}

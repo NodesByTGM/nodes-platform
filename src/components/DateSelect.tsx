@@ -40,10 +40,11 @@ export default function DateSelect({
   // }, [value]);
   return (
     <div className={`${width}`}>
+      
       {/* {defaultVal}
       {moment(value).format("yyyy/mm/DD")} */}
       {label ? (
-        <div className={`${labelStyle} font-medium text-sm mb-1`}>
+        <div className={`${labelStyle} font-medium inputLabel mb-1`}>
           {label}
           {required ? "*" : null}
         </div>
@@ -56,9 +57,9 @@ export default function DateSelect({
         disabled={disabled}
         value={value}
         onChange={onChange}
-        className={`w-full p-4 transition-all outline-none bg-transparent border rounded-[5px] 
-        border-grey-dark focus:border-primary disabled:text-placeholder 
-        placeholder:text-placeholder text-ellipsis text-sm text-black ${className} `}
+        className={`w-full p-4 transition-all outline-none bg-transparent border rounded-[8px]
+        border-[#D6D6D6] focus:border-primary disabled:text-placeholder placeholder:text-[#757575] placeholder:font-normal placeholder:text-base
+         text-ellipsis text-sm text-black ${className} `}
         {...props}
       />
       {description ? <div className="my-2 text-sm">{description}</div> : null}
