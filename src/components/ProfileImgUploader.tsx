@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect, MutableRefObject } from "react";
 import { useUploadFileMutation } from "../api";
 import { toast } from "react-toastify";
 import { Loader,  DefaultAvatar } from "../components";
-import { User } from "react-feather";
 import AppConfig from "../utilities/config";
 
 import { convertToBase64, checkFileSize } from "../utilities/common";

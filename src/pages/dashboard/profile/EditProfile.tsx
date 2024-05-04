@@ -445,7 +445,7 @@ export default function EditIndividual() {
                       />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div className="w-full">
                         <Input
                           placeholder={AppConfig.PLACEHOLDERS.Height}
