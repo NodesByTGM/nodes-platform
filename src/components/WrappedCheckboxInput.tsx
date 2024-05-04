@@ -15,7 +15,7 @@ function WrappedCheckboxInput(props: WrappedProps) {
             containerClass
         )}>
             <Checkbox {...props} size="lg" />
-            <span>{label}</span>
+            <span className='text-sm md:text-base'>{label}</span>
         </div>
     )
 }

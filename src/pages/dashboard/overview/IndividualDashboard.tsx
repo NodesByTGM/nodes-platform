@@ -20,7 +20,7 @@ export default function IndividualDashboard() {
 
   // const navigate = useNavigate();
   return (
-    <div>
+    <div className="">
       <div className="flex flex-col gap-[64px]">
         <div className="pb-6 border-b border-[#D6D6D6]">
           <HeaderAndDescription

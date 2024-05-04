@@ -7,10 +7,10 @@ export default function UpgradeCTA({ username = "" }: { username: string }) {
   return (
     <div className="relative">
       <div className="absolute top-0 bottom-0 inset-x-0 z-[100] mx-auto mt-[24px] mb-[51px] max-w-[360px] flex flex-col items-center justify-center">
-        <p className="text-center text-[24px] font-medium mb-4">
-          Want more out of <span className="text-primary">Nodes</span>?
+        <p className="text-center text-[24px] font-medium mb-4 text-customprimary">
+          Want more out of Nodes?
         </p>
-        <p className="text-center mb-[43px]">
+        <p className="text-center mb-[43px] text-customprimary">
           Upgrade your account today and get access to stuff, stuff, stuff,
           stuff
         </p>

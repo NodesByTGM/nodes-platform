@@ -168,7 +168,7 @@ const TagInput = ({
         ) : null}
       </div>
 
-      {description ? <div className="my-2 text-sm">{description}</div> : null}
+      {description ? <div className="my-2 text-xs md:text-sm">{description}</div> : null}
     </div>
   );
 };

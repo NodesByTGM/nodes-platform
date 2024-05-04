@@ -27,7 +27,7 @@ export default function Input({
   return (
     <div className={`${width}`}>
       {label ? (
-        <div className={`${labelStyle} font-medium text-base mb-1`}>
+        <div className={`${labelStyle} font-medium inputLabel mb-1`}>
           {label}
           {required ? "*" : null}
         </div>

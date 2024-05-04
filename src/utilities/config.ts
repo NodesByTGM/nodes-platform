@@ -474,7 +474,7 @@ const AppConfig = {
     // "gif": "3d",
     // "glb": "3d"
   },
-  FILE_SIZE_LIMIT: 2, //2mb,
+  FILE_SIZE_LIMIT: 5, //5mb,
   COMPANY_INFO: {
     Address: "Level 1, 12 Sample St, Sydney NSW 2000",
     Phone: "1800 123 4567",

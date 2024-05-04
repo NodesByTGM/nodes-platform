@@ -10,7 +10,10 @@ export default function TrendingNewsSection() {
     // refetch: trendingRefetch,
     isFetching: trendingLoading,
     isSuccess: trendingIsSuccess,
-  } = useGetTrendingQuery();
+  } = useGetTrendingQuery({
+    page: 1,
+    pageSize: 10
+  });
 
   useEffect(() => {
     if (trendingIsSuccess && trending?.result?.length) {

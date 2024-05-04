@@ -75,7 +75,7 @@ function Register() {
   } = formik;
 
   return (
-    <div className="px-5">
+    <div className="">
       <AuthOnboardingLogo
         link={{
           text1: "Sign Up",
@@ -96,10 +96,10 @@ function Register() {
         className="flex flex-col gap-4 justify-center w-full"
       >
         <div className="flex flex-col gap-4">
-          <h3 className="text-[#000000] !font-medium !text-[24px]">
+          <h3 className="text-[#000000] !font-medium !text-[18px] md:!text-[24px]">
             Reset your password
           </h3>
-          <p className="font-normal text-[18px] text-[#000000]">
+          <p className="font-normal text-[16px] md:text-[18px] text-[#000000]">
           Forgot your password? Simply enter the email address associated with your Nodes account.
           </p>
         </div>

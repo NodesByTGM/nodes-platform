@@ -5,7 +5,8 @@ import ProfileProvider from "../../../context/profile";
 function Profile() {
   
   return (
-    <div className="min-h-[100vh] main-container">
+    <div className="min-h-[100vh] main-bg-gray-container main-padding ">
+      
       <ProfileProvider>
         <Outlet />
       </ProfileProvider>

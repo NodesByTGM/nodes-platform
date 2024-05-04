@@ -62,7 +62,7 @@ export default function Input({
   return (
     <div className="text-sm">
       <div className="flex justify-between font-medium mb-1">
-        <div className={labelStyle}>
+        <div className={`${labelStyle} !text-sm md:!text-base`}>
           {label}
           {required ? "*" : null}
         </div>

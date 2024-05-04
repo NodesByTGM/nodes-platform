@@ -16,8 +16,8 @@ export default function PricingCard({ info, paymentPlan }) {
     >
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
-          <span className="font-medium text-[20px]">{info.title}</span>
-          <span className="text-base font-normal flex-wrap max-w-[233px]">{info.description}</span>
+          <span className="font-medium text-[18px] md:text-[20px]">{info.title}</span>
+          <span className="text-sm md:text-base font-normal flex-wrap max-w-[233px]">{info.description}</span>
         </div>
 
         <div className="ml-2">
@@ -26,10 +26,10 @@ export default function PricingCard({ info, paymentPlan }) {
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-[2px]">
-          <h3 className="font-medium text-[48px]">
+          <h3 className="font-medium text-[32px] md:text-[48px]">
             {paymentPlan === "monthly" ? info.monthlyPayment : info.payment}{" "}
           </h3>
-          <span className="text-[#757575] font-normal text-base">
+          <span className="text-[#757575] font-normal text-sm md:text-base">
             {paymentPlan === "monthly"
               ? info.monthlyDuration
               : info.yearlyDuration}
@@ -65,7 +65,7 @@ export default function PricingCard({ info, paymentPlan }) {
                 />
               </svg>
             </span>
-            <span className="font-normal text-base">{incentive}</span>
+            <span className="font-normal text-sm md:text-base">{incentive}</span>
           </div>
         ))}
       </div>

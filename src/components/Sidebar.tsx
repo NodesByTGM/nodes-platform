@@ -8,7 +8,7 @@ import { RootState } from "../store";
 import { standardPaths, proPaths, businessPaths } from "../utilities";
 import { Transition } from "@headlessui/react";
 
-function Sidebar() {
+function Sidebar({ isModal = false, closeModal = () => {} }) {
   const user = useSelector((state: RootState) => state.user.user);
   const [showBusinessChild, setShowBusinessChild] = useState(false);
   const location = useLocation();
@@ -16,6 +16,12 @@ function Sidebar() {
   // console.log(JSON.stringify(user?.subscription, null, 2));
 
   const [paths, setPaths] = useState(standardPaths);
+
+  const handleModal = () => {
+    if (isModal) {
+      closeModal();
+    }
+  };
 
   useEffect(() => {
     if (
@@ -45,7 +51,13 @@ function Sidebar() {
             </div> */}
 
       <div className="flex flex-col gap-8 pt-8 pb-6">
-        <NavLink to="/" className="cursor-pointer">
+        <NavLink
+          onClick={() => {
+            handleModal();
+          }}
+          to="/"
+          className="cursor-pointer"
+        >
           <div className="flex items-center gap-2">
             <img src="/nodes-logo-black.svg" alt="" className="h-[24px] " />
 
@@ -75,7 +87,8 @@ function Sidebar() {
                   }`}
                 >
                   <div>{r.icon}</div>
-                  <div className="hidden lg:flex justify-between items-center gap-2 w-full">
+                  {/* <span className="text-white">asd</span> */}
+                  <div className="flex justify-between items-center gap-2 w-full">
                     <span className="">{r.name}</span>
                     {r?.children ? (
                       <div className="">
@@ -87,6 +100,9 @@ function Sidebar() {
               </div>
             ) : (
               <NavLink
+                onClick={() => {
+                  handleModal();
+                }}
                 key={r?.id}
                 to={String(r.path)}
                 className={({ isActive, isPending }) =>
@@ -98,7 +114,7 @@ function Sidebar() {
                 }
               >
                 <div>{r.icon}</div>
-                <div className="hidden lg:flex justify-between items-center gap-2 w-full">
+                <div className="flex justify-between items-center gap-2 w-full">
                   <span className="">{r.name}</span>
                   {r?.children && <ChevronDown />}
                 </div>
@@ -121,6 +137,9 @@ function Sidebar() {
                             leaveTo="-translate-y-full"
                           >
                             <NavLink
+                               onClick={() => {
+                                handleModal();
+                              }}
                               key={child.name}
                               to={String(child.path)}
                               className={({ isActive, isPending }) =>
@@ -131,9 +150,7 @@ function Sidebar() {
                                   : "childNavLink"
                               }
                             >
-                              <div className="hidden lg:block">
-                                {child.name}
-                              </div>
+                              <div className="block">{child.name}</div>
                             </NavLink>
                           </Transition.Child>
                         </div>

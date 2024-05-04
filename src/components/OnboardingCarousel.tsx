@@ -12,7 +12,7 @@ export default function OnboardingCarousel({
 }) {
   return (
     <div
-      className={`${className} onboardingSwiper relative h-full min-h-screen w-1/2 bg-gray-400`}
+      className={`${className} hidden md:block onboardingSwiper relative h-full min-h-screen w-1/2 bg-gray-400`}
     >
       <Swiper
         autoplay={{
@@ -31,7 +31,7 @@ export default function OnboardingCarousel({
       </Swiper>
 
       <div className="z-[100] absolute left-0 right-0 top-0 bottom-0 flex flex-col justify-center  items-center h-full">
-        <div className="bg-white p-8  rounded-[16px] max-w-[440px] flex w-full flex-col gap-4">
+        <div className="bg-white py-8 px-6 lg:px-8  rounded-[16px] max-w-[300px] lg:max-w-[440px] flex w-full flex-col gap-4">
           <h3 className="!text-2xl !font-semibold  !text-primary">
             Level up your creative journey with Nodes!
           </h3>

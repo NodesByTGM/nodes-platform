@@ -38,7 +38,7 @@ export default function TrendingEventsSection() {
           event
           refetchEvents={eventsRefetch}
           title={`Trending Events`}
-          description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. `}
+          description={``}
         />
       ) : null}
     </div>

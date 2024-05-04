@@ -48,7 +48,7 @@ function UpTrendArrow() {
         <path
           d="M10.5407 5.58283L6.99982 2.04199L3.45898 5.58283"
           stroke="#05A405"
-          stroke-width="1.5"
+          strokeWidth="1.5"
           stroke-miterlimit="10"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -56,7 +56,7 @@ function UpTrendArrow() {
         <path
           d="M7 11.9581V2.14062"
           stroke="#05A405"
-          stroke-width="1.5"
+          strokeWidth="1.5"
           stroke-miterlimit="10"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -78,7 +78,7 @@ function DownTrendArrow() {
         <path
           d="M3.45935 8.41717L7.00018 11.958L10.541 8.41717"
           stroke="#ED254E"
-          stroke-width="1.5"
+          strokeWidth="1.5"
           stroke-miterlimit="10"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -86,7 +86,7 @@ function DownTrendArrow() {
         <path
           d="M7 2.04188V11.8594"
           stroke="#ED254E"
-          stroke-width="1.5"
+          strokeWidth="1.5"
           stroke-miterlimit="10"
           strokeLinecap="round"
           strokeLinejoin="round"
