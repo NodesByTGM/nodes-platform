@@ -77,7 +77,7 @@ export default function ItemsCarousel({
     <div className="flex flex-col">
       {/* {prevClass}
       {nextClass} */}
-      <div className="mb-6">
+      <div className="mb-6 text-center sm:text-left mx-auto sm:mx-0">
         <HeaderAndDescription
           seeMore={seeMore}
           navigateTo={navigateTo}
@@ -190,12 +190,12 @@ export default function ItemsCarousel({
           ))}
         </Swiper>
 
-        <div className=" w-full  bottom-0 left-0 flex justify-between items-center mt-10 ">
+        <div className=" w-full  bottom-0 left-0 flex justify-between items-center mt-10 mb-6 sm:mb-0">
           <div
             className={`${customPaginator} flex gap-2 items-center cursor-pointer`}
           ></div>
 
-          <div className="custom-swiper-navigation flex items-center gap-[10px]">
+          <div className="hidden custom-swiper-navigation sm:flex items-center gap-[10px]">
             <div
               className={`${prevClass} cursor-pointer rounded-full w-10 h-10 border flex items-center justify-center text-grey-dark bg-[#ffffff]`}
             >
