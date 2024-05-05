@@ -20,6 +20,7 @@ import {
   Spaces,
   SpacesBase,
   DashboardBase,
+  PublicProfile,
   Dashboard,
   ViewAll,
   ViewDetail,
@@ -49,7 +50,6 @@ import {
   TalentPage,
   ViewMoreIndex,
   ViewMoreEventsIndex,
- 
 } from "../pages";
 import {
   AdminAuthBase,
@@ -207,6 +207,11 @@ export const publicRoutes: RouteObject[] = [
   },
 
   {
+    path: AppConfig.PATHS.Dashboard.PublicProfile.Base,
+    Component: PublicProfile,
+  },
+
+  {
     path: AppConfig.PATHS.Dashboard.Base,
     Component: DashboardBase,
     children: [
@@ -244,8 +249,6 @@ export const publicRoutes: RouteObject[] = [
         path: AppConfig.PATHS.Dashboard.ViewJobDetails,
         Component: getProfile(Details),
       },
-
-      
 
       // {
       //   path: AppConfig.PATHS.Dashboard.Business,

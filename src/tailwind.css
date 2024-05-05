@@ -155,3 +155,8 @@ body {
 .profileLeftCard {
   @apply w-full sm:w-[400px]
 }
+
+
+.businessProfileLeftCard {
+  @apply w-full sm:w-[400px] xl:w-[240px]
+}

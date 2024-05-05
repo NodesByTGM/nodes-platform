@@ -50,7 +50,7 @@ function Header() {
         pathname,
         "main-bg-yellow",
         "main-bg-gray"
-      )} z-[99] relative  pt-8  px-10 w-full flex justify-end items-center pb-4`}
+      )} z-[99] relative pt-8 px-10 w-full flex justify-end items-center pb-4`}
     >
       <div className=" gap-4 items-center hidden">
         <Menu className="w-[50px] cursor-pointer" />

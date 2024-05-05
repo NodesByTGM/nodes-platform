@@ -123,3 +123,4 @@ export { default as NotificationsComponent } from "./notificationsAndMessages/No
 export { default as MessagesComponent } from "./notificationsAndMessages/MessagesComponent";
 export { default as DiscoverCardLoader } from "./loaders/DiscoverCardLoader.tsx";
 export {default as FloatingAppHeader} from './FloatingAppHeader'
+export {default as PublicIndividualProfileCard}  from './profile/PublicIndividualProfileCard.tsx'

@@ -32,6 +32,7 @@ const API_ENDPOINTS = {
   Profile: {
     UserProfile: `${BASE_API_ENDPOINT}/users/profile`,
     BusinessProfile: `${BASE_API_ENDPOINT}/users/business-profile`,
+    PublicProfile: `${BASE_API_ENDPOINT}/users`
   },
   Job: {
     JobUrl: `${BASE_API_ENDPOINT}/jobs`,
@@ -184,6 +185,9 @@ const PATHS = {
       EditWithParam: "/dashboard/events/edit/:id",
       Guests: "/dashboard/events/guests/",
     },
+    PublicProfile: {
+      Base: '/profile/:id'
+    }
   },
   Contact: `${MAIN_APP_URL}/contact`,
   Community: {

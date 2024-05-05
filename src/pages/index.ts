@@ -49,4 +49,5 @@ export {default as TalentPage} from './landing-page/TalentPage.tsx'
 export {default as ViewMoreIndex} from './viewMore/ViewMoreIndex.tsx'
 export {default as ViewMoreEventsIndex} from './viewMoreEvents/ViewMoreEventsIndex.tsx'
 export {default as JobDetail} from './details/jobs/Details.tsx'
+export {default as PublicProfile} from './dashboard/profile/PublicProfile.tsx'
 
