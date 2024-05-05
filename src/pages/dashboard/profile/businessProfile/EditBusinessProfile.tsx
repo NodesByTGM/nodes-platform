@@ -183,7 +183,7 @@ export default function EditBusinessProfile() {
   }, [updateBusinessProfileSuccess]);
 
   return (
-    <div className=" px-10">
+    <div className="">
       <div className="flex flex-col gap-10 pt-6">
         <pre
           className="hidden
@@ -202,54 +202,60 @@ export default function EditBusinessProfile() {
           e?.preventDefault();
           handleSubmit();
         }}
-        className="flex gap-x-8"
+        className="flex flex-col xl:flex-row  gap-x-8"
       >
-        <div className="max-h-max w-[240px]">
-          <div className="flex flex-col">
-            <div className="rounded-lg border border-[#EFEFEF] p-6 bg-white flex flex-col gap-4">
-              <div className="flex items-start flex-col  gap-[16px] ">
-                {navOptions.map((nav) => (
-                  <div
-                    onClick={() => {
-                      setSelected(nav);
-                      scrollToDiv(nav.ref);
-                    }}
-                    key={nav.title}
-                    className={`${
-                      selected?.title?.toLowerCase() == nav?.title.toLowerCase()
-                        ? "border-primary text-primary "
-                        : "border-transparent text-[#000000] "
-                    } flex cursor-pointer flex-col items-center justify-center text-nowrap border-b-[2px] py-2  font-medium  `}
-                  >
-                    <span className="text-base font-medium ">{nav?.title}</span>
-                  </div>
-                ))}
+        <div className="xl:mx-0 sm:mx-auto mx-0">
+          {" "}
+          <div className="max-h-max businessProfileLeftCard">
+            <div className="flex flex-col">
+              <div className="rounded-lg border border-[#EFEFEF] p-6 bg-white flex flex-col gap-4">
+                <div className="flex items-start flex-col  gap-[16px] ">
+                  {navOptions.map((nav) => (
+                    <div
+                      onClick={() => {
+                        setSelected(nav);
+                        scrollToDiv(nav.ref);
+                      }}
+                      key={nav.title}
+                      className={`${
+                        selected?.title?.toLowerCase() ==
+                        nav?.title.toLowerCase()
+                          ? "border-primary text-primary "
+                          : "border-transparent text-[#000000] "
+                      } flex cursor-pointer flex-col items-center justify-center text-nowrap border-b-[2px] py-2  font-medium  `}
+                    >
+                      <span className="text-base font-medium ">
+                        {nav?.title}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="w-full mt-8">
-            <Button
-              isLoading={updateBusinessProfileLoading}
-              disabled={!isValid}
-              className={`${!isValid ? "opacity-50" : ""} `}
-            >
-              Save and Continue
-            </Button>
-          </div>
+            <div className="w-full mt-8">
+              <Button
+                isLoading={updateBusinessProfileLoading}
+                disabled={!isValid}
+                className={`${!isValid ? "opacity-50" : ""} `}
+              >
+                Save and Continue
+              </Button>
+            </div>
 
-          <FormDebug
-            form={{
-              values,
-              touched,
-              errors,
-              // userData: profileData?.result
-            }}
-            className="mt-4 hidden"
-          />
+            <FormDebug
+              form={{
+                values,
+                touched,
+                errors,
+                // userData: profileData?.result
+              }}
+              className="mt-4 hidden"
+            />
+          </div>
         </div>
 
-        <div className="flex-1 flex flex-col gap-8 ">
+        <div className="flex-1 flex flex-col gap-8 mt-12 xl:mt-0">
           <div ref={businessInfo} className="">
             <FormDiv title="Business Information">
               <div className="">
