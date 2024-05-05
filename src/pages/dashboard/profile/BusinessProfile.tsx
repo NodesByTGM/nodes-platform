@@ -15,10 +15,8 @@ export default function BusinessProfile() {
   const [selectedNav, setSelectedNav] = useState(navs[0]);
 
   return (
-    <div className="px-10">
-
+    <div className="">
       <div className="mb-10 flex flex-col gap-2 border-b border-[#D6D6D6] pb-[24px]">
-  
         <h3 className="font-semibold text-[#212121] text-[20px]">
           Business Profile{" "}
         </h3>
@@ -26,28 +24,29 @@ export default function BusinessProfile() {
           See what other people will see when they view your profile{" "}
         </span>
       </div>
-      <div className="flex gap-x-8 h-full">
+      <div className="flex flex-col xl:flex-row  gap-x-8 h-full">
         <pre className="hidden">{JSON.stringify(user, null, 2)}</pre>
 
-        <div className="max-h-max">
+        <div className="max-h-max xl:mx-0 sm:mx-auto mx-0">
           <BusinessProfileCard />
         </div>
+        <div className="flex-1  mt-12 xl:mt-0">
+          <div className="flex flex-col gap-6 w-full">
+            <div className="w-full  border-b border-[#EFEFEF]">
+              <SectionNavs
+                navs={navs}
+                selectedNav={selectedNav}
+                setSelectedNav={setSelectedNav}
+              />
+            </div>
 
-        <div className="flex flex-col gap-6 w-full">
-          <div className="w-full  border-b border-[#EFEFEF]">
-            <SectionNavs
-              navs={navs}
-              selectedNav={selectedNav}
-              setSelectedNav={setSelectedNav}
-            />
-          </div>
+            <div className="p-6 rounded-lg border border-[#EFEFEF] bg-[#ffffff]">
+              {selectedNav?.label?.toLowerCase() == "jobs" && <Jobs />}
 
-          <div className="p-6 rounded-lg border border-[#EFEFEF] bg-[#ffffff]">
-            {selectedNav?.label?.toLowerCase() == "jobs" && <Jobs />}
+              {selectedNav?.label?.toLowerCase() == "projects" && <Projects />}
 
-            {selectedNav?.label?.toLowerCase() == "projects" && <Projects />}
-
-            {selectedNav?.label?.toLowerCase() == "events" && <Events />}
+              {selectedNav?.label?.toLowerCase() == "events" && <Events />}
+            </div>
           </div>
         </div>
       </div>
