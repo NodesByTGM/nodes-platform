@@ -7,7 +7,16 @@ import moment from "moment";
 
 declare const PaystackPop: any;
 
+export const setBg = (pathname, yellowClass, grayClass) => {
+  if (pathname.toLowerCase().includes("edit-profile")) {
+    return yellowClass;
+    // "!bg-yellow-200";
+  } else {
+    return grayClass;
 
+    // "!bg-[#FBFBFB]";
+  }
+};
 
 export const handleCheckList = (
   item: string,
