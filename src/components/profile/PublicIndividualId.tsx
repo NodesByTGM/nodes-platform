@@ -1,29 +1,23 @@
-import React, { useContext } from "react";
+import React from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { GoLink } from "react-icons/go";
-import { ProfileContext } from "../../context/profile";
 import { DefaultAvatar } from "../../components";
-export default function IndividualId() {
-  const { profileData, user } = useContext(ProfileContext);
+export default function PublicIndividualId({profileData,  }) {
 
   return (
     <div className="flex flex-col gap-6 items-center">
       <div className="size-[100px] ">
-        {user?.avatar?.url ? (
-          <img className=" h-full w-full" src={user?.avatar?.url} alt="" />
+        {profileData?.avatar?.url ? (
+          <img className=" h-full w-full" src={profileData?.avatar?.url} alt="" />
         ) : (
-          // <img
-          //   className=" h-full w-full"
-          //   src="/img/ProfilePlaceholder.png"
-          //   alt=""
-          // />
+       
           <DefaultAvatar />
         )}
       </div>
       <span className="font-medium text-[24px] capitalize">
         {" "}
         {`${
-          profileData?.result?.name ? profileData?.result?.name : user?.name
+          profileData?.result?.name ? profileData?.result?.name : '--'
         }`}
       </span>
       <div className="flex gap-4 font-normal text-base text-[#757575] ">

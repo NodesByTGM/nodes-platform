@@ -6,6 +6,7 @@ import { subscriptionType } from "../../utilities/constants";
 import { Modal, ConfirmComponent } from "../../components";
 import { toast } from "react-toastify";
 import { useRequestConnectionMutation } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 // import { SkillsSection } from "../landingPage";
 type ICommunityPeopleCard = {
@@ -16,6 +17,7 @@ export default function CommunityPeopleCard({
   data,
   isConnected = false,
 }: ICommunityPeopleCard) {
+  const navigate = useNavigate()
   const [connectModal, setConnectModal] = useState(false);
   const [
     deleteRequest,
@@ -94,7 +96,7 @@ export default function CommunityPeopleCard({
       </div>
 
       <div className=" flex items-center justify-between gap-4 text-customprimary font-medium text-sm">
-        <span className="">View profile</span>
+        <span onClick={() => navigate(`/profile/${data?.id}`)} className="cursor-pointer">View profile</span>
         {isConnected ? (
           <span className="">Message</span>
         ) : (
