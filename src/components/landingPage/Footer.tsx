@@ -97,7 +97,7 @@ function JoinNewsLetter() {
           <input
             type="text"
             placeholder="Enter your email"
-            className="placeholder-[#505050] px-4 py-2 min-w-[283px] border border-[#D9D9D9] rounded"
+            className="placeholder-[#505050] px-4 py-2 min-w-[283px] border border-[#D9D9D9] rounded outline-primary/30"
           />
 
           <Button className="max-w-max !px-6">

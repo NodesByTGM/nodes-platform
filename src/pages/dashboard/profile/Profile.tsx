@@ -42,15 +42,15 @@ export default function Individual() {
     setSelectedNav(navs[0]);
   }, [navs]);
   return (
-    <div className="flex gap-x-8 h-full">
+    <div className="flex flex-col xl:flex-row gap-x-8 h-full">
       
       {/* <pre className="text-blue-200">{JSON.stringify(profileData,null,2)}</pre> */}
       {/* <span className="st">{localStorage.getItem('bearerToken')}</span> */}
       {/* ss {profileLoading ? 'True' : "false"} */}
-      <div className="max-h-max">
+      <div className="max-h-max xl:mx-0 sm:mx-auto mx-0">
         <IndividualProfileCard />
       </div>
-      <div className="flex-1 ">
+      <div className="flex-1 mt-12 xl:mt-0">
         <div className="flex flex-col w-full gap-10">
           <div className="flex items-center  gap-[8px] overflow-x-auto  ">
             {navs.map((nav) => (

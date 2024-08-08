@@ -96,6 +96,17 @@ export const generalApi: any = createApi({
         };
       },
     }),
+
+    getPublicProfile: builder.query<any, any>({
+      query: (params) => {
+        return {
+          url: `${AppConfig.API_ENDPOINTS.Profile.PublicProfile}/${params?.id}`,
+          method: "get",
+        };
+      },
+    }),
+
+    
     deleteNotifications: builder.mutation<any, any>({
       query: ({id}) => {
         return {
@@ -108,6 +119,7 @@ export const generalApi: any = createApi({
 });
 
 export const {
+  useGetPublicProfileQuery,
   useVerifyBusinessMutation,
   useCheckEmailMutation,
   useGetMoviesAndShowsQuery,

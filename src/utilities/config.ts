@@ -32,6 +32,7 @@ const API_ENDPOINTS = {
   Profile: {
     UserProfile: `${BASE_API_ENDPOINT}/users/profile`,
     BusinessProfile: `${BASE_API_ENDPOINT}/users/business-profile`,
+    PublicProfile: `${BASE_API_ENDPOINT}/users`
   },
   Job: {
     JobUrl: `${BASE_API_ENDPOINT}/jobs`,
@@ -184,6 +185,9 @@ const PATHS = {
       EditWithParam: "/dashboard/events/edit/:id",
       Guests: "/dashboard/events/guests/",
     },
+    PublicProfile: {
+      Base: '/profile/:id'
+    }
   },
   Contact: `${MAIN_APP_URL}/contact`,
   Community: {
@@ -474,7 +478,7 @@ const AppConfig = {
     // "gif": "3d",
     // "glb": "3d"
   },
-  FILE_SIZE_LIMIT: 2, //2mb,
+  FILE_SIZE_LIMIT: 5, //5mb,
   COMPANY_INFO: {
     Address: "Level 1, 12 Sample St, Sydney NSW 2000",
     Phone: "1800 123 4567",

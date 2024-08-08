@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
-import { X } from "react-feather";
+import { X, RefreshCcw } from "react-feather";
 import NotificationsNav from "./notifications/NotificationsNav";
 import AllNotifications from "./notifications/AllNotifications";
 import Mentions from "./notifications/Mentions";
@@ -16,7 +16,7 @@ export default function NotificationsComponent({ closeModal }) {
   const [notifications, setNotifications] = useState<any>([]);
 
   const [navs] = useState([
-    { id: 1, label: "All", count: 1 },
+    { id: 1, label: "All", count: null },
     { id: 2, label: "Mentions", count: null },
     { id: 3, label: "Unread", count: null },
   ]);
@@ -52,9 +52,10 @@ export default function NotificationsComponent({ closeModal }) {
       </div>
       <div
         onClick={() => notificationRefetch()}
-        className="flex items-center gap-2 px-6 py-3"
+        className="flex cursor-pointer items-center gap-2 px-6 py-3"
       >
         <span className="ml-auto text-primary text-xs">Refresh</span>
+        <RefreshCcw className="text-primary size-3" />
       </div>
       <div className="pt-6 max-h-[616px] overflow-y-auto">
         {selectedNav?.label?.toLowerCase() == "all" && (

@@ -1,11 +1,19 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import ProfileProvider from "../../../context/profile";
+import { setBg } from "../../../utilities/common";
 
 function Profile() {
-  
+  const { pathname } = useLocation();
+
   return (
-    <div className="min-h-[100vh] main-container">
+    <div
+      className={`${setBg(
+        pathname,
+        "main-bg-yellow-container",
+        "main-bg-gray-container"
+      )} min-h-[100vh]  main-padding `}
+    >
       <ProfileProvider>
         <Outlet />
       </ProfileProvider>

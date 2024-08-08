@@ -9,7 +9,7 @@ import {
   Settings,
   Smartphone,
 } from "react-feather";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button, Searchbar } from ".";
 // import { useAuth } from "../context/hooks";
 import Avatar from "./Avatar";
@@ -19,15 +19,16 @@ import {
   NotificationsComponent,
   MessagesComponent,
 } from "././../components";
+import { setBg } from "../utilities/common";
 
 function Header() {
   // const { user } = useAuth();
+  const { pathname } = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
   const [menuOpened, setMenuOpened] = useState(false);
   const [appOpened, setAppOpened] = useState(false);
   const [notificationsModal, setNotificationsModal] = useState(false);
   const [messagesModal, setMessagesModal] = useState(false);
-  
 
   const wrapperRef = useRef<any>(null);
   const handleClickOutside = (event: any) => {
@@ -45,7 +46,11 @@ function Header() {
   }, []);
   return (
     <div
-      className={`z-[99] relative main-bg-gray pt-8  px-10 w-full flex justify-end items-center `}
+      className={`${setBg(
+        pathname,
+        "main-bg-yellow",
+        "main-bg-gray"
+      )} z-[99] relative pt-8 px-10 w-full flex justify-end items-center pb-4`}
     >
       <div className=" gap-4 items-center hidden">
         <Menu className="w-[50px] cursor-pointer" />
@@ -155,7 +160,7 @@ function Header() {
         sizeClass="sm:max-w-[440px]"
         open={notificationsModal}
         setOpen={setNotificationsModal}
-        paddingX='px-0'
+        paddingX="px-0"
       >
         <NotificationsComponent
           closeModal={() => setNotificationsModal(false)}
@@ -166,12 +171,11 @@ function Header() {
         sizeClass="sm:max-w-[960px]"
         open={messagesModal}
         setOpen={setMessagesModal}
-        paddingX='px-0'  paddingY='px-0'
-       
+        paddingX="px-0"
+        paddingY="px-0"
       >
-        <MessagesComponent  />
+        <MessagesComponent />
       </Modal>
-     
     </div>
   );
 }
