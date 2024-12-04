@@ -17,7 +17,7 @@ export default function MakePayment() {
 
   function findObject(param) {
     for (const key in planObj) {
-      if (planObj[key].param.toLowerCase() === param.toLowerCase()) {
+      if (planObj[key].param?.toLowerCase() === param?.toLowerCase()) {
         return planObj[key];
       }
     }
@@ -31,8 +31,8 @@ export default function MakePayment() {
 
   useEffect(() => {
     if (
-      user?.subscription?.plan.toLowerCase() == "pro" ||
-      user?.subscription?.plan.toLowerCase() == "business"
+      user?.subscription?.plan?.toLowerCase() == "pro" ||
+      user?.subscription?.plan?.toLowerCase() == "business"
     ) {
       setPaid(true);
     }

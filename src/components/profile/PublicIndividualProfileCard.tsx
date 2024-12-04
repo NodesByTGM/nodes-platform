@@ -9,7 +9,7 @@ export default function PublicIndividualProfileCard({profileType, profileData}) 
 
   const bio = {
     id: "1",
-    title: "Your headline and bio goes her",
+    title: "Your headline and bio goes here",
     text: " Share more about yourself and what you hope to accomplish",
     img: null,
   };
@@ -33,8 +33,8 @@ export default function PublicIndividualProfileCard({profileType, profileData}) 
         <div className="mb-10 w-full">
           <Interaction
             data={bio}
-            headline={profileData?.result?.headline}
-            bio={profileData?.result?.bio}
+            headline={profileData?.headline}
+            bio={profileData?.bio}
           />
         </div>
         <div

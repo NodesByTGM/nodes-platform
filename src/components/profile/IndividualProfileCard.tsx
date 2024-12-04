@@ -13,7 +13,7 @@ export default function Individual() {
 
   const bio = {
     id: "1",
-    title: "Your headline and bio goes her",
+    title: "Your headline and bio goes here",
     text: " Share more about yourself and what you hope to accomplish",
     img: null,
   };
